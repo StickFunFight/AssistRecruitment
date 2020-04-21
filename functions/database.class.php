@@ -7,12 +7,10 @@
 
         // De gegevens om de connectie mee te maken
 
-       
 
         private $host = 'assist.tk';
         private $db_name = 'assist';
         private $username = 'assist_remote';
-
         private $password = 'KPg$R%Tsd@Y%';
 
         // Connectie maken
