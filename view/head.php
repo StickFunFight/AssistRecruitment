@@ -19,14 +19,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Linking to Bootstrap CSS -->
-        <link rel="stylesheet" href="../assests/bootstrap/css/bootstrap.min.css">
 
-        <!-- Linking to Bootstrap JavaScript -->
-        <script src="../assests/bootstrap/js/bootstrap.min.js"></script>
-
-        <!-- Linking voor jQuery -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
         <!-- Linking to own CSS -->
         <link rel="stylesheet" href="../assests/styling/main.css">
@@ -35,6 +28,15 @@
         <script src="../assests/script/validation.js"></script>
         <script src="../assests/script/main.js"></script>
 
+        <!-- Linking voor jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <!-- Linking to Bootstrap CSS -->
+        <link rel="stylesheet" href="../assests/bootstrap/css/bootstrap.min.css">
+
+        <!-- Linking to Bootstrap JavaScript -->
+        <script src="../assests/bootstrap/js/bootstrap.min.js"></script>
+
         <!-- Linking to icons -->
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
@@ -42,7 +44,8 @@
         <link rel="icon" href="assets/images/AssistRecruitmentFavicon.ico">
 
         <!-- Datatables toevoegen -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/sp-1.0.1/sl-1.3.1/datatables.min.css%22/%3E">
-        <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/sp-1.0.1/sl-1.3.1/datatables.min.js%22%3E"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+
     </head>
 </html>
