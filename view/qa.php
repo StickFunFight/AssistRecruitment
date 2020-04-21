@@ -3,13 +3,12 @@ require_once 'head.php';
 ?>
 
 <script>
-    $(document).ready(function(){
-        $("tr").hover(function(){
-
-        }, function(){
-
-        });
-    });
+            $( function() {
+                $('#TrQa').hover( function() {
+                    $('#EditCatergory').toggleClass('fas fa-pencil-alt');
+                    $('#DeleteCatergory').toggleClass('fas fa-trash-alt');
+                });
+            });
 </script>
 
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
@@ -19,7 +18,8 @@ require_once 'head.php';
         <table id="" class="table">
             <thead>
             <tr>
-               <th><i class="fas fa-folder-open"></i> (All Categories)  <i id="CategoryAdd" class="fas fa-plus fa-lg"></i> </th>
+               <th><i class="fas fa-folder-open"></i> (All Categories)</th>
+                <th><i id="CategoryAdd" class="fas fa-plus fa-lg"></i> </th>
 
             </tr>
             </thead>
@@ -29,14 +29,16 @@ require_once 'head.php';
                     $Qa = $QO->GetAllCatergies();
                     foreach ($Qa as $item)
                     {
-                        echo '<tr id="demo" onmouseover="mouseOver()">';
+                        echo '<tr id="TrQa">';
                         echo '<td>';
                         echo '<i id="Icon" class="fas fa-folder"></i>';
                         echo " ";
                         echo  $item->GetNaam();
                         echo '</td>';
                         echo '<td>';
-                        echo '<i id="Icon3" class=""></i>';
+                        echo '<i id="EditCatergory" class=""></i>';
+                        echo " ";
+                        echo '<i id="DeleteCatergory" class=""></i>';
                         echo '</td>';
                     }
                     ?>
