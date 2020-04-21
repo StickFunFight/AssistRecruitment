@@ -1,0 +1,24 @@
+#wrapper{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    height: 50%;
+}
+#FirstQaDiv{
+    border: 1px solid black;
+    width: 20%;
+}
+#SecondQaDiv{
+    width:80%;
+}
+#Icon {
+color: dimgray;
+}
+
+.TRQA:hover {
+
+}
+
+#CategoryAdd{
+    float:right;
+}

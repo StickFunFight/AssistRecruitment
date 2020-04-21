@@ -7,20 +7,20 @@ class EntCategory
 
     function __construct($categorieID, $categorieName, $categorieStatus)
     {
-        $this->ID = $categorieID;
-        $this->Name = $categorieName;
-        $this->Status = $categorieStatus;
-
+        $this->categorieID = $categorieID;
+        $this->categorieName = $categorieName;
+        $this->categorieStatus = $categorieStatus;
     }
+
     function GetID(){
-        return $this->ID;
+        return $this->categorieID;
     }
 
     function GetNaam(){
-        return $this->Name;
+        return $this->categorieName;
     }
 
     function GetStatus(){
-        return $this->Status;
+        return $this->categorieStatus;
     }
 }
