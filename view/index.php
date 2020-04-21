@@ -1,6 +1,6 @@
 <html>
 <?php
-require_once 'functions/database.class.php';
+require_once '../functions/datalayer/database.class.php';
 
 $database = new Database();
 $db = $database->getConnection();
