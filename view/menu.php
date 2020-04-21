@@ -36,7 +36,7 @@
                                 </li>
 
                                 <li class="navbar__item">
-                                    <i class="fa navbar--icon"><a href="#" class="navbar--link">&#xf013;</a></i>
+                                    <i class="fa navbar--icon" onclick="maintenceSubMenu()"><a href="#" class="navbar--link">&#xf013;</a></i>
                                 </li>
                             </ul>
                         </div>
@@ -54,7 +54,7 @@
                     </nav>
                 </div>
 
-                <div class="submenu">
+                <div class="submenu" id="maintanceSubmenu">
                     <ul class="submenu__list">
                         <li class="submenu__item"> <a href="#" class="submenu--link">Scan</a> </li>
                         <li class="submenu__item"> <a href="#" class="submenu--link">Customer</a> </li>
@@ -64,7 +64,7 @@
                     </ul>
 
                     <div class="submenu__resize">
-                        <i class="fas submenu--icon">&#xf100;</i>
+                        <i class="fas submenu--icon" id="submenuFavicon">&#xf100;</i>
                     </div>
                 </div>
             </div>
@@ -76,7 +76,7 @@
     </body>
 
     <script>
-        // Functie voor openen submenubalk
+        // Functie voor openen en sluiten van het submenubalk
         $('.submenu--icon').on('click', function(){
             $('.submenu').toggleClass('submenu--hide');
             $('.submenu--icon').toggleClass('submenu--icon-right');

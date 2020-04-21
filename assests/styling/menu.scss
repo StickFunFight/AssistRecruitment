@@ -104,7 +104,7 @@ html, body{
 
 .submenu {
     position: relative;
-    display: flex;
+    display: none;
     min-width: 15rem;
     background-color: $grey;
     border: 1px solid $black;
@@ -144,6 +144,10 @@ html, body{
     border: 1px solid $black;
     transition: all 0.25s ease-in-out;
     cursor: pointer;
+}
+
+.submenu--show {
+    display: flex;
 }
 
 .submenu--hide {
