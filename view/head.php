@@ -41,7 +41,7 @@
         <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
         <!-- Linking to my favicon -->
-        <link rel="icon" href="assets/images/AssistRecruitmentFavicon.ico">
+        <link rel="icon" href="../assests/images/AssistRecruitmentFavicon.ico">
 
         <!-- Datatables toevoegen -->
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>

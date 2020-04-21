@@ -1,7 +1,9 @@
 <?php include 'head.php'; ?>
-<style><?php include '../assests/styling/loginScreen.css' ?></style>
 
-
+<head>
+    <style><?php include '../assests/styling/loginScreen.css' ?></style>
+    <title>Assist login</title>
+</head>
 <body>
     <div class="container">
         <img class="logo" src="../assests/images/logoFullAssist.png" alt="Assist logo">
