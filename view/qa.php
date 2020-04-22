@@ -24,7 +24,7 @@ require_once 'head.php';
             </tr>
             </thead>
                     <?php
-                    require("../functions/datalayer/QaOverView.php");
+                    require("../functions/controller/QaOverView.php");
                     $QO = new QaOverView();
                     $Qa = $QO->GetAllCatergies();
                     foreach ($Qa as $item)

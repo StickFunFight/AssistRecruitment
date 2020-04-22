@@ -1,22 +1,21 @@
 <?php
-require_once 'database.class.php';
 require '../functions/models/EntCategory.php';
 class QaOverView
 {
+    private $db;
 
     public function __construct()
     {
-
+        require_once '../functions/datalayer/database.class.php';
+        $database = new Database();
+        $this->db = $database->getConnection();
     }
 
     function GetAllCatergies()
     {
-        $database = new Database();
-        $db = $database->getConnection();
-
         $lijst = array();
         $query = "SELECT * FROM categorie where categorieStatus = 'Actief'";
-        $stm = $db->prepare($query);
+        $stm = $this->db->prepare($query);
         if ($stm->execute()) {
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
             foreach ($result as $item) {
