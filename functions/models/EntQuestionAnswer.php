@@ -3,6 +3,7 @@
 class EntQuestionAnswer
 {
     private $questionID;
+    private $categorieID;
     private $questionStatus;
     private $questionName;
     private $questionType;
@@ -12,15 +13,17 @@ class EntQuestionAnswer
     /**
      * EntQuestionAnswer constructor.
      * @param $questionID
+     * @param $categorieID
      * @param $questionStatus
      * @param $questionName
      * @param $questionType
      * @param $answerID
      * @param $answer
      */
-    public function __construct($questionID, $questionStatus, $questionName, $questionType, $answerID, $answer)
+    public function __construct($questionID,$categorieID, $questionStatus, $questionName, $questionType, $answerID, $answer)
     {
         $this->questionID = $questionID;
+        $this->categorieID = $categorieID;
         $this->questionStatus = $questionStatus;
         $this->questionName = $questionName;
         $this->questionType = $questionType;
@@ -35,6 +38,15 @@ class EntQuestionAnswer
     {
         return $this->questionID;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCategorieID()
+    {
+        return $this->categorieID;
+    }
+
 
     /**
      * @return mixed
