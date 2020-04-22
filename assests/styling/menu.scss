@@ -21,8 +21,8 @@ html, body{
 
 /* Wrapper of the page content */
 #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
+    width: 0;
+    padding-left: 5rem;
 }
 
 /* Menu styling */
@@ -33,9 +33,11 @@ html, body{
 
 /* Menu logo */
 .menu__picture {
+    position: sticky;
     display: flex;
     justify-content: center;
     margin-top: 2.5rem;
+    top: 2.5rem;
 }
 
 .menu--logo {
@@ -51,10 +53,12 @@ html, body{
 
 /* Top navbar links */
 .navbar__top {
+    position: sticky;
     display: flex;
     justify-content: center;
     width: 100%;
     height: auto;
+    top: 8rem;
 }
 
 /* Top navbar list */
@@ -65,9 +69,12 @@ html, body{
 
 /* Bottom navbar links */
 .navbar__bottom {
-    position: absolute;
-    bottom: 2.5rem;
-    width: 87%;
+    position: sticky;
+    top: calc(100% - 15vh);
+    // top: 85rem;
+    width: 8rem;
+    // bottom: 2.5rem;
+    // width: 82%;
     display: flex;
     justify-content: center;
 }
@@ -102,6 +109,7 @@ html, body{
     text-decoration: none;
 }
 
+/* Submenu styling */
 .submenu {
     position: relative;
     display: none;
@@ -113,16 +121,19 @@ html, body{
     transition: all 0.25s ease-in-out;
 }
 
+/* Submenu ul styling */
 .submenu__list {
+    position: sticky;
+    top: 9rem;
+    height: auto;
+    max-height: 20rem;
+    width: 100%;
     padding: 1rem;
     margin: 0;
     list-style: none;
-    height: auto;
-    width: 100%;
-    position: absolute;
-    top: 10%;
 }
 
+/* Submenu ul li a styling */
 .submenu--link, 
 .submenu--link:visited,
 .submenu--link:hover {
@@ -131,13 +142,17 @@ html, body{
     font-weight: 600;
 }
 
+/* Submenu resize container */
 .submenu__resize {
+    position: sticky;
+    top: 2rem;
     width: 100%;
     height: 3rem;
     margin-top: 2rem;
     text-align: right;
 }
 
+/* Submenu resize icon styling */
 .submenu--icon {
     font-size: 2rem;
     padding: 0.5rem;
@@ -146,15 +161,18 @@ html, body{
     cursor: pointer;
 }
 
+/* Showing submenu on maintence click */
 .submenu--show {
     display: flex;
 }
 
+/* Hide submenu on resize icon click */
 .submenu--hide {
-    margin-left: -16rem;
+    margin-left: -15rem;
 }
 
+/* Keep submenu icon visable on resize icon click */
 .submenu--icon-right {
-    margin-right: -4rem;
+    margin-right: -3rem;
     transform: rotate(180deg);
 }
