@@ -1,0 +1,19 @@
+body{
+    margin-left:10px;
+}
+
+form{
+    margin-left:10px;
+    margin-right:10px;
+    margin-top:10px;
+}
+
+#selCategory, #selQuestionType, #selStatus{
+    width:400px;
+}
+#taExample{
+    line-height: 5;
+}
+#lbTitel{
+    font-size:40px;
+}
