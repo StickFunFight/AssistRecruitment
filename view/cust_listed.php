@@ -37,13 +37,13 @@ $CustomerDB = new CustomerDB();
 
                 <div class="row">
                     <div class="col-sm-12"></div>
-                        <table class="table table-hover customer__table" style="font-family:verdana">
+                        <table class="table table-hover customer__table">
                         <thead>
                         <tr class="customer__row">
-                            <th class="customer__td">Name</th>
-                            <th class="customer__td">Comment</th>
-                            <th class="customer__td">Reference</th>
-                            <th class="customer__td">Actions</th>
+                            <th class="customer__th_name">Name</th>
+                            <th class="customer__th_comment">Comment</th>
+                            <th class="customer__td_refrence">Reference</th>
+                            <th class="customer__td_icon">Actions</th>
 
 
                         </tr>
@@ -62,7 +62,7 @@ $CustomerDB = new CustomerDB();
                                     </div>
 
                                     <div class="col-sm-6">
-                                        <input type="submit" class="btn btn-primary" name="btnChangeStatus" value="Verander status">
+                                        <input type="submit" class="btn btn-status" name="btnChangeStatus" value="Verander status">
                                     </div>
                                 </div>
                             </form>
@@ -86,19 +86,19 @@ $CustomerDB = new CustomerDB();
                             echo "<br>";
                             echo "<tr class='customer__row'>";
 
-                            echo "<td class='customer__td' onclick='naarDetails(".$customer->getCustomerID().")'>";
+                            echo "<td class='customer__td_name' onclick='naarDetails(".$customer->getCustomerID().")'>";
                             echo $customer->getCustomerNaam();
                             echo "</td>";
                         
-                            echo "<td class='customer__td'>";
+                            echo "<td class='customer__td_comment'>";
                             echo $customer->getCustomerComment();
                             echo "</td>";
 
-                            echo "<td class='customer__td'>";
+                            echo "<td class='customer__td_refrence'>";
                             echo $customer->getCustomerRefrence();
                             echo "</td>";
 
-                            echo "<td class='customer__td'>";
+                            echo "<td class='customer__td_icon'>";
                             // echo '<a class="editKnop" href="DetailsCustomer?customer='.$customer->getCustomerID().'"><i class="fas fa-edit"></i></a>
                             echo '<a class="editKnop" href="https://youtu.be/oHg5SJYRHA0"><i class="fas fa-edit"></i></a>
                             <a class="deleteKnop" href="DetailsCustomer?customer='.$customer->getCustomerID().'"><i class="fas fa-trash-alt"></i></a>

@@ -47,5 +47,21 @@ else{
 }
 }
 
+function deleteCustomers($customerID){
+ 
+ // Query aanmaken om customerStatus te veranderen naar Deleted
+ $query = "UPDATE customer SET customerStatus = 'Deleted' WHERE customerID = $customerID";
+ $stm = $this->db->prepare($query);
+ if($stm->execute()){
+
+    echo 'Het is gelukt';
+
+ }
+ // Tekst laten zien voor als er geen functies zijn opgehaald
+ else{
+     echo "Er is iets fout gegaan";
+ }
+ }
+
 }
 ?>
