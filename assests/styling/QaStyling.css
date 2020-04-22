@@ -56,4 +56,7 @@ th{
 .table--icon:hover, .table--icon:visited{
     color: #005cbf;
 }
-
+.ButtonRight{
+    font-size: 1.5rem;
+    float: right;
+}

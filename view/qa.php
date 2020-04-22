@@ -8,7 +8,10 @@ require_once 'menu.php';
 <div id="page-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
+                <input class="form-control form-control-lg" id="Filter"  onkeyup="myFunction()" type="text" placeholder="Zoek naar een vraag of antwoord">
+            </div>
+            <div class="col-sm-6">
                 <button type="button" class="btn btn-primary ButtonRight"><i class="fas fa-plus"></i> Vraag toevoegen</button>
             </div>
         </div>
@@ -83,6 +86,26 @@ require_once 'menu.php';
 </div>
 </body>
 </html>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("Filter");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("example");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0,1];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 
 
 
