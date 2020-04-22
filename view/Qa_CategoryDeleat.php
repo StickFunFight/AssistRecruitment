@@ -5,7 +5,7 @@ require_once 'head.php';
 require_once '../functions/datalayer/database.class.php';
 ?>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">verwijder category<category></category></button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">verwijder categoryw<category></category></button>
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
