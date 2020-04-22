@@ -1,7 +1,8 @@
 <?php
 require_once 'head.php';
+require_once 'menu.php';
 ?>
-
+<html>
 <script>
             $( function() {
                 $('#TrQa').hover( function() {
@@ -13,6 +14,7 @@ require_once 'head.php';
 
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
 <body>
+<div class="container-jouw-pagina" style="100%">
 <div id="wrapper">
     <div id="FirstQaDiv" >
         <table id="" class="table">
@@ -69,6 +71,7 @@ require_once 'head.php';
             </tbody>
         </table>
     </div>
+</div>
 </div>
 </body>
 </html>
