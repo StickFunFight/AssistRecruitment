@@ -49,7 +49,7 @@
             url: 'catHandler.php',
             type: 'post',
             data: { "catName": $('#textField').val()},
-            success: function(response) { console.log(response); }
+            success: function(response) { window.location.href = 'Qa.php'; }
         });
     });
 

@@ -19,7 +19,7 @@ class CategoryAddFunction{
         $query = "INSERT INTO categorie (categorieName, categorieStatus) VALUES ('$categorieNaam', 'concept')";
         $stm = $this->conn->prepare($query);
         if ($stm->execute()){
-
+            Header("Location: Qa.php");
         }
 
     }

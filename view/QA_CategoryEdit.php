@@ -82,8 +82,10 @@ require 'head.php';
             url: 'catEditHandler.php',
             type: 'post',
             data: { "catName": $('#txtNaam').val(), "catStatus" : $('#txtStatus').val(), "oldCatName": $('#categorien').val()},
-            success: function(response) { console.log(response); }
+            success: function(response) { window.location.href = 'Qa.php'; }
         });
+
+
     });
 
 </script>
