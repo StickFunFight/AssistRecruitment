@@ -2,12 +2,11 @@
     // Checking if there is a customer given in the link
     //if(isset($_GET['customerID'])){
 
-        // Importing the class
-        include '../functions/controller/CustomerEdit.php';
+        //require("/functions/modals/CustomerModalMarvin.php");
+        include "/functions/controller/CustomerEdit.php";
+        $ctrlCustomer = new CustomerMarvin();
 
-        $ctrlCustomer = new CustomerEdit();
-
-        require('menu.php');
+        //require('menu.php');
 ?>
 <html>
     <body>

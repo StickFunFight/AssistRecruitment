@@ -1,5 +1,5 @@
 <?php
-    class CustomerEdit {
+    class CustomerMarvin {
 
         // Creating variables
         //private $customerModal;
@@ -8,12 +8,13 @@
 
         public function __construct(){
             // Importing files
-            require("../functions/modals/CustomerModalMarvin.php");
-            require("../functions/datalayer/database.class.php");
+            require("/functions/datalayer/database.class.php");
 
             // Getting the database connection
             $database = new Database();
             $this->db = $database->getConnection();
+
+            //$customerModal = new CustomerModal();
         }
 
         // Function to get all diffrent status from the database
