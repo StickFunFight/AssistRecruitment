@@ -8,6 +8,7 @@ if (isset($_POST['catName'])){
     $CAF = new CategoryAddFunction();
     $CAF->catOpslaan($catName);
     echo "Succes";
+
 }else echo "failed";
 
 ?>

@@ -21,6 +21,17 @@ class CategoryAddFunction{
         if ($stm->execute()){
 
         }
+
+    }
+
+    public function catAanpassen($categorieNaam, $categorieStatus, $oldCatName){
+        $query = "UPDATE categorie SET categorieName = '$categorieNaam',
+                                       categorieStatus= '$categorieStatus'
+                                       WHERE categorieName = '$oldCatName'";
+        $stm = $this->conn->prepare($query);
+        if ($stm->execute()){
+
+        }
     }
 
 }
