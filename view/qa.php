@@ -3,14 +3,6 @@ require_once 'head.php';
 require_once 'menu.php';
 ?>
 <html>
-<script>
-            $( function() {
-                $('#TrQa').hover( function() {
-                    $('#EditCatergory').toggleClass('fas fa-pencil-alt');
-                    $('#DeleteCatergory').toggleClass('fas fa-trash-alt');
-                });
-            });
-</script>
 
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
 <body>
@@ -32,16 +24,16 @@ require_once 'menu.php';
                             $Qa = $QO->GetAllCatergies();
                             foreach ($Qa as $item)
                             {
-                                echo '<tr id="TrQa">';
+                                echo '<tr class="category-tabel__row">';
                                 echo '<td>';
                                 echo '<i id="Icon" class="fas fa-folder"></i>';
                                 echo " ";
                                 echo  $item->GetNaam();
                                 echo '</td>';
                                 echo '<td>';
-                                echo '<i id="EditCatergory" class=""></i>';
+                                echo '<i id="EditCatergory" class="fas fa-pencil-alt table--icon"><a href="#"></a></i>';
                                 echo " ";
-                                echo '<i id="DeleteCatergory" class=""></i>';
+                                echo '<i id="DeleteCatergory" class="fas fa-trash-alt table--icon"><a href="#"></a></i>';
                                 echo '</td>';
                             }
                             ?>
@@ -50,7 +42,7 @@ require_once 'menu.php';
                 </table>
             </div>
             <div id="SecondQaDiv">
-                <table id="example" class="table table-striped" ">
+                <table id="example" class="table table-striped">
                     <thead>
                     <tr>
                         <th>Questions</th>
