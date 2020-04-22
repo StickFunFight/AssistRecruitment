@@ -1,6 +1,6 @@
 <?php
 
-require_once 'database.class.php';
+require_once '../functions/datalayer/database.class.php';
 
 
 
@@ -9,23 +9,23 @@ Class CustomerDB {
     
     private $db;
     
+    
     public function __construct(){
 
         //maakt een nieuwe connectie 
+        $database = new Database();
+        $this->db = $database->getConnection();
 
     }
 
-function getCustomers(){
+function getCustomers($status){
 
-    $database = new Database();
-    $db = $database->getConnection();
-
-    // Array aanmaken voor de functies
+   // Array aanmaken voor de functies
     $listCustomers = array();
 
 // Query aanmaken om alle functies uit de database te halen
-$query = "SELECT * FROM customer WHERE customerStatus = 'Active'";
-$stm = $db->prepare($query);
+$query = "SELECT * FROM customer WHERE customerStatus = '$status'";
+$stm = $this->db->prepare($query);
 if($stm->execute()){
     // Resultaten uit de database halen
     $result = $stm->fetchAll(PDO::FETCH_OBJ);

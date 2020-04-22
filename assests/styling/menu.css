@@ -188,10 +188,67 @@ html, body {
   margin-left: -15rem;
 }
 
+.page__content {
+  width: 100%;
+  padding-right: 5rem;
+}
+
 /* Keep submenu icon visable on resize icon click */
 .submenu--icon-right {
   margin-right: -3rem;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
+}
+
+.customer__table {
+  background-color: white;
+}
+
+.customer__row {
+  padding: 150px;
+  width: 300px;
+}
+
+.customer__td {
+  padding: 5px;
+  text-align: left;
+  border-bottom: 1px solid #d1d1d1;
+}
+
+th {
+  background-color: #73b99b;
+  color: white;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.deleteKnop, .editKnop,
+.editKnop:hover, .profileKnop,
+.profileKnop:hover,
+.deleteKnop:hover,
+.editKnop:hover,
+.profileKnop:hover {
+  padding: 5px 10px;
+  color: white;
+  background-color: #73b99b;
+  border-radius: 10%;
+}
+
+.btn-primary {
+  color: #73b99b;
+}
+
+.customer__header {
+  color: #73b99b;
+}
+
+.customer__select {
+  padding-bottom: 1rem;
+}
+
+select.form-control {
+  height: auto;
 }
 /*# sourceMappingURL=menu.css.map */

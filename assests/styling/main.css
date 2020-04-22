@@ -8,7 +8,6 @@ html, body {
 
 .customer__table {
   background-color: white;
-  width: 30%;
 }
 
 table {
@@ -17,7 +16,7 @@ table {
 }
 
 tr {
-  padding: 7px;
+  padding: 15px;
 }
 
 th, td {
