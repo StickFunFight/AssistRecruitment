@@ -9,11 +9,11 @@ require_once 'menu.php';
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <a href="qa.php"><i class="fas fa-sync-alt fa-lg"></i> </a>
+                <button type="button" class="btn btn-primary ButtonRight"><i class="fas fa-plus"></i> Vraag toevoegen</button>
             </div>
         </div>
         <div id="wrapper">
-            <div id="FirstQaDiv" >
+            <div id="FirstQaDiv">
                 <table id="" class="table">
                     <thead>
                     <tr>
@@ -21,6 +21,7 @@ require_once 'menu.php';
                         <th><i id="CategoryAdd" class="fas fa-plus fa-lg"></i> </th>
                     </tr>
                     </thead>
+                    <tbody>
                             <?php
                             require("../functions/controller/QaOverView.php");
                             $QO = new QaOverView();
@@ -45,7 +46,7 @@ require_once 'menu.php';
                 </table>
             </div>
             <div id="SecondQaDiv">
-                <table id="example" class="table table-striped">
+                <table id="example" class="table">
                     <thead>
                     <tr>
                         <th>Questions</th>
@@ -54,16 +55,26 @@ require_once 'menu.php';
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>iets</td>
-                        <td>iets</td>
-                        <td>iets</td>
-                    </tr>
-                    <tr>
-                        <td>uets</td>
-                        <td>uets</td>
-                        <td>iets</td>
-                    </tr>
+                    <?php
+                    $QO = new QaOverView();
+                    $Qa = $QO->GetQuestionAnswers();
+                    foreach ($Qa as $item)
+                    {
+                        echo'<tr>';
+                        echo '<td>';
+                        echo  $item->getQuestionName();
+                        echo '</td>';
+                        echo '<td>';
+                        echo  $item->getAnswer();
+                        echo '</td>';
+                        echo '<td>';
+                        echo  '<i value="'.$item->getQuestionID().'" class="fas fa-pencil-alt"></i>';
+                        echo  ' ';
+                        echo  '<i value="'.$item->getQuestionID().'" class="fas fa-trash-alt"></i>';
+                        echo '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
                     </tbody>
                 </table>
             </div>
