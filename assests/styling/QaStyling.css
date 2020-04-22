@@ -53,4 +53,7 @@ th{
 .category-tabel__row:hover .table--icon{
     display: inline-block;
 }
+.table--icon:hover, .table--icon:visited{
+    color: #005cbf;
+}
 

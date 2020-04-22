@@ -3,9 +3,9 @@ require_once 'head.php';
 require_once 'menu.php';
 ?>
 <html>
-
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
 <body>
+<a href="qa.php"><i class="fas fa-sync-alt fa-lg"></i> </a>
 <div id="page-content">
     <div class="container-fluid">
         <div id="wrapper">
@@ -15,7 +15,6 @@ require_once 'menu.php';
                     <tr>
                     <th><i class="fas fa-folder-open"></i> (All Categories)</th>
                         <th><i id="CategoryAdd" class="fas fa-plus fa-lg"></i> </th>
-
                     </tr>
                     </thead>
                             <?php
@@ -25,15 +24,15 @@ require_once 'menu.php';
                             foreach ($Qa as $item)
                             {
                                 echo '<tr class="category-tabel__row">';
-                                echo '<td>';
+                                echo '<td value="'.$item->GetID().'">';
                                 echo '<i id="Icon" class="fas fa-folder"></i>';
                                 echo " ";
                                 echo  $item->GetNaam();
                                 echo '</td>';
                                 echo '<td>';
-                                echo '<i id="EditCatergory" class="fas fa-pencil-alt table--icon"><a href="#"></a></i>';
+                                echo '<i id="EditCatergory" class="fas fa-pencil-alt table--icon"><a href="https://www.w3schools.com/sql/sql_join.asp"></a></i>';
                                 echo " ";
-                                echo '<i id="DeleteCatergory" class="fas fa-trash-alt table--icon"><a href="#"></a></i>';
+                                echo '<a href="https://www.youtube.com/watch?v=i7MfrslYUac"><i id="DeleteCatergory" class="fas fa-trash-alt table--icon"></i></a>';
                                 echo '</td>';
                             }
                             ?>
@@ -69,3 +68,7 @@ require_once 'menu.php';
 </div>
 </body>
 </html>
+
+
+
+
