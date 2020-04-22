@@ -21,8 +21,7 @@ html, body{
 
 /* Wrapper of the page content */
 #page-content-wrapper {
-    min-width: 0;
-    width: 100%;
+    width: 0;
 }
 
 /* Menu styling */
@@ -33,9 +32,11 @@ html, body{
 
 /* Menu logo */
 .menu__picture {
+    position: sticky;
     display: flex;
     justify-content: center;
     margin-top: 2.5rem;
+    top: 2.5rem;
 }
 
 .menu--logo {
@@ -51,10 +52,12 @@ html, body{
 
 /* Top navbar links */
 .navbar__top {
+    position: sticky;
     display: flex;
     justify-content: center;
     width: 100%;
     height: auto;
+    top: 8rem;
 }
 
 /* Top navbar list */
@@ -67,7 +70,7 @@ html, body{
 .navbar__bottom {
     position: absolute;
     bottom: 2.5rem;
-    width: 87%;
+    width: 82%;
     display: flex;
     justify-content: center;
 }
