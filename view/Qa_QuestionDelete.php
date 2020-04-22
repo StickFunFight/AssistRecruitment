@@ -39,7 +39,9 @@ require_once '../functions/datalayer/database.class.php';
         var modal = $(this)
         modal.find('.modal-title').text('New message to ' + recipient)
         modal.find('.modal-body input').val(recipient)
-    })</script>
+    })
+
+</script>
 
 
 
