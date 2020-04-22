@@ -5,9 +5,12 @@ require_once 'menu.php';
 <html>
 <script>
             $( function() {
-                $('#TrQa').hover( function() {
-                    $('#EditCatergory').toggleClass('fas fa-pencil-alt');
-                    $('#DeleteCatergory').toggleClass('fas fa-trash-alt');
+                $('.TrQa').hover( function() {
+                    $(this).closest('.TrQa').find('.EditCatergory').addClass("fas fa-pencil-alt");
+                    $(this).closest('.TrQa').find('.DeleteCatergory').addClass("fas fa-trash-alt");
+                }, function () {
+                    $(this).closest('.TrQa').find('.EditCatergory').removeClass("fas fa-pencil-alt");
+                    $(this).closest('.TrQa').find('.DeleteCatergory').removeClass("fas fa-trash-alt");
                 });
             });
 </script>
@@ -32,16 +35,16 @@ require_once 'menu.php';
                             $Qa = $QO->GetAllCatergies();
                             foreach ($Qa as $item)
                             {
-                                echo '<tr id="TrQa">';
+                                echo '<tr class="TrQa">';
                                 echo '<td>';
                                 echo '<i id="Icon" class="fas fa-folder"></i>';
                                 echo " ";
                                 echo  $item->GetNaam();
                                 echo '</td>';
                                 echo '<td>';
-                                echo '<i id="EditCatergory" class=""></i>';
+                                echo '<i class="EditCatergory"></i>';
                                 echo " ";
-                                echo '<i id="DeleteCatergory" class=""></i>';
+                                echo '<i class="DeleteCatergory"></i>';
                                 echo '</td>';
                             }
                             ?>
