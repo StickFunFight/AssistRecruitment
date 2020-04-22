@@ -37,7 +37,7 @@ require_once 'menu.php';
                                 echo '</td>';
                             }
                             ?>
-                    </tr>
+                    </tr> 
                     </tbody>
                 </table>
             </div>
@@ -59,7 +59,7 @@ require_once 'menu.php';
                     <tr>
                         <td>uets</td>
                         <td>uets</td>
-                        <td>uets</td>
+                        <td>iets</td>
                     </tr>
                     </tbody>
                 </table>
