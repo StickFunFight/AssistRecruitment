@@ -2,6 +2,11 @@
     // Checking if there is a customer given in the link
     //if(isset($_GET['customerID'])){
 
+        // Importing the class
+        include '../functions/controller/CustomerEdit.php';
+
+        $ctrlCustomer = new CustomerEdit();
+
         require('menu.php');
 ?>
 <html>
@@ -39,9 +44,17 @@
                         <div class="col-sm-6">
                             <label for="status" class="ce__label">Status</label>
                             <select class="form-control" name="cbxStatus" id="status" onchange="">
-                                <option value="Active">Active</option>
-                                <option value="Archive">Archive</option>
-                                <option value="Delete">Delete</option>
+                               <?php 
+                                    // // Functies ophalen
+                                    // $listStatus = $ctrlCustomer->getStatus();
+
+                                    // // Loop om door de functies heen te lopen
+                                    // foreach($listStatus as $status){
+                                    //     ?>
+                                             <option value="iets">iets</option>
+                                         <?php
+                                    // }
+                               ?>
                             </select>
                             <span class="ce__feedback" id="feedbackCustomerStatus"></span>
                     </div>
