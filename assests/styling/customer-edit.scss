@@ -1,5 +1,38 @@
-.page__container{
+/* Container next to the sidebar */
+.page__container {
     width: 100%;
     height: auto;
     padding-right: 5rem;
+}
+
+/* Page title */
+.ce__title {
+    margin: 2rem 0 4rem;
+    font-size: 3.5rem;
+    text-align: center;
+}
+
+.ce--form-row{
+    padding: 1.5rem 0;
+}
+
+/* Label styling customer edit form */
+.ce__label{
+    font-size: 1.6rem;
+}
+
+/* Input styling customer edit form */
+.ce--input,
+.form-control.ce--input {
+    font-size: 1.6rem;
+}
+
+select.form-control{
+    height: auto;
+    font-size: 1.6rem;
+}
+
+/* Form validation feedback */
+.ce__feedback {
+    padding-bottom: 0.5;
 }
