@@ -1,12 +1,14 @@
 <?php  
-    // Checking if there is a customer given in the link
-    //if(isset($_GET['customerID'])){
+    require '../functions/datalayer/database.class.php';
+    // Class job toevoegen aan het bestand
+    require '../functions/controller/getCustList.php';
+    // Class used technologie toevoegen aan het bestand
+    require '../functions/models/entCustomer.php';
 
-        //require("/functions/modals/CustomerModalMarvin.php");
-        include "/functions/controller/CustomerEdit.php";
-        $ctrlCustomer = new CustomerMarvin();
+    //Connectie maken met class CustomerDB
+    $CustomerDB = new CustomerDB(); 
 
-        //require('menu.php');
+    require "menu.php";
 ?>
 <html>
     <body>
@@ -44,15 +46,17 @@
                             <label for="status" class="ce__label">Status</label>
                             <select class="form-control" name="cbxStatus" id="status" onchange="">
                                <?php 
-                                    // // Functies ophalen
-                                    // $listStatus = $ctrlCustomer->getStatus();
+                                    // Functies ophalen
+                                    $listStatus = $CustomerDB->getStatus();
 
-                                    // // Loop om door de functies heen te lopen
-                                    // foreach($listStatus as $status){
-                                    //     ?>
-                                             <option value="iets">iets</option>
-                                         <?php
-                                    // }
+                                    var_dump($listStatus);
+
+                                    // Loop om door de functies heen te lopen
+                                    foreach($listStatus as $status){
+                                        ?>
+                                            <option value="iets">iets</option>
+                                        <?php
+                                    }
                                ?>
                             </select>
                             <span class="ce__feedback" id="feedbackCustomerStatus"></span>
