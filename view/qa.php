@@ -6,10 +6,10 @@ require_once 'menu.php';
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
 <body>
 <div id="page-content">
-        <button type="button" class="btn btn-primary ButtonRight"><i class="fas fa-plus"></i> Vraag toevoegen</button>
     <div class="container-fluid">
+        <button type="button" class="btn btn-primary ButtonRight"><i class="fas fa-plus"></i> Vraag toevoegen</button>
         <div id="wrapper">
-            <div id="FirstQaDiv" >
+            <div id="FirstQaDiv">
                 <table id="" class="table">
                     <thead>
                     <tr>
@@ -64,9 +64,9 @@ require_once 'menu.php';
                         echo  $item->getAnswer();
                         echo '</td>';
                         echo '<td>';
-                        echo  '<i class="fas fa-pencil-alt"></i>';
+                        echo  '<i value="'.$item->getQuestionID().'" class="fas fa-pencil-alt"></i>';
                         echo  ' ';
-                        echo  '<i class="fas fa-pencil-alt"></i>';
+                        echo  '<i value="'.$item->getQuestionID().'" class="fas fa-trash-alt"></i>';
                         echo '</td>';
                         echo '</tr>';
                     }
