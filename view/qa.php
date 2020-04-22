@@ -5,9 +5,13 @@ require_once 'menu.php';
 <html>
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
 <body>
-<a href="qa.php"><i class="fas fa-sync-alt fa-lg"></i> </a>
 <div id="page-content">
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <a href="qa.php"><i class="fas fa-sync-alt fa-lg"></i> </a>
+            </div>
+        </div>
         <div id="wrapper">
             <div id="FirstQaDiv" >
                 <table id="" class="table">
