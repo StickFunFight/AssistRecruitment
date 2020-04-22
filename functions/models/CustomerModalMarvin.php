@@ -1,6 +1,6 @@
 <?php
 
-    class EntCustomer {
+    class CustomerModal {
         private $show_customerID;
         private $show_customerNaam;
         private $show_customerComment;
