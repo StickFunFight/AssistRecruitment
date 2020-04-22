@@ -3,9 +3,11 @@
 ?>
 <html>
     <body>
-        <div class="iets"> hai <div> 
-
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
+        <!-- Jouw container -->
+        <div class="container-jouw-pagina" style="100%">
+            <!-- Bootstrap container -->
+            <div class="container">
+            </div>
+        </div>
     </body>
 </html>
