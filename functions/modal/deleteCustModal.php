@@ -1,5 +1,6 @@
     
-    <html>
+    
+    <!-- <html>
     <head>
 
     <style>
@@ -7,8 +8,8 @@
     </head>
     <body>                                                       
     
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         Modal -->
+        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
@@ -24,9 +25,9 @@
             <form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
-                <input type="submit" name="btnDelete" class="btn btn-primary" value= "Archive Customer">            
+                <input type="submit" name="btnDelete" class="btn btn-primary" value= "Archive Customer">             -->
 
-            </div>
+            <!-- </div>
             </form>
 
             </div>
@@ -39,5 +40,5 @@
     </script>
 
     </body>
-    </html>
-                                
+    </html> -->
+                                 -->

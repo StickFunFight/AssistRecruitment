@@ -4,8 +4,6 @@
 require('menu.php');
 //Inlcude Database class
 include '../functions/datalayer/database.class.php';
-//Include Modal
-include '../functions/modal/deleteCustModal.php';
 //Include Customer Controller Class
 include '../functions/datalayer/CustomerDB.php';
 //Customer Entity Class
@@ -38,6 +36,7 @@ $CustomerDB = new CustomerDB();
                 <div class="col-sm-12"></div>
                 <table class="table table-hover customer__table">
                     <thead>
+                        <!-- Tablerow Headers -->
                         <tr class="customer__row">
                             <th class="customer__th_name">Name</th>
                             <th class="customer__th_comment">Comment</th>
@@ -51,6 +50,7 @@ $CustomerDB = new CustomerDB();
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="customer__select">
+                                        <!-- Combobox settings -->
                                         <select id="customerStatus" name="cbxStatus" class="form-control">
                                             <option value="Active">Active</option>
                                             <option value="Archived">Archived</option>
@@ -59,6 +59,7 @@ $CustomerDB = new CustomerDB();
                                     </div>
                                 </div>
 
+                                <!-- Status Change button -->
                                 <div class="col-sm-6">
                                     <input type="submit" class="btn btn-status" name="btnChangeStatus" value="Verander status">
                                 </div>
@@ -68,6 +69,7 @@ $CustomerDB = new CustomerDB();
 
                         <?php
 
+                        //Read the Combobox Status
                         if (isset($_POST['btnChangeStatus'])) {
 
                             $status = $_POST['cbxStatus'];
@@ -77,7 +79,7 @@ $CustomerDB = new CustomerDB();
                             $listCustomer = $CustomerDB->getCustomers("Active");
                         }
 
-                        // Loop om door de functies heen te lopen
+                        // Loop to go through the functions for every customer in the DB table
                         foreach ($listCustomer as $customer) {
 
 
@@ -98,9 +100,9 @@ $CustomerDB = new CustomerDB();
 
                             echo "<td class='customer__td_icon'>";
                             // echo '<a class="editKnop" href="DetailsCustomer?customer='.$customer->getCustomerID().'"><i class="fas fa-edit"></i></a>
-                            echo
-                                '<a class="editKnop" href="https://youtu.be/oHg5SJYRHA0"><i class="fas fa-edit"></i></a>
-                            <a class="deleteKnop" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-trash-alt"></i></a>
+                            echo'
+                            <a class="editKnop" href="https://youtu.be/oHg5SJYRHA0"><i class="fas fa-edit"></i></a>
+                            <a class="deleteKnop" data-toggle="modal" data-target="#exampleModal" id='.$customer->getCustomerID().' onClick="reply_click(this.id)"><i class="fas fa-trash-alt"></i></a>
                             <a class="profileKnop" href="DetailsCustomer?customer=' . $customer->getCustomerID() . '"><i class="fas fa-user"></i></a>';
 
                             echo "</td>";
@@ -109,9 +111,10 @@ $CustomerDB = new CustomerDB();
                         }
                         ?>
 
-
+                        
 
                     </tbody>
+                    
                 </table>
             </div>
         </div>
@@ -120,11 +123,64 @@ $CustomerDB = new CustomerDB();
     <span id="iets"></span>
 </body>
 
-<!-- <script>
-    function naarDetails(var customerID) {
-        // document.getElementById("iets").innerHTML = "Paragraph changed!";
-        echo 'hey hallo en welkom';
-    }
-</script> -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Archive Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to archive this costumer?
+            </div>
+
+            <form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                <button type="submit" name="btnDelete" class="btn btn-primary" id="btnDelete">Archive   </button>          
+
+                <script type="text/javascript">
+                function reply_click(clicked_id)
+                {
+                    window.yourGlobalVariable = clicked_id;
+                }
+
+                $('#btnDelete').click(function () {
+
+                $.ajax({
+                    url: 'customer_handler.php',
+                    type: 'post',
+                    data: { "CustomerID": yourGlobalVariable},
+                    success: function(response) { window.location.href='customer_list.php' }
+                });
+
+
+                });
+
+                </script>
+
+                
+
+            </div>
+            </form>
+
+            </div>
+        </div>
+        </div>
+
+<script>
+    // function naarDetails(var customerID) {
+    //     // document.getElementById("iets").innerHTML = "Paragraph changed!";
+    //     echo 'hey hallo en welkom';
+    // }
+
+$(document).ready(function(){
+    $("#customerStatus").val("<?php echo $_POST['cbxStatus']; ?>");
+});
+
+</script>
 
 </html>
