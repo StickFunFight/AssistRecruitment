@@ -7,17 +7,15 @@ class User {
     private $username;
     private $userEmail;
     private $userPassword;
-    private $userPasswordSalt;
     private $isAdmin;
     private $userStatus;
 
-    public function __construct($userId, $username, $userEmail, $userPassword, $userPasswordSalt, $isAdmin, $userStatus)
+    public function __construct($userId, $username, $userEmail, $userPassword, $isAdmin, $userStatus)
     {
         $this->userId = $userId;
         $this->username = $username;
         $this->userEmail = $userEmail;
         $this->userPassword = $userPassword;
-        $this->userPasswordSalt = $userPasswordSalt;
         $this->isAdmin = $isAdmin;
         $this->userStatus = $userStatus;
     }
@@ -62,16 +60,6 @@ class User {
         $this->userPassword = $userPassword;
     }
 
-    public function getUserPasswordSalt()
-    {
-        return $this->userPasswordSalt;
-    }
-
-    public function setUserPasswordSalt($userPasswordSalt)
-    {
-        $this->userPasswordSalt = $userPasswordSalt;
-    }
-
     public function getIsAdmin()
     {
         return $this->isAdmin;
@@ -91,7 +79,5 @@ class User {
     {
         $this->userStatus = $userStatus;
     }
-
-
 
 }

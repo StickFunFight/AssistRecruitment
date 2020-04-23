@@ -1,5 +1,5 @@
 body{
-    background-color: lightgray;
+    background-color: #F5F5F5;
 }
 
 a{
@@ -25,4 +25,8 @@ a{
     left: 50%;
     transform: translate(-50%);
     min-width: 350px
+}
+
+#loginFormButton{
+    width: 30%;
 }

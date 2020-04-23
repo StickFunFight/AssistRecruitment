@@ -14,8 +14,26 @@ class LoginController {
         if($this->ldb->createUser($username, $hash, $email)){
             echo "Account aangemaakt !";
         } else {
-            echo "Dit e-mailadres is al in gebruik";
+            echo "Het lijkt er op dat dit account al bestaat";
         }
+    }
+
+    public function logIn($username, $password){
+        $user = $this->ldb->getUser($username);
+
+        if($user->getUsername() != null && $user->getUserPassword() != null){
+            if($username == $user->getUsername() && password_verify($password, $user->getUserPassword())){
+                echo "Ingelogd";
+            } else {
+                echo "Credentials zijn onjuist";
+            }
+        } else {
+            echo "Er ging iets mis";
+        }
+    }
+
+    public function forgotPassword($email){
+
     }
 
 }

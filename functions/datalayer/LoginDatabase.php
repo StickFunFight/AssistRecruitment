@@ -1,5 +1,6 @@
 <?php
-require_once 'database.class.php';
+include 'database.class.php';
+include '../functions/models/User.php';
 
 class LoginDatabase {
 
@@ -14,6 +15,24 @@ class LoginDatabase {
          $stmt->bindParam(3, $passwordHash);
          $stmt->bindParam(4, $userRight);
          $stmt->execute();
+    }
+
+    public function getUser($username){
+        $connection = new Database();
+        $getUser = null;
+        $db = $connection->getConnection();
+
+        $stmt = $db->prepare("SELECT * FROM user WHERE userName = ?");
+        $stmt->bindParam(1, $username);
+        $stmt->execute();
+        $resultSet = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+        foreach($resultSet as $user){
+            $userSet = new User($user->userID, $user->userName, $user->userEmail, $user->userPassword, $user->userRights, $user->userStatus);
+            $getUser = $userSet;
+        }
+
+        return $getUser;
     }
 
 }

@@ -10,6 +10,13 @@ if(isset($_POST['submitCreateAccount'])){
 
     $lc->createUser($username, $password, $email);
 }
+
+if(isset($_POST['submitLogin'])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    $lc->logIn($username, $password);
+}
 ?>
 
 <head>
@@ -21,13 +28,12 @@ if(isset($_POST['submitCreateAccount'])){
         <img class="logo" src="../assests/images/logoFullAssist.png" alt="Assist logo">
     </div>
     <div class="container login-form pb-1">
-        <form method="POST" class="form-group">
-            <input class="form-control mt-2" type="text" placeholder="Gebruikersnaam"><br>
-            <input class="form-control mt-n2" type="password" placeholder="Wachtwoord"><br>
-            <button type="submit" class="btn btn-block btn-primary mt-2 mb-4">Inloggen</button>
+        <form method="post" class="form-group">
+            <input name="username" class="form-control mt-2" type="text" placeholder="Gebruikersnaam"><br>
+            <input name="password" class="form-control mt-n2" type="password" placeholder="Wachtwoord"><br>
+            <button name="submitLogin" type="submit" class="btn btn-block btn-primary mt-2 mb-4 float-right" id="loginFormButton">Inloggen</button>
         </form>
-        <p class="mb-1"><u><a data-toggle="modal" href="#createAccount" class="font-weight-bold">Maak een account aan +</a></u>
-        </p>
+        <p class="mb-1"><u><a data-toggle="modal" href="#createAccount" class="font-weight-bold">Maak een account aan +</a></u></p>
         <p><u><a href="#blank" class="font-weight-bold">Wachtwoord vergeten?</a></u></p>
     </div>
 
@@ -38,7 +44,7 @@ if(isset($_POST['submitCreateAccount'])){
                 <div class="modal-header">
                     <h5 class="modal-title">Account Aanmaken</h5>
                 </div>
-                <form method="post">
+                <form method="post" class="form-group">
                     <div class="modal-body">
                         <div class="form-group form-row mb-4">
                             <label class="col col-form-label">Gebruikersnaam</label>
@@ -61,7 +67,7 @@ if(isset($_POST['submitCreateAccount'])){
                         <div class="form-group form-row">
                             <label class="col col-form-label">Email</label>
                             <div class="col-7">
-                                <input name="email" class="form-control" type="text" placeholder="Email">
+                                <input name="email" class="form-control" type="email" placeholder="Email">
                             </div>
                         </div>
                     </div>
