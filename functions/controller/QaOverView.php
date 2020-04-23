@@ -38,13 +38,19 @@ class QaOverView
         if ($stm->execute()) {
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
             foreach ($result as $item) {
-                $entQuestionAnswer = new EntQuestionAnswer($item->questionID,$item->categorieID, $item->questionStatus, $item->questionName, $item->questionType, $item->answerID, $item->answer);
-                array_push($lijst, $entQuestionAnswer);
+                $entQuestionAnswer = new EntQuestionAnswer($item->questionID,$item->categorieID, $item->questionStatus, $item->questionName, $item->questionType, $item->answerID);
+                if(!empty($lijst[$item->questionID])){
+                    $entQuestionAnswer = $lijst[$item->questionID];
+                }
+                $Answers = $entQuestionAnswer->getAnswers();
+                array_push($Answers, $item->answer);
+                $entQuestionAnswer->setAnswers($Answers);
+                $lijst[$item->questionID] = $entQuestionAnswer;
+//                array_push($lijst, $entQuestionAnswer);
             }
             return $lijst;
         } else {
             echo "oef foutje";
         }
     }
-
 }

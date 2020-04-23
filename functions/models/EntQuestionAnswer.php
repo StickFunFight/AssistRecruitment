@@ -20,7 +20,7 @@ class EntQuestionAnswer
      * @param $answerID
      * @param $answer
      */
-    public function __construct($questionID,$categorieID, $questionStatus, $questionName, $questionType, $answerID, $answer)
+    public function __construct($questionID,$categorieID, $questionStatus, $questionName, $questionType, $answerID)
     {
         $this->questionID = $questionID;
         $this->categorieID = $categorieID;
@@ -28,7 +28,6 @@ class EntQuestionAnswer
         $this->questionName = $questionName;
         $this->questionType = $questionType;
         $this->answerID = $answerID;
-        $this->answer = $answer;
     }
 
     /**
@@ -83,8 +82,22 @@ class EntQuestionAnswer
     /**
      * @return mixed
      */
-    public function getAnswer()
+    public function getAnswers()
     {
+        if($this->answer == null){
+            return array();
+        }
         return $this->answer;
     }
+
+    /**
+     * @param mixed $answer
+     */
+    public function setAnswers($answer)
+    {
+        $this->answer = $answer;
+    }
+
+
+
 }

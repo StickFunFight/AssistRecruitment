@@ -67,7 +67,9 @@ require_once 'menu.php';
                         echo  $item->getQuestionName();
                         echo '</td>';
                         echo '<td>';
-                        echo  $item->getAnswer();
+                        foreach ($item->getAnswers() as $test) {
+                            echo "<span style='margin-right:10px'>$test.</span>";
+                        }
                         echo '</td>';
                         echo '<td>';
                         echo  '<i value="'.$item->getQuestionID().'" class="fas fa-pencil-alt"></i>';
