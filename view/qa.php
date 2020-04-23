@@ -30,7 +30,7 @@ require_once 'menu.php';
                             $Qa = $QO->GetAllCatergies();
                             foreach ($Qa as $item)
                             {
-                                echo '<tr class="category-tabel__row">';
+                                echo '<tr class="category-tabel__row" onclick="filterSelection('.$item->GetID().')">';
                                 echo '<td value="'.$item->GetID().'">';
                                 echo '<i id="Icon" class="fas fa-folder"></i>';
                                 echo " ";
@@ -63,7 +63,7 @@ require_once 'menu.php';
                     foreach ($Qa as $item)
                     {
                         echo'<tr>';
-                        echo '<td value="'.$item->getCategorieID().'">';
+                        echo '<td id="'.$item->getCategorieID().'">';
                         echo  $item->getQuestionName();
                         echo '</td>';
                         echo '<td>';
@@ -96,6 +96,25 @@ require_once 'menu.php';
             });
         });
     });
+
+
+    function filterSelection(ID) {
+        var input, filter, table, tr, td, i;
+        input = ID;
+        table = document.getElementById("QaTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                if (td.id.indexOf(input) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
 </script>
 </script>
 
