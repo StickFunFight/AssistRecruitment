@@ -18,26 +18,23 @@
         }
 
         // Function to get all diffrent status from the database
-        public function getStatus(){
+        public function getCustomerDetails($customerID){
             // Making an array
-            $lijst;
+            $list;
 
             // Making a query
-            $query = sprintf("SELECT customerStatus FROM customer  GROUP BY customerStatus");
+            $query = sprintf("SELECT * FROM customer WHERE customerID = " . $customerID);
             $stm = $this->db->prepare($query);
             if($stm->execute()){
                 // Getting the result
-                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                $result = $stm->fetch(PDO::FETCH_OBJ);
 
-                // Loopen through the result
-                foreach($result as $status){
-                    // Entiteit aanroepen om de waardes op te halen en in de array te doen
-                    $customerModal = new CustomerModal("", "", "", "", $status->customerStatus);
-                    array_push($lijst, $customerModal);
-                }
-
-                // De volledige lijst teruggeven
-                return $lijst;
+                // Entiteit aanroepen om de waardes op te halen en in de array te doen
+                $customerModal = new CustomerModal("", "", "", "", $status->customerStatus);
+                array_push($lijst, $customerModal);
+                
+                // Returning the customer
+                return $list;
             }else {
                 echo "RIP";
             }

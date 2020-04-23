@@ -7,9 +7,9 @@
 
 /* Page title */
 .ce__title {
-  margin: 2rem 0 4rem;
+  margin: 2rem 0;
+  color: #73b99b;
   font-size: 3.5rem;
-  text-align: center;
 }
 
 .ce--form-row {

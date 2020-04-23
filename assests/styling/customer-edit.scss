@@ -1,3 +1,6 @@
+@import "variables";
+@import "mixins";
+
 /* Container next to the sidebar */
 .page__container {
     width: 100%;
@@ -7,9 +10,9 @@
 
 /* Page title */
 .ce__title {
-    margin: 2rem 0 4rem;
+    margin: 2rem 0;
+    color: $green;
     font-size: 3.5rem;
-    text-align: center;
 }
 
 .ce--form-row{

@@ -1,16 +1,29 @@
 <?php  
-    require '../functions/datalayer/database.class.php';
-    // Class job toevoegen aan het bestand
-    require '../functions/controller/getCustList.php';
-    // Class used technologie toevoegen aan het bestand
-    require '../functions/models/entCustomer.php';
+    if (isset($_GET['customer'])) {
+    
+        $customerID = $_GET['customer'];
 
-    //Connectie maken met class CustomerDB
-    $CustomerDB = new CustomerDB(); 
+        require '../functions/datalayer/database.class.php';
+        // Adding the customer controller
+        require '../functions/controller/getCustList.php';
+        // Adding the customer modal
+        require '../functions/models/entCustomer.php';
 
-    require "menu.php";
+        //Connectie maken met class CustomerDB
+        $CustomerDB = new CustomerDB(); 
+
+        // Including the menu and head
+        require "menu.php";
+
+        // Getting the customer
+        $detailsCustomer = $CustomerDB->getCustomerDetails($customerID);
+
+        // Loop through result
+        foreach($detailsCustomer as $customer){
 ?>
 <html>
+    <link rel="stylesheet" href="../assests/styling/customer-edit.css">
+
     <body>
         <div class="page__container"> 
             <div class="container">
@@ -24,7 +37,7 @@
                     <div class="row justify-content-md-center ce--form-row">
                         <div class="col-sm-6">
                             <label for="customerName" class="ce__label">Name</label>
-                            <input type="text" name="txtCustomerName" id="customerName" value="<?php ?>" class="form-control ce--input" required onchange=""/>
+                            <input type="text" name="txtCustomerName" id="customerName" value="<?php ?>" class="form-control ce--input" required />
                             <span class="ce__feedback" id="feedbackCustomerName"></span>
                         </div>
 
@@ -42,21 +55,27 @@
                             <span class="ce__feedback" id="feedbackCustomerComment"></span>
                         </div>
 
+                        <?php echo getCustomerStatus(); ?>
+
                         <div class="col-sm-6">
                             <label for="status" class="ce__label">Status</label>
                             <select class="form-control" name="cbxStatus" id="status" onchange="">
                                <?php 
-                                    // Functies ophalen
-                                    $listStatus = $CustomerDB->getStatus();
-
-                                    var_dump($listStatus);
-
-                                    // Loop om door de functies heen te lopen
-                                    foreach($listStatus as $status){
-                                        ?>
-                                            <option value="iets">iets</option>
-                                        <?php
-                                    }
+                                        $customerStatus[]="Active";
+                                        $customerStatus[]="Archived";
+                                        $customerStatus[]="Deleted";
+                                    
+                                        foreach($customerStatus as $value){
+                                            if($value == $detailsCustomer->getCustomerStatus()) {
+                                                ?>
+                                                    <option selected="selected" value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                    <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                                <?php
+                                            }
+                                        }
                                ?>
                             </select>
                             <span class="ce__feedback" id="feedbackCustomerStatus"></span>
@@ -67,7 +86,9 @@
     </body>
 </html>
 <?php
-    // If no customer is set
-    // }
-    // else header('Location: #');
+        // Ending the customer foreach loop
+        }
+    //If no customer is set
+    }
+    //else header('Location: cust_listed');
 ?>

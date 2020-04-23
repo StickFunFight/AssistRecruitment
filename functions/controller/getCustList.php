@@ -15,7 +15,7 @@ Class CustomerDB {
     }
 
     function getCustomers($status){
-    // Array aanmaken voor de functies
+        // Array aanmaken voor de functies
         $listCustomers = array();
 
         // Query aanmaken om alle functies uit de database te halen
@@ -27,7 +27,7 @@ Class CustomerDB {
             // Loop aanmaken om alle rijen in een array te doen
             foreach($result as $customer){
                 // Entiteit aanroepen om de waardes op te halen en in de array te doen
-                $entCustomer = new entCustomer($customer->customerID, $customer->customerNaam, $customer->customerComment, $customer->customerRefrence, $customer->customerStatus);
+                $entCustomer = new entCustomer($customer->customerID, $customer->customerName, $customer->customerComment, $customer->customerRefrence, $customer->customerStatus);
                 array_push($listCustomers, $entCustomer);
             }
             // De volledige lijst teruggeven
@@ -54,30 +54,30 @@ Class CustomerDB {
         }
     }
 
-  // Function to get all diffrent status from the database
-    function getStatus(){
-        // Making an array
-        $lijst;
+    // Function to get all diffrent status from the database
+    function getCustomerDetails($customerID){
+        // Array aanmaken voor de functies
+        $detailsCustomer = array();
 
-        // Making a query
-        $query = sprintf("SELECT customerStatus FROM customer  GROUP BY customerStatus");
-        echo $query;
+        // Query aanmaken om alle functies uit de database te halen
+        $query = "SELECT * FROM customer WHERE customerID = ?";
         $stm = $this->db->prepare($query);
+        $stm->bindParam(1, $customerID);
         if($stm->execute()){
-            // Getting the result
+            // Resultaten uit de database halen
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
-
-            // Loopen through the result
-            foreach($result as $status){
+            // Loop aanmaken om alle rijen in een array te doen
+            foreach($result as $customer){
                 // Entiteit aanroepen om de waardes op te halen en in de array te doen
-                $customerModal = new CustomerModal($status->customerStatus);
-                array_push($lijst, $customerModal);
+                $entCustomer = new entCustomer($customer->customerID, $customer->customerName, $customer->customerComment, $customer->customerReference, $customer->customerStatus);
+                array_push($detailsCustomer, $entCustomer);
             }
-
             // De volledige lijst teruggeven
-            return $lijst;
-        }else {
-            echo "RIP";
+            return $detailsCustomer;    
+        }
+        // Tekst laten zien voor als er geen functies zijn opgehaald
+        else{
+            echo "Oof";
         }
     }
 }
