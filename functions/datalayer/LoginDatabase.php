@@ -14,7 +14,12 @@ class LoginDatabase {
          $stmt->bindParam(2, $email);
          $stmt->bindParam(3, $passwordHash);
          $stmt->bindParam(4, $userRight);
-         $stmt->execute();
+
+         try {
+            return $stmt->execute();
+         } catch (PDOException $exception){
+            return false;
+         }
     }
 
     public function getUser($username){
@@ -24,15 +29,20 @@ class LoginDatabase {
 
         $stmt = $db->prepare("SELECT * FROM user WHERE userName = ?");
         $stmt->bindParam(1, $username);
-        $stmt->execute();
-        $resultSet = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-        foreach($resultSet as $user){
-            $userSet = new User($user->userID, $user->userName, $user->userEmail, $user->userPassword, $user->userRights, $user->userStatus);
-            $getUser = $userSet;
+        try {
+            $stmt->execute();
+            $resultSet = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+            foreach ($resultSet as $user) {
+                $userSet = new User($user->userID, $user->userName, $user->userEmail, $user->userPassword, $user->userRights, $user->userStatus);
+                $getUser = $userSet;
+            }
+
+            return $getUser;
+        } catch(PDOException $exception){
+            return null;
         }
-
-        return $getUser;
     }
 
 }

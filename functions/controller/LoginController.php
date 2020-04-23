@@ -21,9 +21,9 @@ class LoginController {
     public function logIn($username, $password){
         $user = $this->ldb->getUser($username);
 
-        if($user->getUsername() != null && $user->getUserPassword() != null){
+        if(!is_null($user) && $user->getUserPassword() != null){
             if($username == $user->getUsername() && password_verify($password, $user->getUserPassword())){
-                echo "Ingelogd";
+                header("Location: menu.php");
             } else {
                 echo "Credentials zijn onjuist";
             }
