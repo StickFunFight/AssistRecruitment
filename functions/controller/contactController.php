@@ -19,12 +19,12 @@
             $stm = $this->db->prepare($query);
             if($stm->execute()){
                 $result= $stm->fetchAll(PDO::FETCH_OBJ);
-                foreach ($result as $item){
-                    $entContact = new entContact($item->contactID, $item->contactName, $item->contactPhonenumber, $item->contactEmail, $item->contactComment, $item->contactStatus,$item->contactCustomerID,$item->contactUserID);
-                    array_push($lijst, $entContact);
 
+                foreach ($result as $item){
+                    $entContact = new entContact($item->contactID, $item->contactName, $item->contactPhoneNumber, $item->contactEmail, $item->contactComment, $item->contactStatus, $item->customerID, $item->userID);
+                    array_push($lijst, $entContact);
                 }
-                return $lijst;
+                //return $lijst;
             }
             else{
                 ECHO "Kapoet";

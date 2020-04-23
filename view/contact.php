@@ -48,6 +48,8 @@ $contactController = new contactController();
                      //   Functies ophalen
                         $listContact = $contactController->getContacts();
 
+                        echo "<br><br>" . $listContact;
+
                        // Loop om door de functies heen te lopen
                         foreach($listContact as $contact){
 
