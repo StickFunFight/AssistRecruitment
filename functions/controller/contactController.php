@@ -20,7 +20,7 @@
             if($stm->execute()){
                 $result= $stm->fetchAll(PDO::FETCH_OBJ);
                 foreach ($result as $item){
-                    $entContact = new entContact($item->contactID, $item->contactName, $item->contactEmail, $item->contactPhonenumber, $item->contactCustomer, $item->contactCustomerID, $item->contactUserID, $item->contactStatus);
+                    $entContact = new entContact($item->contactID, $item->contactName, $item->contactPhonenumber, $item->contactEmail, $item->contactComment, $item->contactStatus,$item->contactCustomerID,$item->contactUserID);
                     array_push($lijst, $entContact);
 
                 }

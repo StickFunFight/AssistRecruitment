@@ -51,27 +51,26 @@ $contactController = new contactController();
                        // Loop om door de functies heen te lopen
                         foreach($listContact as $contact){
 
-                            
-                            echo "<br>";
+//                            echo "<br>";
                             echo "<tr class='customer__row'>";
 
                             echo "<td class='customer__td'>";
-                            echo $contact->getName();
+                            echo $contact->getContactName();
                             echo "</td>";
                         
                             echo "<td class='customer__td'>";
-                            echo $contact->getEmail();
+                            echo $contact->getContactEmail();
                             echo "</td>";
 
                             echo "<td class='customer__td'>";
-                            echo $contact->getPhonenumber();
+                            echo $contact->getContactPhonenumber();
                             echo "</td>";
 
                             echo "<td class='customer__td'>";
                             // echo '<a class="editKnop" href="DetailsCustomer?customer='.$customer->getCustomerID().'"><i class="fas fa-edit"></i></a>
                             echo '<a class="editKnop" href="https://youtu.be/oHg5SJYRHA0"><i class="fas fa-edit"></i></a>
-                            <a class="deleteKnop" href="DetailsCustomer?customer='.$contact->getCustomerID().'"><i class="fas fa-trash-alt"></i></a>
-                            <a class="profileKnop" href="DetailsCustomer?customer='.$contact->getCustomerID().'"><i class="fas fa-user"></i></a>';
+                            <a class="deleteKnop" href="DetailsCustomer?customer='.$contact->getContactCustomerID().'"><i class="fas fa-trash-alt"></i></a>
+                            <a class="profileKnop" href="DetailsCustomer?customer='.$contact->getContactCustomerID().'"><i class="fas fa-user"></i></a>';
 
                             echo "</td>";
 

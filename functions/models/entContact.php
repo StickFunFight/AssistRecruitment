@@ -9,48 +9,95 @@ class entContact
     private $contactStatus;
     private $contactCustomerID;
     private $contactUserID;
-    
-    
 
-    function __contstruct($contactID, $contactName, $contactPhonenumber, $contactEmail, $contactCustomerID, $contactUserID, $contactStatus)
+    /**
+     * entContact constructor.
+     * @param $contactID
+     * @param $contactName
+     * @param $contactPhonenumber
+     * @param $contactEmail
+     * @param $contactComment
+     * @param $contactStatus
+     * @param $contactCustomerID
+     * @param $contactUserID
+     */
+    public function __construct($contactID, $contactName, $contactPhonenumber, $contactEmail, $contactComment, $contactStatus, $contactCustomerID, $contactUserID)
     {
         $this->contactID = $contactID;
         $this->contactName = $contactName;
         $this->contactPhonenumber = $contactPhonenumber;
         $this->contactEmail = $contactEmail;
-        $this->
-        $this->contactCustomer = $contactCustomerID;
-        $this->contactUserID = $contactUserID;
+        $this->contactComment = $contactComment;
         $this->contactStatus = $contactStatus;
+        $this->contactCustomerID = $contactCustomerID;
+        $this->contactUserID = $contactUserID;
     }
 
-    function getID(){
+
+    /**
+     * @return mixed
+     */
+    public function getContactID()
+    {
         return $this->contactID;
     }
 
-    function getName(){
+    /**
+     * @return mixed
+     */
+    public function getContactName()
+    {
         return $this->contactName;
     }
 
-    function getEmail(){
-        return $this->contactEmail;
-    }
-    
-    function getPhonenumber(){
+    /**
+     * @return mixed
+     */
+    public function getContactPhonenumber()
+    {
         return $this->contactPhonenumber;
     }
 
-    function getCustomerID(){
+    /**
+     * @return mixed
+     */
+    public function getContactEmail()
+    {
+        return $this->contactEmail;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContactComment()
+    {
+        return $this->contactComment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContactStatus()
+    {
+        return $this->contactStatus;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContactCustomerID()
+    {
         return $this->contactCustomerID;
     }
 
-    function getUserID(){
+    /**
+     * @return mixed
+     */
+    public function getContactUserID()
+    {
         return $this->contactUserID;
     }
-    
-    function getStatus(){
-        return $this->contactStatus;
-    }
+
 
 }
 ?>
