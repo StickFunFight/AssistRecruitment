@@ -22,11 +22,11 @@ class EntCustomer
         return $this->show_customerID;
     }
 
-    public function getCustomerNaam() : string
+    public function getCustomerName() : string
     {
         return $this->show_customerNaam;
     }
-
+ 
     public function getCustomerComment() : string
     {
         return $this->show_customerComment;
@@ -39,7 +39,7 @@ class EntCustomer
 
     public function getCustomerStatus() : string
     {
-        return $this->show_customerRefrence;
+        return $this->show_customerStatus;
     }
 } 
 
