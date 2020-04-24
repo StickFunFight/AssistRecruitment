@@ -194,4 +194,9 @@ html, body {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
 }
+
+.page__content {
+  width: 100%;
+  padding-right: 5rem;
+}
 /*# sourceMappingURL=menu.css.map */

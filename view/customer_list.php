@@ -11,12 +11,14 @@ include '../functions/models/entCustomer.php';
 
 //Create connecting with CustomerDB Class
 $CustomerDB = new CustomerDB();
+
 ?>
 
 <html>
 
 <head>
-
+<!-- Linking to own styleheet -->
+<link rel="stylesheet" href="../assests/styling/customer.css">
 </head>
 
 <body>
@@ -98,7 +100,7 @@ $CustomerDB = new CustomerDB();
                             // echo '<a class="editKnop" href="DetailsCustomer?customer='.$customer->getCustomerID().'"><i class="fas fa-edit"></i></a>
                             echo'
                             <a class="editKnop" href="https://youtu.be/oHg5SJYRHA0"><i class="fas fa-edit"></i></a>
-                            <a class="deleteKnop" data-toggle="modal" data-target="#exampleModal" id='.$customer->getCustomerID().' onClick="reply_click(this.id)"><i class="fas fa-trash-alt"></i></a>
+                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#exampleModal" id='.$customer->getCustomerID().' onClick="reply_click(this.id)"><i class="fas fa-trash-alt"></i></a>
                             <a class="profileKnop" href="DetailsCustomer?customer=' . $customer->getCustomerID() . '"><i class="fas fa-user"></i></a>';
 
                             echo "</td>";
