@@ -1,7 +1,7 @@
 <?php
-require '../datalayer/CategoryAddFunction.php';
+require '../datalayer/CategoryDatabase.php';
 
-$CAF = new CategoryAddFunction();
+$CAF = new CategoryDatabase();
 
 if (isset($_POST['catName'])){
 

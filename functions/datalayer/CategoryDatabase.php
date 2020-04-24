@@ -2,7 +2,7 @@
 
 require_once '/database.class.php';
 
-class CategoryAddFunction{
+class CategoryDatabase{
 
     private $conn;
 
