@@ -8,45 +8,14 @@ class customerAdd {
         $this->custAdd = new customerDatabase();
     }
 
+    //This function creates a new customer using the values obtained from the customerDatabase (createCustomer) function.
+    //Also gives an echo as feedback to assure the user that the statement has succesfully been executed or not.
     public function createCustomer($customerName, $customerComment, $customerReference) {
         if($this->custAdd->createCustomer($customerName, $customerComment, $customerReference)){
-            echo "Customer toegevoegd!";
+            echo "Customer succesfully added!";
         } else {
-            echo "Er heeft zich een fout plaats gevonden in de customerAdd klasse! (regel 11)";
+            echo "An error occured in the createCustomer function within the customerAdd class.";
         }
     }
-
-
 }
-    // $conn = new mysqli('assist.tk', 'assist_remote', 'KPg$R%Tsd@Y%', 'assist');
-    // if ($conn->connect_error){
-    //     die('Connection Failed  :  '.$conn->connect_error);
-    // }else{
-
-        
-        // $connection = new Database();
-        // $db = $connection->getConnection();
-
-        // private $customerID;
-
-        // $customerName = $_POST['customerName'];
-        // $customerComment = $_POST['customerComment'];
-
-        // $customerReference = "TestQR";
-        // $customerStatus = "Active";
-
-        // $stmt = $conn->prepare("INSERT INTO customer (customerID, customerNaam, customerComment, customerReference, customerStatus) VALUES (?, ?, ?, ?, ?)");
-        // $stmt->bindParam(1, $customerID);
-        // $stmt->bindParam(2, $customerName);
-        // $stmt->bindParam(3, $customerComment);
-        // $stmt->bindParam(4, $customerReference);
-        // $stmt->bindParam(5, $customerStatus);
-        // $stmt->execute();
-
-        // $stm = $conn->prepare("INSERT INTO customer(customerID, customerNaam, customerComment, customerReference, customerStatus) VALUES (?, ?, ?, ?, ?)");
-        // $stm->bind_param("issss", 'iets', $customerName, $customerComment, 'iets', 'iets');
-        // $stm->execute();
-
-        // $stm->close();
-        // $conn->close();
 ?>
