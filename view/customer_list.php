@@ -11,7 +11,6 @@ include '../functions/models/entCustomer.php';
 
 //Create connecting with CustomerDB Class
 $CustomerDB = new CustomerDB();
-
 ?>
 
 <html>
@@ -24,7 +23,7 @@ $CustomerDB = new CustomerDB();
     <!-- Page Container -->
     <div class="page__content">
         <!-- Bootstrap Container -->
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <br>
@@ -72,17 +71,13 @@ $CustomerDB = new CustomerDB();
 
                         //Read the Combobox Status
                         if (isset($_POST['btnChangeStatus'])) {
-
                             $status = $_POST['cbxStatus'];
-
                             $listCustomer = $CustomerDB->getCustomers($status);
                         } else {
                             $listCustomer = $CustomerDB->getCustomers("Active");
                         }
-
                         // Loop to go through the functions for every customer in the DB table
                         foreach ($listCustomer as $customer) {
-
 
                             echo "<br>";
                             echo "<tr class='customer__row'>";
@@ -107,15 +102,11 @@ $CustomerDB = new CustomerDB();
                             <a class="profileKnop" href="DetailsCustomer?customer=' . $customer->getCustomerID() . '"><i class="fas fa-user"></i></a>';
 
                             echo "</td>";
-
                             echo "</tr>";
                         }
                         ?>
-
-                        
-
+                       
                     </tbody>
-                    
                 </table>
             </div>
         </div>
@@ -123,7 +114,6 @@ $CustomerDB = new CustomerDB();
     </div>
     <span id="iets"></span>
 </body>
-
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -158,13 +148,10 @@ $CustomerDB = new CustomerDB();
                     success: function(response) { window.location.href='customer_list.php' }
                 });
 
-
                 });
 
                 </script>
-
-                
-
+               
             </div>
             </form>
 
