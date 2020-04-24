@@ -56,7 +56,7 @@
                         <li class="submenu__item"> <a href="#" class="submenu--link">Scan</a> </li>
                         <li class="submenu__item"> <a href="customer_list" class="submenu--link">Customer</a> </li>
                         <li class="submenu__item"> <a href="contact" class="submenu--link">Contact</a> </li>
-                        <li class="submenu__item"> <a href="#" class="submenu--link">Department</a> </li>
+                        <li class="submenu__item"> <a href="department-list" class="submenu--link">Department</a> </li>
                         <li class="submenu__item"> <a href="#" class="submenu--link">QA</a> </li>
                     </ul>
 

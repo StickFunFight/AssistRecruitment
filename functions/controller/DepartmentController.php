@@ -9,6 +9,16 @@
             $this->departmentDB = new DepartmentDB();
         }
 
+        function getDepartments($statusDepartment){
+            // Creating a array
+            $listDepartments = array();
+
+            $listDepartments = $this->departmentDB->getDepartments($statusDepartment);
+
+            // Returning the list given from the Database class
+            return $listDepartments;
+        }
+
         function getDepartmentsCustomer($customerID, $statusDepartment){
             // Creating a array
             $listDepartments = array();

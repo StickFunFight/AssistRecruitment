@@ -19,6 +19,7 @@ $CustomerDB = new CustomerDB();
 <head>
 <!-- Linking to own styleheet -->
 <link rel="stylesheet" href="../assests/styling/customer.css">
+<link rel="stylesheet" href="../assests/styling/customer-edit.css">
 </head>
 
 <body>
