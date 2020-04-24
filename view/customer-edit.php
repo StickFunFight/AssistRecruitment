@@ -45,7 +45,7 @@
             $custStatus = $_POST['cbxStatus'];
 
             // Storring all variables in the customer object
-            $CustomerModal = new EntCustomer($custID, $custName, $custRefrence, $custComment, $custStatus);
+            //$CustomerModal = new EntCustomer($custID, $custName, $custRefrence, $custComment, $custStatus);
 
             // echo "ID = " . $custID . "<br>";
             // echo "Name = " . $custName . "<br>";
@@ -53,7 +53,7 @@
             // echo "Comment = " . $custComment . "<br>";
             // echo "Status = " . $custStatus . "<br>";
 
-            $CustomerDB->updateCustomer($CustomerModal);
+            $CustomerDB->updateCustomer($custID, $custName, $custRefrence, $custComment, $custStatus);
         }
 
 

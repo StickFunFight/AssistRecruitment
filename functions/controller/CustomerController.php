@@ -25,7 +25,8 @@
         //This function creates a new customer using the values obtained from the customerDatabase (createCustomer) function.
         //Also gives an echo as feedback to assure the user that the statement has succesfully been executed or not.
         public function createCustomer($customerName, $customerComment, $customerReference) {
-            if($this->custAdd->createCustomer($customerName, $customerComment, $customerReference)){
+            //$this->customerDB->createCustomer($customerName, $customerComment, $customerReference);
+            if($this->customerDB->createCustomer($customerName, $customerComment, $customerReference)){
                 echo "Customer succesfully added!";
             } else {
                 echo "An error occured in the createCustomer function within the customerAdd class.";
@@ -43,13 +44,13 @@
         }
 
         // Function to update the customer
-        function updateCustomer($CustomerModal) {
+        function updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus) {
             
             //var_dump($CustomerModal);
 
             //echo "<br> hai ik ben iets <br>" . $CustomerModal->getCustomerName();
 
-            //$this->customerDB->updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus);
+            $this->customerDB->updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus);
         }
     }
 ?>
