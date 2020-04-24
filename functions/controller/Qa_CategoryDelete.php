@@ -1,5 +1,4 @@
 <?php
-require '../functions/models/EntCategory.php';
 class QaOverView
 {
     private $db;
@@ -14,27 +13,49 @@ class QaOverView
     function DeleteQaCategory($cID)
     {
 
-        $query = "SELECT categorieStatus FROM categorie WHERE categorieID = $id";
-            if (actief)
+        $query = "SELECT scanStatus FROM scan 
+                  JOIN scan_question ON scan_question.scanID = scan.scanID
+                  JOIN question ON question.questionID = scan_question.questionID
+                  WHERE question.categorieID = '$cID' " ;
+        $stm = $this->db->prepare($query);
+        if($stm->execute())
+        {
+            $result = $stm->fetchAll(PDO::FETCH_ALL);
+            foreach($result as $status)
             {
-                $stm = $this->db->prepare($query);
-                if($stm->execute())
+                echo $status;
+                if($status == "actief")
                 {
-                    Header("Location:Qa_CategoryDelete");
-                    //  $query = "DELETE FROM categorie WHERE categorieID = $cID";
+                    echo "Er is een scan actief waarin deze categorie gebruikt wordt";
                 }
                 else
                 {
-                    echo"YOU FUCKED UP SOMWHERE";
+                    $query = "SELECT questionStatus from question WHERE categorieID = $cID";
+                    $stm = $this->db->prepare($query);
+                    if($stm->execute())
+                    {
+                        $result = $stm->fetchAll(PDO::FETCH_ALL);
+                        foreach($result as $status)
+                        {
+                            echo $status;
+                            if ($status == "actief")
+                            {
+
+                            }
+                            else
+                            {
+                                $query = "UPDATE category SET categorieStatus = 'deleted' WHERE categoryID = '$cID'";
+                                $stm = $this->db->prepare($query);
+                                if($stm->execute())
+                                {
+                                    echo "Categorie op 'deleted' gezet";
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            else
-            {
-                echo "nog niks";
-            }
-
+        }
     }
 }
 ?>
-
-
