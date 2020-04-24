@@ -93,13 +93,13 @@ $CustomerDB = new CustomerDB();
                             echo "</td>";
 
                             echo "<td class='customer__td_refrence'>";
-                            echo $customer->getCustomerReference();
+                            echo $customer->getCustomerRefrence();
                             echo "</td>";
 
                             echo "<td class='customer__td_icon'>";
                             // echo '<a class="editKnop" href="DetailsCustomer?customer='.$customer->getCustomerID().'"><i class="fas fa-edit"></i></a>
                             echo'
-                            <a class="editKnop" href="https://youtu.be/oHg5SJYRHA0"><i class="fas fa-edit"></i></a>
+                            <a class="editKnop" href="customer-edit?customer='.$customer->getCustomerID().'"><i class="fas fa-edit"></i></a>
                             <a class="deleteKnop" href="#" data-toggle="modal" data-target="#exampleModal" id='.$customer->getCustomerID().' onClick="reply_click(this.id)"><i class="fas fa-trash-alt"></i></a>
                             <a class="profileKnop" href="DetailsCustomer?customer=' . $customer->getCustomerID() . '"><i class="fas fa-user"></i></a>';
 

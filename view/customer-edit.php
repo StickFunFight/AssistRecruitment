@@ -94,7 +94,7 @@
 
 
         // Getting the customer
-        $detailsCustomer = $CustomerDB->getCustomerDetails($customerID);
+        $detailsCustomer = $CustomerDB->getCustomerDetails($customerID); 
 
         // Loop through result
         foreach($detailsCustomer as $customer){
