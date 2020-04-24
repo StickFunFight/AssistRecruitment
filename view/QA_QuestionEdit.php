@@ -3,9 +3,10 @@ require_once 'head.php';
 require_once '../functions/controller/QA_QuestionFunctions.php';
 $QF = new QA_QuestionFunctions();
 $questionID = "10";
-
+$results = $QF->getQuestionData($questionID);
 ?>
-    <link rel="stylesheet" type="text/css" href="../assests/styling/QA_QuestionStyle.css">
+
+    <link rel="stylesheet" type="text/css" shref="../assests/styling/QA_QuestionStyle.css">
     <body>
 
 <!-- Button trigger modal -->
@@ -18,7 +19,7 @@ $questionID = "10";
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Vraag toevoegen</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Vraag aanpassen</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -27,33 +28,41 @@ $questionID = "10";
                     <div class="form-group row">
                         <label for="selCategory" class="col-sm-2 col-form-label" >Categorie</label>
                         <div class="col-sm-10">
-                            <select id="selCategory" name="selCategory" class="form-control">
-                                <?php  ?>
+                            <select id="selCategory" name="selCategory" class="form-control" required><?php $QF->getCategories(); ?>
                             </select>
                         </div>
                     </div>
+                    <script>
+                        //Does not work
+                        var selectedCategory = $('#selCategory');
+                        var catName = '<?php echo $results['categorieName']; ?>';
+
+                        $(function() {
+                            $("#selCategory").val(catName);
+                        });
+                    </script>
 
                     <div class="form-group row">
                         <label for="txQuestion" class="col-sm-2 col-form-label" >Vraag</label>
                         <div class="col-sm-10">
-                            <input id="txQuestion" name="txQuestion" class="form-control" required>
+                            <input id="txQuestion" name="txQuestion" class="form-control" value="<?php echo $results['questionName']; ?>" required>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="taExample" class="col-sm-2 col-form-label" >Voorbeeld</label>
                         <div class="col-sm-10">
-                            <textarea id="taExample" name="taExample" class="form-control"></textarea>
+                            <textarea required id="taExample" name="taExample" class="form-control"><?php echo $results['questionExemple']; ?></textarea>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <label for="selStatus" class="col-sm-2 col-form-label" >Status</label>
                         <div class="col-sm-10">
-                            <select id="selStatus" name="selStatus" class="form-control">
-                                <option value="active">Actief</option>
-                                <option value="archived">Gearchiveerd</option>
-                                <option value="deleted">Verwijderd</option>
+                            <select id="selStatus" name="selStatus" class="form-control" required>
+                                <option value="Active">Actief</option>
+                                <option value="Archived">Gearchiveerd</option>
+                                <option value="Deleted">Verwijderd</option>
                             </select>
                         </div>
                     </div>
@@ -95,8 +104,13 @@ $questionID = "10";
             $('#divAnswerOptions').hide();
         }
     });
+
+
 </script>
 <?php
+
+
+
 
     if(isset($_POST['btConfirm'])){
 
@@ -105,14 +119,8 @@ $questionID = "10";
         $taExemple = $_POST['taExample'];
         $selStatus = $_POST['selStatus'];
         $selQuestionType = $_POST['selQuestionType'];
-        echo $selQuestionType;
 
-        if($selCategory == null || $txQuestion == null || $selStatus == null || $selQuestionType == null){
-            ?><?php
-        }
-        else {
-            $QF->updateQuestion($questionID, $selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
-        }
+        $QF->updateQuestion($questionID, $selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
     }
     ?>
     <script>

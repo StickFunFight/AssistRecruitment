@@ -21,7 +21,7 @@ class QA_QuestionFunctions
     }
 
     public function updateQuestion($questionID, $categorieID, $questionname, $questionExemple, $questionStatus, $questionType){
-        $sql = "UPDATE question SET categorieID = '$categorieID', questionname = '$questionname', questionExemple = '$questionStatus', questionType = '$questionType' WHERE questionID = '$questionID'";
+        $sql = "UPDATE question SET categorieID = '$categorieID', questionname = '$questionname', questionExemple = '$questionExemple', questionStatus = '$questionStatus', questionType = '$questionType' WHERE questionID = '$questionID'";
         $stm = $this->conn->prepare($sql);
         $stm->execute();
     }
@@ -35,7 +35,6 @@ class QA_QuestionFunctions
                 echo "<option value=".$cat->categorieID.">".$cat->categorieName."</option>";
             }
         }
-
     }
 
     public function getQuestionID(){
@@ -45,6 +44,16 @@ class QA_QuestionFunctions
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
             foreach($result as $question){
                 echo "<option value=".$question->questionID.">".$question->questionName."</option>";
+            }
+        }
+    }
+
+    public function getQuestionData($questionID){
+        $sql = "SELECT q.questionID, q.questionName, q.questionExemple, q.questionStatus, q.questionType, c.categorieName FROM question q JOIN categorie c ON c.categorieID = q.categorieID WHERE q.questionID = '$questionID'";
+        $stm = $this->conn->prepare($sql);
+        if($stm->execute()){
+            while($row = $stm->fetch(PDO::FETCH_ASSOC)){
+               return $row;
             }
         }
     }
