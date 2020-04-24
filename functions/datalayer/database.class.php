@@ -1,6 +1,4 @@
 <?php
-
-
 // Class aanmaken
     class Database {
 
@@ -26,12 +24,5 @@
             // Connectie teruggeven
             return $this->conn;
         }
-
-
     }
-
-
-
-
-
 ?>
