@@ -38,6 +38,21 @@ class QA_QuestionFunctions
 
     }
 
+    public function getQuestionID(){
+        $sql = "SELECT * FROM question";
+        $stm = $this->conn->prepare($sql);
+        if($stm->execute()){
+            $result = $stm->fetchAll(PDO::FETCH_OBJ);
+            foreach($result as $question){
+                echo "<option value=".$question->questionID.">".$question->questionName."</option>";
+            }
+        }
+    }
+
+    public function getDataFromSelectedQuestionID($questionID){
+
+    }
+
     public function fillCategorySelect(){
 
     }

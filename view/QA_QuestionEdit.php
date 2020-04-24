@@ -1,18 +1,19 @@
 <?php
-    require_once 'head.php';
-    require_once '../functions/controller/QA_QuestionFunctions.php';
-    $QF = new QA_QuestionFunctions();
+require_once 'head.php';
+require_once '../functions/controller/QA_QuestionFunctions.php';
+$QF = new QA_QuestionFunctions();
+$questionID = "10";
 
 ?>
-<link rel="stylesheet" type="text/css" href="../assests/styling/QA_QuestionStyle.css">
-<body>
+    <link rel="stylesheet" type="text/css" href="../assests/styling/QA_QuestionStyle.css">
+    <body>
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
     Modal
 </button>
 <form method="POST">
-<!-- Modal -->
+    <!-- Modal -->
     <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -27,7 +28,7 @@
                         <label for="selCategory" class="col-sm-2 col-form-label" >Categorie</label>
                         <div class="col-sm-10">
                             <select id="selCategory" name="selCategory" class="form-control">
-                                <?php $QF->getCategories(); ?>
+                                <?php  ?>
                             </select>
                         </div>
                     </div>
@@ -75,50 +76,48 @@
                         </div>
                     </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                    <input type="submit" class="btn btn-primary" id="btConfirm" name="btConfirm" value="Verzenden"/>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                        <input type="submit" class="btn btn-primary" id="btConfirm" name="btConfirm" value="Verzenden"/>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </form>
 
 
 <script>
-
-        $('#selQuestionType').change(function(){
-            if($(this).val() == "Question-answer") {
-                $('#divAnswerOptions').show();
-            }
-            else{
-                $('#divAnswerOptions').hide();
-            }
-        });
+    $('#selQuestionType').change(function(){
+        if($(this).val() == "Question-answer") {
+            $('#divAnswerOptions').show();
+        }
+        else{
+            $('#divAnswerOptions').hide();
+        }
+    });
 </script>
 <?php
 
-if(isset($_POST['btConfirm'])){
-    $selCategory = $_POST['selCategory'];
-    $txQuestion = $_POST['txQuestion'];
-    $taExemple = $_POST['taExample'];
-    $selStatus = $_POST['selStatus'];
-    $selQuestionType = $_POST['selQuestionType'];
-    echo $selQuestionType;
+    if(isset($_POST['btConfirm'])){
 
-    if($selCategory == null || $txQuestion == null || $selStatus == null || $selQuestionType == null){
+        $selCategory = $_POST['selCategory'];
+        $txQuestion = $_POST['txQuestion'];
+        $taExemple = $_POST['taExample'];
+        $selStatus = $_POST['selStatus'];
+        $selQuestionType = $_POST['selQuestionType'];
+        echo $selQuestionType;
+
+        if($selCategory == null || $txQuestion == null || $selStatus == null || $selQuestionType == null){
+            ?><?php
+        }
+        else {
+            $QF->updateQuestion($questionID, $selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
+        }
     }
-    else {
-        echo $selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType;
-        $QF->setQuestion($selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
-    }
-}
+    ?>
+    <script>
+        $('#btnConfirm').click(function(){
 
-?>
-<script>
-
-    $('#btnConfirm').click(function(){
-
-    });
-</script>
-</body>
+        });
+    </script>
+    </body><?php
