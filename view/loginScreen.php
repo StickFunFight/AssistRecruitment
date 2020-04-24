@@ -1,6 +1,6 @@
 <?php
-include 'head.php';
-include '../functions/controller/LoginController.php';
+require_once 'head.php';
+require_once '../functions/controller/LoginController.php';
 $lc = new LoginController();
 
 if(isset($_POST['submitCreateAccount'])){
@@ -20,7 +20,9 @@ if(isset($_POST['submitLogin'])){
 ?>
 
 <head>
+    <script><?php include '../assests/script/toast.js'; ?></script>
     <style><?php include '../assests/styling/loginScreen.css' ?></style>
+    <style><?php include '../assests/styling/toast.css'?></style>
     <title>Assist login</title>
 </head>
 <body>
@@ -34,8 +36,10 @@ if(isset($_POST['submitLogin'])){
             <button name="submitLogin" type="submit" class="btn btn-block btn-primary mt-2 mb-4 float-right" id="loginFormButton">Inloggen</button>
         </form>
         <p class="mb-1"><u><a data-toggle="modal" href="#createAccount" class="font-weight-bold">Maak een account aan +</a></u></p>
-        <p><u><a href="#blank" class="font-weight-bold">Wachtwoord vergeten?</a></u></p>
+        <p><u><a onclick="myFunction()" href="#" class="font-weight-bold">Error</a></u></p>
     </div>
+
+    <div id="snackbar">lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsum</div>
 
 <!-- Modal -->
     <div class="modal fade" id="createAccount" tabindex="-1" role="dialog" aria-hidden="true">
