@@ -1,34 +1,22 @@
 <?php
-    include "../functions/models/entContact.php";
+    require_once '../functions/datalayer/ContactDB.php';
 
-    class contactController
-    {
-        private $db;
-
-        public function __construct()
-        {
-            include "../functions/datalayer/database.class.php";
-            $database = new Database();
-            $this->db = $database->getConnection();
+    Class ContactController {
+        
+        private $ContactDB;   
+    
+        public function __construct(){
+            $this->ContactDB = new ContactDB();
         }
 
-        function getContacts()
-        {
-            $lijst = array();
-            $query = "SELECT * FROM contact WHERE contactStatus = 'active'";
-            $stm = $this->db->prepare($query);
-            if($stm->execute()){
-                $result= $stm->fetchAll(PDO::FETCH_OBJ);
+        function getContactsCustomer($customerID, $status){
+            // Creating a array
+            $listContacts = array();
 
-                foreach ($result as $item){
-                    $entContact = new entContact($item->contactID, $item->contactName, $item->contactPhoneNumber, $item->contactEmail, $item->contactComment, $item->contactStatus, $item->customerID, $item->userID);
-                    array_push($lijst, $entContact);
-                }
-                //return $lijst;
-            }
-            else{
-                ECHO "Kapoet";
-            }
+            $listContacts = $this->ContactDB->getContactsCustomer($customerID, $status);
+
+            // Returning the list given from the Database class
+            return $listContacts;
         }
     }
 ?>
