@@ -1,5 +1,7 @@
 <?php
-require 'CategoryAddFunction.php';
+require '../datalayer/CategoryAddFunction.php';
+
+$CAF = new CategoryAddFunction();
 
 if (isset($_POST['catName']) && isset($_POST['catStatus']) && isset($_POST['oldCatName'])){
 
@@ -7,7 +9,7 @@ if (isset($_POST['catName']) && isset($_POST['catStatus']) && isset($_POST['oldC
     $catStatus = $_POST['catStatus'];
     $oldCatName = $_POST['oldCatName'];
 
-    $CAF = new CategoryAddFunction();
+
     $CAF->catAanpassen($catName, $catStatus, $oldCatName);
     echo "Succes";
     echo $catName, $oldCatName;
