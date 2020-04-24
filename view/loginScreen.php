@@ -36,7 +36,7 @@ if(isset($_POST['submitLogin'])){
             <button name="submitLogin" type="submit" class="btn btn-block btn-primary mt-2 mb-4 float-right" id="loginFormButton">Inloggen</button>
         </form>
         <p class="mb-1"><u><a data-toggle="modal" href="#createAccount" class="font-weight-bold">Maak een account aan +</a></u></p>
-        <p><u><a onclick="myFunction()" href="#" class="font-weight-bold">Error</a></u></p>
+        <p><u><a id="forgotPassword"href="#" class="font-weight-bold">Wachtwoord vergeten?</a></u></p>
     </div>
 
     <div id="snackbar">lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsum</div>
@@ -53,13 +53,13 @@ if(isset($_POST['submitLogin'])){
                         <div class="form-group form-row mb-4">
                             <label class="col col-form-label">Gebruikersnaam</label>
                             <div class="col-7">
-                                <input name="username" class="form-control" type="text" placeholder="Gebruikersnaam"">
+                                <input name="username" id="username" class="form-control" type="text" placeholder="Gebruikersnaam"">
                             </div>
                         </div>
                         <div class="form-group form-row">
                             <label class="col col-form-label">Wachtwoord</label>
                             <div class="col-7">
-                                <input name="password" class="form-control" type="password" placeholder="Wachtwoord">
+                                <input name="password" id="password" class="form-control" type="password" placeholder="Wachtwoord">
                             </div>
                         </div>
                         <div class="form-group form-row mb-4">
@@ -71,13 +71,13 @@ if(isset($_POST['submitLogin'])){
                         <div class="form-group form-row">
                             <label class="col col-form-label">Email</label>
                             <div class="col-7">
-                                <input name="email" class="form-control" type="email" placeholder="Email">
+                                <input name="email" id="email" class="form-control" type="email" placeholder="Email">
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary float-left" data-dismiss="modal">Sluiten</button>
-                        <button name="submitCreateAccount" type="submit" class="btn btn-success">Bevestigen</button>
+                        <button name="submitCreateAccount" id="submitCreateAccount" type="submit" class="btn btn-success">Bevestigen</button>
                     </div>
                 </form>
             </div>

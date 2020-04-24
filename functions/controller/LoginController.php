@@ -12,7 +12,7 @@ class LoginController {
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
         if($this->ldb->createUser($username, $hash, $email)){
-            echo "Account aangemaakt !";
+            echo "afgeklapt";
         } else {
             echo "Het lijkt er op dat dit account al bestaat";
         }
