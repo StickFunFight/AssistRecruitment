@@ -12,7 +12,7 @@ class QaOverView
         $this->db = $database->getConnection();
     }
 
-    function GetAllCatergies()
+    function GetAllCategories()
     {
         $lijst = array();
         $query = "SELECT * FROM categorie where categorieStatus = 'Active'";

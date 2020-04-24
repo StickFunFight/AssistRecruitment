@@ -23,4 +23,28 @@ class EntCategory
     function GetStatus(){
         return $this->categorieStatus;
     }
+
+    /**
+     * @param mixed $categorieID
+     */
+    public function setCategorieID($categorieID)
+    {
+        $this->categorieID = $categorieID;
+    }
+
+    /**
+     * @param mixed $categorieName
+     */
+    public function setCategorieName($categorieName)
+    {
+        $this->categorieName = $categorieName;
+    }
+
+    /**
+     * @param mixed $categorieStatus
+     */
+    public function setCategorieStatus($categorieStatus)
+    {
+        $this->categorieStatus = $categorieStatus;
+    }
 }

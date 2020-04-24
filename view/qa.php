@@ -27,7 +27,7 @@ require_once 'menu.php';
                             <?php
                             require("../functions/datalayer/QaOverView.php");
                             $QO = new QaOverView();
-                            $Qa = $QO->GetAllCatergies();
+                            $Qa = $QO->GetAllCategories();
                             foreach ($Qa as $item)
                             {
                                 echo '<tr class="category-tabel__row" onclick="filterSelection('.$item->GetID().')">';
@@ -98,7 +98,6 @@ require_once 'menu.php';
         });
     });
 
-
     function filterSelection(ID) {
         var input, filter, table, tr, td, i;
         input = ID;
@@ -115,8 +114,6 @@ require_once 'menu.php';
             }
         }
     }
-
-</script>
 </script>
 
 

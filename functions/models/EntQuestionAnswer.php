@@ -98,6 +98,51 @@ class EntQuestionAnswer
         $this->answer = $answer;
     }
 
+    /**
+     * @param mixed $questionID
+     */
+    public function setQuestionID($questionID)
+    {
+        $this->questionID = $questionID;
+    }
 
+    /**
+     * @param mixed $categorieID
+     */
+    public function setCategorieID($categorieID)
+    {
+        $this->categorieID = $categorieID;
+    }
 
+    /**
+     * @param mixed $questionStatus
+     */
+    public function setQuestionStatus($questionStatus)
+    {
+        $this->questionStatus = $questionStatus;
+    }
+
+    /**
+     * @param mixed $questionName
+     */
+    public function setQuestionName($questionName)
+    {
+        $this->questionName = $questionName;
+    }
+
+    /**
+     * @param mixed $questionType
+     */
+    public function setQuestionType($questionType)
+    {
+        $this->questionType = $questionType;
+    }
+
+    /**
+     * @param mixed $answerID
+     */
+    public function setAnswerID($answerID)
+    {
+        $this->answerID = $answerID;
+    }
 }
