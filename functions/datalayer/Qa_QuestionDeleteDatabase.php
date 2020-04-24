@@ -12,11 +12,11 @@ class QaQuestionDeleteDatabase
     }
     function DeleteQaQuestion($Qid){
         //variabele (n) uit de url halen
-        $query = "UPDATE question SET questionStatus = 'Archived' WHERE questionID = '$Qid'";
+        $query = "UPDATE question SET questionStatus = 'Archived' WHERE questionID = $Qid";
 
         $stm = $this->db->prepare($query);
         if ($stm->execute()) {
-            Header("Location:Qa_QuestionDeleteView.php");
+
         } else echo "oeps";
     }
 
