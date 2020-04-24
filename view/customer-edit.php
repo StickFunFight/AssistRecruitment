@@ -103,6 +103,7 @@
 ?>
 <html>
     <link rel="stylesheet" href="../assests/styling/customer-edit.css">
+    <link rel="stylesheet" href="../assests/styling/customer.css">
 
     <body>
         <div class="page__container"> 
