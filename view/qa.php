@@ -139,7 +139,8 @@ require_once 'menu.php';
         </div>
     </div>
 </div>
-
+<?php require("../functions/controller/QA_QuestionFunctions.php");
+$QF = new QA_QuestionFunctions(); ?>
 
 <!-- Modal Add Question-->
 <div class="modal fade" id="modaladdQuestion" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalQuestionAdd" aria-hidden="true">
@@ -234,7 +235,6 @@ require_once 'menu.php';
             echo $selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType;
             $QF->setQuestion($selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
         }
-        
     ?>
 </div>
 
@@ -325,8 +325,7 @@ require_once 'menu.php';
 
     if(isset($_POST['btConfirmEditQuestion'])){
 
-        require("../functions/controller/QA_QuestionFunctions.php");
-        $QF = new QA_QuestionFunctions();
+
         $CategorieID = $_POST['questionIDEdit'];
         $resultsQuestion = $QF->getQuestionData($CategorieID);
 
