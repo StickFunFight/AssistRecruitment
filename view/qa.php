@@ -77,7 +77,7 @@ require_once 'menu.php';
                         echo '<td>';
                         echo  '<i id="'.$item->getQuestionID().'" name="questionIDEdit" onClick="SendID(this.id)" class="fas fa-pencil-alt" data-toggle="modal" data-target="#modalEditQuestion"></i>';
                         echo  ' ';
-                        echo  '<i id="'.$item->getQuestionID().'" class="fas fa-trash-alt"></i>';
+                        echo  '<i data-toggle="modal" data-target="#deleteQuestionModal" id="'.$item->getQuestionID().'" onClick="SendID(this.id)" class="fas fa-trash-alt"></i>';
                         echo '</td>';
                         echo '</tr>';
                     }
@@ -340,6 +340,30 @@ $QF = new QA_QuestionFunctions(); ?>
     ?>
 </div>
 
+<div class="modal fade" id="deleteQuestionModal" tabindex="-1" role="dialog" aria-labelledby="deleteQuestionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--                <h5 class="modal-title" id="exampleModalLabel">New message</h5>-->
+                <button type="button" class="ja" data-dismiss="modal" aria-label="ja">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Weet je zeker dat je de vraag: "" wilt verwijderen?</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" name="btnDelete" id="btnQuestionDelete" class="btn btn-danger" value="Ja">Ja</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">nee</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
 <script>
@@ -407,6 +431,26 @@ $QF = new QA_QuestionFunctions(); ?>
             success: function(response) { window.location.href = 'Qa.php'; },
         });
     });
+
+    $('#deleteQuestionModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+    })
+
+    $('#btnQuestionDelete').click(function () {
+        $.ajax({
+            url: '../functions/controller/QaDeleteHandler.php',
+            type: 'post',
+            data: { "CustomerID": categoryID},
+            success: function(response) { window.location.href = 'Qa.php'; }
+        });
+    });
+
 </script>
 
 
