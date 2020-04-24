@@ -7,8 +7,8 @@ class entContact
     private $contactEmail;
     private $contactComment;
     private $contactStatus;
-    private $contactCustomerID;
-    private $contactUserID;
+    private $contactCustomerName;
+    private $contactDepartmentName;
 
     /**
      * entContact constructor.
@@ -18,10 +18,10 @@ class entContact
      * @param $contactEmail
      * @param $contactComment
      * @param $contactStatus
-     * @param $contactCustomerID
-     * @param $contactUserID
+     * @param $contactCustomerName
+     * @param $contactDepartmentName
      */
-    public function __construct($contactID, $contactName, $contactPhonenumber, $contactEmail, $contactComment, $contactStatus, $contactCustomerID, $contactUserID)
+    public function __construct($contactID, $contactName, $contactPhonenumber, $contactEmail, $contactComment, $contactStatus, $contactCustomerName, $contactDepartmentName)
     {
         $this->contactID = $contactID;
         $this->contactName = $contactName;
@@ -29,8 +29,8 @@ class entContact
         $this->contactEmail = $contactEmail;
         $this->contactComment = $contactComment;
         $this->contactStatus = $contactStatus;
-        $this->contactCustomerID = $contactCustomerID;
-        $this->contactUserID = $contactUserID;
+        $this->contactCustomerName = $contactCustomerName;
+        $this->contactDepartmentName = $contactDepartmentName;
     }
 
 
@@ -85,17 +85,17 @@ class entContact
     /**
      * @return mixed
      */
-    public function getContactCustomerID()
+    public function getContactCustomerName()
     {
-        return $this->contactCustomerID;
+        return $this->contactCustomerName;
     }
 
     /**
      * @return mixed
      */
-    public function getContactUserID()
+    public function getContactDepartmentName()
     {
-        return $this->contactUserID;
+        return $this->contactDepartmentName;
     }
 
 
