@@ -127,7 +127,7 @@ require_once 'menu.php';
                     <input type="text" name="textFieldNaam" id="txtNaam"/>
                     <br>
                     <label for="txtStatus">Status:</label>
-                    <input type="text" name="textFieldStatus" id="txtStatus"/>
+                    <input type="text" name="textFieldStatus" id="txtStatus" value="Active"/>
                 </div>
                 <div class="modal-footer">
                     <button type="button" name="btnCatEditAnnuleer" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
@@ -208,7 +208,6 @@ require_once 'menu.php';
 
     $('#editCategory').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
-
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 
@@ -217,7 +216,6 @@ require_once 'menu.php';
     function SendID(clicked_id)
     {
         window.categoryID = clicked_id;
-        alert(clicked_id);
     }
 
     $('#btnCatEditOpslaan').click(function () {
