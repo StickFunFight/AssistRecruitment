@@ -7,7 +7,7 @@ class QaOverView
 
     public function __construct()
     {
-        require_once '../functions/datalayer/database.class.php';
+        require_once 'database.class.php';
         $database = new Database();
         $this->db = $database->getConnection();
     }

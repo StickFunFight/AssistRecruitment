@@ -6,7 +6,7 @@ require_once 'menu.php';
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
 <div id="page-content">
     <div class="container-fluid">
-        <div class="row" style="margin-top: 10%">
+        <div class="row QaTopMargin">
             <div class="col-sm-6">
                 <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een vraag of antwoord">
             </div>
@@ -16,7 +16,7 @@ require_once 'menu.php';
         </div>
         <div id="wrapper">
             <div id="FirstQaDiv">
-                <table id="" class="table">
+                <table class="table">
                     <thead>
                     <tr>
                     <th><i class="fas fa-folder-open"></i> (All Categories)</th>
@@ -25,7 +25,7 @@ require_once 'menu.php';
                     </thead>
                     <tbody>
                             <?php
-                            require("../functions/controller/QaOverView.php");
+                            require("../functions/datalayer/QaOverView.php");
                             $QO = new QaOverView();
                             $Qa = $QO->GetAllCatergies();
                             foreach ($Qa as $item)
@@ -41,9 +41,10 @@ require_once 'menu.php';
                                 echo " ";
                                 echo '<a href="https://www.youtube.com/watch?v=i7MfrslYUac"><i id="DeleteCatergory" class="fas fa-trash-alt table--icon"></i></a>';
                                 echo '</td>';
+                                echo '</tr>';
                             }
                             ?>
-                    </tr> 
+
                     </tbody>
                 </table>
             </div>
@@ -68,7 +69,7 @@ require_once 'menu.php';
                         echo '</td>';
                         echo '<td>';
                         foreach ($item->getAnswers() as $test) {
-                            echo "<span style='margin-right:10px'>$test.</span>";
+                            echo "<span class='RuimteVragen'>$test.</span>";
                         }
                         echo '</td>';
                         echo '<td>';
