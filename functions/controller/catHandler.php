@@ -1,5 +1,5 @@
 <?php
-require '../functions/controller/CategoryAddFunction.php';
+require 'CategoryAddFunction.php';
 
 if (isset($_POST['catName'])){
 

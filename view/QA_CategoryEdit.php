@@ -79,7 +79,7 @@ require 'head.php';
 
 
         $.ajax({
-            url: 'catEditHandler.php',
+            url: '../functions/controller/catEditHandler.php',
             type: 'post',
             data: { "catName": $('#txtNaam').val(), "catStatus" : $('#txtStatus').val(), "oldCatName": $('#categorien').val()},
             success: function(response) { window.location.href = 'Qa.php'; }

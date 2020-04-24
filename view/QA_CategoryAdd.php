@@ -46,7 +46,7 @@
 
     $('#btnOpslaan').click(function () {
         $.ajax({
-            url: 'catHandler.php',
+            url: '../functions/controller/catHandler.php',
             type: 'post',
             data: { "catName": $('#textField').val()},
             success: function(response) { window.location.href = 'Qa.php'; }
