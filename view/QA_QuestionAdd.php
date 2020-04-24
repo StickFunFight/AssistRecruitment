@@ -53,11 +53,19 @@
             </div>
         </div>
 
+        <div name="divAnswerOptions" id="divAnswerOptions" class="form-group row" style="display:none;">
+            <label for="answerOptions" class="col-sm-2 col-form-label" >Antwoord opties</label>
+            <table name="answerOptions"></table>
+            <label>OPEN</label>
+        </div>
+
         <div class="form-group row">
             <div class="col-sm-10">
                 <input type="submit" id="btConfirm" name="btConfirm" class="form-control">
             </div>
         </div>
+
+
 
     </form>
 
@@ -105,6 +113,14 @@
             modal.find('.modal-body input').val(recipient)
         });
 
+        $('#selQuestionType').change(function(){
+            if($(this).val() == "Question-answer") {
+                $('#divAnswerOptions').show();
+            }
+            else{
+                $('#divAnswerOptions').hide();
+            }
+        });
 </script>
 <?php
 
@@ -114,10 +130,15 @@ if(isset($_POST['btConfirm'])){
     $taExemple = $_POST['taExample'];
     $selStatus = $_POST['selStatus'];
     $selQuestionType = $_POST['selQuestionType'];
+    echo $selQuestionType;
 
-    echo $selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType;
-    $QF->setQuestion($selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
-
+    if($selCategory == null || $txQuestion == null || $selStatus == null || $selQuestionType == null){
+        ?><script>alert("Je bent een van de velden vergeten in te vullen.");</script><?php
+    }
+    else {
+        echo $selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType;
+        $QF->setQuestion($selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
+    }
 }
 
 ?>
