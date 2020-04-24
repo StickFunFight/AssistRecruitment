@@ -1,13 +1,13 @@
 <?php
 
-require '../functions/datalayer/QaDatabase.php';
+require '../functions/datalayer/Qa_QuestionDeleteDatabase.php';
 
-$QQD = new QaDatabase();
+$QD = new QaQuestionDeleteDatabase();
 
 if (isset($_POST['questionName'])){
 
     $questionName = $_POST['questionName'];
-    $QQD->DeleteQaQuestion($questionName);
+    $QD->DeleteQaQuestion($Qid);
     echo "Succes";
 }else echo "failed";
 ?>

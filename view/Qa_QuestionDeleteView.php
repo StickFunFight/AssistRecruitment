@@ -2,9 +2,12 @@
 
 require_once 'head.php';
 require_once '../functions/datalayer/database.class.php';
+require_once '../functions/datalayer/Qa_QuestionDeleteDatabase.php';
+$QD = new QaQuestionDeleteDatabase();
+$Qid = "1";
 ?>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">verwijder vraag</button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >verwijder vraag</button>
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -17,20 +20,26 @@ require_once '../functions/datalayer/database.class.php';
                 </button>
             </div>
             <div class="modal-body">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Weet je zeker dat je de vraag "<?php $QD->showQ($Qid); ?>" wilt verwijderen?</label>
 
-                <div class="form-group">
-                    <label for="message-text" class="col-form-label">weet je zeker dat je de vraag wilt verwijderen?</label>
+                    </div>
 
+                <div class="modal-footer">
+                    <button type="submit" name="btnDelete" id="btnDelete" class="btn btn-danger" value="Ja">Ja</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">nee</button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger">ja</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">nee</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
-
+<?php
+if(isset($_POST['btnDelete'])){
+    $QD->DeleteQaQuestion($Qid);
+}
+ ?>
 <script>
 
     $('#exampleModal').on('show.bs.modal', function (event) {
