@@ -43,15 +43,16 @@ select.form-control {
 
 /* customer edit update button */
 .btn.ce__update-button {
-  color: white;
+  color: black;
   font-size: 1.6rem;
-  background-color: #91B973;
-  border-color: #91B973;
+  background-color: #d1d1d1;
+  border-color: #d1d1d1;
 }
 
 .btn.ce__update-button:hover {
   background-color: #73b99b;
   border-color: #73b99b;
+  color: white;
 }
 
 /* customer details tables */
@@ -118,13 +119,14 @@ select.form-control {
 
 /* table status button */
 .btn.btn-status {
-  color: white;
+  color: black;
   font-size: 1.6rem;
-  background-color: #91B973;
-  border-color: #91B973;
+  background-color: #d1d1d1;
+  border-color: #d1d1d1;
 }
 
 .btn.btn-status:hover {
+  color: white;
   background-color: #73b99b;
   border-color: #73b99b;
 }
