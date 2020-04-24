@@ -7,6 +7,16 @@ html, body {
   font-family: "Open Sans", sans-serif;
 }
 
+::-moz-selection {
+  color: white;
+  background: #787878;
+}
+
+::selection {
+  color: white;
+  background: #787878;
+}
+
 /* Wrapper of the sidebar */
 #sidebar-wrapper {
   display: -webkit-box;
@@ -198,11 +208,6 @@ html, body {
   margin-right: -3rem;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
-}
-
-.customer__table {
-  background-color: white;
-  width: 50%;
 }
 
 .customer__row {

@@ -1,8 +1,5 @@
 <?php
     // Checking if user exists
-
-    // including the head
-    require("head.php");
 ?>
 <html lang="en">
     <head>
@@ -11,8 +8,8 @@
             require("head.php");
         ?>
 
-        <title>Assist menu</title>
-        <meta name="author" content="Marvin Vissers">
+        <!-- menu styling -->
+        <link rel="stylesheet" href="../assests/styling/menu.css">
     </head>
 
     <body>
