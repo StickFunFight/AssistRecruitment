@@ -2,7 +2,7 @@
 
 require '../datalayer/Qa_QuestionDeleteDatabase.php';
 
-$QD = new QaQuestionDeleteDatabase();
+$QD = new Qa_QuestionDeleteDatabase();
 
 if (isset($_POST['CustomerID'])){
 

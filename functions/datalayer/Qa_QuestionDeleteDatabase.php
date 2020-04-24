@@ -1,7 +1,7 @@
 <?php
 
 require_once 'database.class.php';
-class QaQuestionDeleteDatabase
+class Qa_QuestionDeleteDatabase
 {
     private $db;
 
@@ -29,6 +29,5 @@ class QaQuestionDeleteDatabase
         } else echo "oeps";
     }
 }
-?>
 
 
