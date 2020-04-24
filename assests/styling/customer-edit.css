@@ -50,9 +50,9 @@ select.form-control {
 }
 
 .btn.ce__update-button:hover {
+  color: white;
   background-color: #73b99b;
   border-color: #73b99b;
-  color: white;
 }
 
 /* customer details tables */
