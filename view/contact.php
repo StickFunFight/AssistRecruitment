@@ -3,107 +3,132 @@
 //Include Menu
 require('menu.php');
 include '../functions/controller/contactController.php';
+include '../functions/models/EntContact.php';
 
-//Connectie maken met class CustomerDB
+//Connectie maken met class contactcontroller
 $contactController = new contactController();
 
 ?>
 <html>
+
 <head>
-<title></title>
+  <link rel="stylesheet" href="../assests/styling/contact.css">
+  <title></title>
 </head>
+
 <body>
-    <!-- Jouw container -->
-    <div class="pagecontent">
-            <!-- Bootstrap container -->
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <br>
-                        <h1 class="customerheader">Overview Contacts</h1>
-                        <br>
-                    </div>
-                </div>
+<form method="post" class="page__content">
 
-                <div class="row">
-                    <div class="col-sm-12"></div>
-                        <table class="table table-hover customertable" style="font-family:verdana">
-                        <thead>
-                        <tr class="customerrow">
-                            <th class="customertd">Name</th>
-                            <th class="customertd">Comment</th>
-                            <th class="customertd">Reference</th>
-                            <th class="customertd">Actions</th>
+  <!-- Jouw container -->
+  <div class="page__content">
+    <!-- Bootstrap container -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <br>
+          <h1 class="contactheader">Overview Contacts</h1>
+          <br>
+        </div>
+      </div>
+      <form method="POST" action="customer-edit?customer=<?php echo $customerID; ?>&tab=scan">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="customer__select">
+              <select id="customerStatus" name="cbxStatusScans" class="form-control">
+                  <option selected="selected" value="Active">Active</option>
+                  <option value="Archived">Archived</option>
+                  <option value="Deleted">Deleted</option>
+              </select>
+            </div>
+          </div>
 
+          <div class="col-sm-6">
+              <input type="submit" class="btn btn-status" name="btnChangeStatusScans" value="Change Status">
+          </div>
+        </div>
+      </form>
 
-                        </tr>
-                        </thead>
-                            <tbody>
-
-
-
-                        <?php
-
-                     //   in de table body
-                     //   Functies ophalen
-                        $listContact = $contactController->getContacts();
-
-                        echo "<br><br>" . $listContact;
-
-                       // Loop om door de functies heen te lopen
-                        foreach($listContact as $contact){
-
-//                            echo "<br>";
-                            echo "<tr class='customer__row'>";
-
-                            echo "<td class='customer__td'>";
-                            echo $contact->getContactName();
-                            echo "</td>";
-                        
-                            echo "<td class='customer__td'>";
-                            echo $contact->getContactEmail();
-                            echo "</td>";
-
-                            echo "<td class='customer__td'>";
-                            echo $contact->getContactPhonenumber();
-                            echo "</td>";
-
-                            echo "<td class='customer__td'>";
-                            // echo '<a class="editKnop" href="DetailsCustomer?customer='.$customer->getCustomerID().'"><i class="fas fa-edit"></i></a>
-                            echo '<a class="editKnop" href="https://youtu.be/oHg5SJYRHA0"><i class="fas fa-edit"></i></a>
-                            <a class="deleteKnop" href="DetailsCustomer?customer='.$contact->getContactCustomerID().'"><i class="fas fa-trash-alt"></i></a>
-                            <a class="profileKnop" href="DetailsCustomer?customer='.$contact->getContactCustomerID().'"><i class="fas fa-user"></i></a>';
-
-                            echo "</td>";
-
-                            echo "</tr>";
+      <div class="row">
+        <div class="col-sm-12"></div>
+        <table class="table table-hover contacttable" style="font-family:verdana">
+          <thead>
+            <tr class="contactrow">
+              <th class="contact__th_name">Name</th>
+              <th class="contact__th_email">Email</th>
+              <th class="contact__th_phonenumber">Phone number</th>
+              <th class="contact__th_status">Status</th>
+              <th class="contact__th_Customer">Customer</th>
+              <th class="contact__th_Department">Department</th>
+              <th class="contact__th_icon">Actions</th>
 
 
-                        }
-
-                        ?>
-            <!-- <table style="width:100%">
-  <tr>
-    <th>Firstname</th>
-    <th>Lastname</th>
-    <th>Age</th>
-    <th>gender</th>
-  </tr>
-  <tr>
-    <td>Jill</td>
-    <td>Smith</td>
-    <td>50</td>
-    <td>male</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-    <td>female</td>
-  </tr>
-</table> -->
+            </tr>
+          </thead>
+          <tbody>
 
 
-                        </tbody>
+
+            <?php
+
+            if (isset($_POST['btnChangeStatusScans'])) {
+              $status = $_POST['cbxStatusScans'];
+              $listContact = $contactController->getContacts($status);
+            } else {
+              $listContact = $contactController->getContacts("Active");
+            }
+            //   in de table body
+            //   Functies ophalen
+            //$listContact = $contactController->getContacts($status);
+
+            // Loop om door de functies heen te lopen
+                  if (is_array($listContact) || is_object($listContact)) {
+
+            foreach ($listContact as $contact) {
+
+              echo "<br>";
+              echo "<tr class='contact__row'>";
+
+              echo "<td class='contact__td_name'>";
+              echo $contact->getContactName();
+              echo "</td>";
+
+              echo "<td class='contact__td_name'>";
+              echo $contact->getContactEmail();
+              echo "</td>";
+
+              echo "<td class='contact__td_phonenumber'>";
+              echo $contact->getContactPhonenumber();
+              echo "</td>";
+
+              echo "<td class='contact__td_status'>";
+              echo $contact->getContactStatus();
+              echo "</td>";
+
+              echo "<td class='contact__td_customer'>";
+              echo $contact->getContactCustomerName();
+              echo "</td>";
+
+              echo "<td class='contact__td_department'>";
+              echo $contact->getContactDepartmentName();
+              echo "</td>";
+
+              echo "<td class='contact__td_icon'>";
+              echo '<a class="deleteKnop" href="DetailsContact?contact=' . $contact->getContactID() . '"><i class="fas fa-trash-alt"></i></a>
+                      <a class="editKnop" href="DetailsContact?contact=' . $contact->getContactID() . '"><i class="fas fa-edit"></i></a>
+                      <a class="profileKnop" href="DetailsContact?contact=' . $contact->getContactID() . '"><i class="fas fa-user"></i></a>';
+
+              echo "</td>";
+
+              echo "</tr>";
+            }
+                } else {
+                echo "geen array";
+              }
+
+            ?>
+
+          </tbody>
+            </form>
 </body>
+
 </html>

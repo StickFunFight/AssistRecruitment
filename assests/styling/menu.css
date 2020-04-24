@@ -208,7 +208,6 @@ html, body {
 .page__content {
   width: 100%;
   padding-right: 5rem;
-
 }
 
 .customer__row {
@@ -311,9 +310,5 @@ tr:hover {
 .customer__select {
   padding-bottom: 1rem;
   color: #73b99b;
-}
-
-select.form-control {
-  height: auto;
 }
 /*# sourceMappingURL=menu.css.map */
