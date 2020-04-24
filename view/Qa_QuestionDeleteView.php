@@ -4,11 +4,10 @@ require_once 'head.php';
 require_once '../functions/datalayer/database.class.php';
 require_once '../functions/datalayer/Qa_QuestionDeleteDatabase.php';
 $QD = new QaQuestionDeleteDatabase();
-$Qid = "1";
+$Qid = "2";
 ?>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >verwijder vraag</button>
-
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -22,14 +21,12 @@ $Qid = "1";
             <div class="modal-body">
                 <form method="POST">
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">Weet je zeker dat je de vraag "<?php $QD->showQ($Qid); ?>" wilt verwijderen?</label>
-
+                        <label for="message-text" class="col-form-label">Weet je zeker dat je de vraag: "<?php $QD->showQ($Qid); ?>" wilt verwijderen?</label>
                     </div>
-
                 <div class="modal-footer">
                     <button type="submit" name="btnDelete" id="btnDelete" class="btn btn-danger" value="Ja">Ja</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">nee</button>
-                </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -52,7 +49,6 @@ if(isset($_POST['btnDelete'])){
         modal.find('.modal-body input').val(recipient)
     })
 
-
     $('#btnDelete').click(function () {
         $.ajax({
             url: 'QaDeleteHandler.php',
@@ -61,9 +57,6 @@ if(isset($_POST['btnDelete'])){
             success: function(response) { console.log(response); }
         });
     });
-
-
-
 </script>
 
 
