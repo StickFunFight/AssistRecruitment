@@ -8,11 +8,11 @@ form{
     margin-top:10px;
 }
 
-#selCategory, #selQuestionType, #selStatus{
+#selCategory, #selQuestionType, #selStatus, #taExample, #txQuestion{
     width:400px;
 }
 #taExample{
-    line-height: 5;
+    line-height: 4;
 }
 #lbTitel{
     font-size:40px;
