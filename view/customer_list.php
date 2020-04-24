@@ -17,13 +17,15 @@ $CustomerDB = new CustomerDB();
 <html>
 
 <head>
+<!-- Linking to own styleheet -->
+<link rel="stylesheet" href="../assests/styling/customer.css">
 </head>
 
 <body>
     <!-- Page Container -->
     <div class="page__content">
         <!-- Bootstrap Container -->
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <br>
@@ -71,17 +73,13 @@ $CustomerDB = new CustomerDB();
 
                         //Read the Combobox Status
                         if (isset($_POST['btnChangeStatus'])) {
-
                             $status = $_POST['cbxStatus'];
-
                             $listCustomer = $CustomerDB->getCustomers($status);
                         } else {
                             $listCustomer = $CustomerDB->getCustomers("Active");
                         }
-
                         // Loop to go through the functions for every customer in the DB table
                         foreach ($listCustomer as $customer) {
-
 
                             echo "<br>";
                             echo "<tr class='customer__row'>";
@@ -102,19 +100,15 @@ $CustomerDB = new CustomerDB();
                             // echo '<a class="editKnop" href="DetailsCustomer?customer='.$customer->getCustomerID().'"><i class="fas fa-edit"></i></a>
                             echo'
                             <a class="editKnop" href="https://youtu.be/oHg5SJYRHA0"><i class="fas fa-edit"></i></a>
-                            <a class="deleteKnop" data-toggle="modal" data-target="#exampleModal" id='.$customer->getCustomerID().' onClick="reply_click(this.id)"><i class="fas fa-trash-alt"></i></a>
+                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#exampleModal" id='.$customer->getCustomerID().' onClick="reply_click(this.id)"><i class="fas fa-trash-alt"></i></a>
                             <a class="profileKnop" href="DetailsCustomer?customer=' . $customer->getCustomerID() . '"><i class="fas fa-user"></i></a>';
 
                             echo "</td>";
-
                             echo "</tr>";
                         }
                         ?>
-
-                        
-
+                       
                     </tbody>
-                    
                 </table>
             </div>
         </div>
@@ -122,7 +116,6 @@ $CustomerDB = new CustomerDB();
     </div>
     <span id="iets"></span>
 </body>
-
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -157,13 +150,10 @@ $CustomerDB = new CustomerDB();
                     success: function(response) { window.location.href='customer_list.php' }
                 });
 
-
                 });
 
                 </script>
-
-                
-
+               
             </div>
             </form>
 
