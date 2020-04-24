@@ -1,45 +1,38 @@
 <?php
 
-class EntCustomer
-{
-    private $show_customerID;
-    private $show_customerNaam;
-    private $show_customerComment;
-    private $show_customerRefrence;
-    private $show_customerStatus;
+class EntCustomer {
+    private $CustomerID;
+    private $CustomerName;
+    private $CustomerComment;
+    private $CustomerRefrence;
+    private $CustomerStatus;
 
-    public function __construct(string $show_customerID, string $show_customerNaam, string $show_customerComment, string $show_customerRefrence, string $show_customerStatus)
-    {
-        $this->show_customerID = $show_customerID;
-        $this->show_customerNaam = $show_customerNaam;
-        $this->show_customerComment = $show_customerComment;
-        $this->show_customerRefrence = $show_customerRefrence;
-        $this->show_customerStatus = $show_customerStatus;
+    public function __construct($CustomerID, $CustomerName, $CustomerComment, $CustomerRefrence, $CustomerStatus) {
+        $this->CustomerID = $CustomerID;
+        $this->$CustomerName = $CustomerName;
+        $this->CustomerComment = $CustomerComment;
+        $this->CustomerRefrence = $CustomerRefrence;
+        $this->CustomerStatus = $CustomerStatus;
     }
 
-    public function getCustomerID() : string
-    {
-        return $this->show_customerID;
+    public function getCustomerID() {
+        return $this->CustomerID;
     }
 
-    public function getCustomerName() : string
-    {
-        return $this->show_customerNaam;
+    public function getCustomerName() {
+        return $this->CustomerName;
     }
  
-    public function getCustomerComment() : string
-    {
-        return $this->show_customerComment;
+    public function getCustomerComment() {
+        return $this->CustomerComment;
     }
 
-    public function getCustomerRefrence() : string
-    {
-        return $this->show_customerRefrence;
+    public function getCustomerRefrence() {
+        return $this->CustomerRefrence;
     }
 
-    public function getCustomerStatus() : string
-    {
-        return $this->show_customerStatus;
+    public function getCustomerStatus() {
+        return $this->CustomerStatus;
     }
 } 
 

@@ -2,13 +2,13 @@
     if (isset($_GET['customer'])) {
         require '../functions/datalayer/database.class.php';
         // Adding the customer controller
-        require '../functions/controller/CustomerControllerMarvin.php';
+        require '../functions/controller/CustomerController.php';
         // Adding the scanDB controller
-        require '../functions/controller/ScanControllerMarvin.php';
+        require '../functions/controller/ScanController.php';
         // Adding the department controller
-        require '../functions/controller/DepartmentControllerMarvin.php';
+        require '../functions/controller/DepartmentController.php';
         // Adding the Contact controller
-        require '../functions/controller/ContactControllerMarvin.php';
+        require '../functions/controller/ContactController.php';
 
 
         // Adding the customer modal
@@ -44,13 +44,16 @@
             $custComment = $_POST['txtCustomerComment'];
             $custStatus = $_POST['cbxStatus'];
 
+            // Storring all variables in the customer object
+            $CustomerModal = new EntCustomer($custID, $custName, $custRefrence, $custComment, $custStatus);
+
             // echo "ID = " . $custID . "<br>";
             // echo "Name = " . $custName . "<br>";
             // echo "Refrence = " . $custRefrence . "<br>";
             // echo "Comment = " . $custComment . "<br>";
             // echo "Status = " . $custStatus . "<br>";
 
-            $CustomerDB->updateCustomer($custID, $custName, $custRefrence, $custComment, $custStatus);
+            $CustomerDB->updateCustomer($CustomerModal);
         }
 
 

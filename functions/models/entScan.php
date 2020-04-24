@@ -1,59 +1,50 @@
 <?php
 
-class EntScan
-{
-    private $show_scanID;
-    private $show_scanName;
-    private $show_scanStatus;
-    private $show_ScanIntroductionText;
-    private $show_ScanReminderText;
-    private $show_ScanStartDate;
-    private $show_ScanEndDate;
+class EntScan {
+    private $ScanID;
+    private $ScanName;
+    private $ScanStatus;
+    private $ScanIntroductionText;
+    private $ScanReminderText;
+    private $ScanStartDate;
+    private $ScanEndDate;
 
-    public function __construct(string $show_scanID, string $show_scanName, string $show_scanStatus, string $show_ScanIntroductionText, string $show_ScanReminderText, $show_ScanStartDate, $show_ScanEndDate)
-    {
-        $this->show_scanID = $show_scanID;
-        $this->show_scanName = $show_scanName;
-        $this->show_scanStatus = $show_scanStatus;
-        $this->show_ScanIntroductionText = $show_ScanIntroductionText;
-        $this->show_ScanReminderText = $show_ScanReminderText;
-        $this->show_ScanStartDate = $show_ScanStartDate;
-        $this->show_ScanEndDate = $show_ScanEndDate;
+    public function __construct($ScanID, $ScanName, $ScanStatus, $ScanIntroductionText, $ScanReminderText, $ScanStartDate, $ScanEndDate) {
+        $this->ScanID = $ScanID;
+        $this->ScanName = $ScanName;
+        $this->ScanStatus = $ScanStatus;
+        $this->ScanIntroductionText = $ScanIntroductionText;
+        $this->ScanReminderText = $ScanReminderText;
+        $this->ScanStartDate = $ScanStartDate;
+        $this->ScanEndDate = $ScanEndDate;
     }
 
-    public function getScanID() : string
-    {
-        return $this->show_scanID;
+    public function getScanID() {
+        return $this->ScanID;
     }
 
-    public function getScanName() : string
-    {
-        return $this->show_scanName;
+    public function getScanName() {
+        return $this->ScanName;
     }
  
-    public function getScanStatus() : string
-    {
-        return $this->show_scanStatus;
+    public function getScanStatus() {
+        return $this->ScanStatus;
     }
 
-    public function getScanIntroductionText() : string
-    {
-        return $this->show_ScanIntroductionText;
+    public function getScanIntroductionText() {
+        return $this->ScanIntroductionText;
     }
 
-    public function getScanReminderText() : string
-    {
-        return $this->show_ScanReminderText;
+    public function getScanReminderText() {
+        return $this->ScanReminderText;
     }
 
-    public function getScanStartDate()
-    {
-        return $this->show_ScanStartDate;
+    public function getScanStartDate() {
+        return $this->ScanStartDate;
     }
 
-    public function getScanEndDate()
-    {
-        return $this->show_ScanEndDate;
+    public function getScanEndDate() {
+        return $this->ScanEndDate;
     }
 } 
 

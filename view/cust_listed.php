@@ -4,7 +4,7 @@
 require('menu.php');
 
 // Class job toevoegen aan het bestand
-include '../functions/controller/CustomerControllerMarvin.php';
+include '../functions/controller/CustomerController.php';
 // Class used technologie toevoegen aan het bestand
 include '../functions/models/entCustomer.php';
 
@@ -19,7 +19,7 @@ $CustomerDB = new CustomerController();
 <html>
 <head>
 </head>
-<link rel="stylesheet" href="../assests/styling/customer-edit.css">
+    <link rel="stylesheet" href="../assests/styling/customer-edit.css">
     <body>
         <!-- Jouw container -->
         <div class="page__content">

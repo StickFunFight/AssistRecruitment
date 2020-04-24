@@ -33,8 +33,13 @@
         }
 
         // Function to update the customer
-        function updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus) {
-            $this->customerDB->updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus);
+        function updateCustomer($CustomerModal) {
+            
+            //var_dump($CustomerModal);
+
+            //echo "<br> hai ik ben iets <br>" . $CustomerModal->getCustomerName();
+
+            //$this->customerDB->updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus);
         }
     }
 ?>
