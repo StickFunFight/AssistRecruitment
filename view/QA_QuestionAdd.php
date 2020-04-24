@@ -9,11 +9,10 @@
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaladdQuestion">
-    Modal
-</button>
-<form method="POST">
+
 <!-- Modal -->
     <div class="modal fade" id="modaladdQuestion" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <form method="POST">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -81,8 +80,9 @@
                 </div>
             </div>
         </div>
+        </form>
     </div>
-</form>
+
 
 
 <script>
@@ -97,7 +97,6 @@
         });
 </script>
 <?php
-
 if(isset($_POST['btConfirm'])){
     $selCategory = $_POST['selCategory'];
     $txQuestion = $_POST['txQuestion'];
@@ -113,12 +112,5 @@ if(isset($_POST['btConfirm'])){
         $QF->setQuestion($selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
     }
 }
-
 ?>
-<script>
-
-    $('#btnConfirm').click(function(){
-
-    });
-</script>
 </body>

@@ -13,9 +13,10 @@ $results = $QF->getQuestionData($questionID);
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
     Modal
 </button>
-<form method="POST">
+
     <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="editQuestion" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <form method="POST">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -32,15 +33,6 @@ $results = $QF->getQuestionData($questionID);
                             </select>
                         </div>
                     </div>
-                    <script>
-                        //Does not work
-                        var selectedCategory = $('#selCategory');
-                        var catName = '<?php echo $results['categorieName']; ?>';
-
-                        $(function() {
-                            $("#selCategory").val(catName);
-                        });
-                    </script>
 
                     <div class="form-group row">
                         <label for="txQuestion" class="col-sm-2 col-form-label" >Vraag</label>
@@ -91,8 +83,9 @@ $results = $QF->getQuestionData($questionID);
                     </div>
                 </div>
             </div>
+        </form>
         </div>
-</form>
+
 
 
 <script>

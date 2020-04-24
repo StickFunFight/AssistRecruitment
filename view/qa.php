@@ -1,6 +1,8 @@
 <?php
 require_once 'head.php';
 require_once 'menu.php';
+
+
 ?>
 <html>
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
@@ -11,7 +13,7 @@ require_once 'menu.php';
                 <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een vraag of antwoord">
             </div>
             <div class="col-sm-6">
-                <button type="button" class="btn btn-primary ButtonRight"><i class="fas fa-plus"></i> Vraag toevoegen</button>
+                <button type="button" data-toggle="modal" data-target="#modaladdQuestion" class="btn btn-primary ButtonRight"><i class="fas fa-plus"></i> Vraag toevoegen</button>
             </div>
         </div>
         <div id="wrapper">
@@ -73,7 +75,7 @@ require_once 'menu.php';
                         }
                         echo '</td>';
                         echo '<td>';
-                        echo  '<i id="'.$item->getQuestionID().'" class="fas fa-pencil-alt"></i>';
+                        echo  '<i id="'.$item->getQuestionID().'" name="questionIDEdit" onClick="SendID(this.id)" class="fas fa-pencil-alt" data-toggle="modal" data-target="#modalEditQuestion"></i>';
                         echo  ' ';
                         echo  '<i id="'.$item->getQuestionID().'" class="fas fa-trash-alt"></i>';
                         echo '</td>';
@@ -136,6 +138,207 @@ require_once 'menu.php';
             </form>
         </div>
     </div>
+</div>
+
+
+<!-- Modal Add Question-->
+<div class="modal fade" id="modaladdQuestion" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalQuestionAdd" aria-hidden="true">
+    <form method="POST">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Vraag toevoegen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="selCategory" class="col-sm-2 col-form-label" >Categorie</label>
+                        <div class="col-sm-10">
+                            <select required id="selCategoryQuestionAdd" name="selCategoryQuestionAdd" class="form-control">
+                                <?php $QF->getCategories(); ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="txQuestion" class="col-sm-2 col-form-label" >Vraag</label>
+                        <div class="col-sm-10">
+                            <input id="txQuestionAdd" name="txQuestionAdd" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="taExample" class="col-sm-2 col-form-label" >Voorbeeld</label>
+                        <div class="col-sm-10">
+                            <textarea id="taExampleAdd" name="taExampleAdd" class="form-control" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="selStatus" class="col-sm-2 col-form-label" >Status</label>
+                        <div class="col-sm-10">
+                            <select id="selStatusQuestAdd" name="selStatusQuestAdd" class="form-control" required>
+                                <option value="Active">Actief</option>
+                                <option value="Archived">Gearchiveerd</option>
+                                <option value="Deleted">Verwijderd</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="selQuestionType" class="col-sm-2 col-form-label" >Vraag type</label>
+                        <div class="col-sm-10">
+                            <select id="selQuestionTypeQuestionAdd" name="selQuestionTypeQuestionAdd" class="form-control" required>
+                                <option value="OCAI">OCAI</option>
+                                <option value="Question-answer">Vraag-antwoord</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div name="divAnswerOptionsAdd" id="divAnswerOptions" class="form-group row" style="display:none;">
+                        <label for="answerOptionsQuestionAdd" class="col-sm-2 col-form-label" >Antwoord opties</label>
+                        <div class="col-sm-10">
+                            <table name="answerOptionsQuestionAdd"></table>
+                            <label>OPEN</label>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                        <input type="submit" class="btn btn-primary" id="btConfirmAddQuestion" name="btConfirmAddQuestion" value="Verzenden"/>
+                    </div>
+                </div>
+            </div>
+    </form>
+
+    <script>
+
+        $('#selQuestionTypeQuestionAdd').change(function(){
+            if($(this).val() == "Question-answer") {
+                $('#divAnswerOptionsAdd').show();
+            }
+            else{
+                $('#divAnswerOptionsAdd').hide();
+            }
+        });
+    </script>
+    <?php
+        if(isset($_POST['btConfirmAddQuestion'])){
+            $selCategory = $_POST['selCategoryQuestionAdd'];
+            $txQuestion = $_POST['txQuestionAdd'];
+            $taExemple = $_POST['taExampleAdd'];
+            $selStatus = $_POST['selStatusQuestAdd'];
+            $selQuestionType = $_POST['selQuestionTypeQuestionAdd'];
+            echo $selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType;
+            $QF->setQuestion($selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
+        }
+        
+    ?>
+</div>
+
+<!-- Modal Edit Question -->
+<div class="modal fade" id="modalEditQuestion" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="modalQuestionEdit" aria-hidden="true">
+    <form method="POST">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Vraag toevoegen</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="selCategory" class="col-sm-2 col-form-label" >Categorie</label>
+                        <div class="col-sm-10">
+                            <select required id="selCategoryQuestionEdit" name="selCategoryQuestionEdit" class="form-control">
+                                <?php $QF->getCategories(); ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="txQuestion" class="col-sm-2 col-form-label" >Vraag</label>
+                        <div class="col-sm-10">
+                            <input id="txQuestionEdit" name="txQuestionEdit" class="form-control" value="<?php echo $resultsQuestion['questionName']; ?>" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="taExample" class="col-sm-2 col-form-label" >Voorbeeld</label>
+                        <div class="col-sm-10">
+                            <textarea required id="taExampleQuestionEdit" name="taExampleQuestionEdit" class="form-control"><?php echo $resultsQuestion['questionExemple']; ?></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="selStatus" class="col-sm-2 col-form-label" >Status</label>
+                        <div class="col-sm-10">
+                            <select id="selStatusQuestEdit" name="selStatusQuestEdit" class="form-control" required>
+                                <option value="Active">Actief</option>
+                                <option value="Archived">Gearchiveerd</option>
+                                <option value="Deleted">Verwijderd</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="selQuestionTypeQuestionEdit" class="col-sm-2 col-form-label" >Vraag type</label>
+                        <div class="col-sm-10">
+                            <select id="selQuestionTypeQuestionEdit" name="selQuestionTypeQuestionEdit" class="form-control" required>
+                                <option value="OCAI">OCAI</option>
+                                <option value="Question-answer">Vraag-antwoord</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div name="divAnswerOptionsEdit" id="divAnswerOptionsEdit" class="form-group row" style="display:none;">
+                        <label for="answerOptionsQuestionAdd" class="col-sm-2 col-form-label" >Antwoord opties</label>
+                        <div class="col-sm-10">
+                            <table name="answerOptionsQuestionAdd"></table>
+                            <label>OPEN</label>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                        <input type="submit" class="btn btn-primary" id="btConfirmEditQuestion" name="btConfirmEditQuestion" value="Verzenden"/>
+                    </div>
+                </div>
+            </div>
+    </form>
+
+    <script>
+        $('#selQuestionTypeQuestionEdit').change(function(){
+            if($(this).val() == "Question-answer") {
+                $('#divAnswerOptionsEdit').show();
+            }
+            else{
+                $('#divAnswerOptionsEdit').hide();
+            }
+        });
+    </script>
+    <?php
+
+
+    if(isset($_POST['btConfirmEditQuestion'])){
+
+        require("../functions/controller/QA_QuestionFunctions.php");
+        $QF = new QA_QuestionFunctions();
+        $CategorieID = $_POST['questionIDEdit'];
+        $resultsQuestion = $QF->getQuestionData($CategorieID);
+
+        $selCategory = $_POST['selCategoryQuestionEdit'];
+        $txQuestion = $_POST['txQuestionEdit'];
+        $taExemple = $_POST['taExampleQuestionEdit'];
+        $selStatus = $_POST['selStatusQuestEdit'];
+        $selQuestionType = $_POST['selQuestionTypeQuestionEdit'];
+
+        $QF->updateQuestion($questionID, $selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
+    }
+    ?>
 </div>
 
 </body>

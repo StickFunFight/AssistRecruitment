@@ -6,7 +6,7 @@ class QA_QuestionFunctions
 
     public function __construct()
     {
-        include("../functions/datalayer/database.class.php");
+        require_once "../functions/datalayer/database.class.php";
         $database = new Database();
         $this->conn = $database->getConnection();
     }
