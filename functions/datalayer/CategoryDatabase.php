@@ -1,6 +1,6 @@
 <?php
 
-require_once '/database.class.php';
+require_once 'database.class.php';
 
 class CategoryDatabase{
 
@@ -24,10 +24,10 @@ class CategoryDatabase{
 
     }
 
-    public function catAanpassen($categorieNaam, $categorieStatus, $oldCatName){
+    public function catAanpassen($categorieNaam, $categorieStatus, $customerID){
         $query = "UPDATE categorie SET categorieName = '$categorieNaam',
                                        categorieStatus= '$categorieStatus'
-                                       WHERE categorieName = '$oldCatName'";
+                                       WHERE categorieID = '$customerID'";
         $stm = $this->conn->prepare($query);
         if ($stm->execute()){
 
