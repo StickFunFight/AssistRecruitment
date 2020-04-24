@@ -37,9 +37,9 @@ require_once 'menu.php';
                                 echo  $item->GetNaam();
                                 echo '</td>';
                                 echo '<td>';
-                                echo '<i id="EditCatergory" class="fas fa-pencil-alt table--icon"><a href="https://www.w3schools.com/sql/sql_join.asp"></a></i>';
+                                echo '<i id="'.$item->GetID().'" class="fas fa-pencil-alt table--icon"><a href="https://www.w3schools.com/sql/sql_join.asp"></a></i>';
                                 echo " ";
-                                echo '<a href="https://www.youtube.com/watch?v=i7MfrslYUac"><i id="DeleteCatergory" class="fas fa-trash-alt table--icon"></i></a>';
+                                echo '<a href="https://www.youtube.com/watch?v=i7MfrslYUac"><i id="'.$item->GetID().'" class="fas fa-trash-alt table--icon"></i></a>';
                                 echo '</td>';
                                 echo '</tr>';
                             }
@@ -73,9 +73,9 @@ require_once 'menu.php';
                         }
                         echo '</td>';
                         echo '<td>';
-                        echo  '<i value="'.$item->getQuestionID().'" class="fas fa-pencil-alt"></i>';
+                        echo  '<i id="'.$item->getQuestionID().'" class="fas fa-pencil-alt"></i>';
                         echo  ' ';
-                        echo  '<i value="'.$item->getQuestionID().'" class="fas fa-trash-alt"></i>';
+                        echo  '<i id="'.$item->getQuestionID().'" class="fas fa-trash-alt"></i>';
                         echo '</td>';
                         echo '</tr>';
                     }

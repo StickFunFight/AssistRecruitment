@@ -15,7 +15,7 @@ class QaOverView
     function GetAllCatergies()
     {
         $lijst = array();
-        $query = "SELECT * FROM categorie where categorieStatus = 'Actief'";
+        $query = "SELECT * FROM categorie where categorieStatus = 'Active'";
         $stm = $this->db->prepare($query);
         if ($stm->execute()) {
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
