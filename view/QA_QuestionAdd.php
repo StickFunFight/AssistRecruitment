@@ -1,6 +1,7 @@
 <?php
     require_once 'head.php';
-    require_once '../functions/datalayer/QA_Questionclass.php';
+    require_once '../functions/controller/QA_QuestionFunctions.php';
+    $QF = new QA_QuestionFunctions();
 
 ?>
 <link rel="stylesheet" type="text/css" href="../assests/styling/QA_QuestionStyle.css">
@@ -10,8 +11,8 @@
         <div class="form-group row">
             <label for="selCategory" class="col-sm-2 col-form-label" >Categorie</label>
             <div class="col-sm-10">
-                <select id="selCategory" class="form-control">
-                    <option value="">Naam categorie</option>
+                <select id="selCategory" name="selCategory" class="form-control">
+                    <?php $QF->getCategories(); ?>
                 </select>
             </div>
         </div>
@@ -19,14 +20,14 @@
         <div class="form-group row">
             <label for="txQuestion" class="col-sm-2 col-form-label" >Vraag</label>
             <div class="col-sm-10">
-                <input id="txQuestion" class="form-control">
+                <input id="txQuestion" name="txQuestion" class="form-control">
             </div>
         </div>
 
         <div class="form-group row">
             <label for="taExample" class="col-sm-2 col-form-label" >Voorbeeld</label>
             <div class="col-sm-10">
-                <textarea id="taExample" class="form-control">
+                <textarea id="taExample" name="taExample" class="form-control">
                 </textarea>
             </div>
         </div>
@@ -34,7 +35,7 @@
         <div class="form-group row">
             <label for="selStatus" class="col-sm-2 col-form-label" >Status</label>
             <div class="col-sm-10">
-                <select id="selStatus" class="form-control">
+                <select id="selStatus" name="selStatus" class="form-control">
                     <option value="active">Actief</option>
                     <option value="archived">Gearchiveerd</option>
                     <option value="deleted">Verwijderd</option>
@@ -45,7 +46,7 @@
         <div class="form-group row">
             <label for="selQuestionType" class="col-sm-2 col-form-label" >Vraag type</label>
             <div class="col-sm-10">
-                <select id="selQuestionType" class="form-control">
+                <select id="selQuestionType" name="selQuestionType" class="form-control">
                     <option value="OCAI">OCAI</option>
                     <option value="Question-answer">Vraag-antwoord</option>
                 </select>
@@ -54,7 +55,7 @@
 
         <div class="form-group row">
             <div class="col-sm-10">
-                <input type="submit" id="btConfirm" class="form-control">
+                <input type="submit" id="btConfirm" name="btConfirm" class="form-control">
             </div>
         </div>
 
@@ -105,16 +106,25 @@
         });
 
 </script>
+<?php
 
+if(isset($_POST['btConfirm'])){
+    $selCategory = $_POST['selCategory'];
+    $txQuestion = $_POST['txQuestion'];
+    $taExemple = $_POST['taExample'];
+    $selStatus = $_POST['selStatus'];
+    $selQuestionType = $_POST['selQuestionType'];
+
+    echo $selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType;
+    $QF->setQuestion($selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
+
+}
+
+?>
 <script>
 
     $('#btnConfirm').click(function(){
-        $.ajax({
-            url: 'myFunctions.php',
-            type: 'post', //data die je opstuurt wordt post
-            data: { "txQuestion": $('#txQuestion').val(), "Example": $('#taExample').val()}, //je postdata, postname en 1 is de waarde.
-            success: function(response) { console.log(response); }
-        });
+
     });
 </script>
 </body>
