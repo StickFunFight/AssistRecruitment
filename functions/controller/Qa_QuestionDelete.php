@@ -1,7 +1,7 @@
 <?php
 
-require '../functions/models/EntCategory.php';
-class QaOverView
+
+class Qa_QuestionDelete
 {
     private $db;
 
@@ -14,12 +14,12 @@ class QaOverView
 
     function DeleteQaQuestion($Qid){
         //variabele (n) uit de url halen
-        $query = "delete from question where questionID = $Qid ";
+        $query = "UPDATE question SET questionStatus = 'deleted' WHERE questionName = '$Qid'";
 
 
         $stm = $this->db->prepare($query);
         if ($stm->execute()) {
-            Header("Location:Qa_QuestionDelete.php");
+            Header("Location:Qa_QD.php");
         } else echo "oeps";
 
     }
