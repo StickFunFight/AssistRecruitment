@@ -20,7 +20,7 @@ require_once 'menu.php';
                     <thead>
                     <tr>
                     <th><i class="fas fa-folder-open"></i> (All Categories)</th>
-                        <th><i id="CategoryAdd" class="fas fa-plus fa-lg"></i> </th>
+                        <th><i id="CategoryAdd" class="fas fa-plus fa-lg" data-target="#modalCatAdd" data-toggle="modal"></i> </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -37,7 +37,7 @@ require_once 'menu.php';
                                 echo  $item->GetNaam();
                                 echo '</td>';
                                 echo '<td>';
-                                echo '<i id="'.$item->GetID().'" class="fas fa-pencil-alt table--icon"><a href="https://www.w3schools.com/sql/sql_join.asp"></a></i>';
+                                echo '<i id="'.$item->GetID().'" onClick="SendID(this.id)" data-toggle="modal" data-target="#editCategory" class="fas fa-pencil-alt table--icon"></i>';
                                 echo " ";
                                 echo '<a href="https://www.youtube.com/watch?v=i7MfrslYUac"><i id="'.$item->GetID().'" class="fas fa-trash-alt table--icon"></i></a>';
                                 echo '</td>';
@@ -86,6 +86,58 @@ require_once 'menu.php';
         </div>
     </div>
 </div>
+
+<!-- Modal AddCategory-->
+<div class="modal fade" id="modalCatAdd" tabindex="-1" role="dialog" aria-labelledby="modalCatAdd" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Categorie aanmaken</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST">
+                <div class="modal-body">
+                    <label for="textField">Categorie aanmaken:</label>
+                    <input type="text" name="textField" id="textField"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" name="btnCatAnnuleer" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
+                    <input type="button" name="btnOpslaan" id="btnCatOpslaan" class="btn btn-primary" data-dismiss="modal" value="Categorie Opslaan"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Category-->
+<div class="modal fade" id="editCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Categorie aanpassen</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST">
+                <div class="modal-body">
+                    <label for="txtNaam">Nieuwe categorienaam:</label>
+                    <input type="text" name="textFieldNaam" id="txtNaam"/>
+                    <br>
+                    <label for="txtStatus">Status:</label>
+                    <input type="text" name="textFieldStatus" id="txtStatus"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" name="btnCatEditAnnuleer" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
+                    <input type="button" name="btnOpslaan" id="btnCatEditOpslaan" class="btn btn-primary" data-dismiss="modal" value="Categorie Opslaan"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
 <script>
@@ -114,6 +166,45 @@ require_once 'menu.php';
             }
         }
     }
+    $('#modalCatAdd').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+
+    })
+    $('#btnCatOpslaan').click(function () {
+        $.ajax({
+            url: '../functions/controller/catHandler.php',
+            type: 'post',
+            data: { "catName": $('#textField').val()},
+            success: function(response) { window.location.href = 'Qa.php'; }
+        });
+    });
+
+    $('#editCategory').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+
+    })
+
+    function SendID(clicked_id)
+    {
+        window.categoryID = clicked_id;
+        alert(clicked_id);
+    }
+
+    $('#btnCatEditOpslaan').click(function () {
+        $.ajax({
+            url: '../functions/controller/catEditHandler.php',
+            type: 'post',
+            data: { "catName": $('#txtNaam').val(), "catStatus" : $('#txtStatus').val(), "CustomerID": categoryID},
+
+            success: function(response) { window.location.href = 'Qa.php'; },
+        });
+    });
 </script>
 
 
