@@ -1,4 +1,5 @@
 <?php
+
 class EntCategory
 {
     private $categorieID;
@@ -48,3 +49,4 @@ class EntCategory
         $this->categorieStatus = $categorieStatus;
     }
 }
+
