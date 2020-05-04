@@ -63,7 +63,7 @@ require_once 'menu.php';
                     $Qa = $QO->GetQuestionAnswers();
                     foreach ($Qa as $item)
                     {
-                        echo'<tr>';
+                        echo'<tr id="RowFilter">';
                         echo '<td id="'.$item->getCategorieID().'">';
                         echo  $item->getQuestionName();
                         echo '</td>';
@@ -168,11 +168,12 @@ require_once 'menu.php';
     $(document).ready(function(){
         $("#Filter").on("keyup", function() {
             var value = $(this).val().toLowerCase();
-            $("#QaTable tr").filter(function() {
+            $("#QaTable #RowFilter").filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
     });
+
 
     function filterSelection(ID) {
         var input, filter, table, tr, td, i;
