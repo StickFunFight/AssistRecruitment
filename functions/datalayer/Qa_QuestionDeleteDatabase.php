@@ -12,7 +12,7 @@ class Qa_QuestionDeleteDatabase
     }
     function DeleteQaQuestion($Qid){
         //variabele (n) uit de url halen
-        $query = "UPDATE question SET questionStatus = 'Archived' WHERE questionID = $Qid";
+        $query =sprintf("UPDATE question SET questionStatus = 'Archived' WHERE questionID = %d",$Qid);
 
         $stm = $this->db->prepare($query);
         if ($stm->execute()) {
@@ -21,7 +21,7 @@ class Qa_QuestionDeleteDatabase
     }
 
     function showQ($Qid){
-        $query = "SELECT * FROM question WHERE questionID = '$Qid'";
+        $query =sprintf("SELECT * FROM question WHERE questionID = %d", $Qid);
         $stm = $this->db->prepare($query);
         if ($stm->execute()) {
             $result = $stm->fetch(PDO::FETCH_OBJ);
