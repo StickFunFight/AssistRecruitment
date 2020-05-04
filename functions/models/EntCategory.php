@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 class EntCategory
 {
     private $categorieID;

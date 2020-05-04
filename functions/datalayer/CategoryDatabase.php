@@ -16,7 +16,7 @@ class CategoryDatabase{
     public function catOpslaan($categorieNaam){
 
 
-        $query = "INSERT INTO categorie (categorieName, categorieStatus) VALUES ('$categorieNaam', 'concept')";
+        $query = "INSERT INTO categorie (categorieName, categorieStatus) VALUES ('$categorieNaam', 'Active')";
         $stm = $this->conn->prepare($query);
         if ($stm->execute()){
             Header("Location: Qa.php");
@@ -25,9 +25,9 @@ class CategoryDatabase{
     }
 
     public function catAanpassen($categorieNaam, $categorieStatus, $customerID){
-        $query = "UPDATE categorie SET categorieName = '$categorieNaam',
-                                       categorieStatus= '$categorieStatus'
-                                       WHERE categorieID = '$customerID'";
+        $query = sprintf("UPDATE categorie SET categorieName = '%s',
+                                       categorieStatus= '%s'
+                                       WHERE categorieID = %d", $categorieNaam, $categorieStatus, $customerID);
         $stm = $this->conn->prepare($query);
         if ($stm->execute()){
 
