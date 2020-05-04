@@ -53,7 +53,7 @@ $CustomerDB = new CustomerDB();
                                 <div class="col-sm-6">
                                     <div class="customer__select">
                                         <!-- Combobox settings -->
-                                        <select id="customerStatus" name="cbxStatus" class="form-control">
+                                        <select id="customerStatus" name="customerStatus" class="form-control">
                                             <option value="Active">Active</option>
                                             <option value="Archived">Archived</option>
                                             <option value="Deleted">Deleted</option>
@@ -72,9 +72,10 @@ $CustomerDB = new CustomerDB();
                         <?php
 
                         //Read the Combobox Status
-                        if (isset($_POST['btnChangeStatus'])) {
-                            $status = $_POST['cbxStatus'];
+                        if (isset($_REQUEST['customerStatus'])) {
+                            $status = $_POST['customerStatus'];
                             $listCustomer = $CustomerDB->getCustomers($status);
+
                         } else {
                             $listCustomer = $CustomerDB->getCustomers("Active");
                         }
@@ -162,13 +163,9 @@ $CustomerDB = new CustomerDB();
         </div>
 
 <script>
-    // function naarDetails(var customerID) {
-    //     // document.getElementById("iets").innerHTML = "Paragraph changed!";
-    //     echo 'hey hallo en welkom';
-    // }
 
 $(document).ready(function(){
-    $("#customerStatus").val("<?php echo $_POST['cbxStatus']; ?>");
+    $("#customerStatus").val("<?php echo $_POST['customerStatus']; ?>");
 });
 
 </script>
