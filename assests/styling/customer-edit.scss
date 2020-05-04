@@ -30,8 +30,22 @@
     font-size: 1.6rem;
 }
 
+// Styling for the search field with icon
+.search--icon {
+    position: absolute;
+    top: 20%;
+    left: 4%;
+    color: $grey;
+    font-size: 16px;
+}
+
+.input__filter {
+    font-size: 1.6rem;
+    padding-left: 35px;
+}
+
 select.form-control{
-    height: auto;
+    // height: auto;
     font-size: 1.6rem;
 }
 
@@ -56,6 +70,15 @@ select.form-control{
     color: $white;
     background-color: $green;
     border-color: $green;
+}
+
+.ce-overview--link {
+    @extend .btn.ce__update-button;
+    margin-right: 1.5rem;
+}
+
+.ce-overview--link:hover {
+    @extend .btn.ce__update-button:hover;
 }
 
 /* customer details tables */
@@ -101,7 +124,7 @@ select.form-control{
 }
 
 .ce-overview--link:hover {
-    color: inherit;
+    // color: inherit;
     text-decoration: none;
 }
 
@@ -132,6 +155,10 @@ select.form-control{
     color: $white;
     background-color: $green;
     border-color: $green;
+}
+
+.tab-table__head {
+    cursor: pointer;
 }
 
 /* set a max with for the table cell */

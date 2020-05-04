@@ -143,21 +143,21 @@
                             <label for="status" class="ce__label">Status</label>
                             <select class="form-control" name="cbxStatus" id="status">
                                <?php 
-                                        $customerStatus[]="Active";
-                                        $customerStatus[]="Archived";
-                                        $customerStatus[]="Deleted";
-                                    
-                                        foreach($customerStatus as $value){
-                                            if($value == $customer->getCustomerStatus()) {
-                                                ?>
-                                                    <option selected="selected" value="<?php echo $value; ?>"><?php echo $value; ?></option>
-                                                <?php
-                                            } else {
-                                                ?>
-                                                    <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-                                                <?php
-                                            }
+                                    $customerStatus[]="Active";
+                                    $customerStatus[]="Archived";
+                                    $customerStatus[]="Deleted";
+                                
+                                    foreach($customerStatus as $value){
+                                        if($value == $customer->getCustomerStatus()) {
+                                            ?>
+                                                <option selected="selected" value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                            <?php
+                                        } else {
+                                            ?>
+                                                <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                            <?php
                                         }
+                                    }
                                ?>
                             </select>
                             <span class="ce__feedback" id="feedbackCustomerStatus"></span>
@@ -172,6 +172,14 @@
                 </form>
 
                 <section class="ce-overview">
+                    <div class="btn-group" role="group" aria-label="Customer overview links">
+                        <a href="user-list-test?customer=<?php echo $customerID; ?>" class="ce-overview--link btn">Users</a>
+                        <a href="#" class="ce-overview--link btn">Departments</a>
+                        <a href="#" class="ce-overview--link btn">Scans</a>
+                    </div>
+                </section>
+
+                <!-- <section class="ce-overview">
                     <h2 class="ce-overview__title">Customer overview</h2>
 
                     <ul class="nav nav-tabs">
@@ -183,7 +191,7 @@
                     <div class="tab-content">
                         <div id="scans" class="tab-pane fade in active show">
                             <div class="tab-content__container">
-                                <form method="POST" action="customer-edit?customer=<?php echo $customerID; ?>&tab=scan">
+                                <form method="POST" action="customer-edit?customer=<?php //echo $customerID; ?>&tab=scan">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="customer__select">
@@ -214,12 +222,12 @@
                                     <tbody class="tab-table__body">
                                         <?php
                                             // Looping through the results
-                                            foreach ($listScans as $scan) { 
+                                            //foreach ($listScans as $scan) { 
                                         ?>
                                             <tr class="tab-table__row">
-                                                <td class="tab-table__td"><?php echo $scan->getScanName(); ?></td>
-                                                <td class="tab-table__td"><?php echo $scan->getScanStartDate(); ?></td>
-                                                <td class="tab-table__td"><?php echo $scan->getScanEndDate(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $scan->getScanName(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $scan->getScanStartDate(); ?></td>
+                                                <td class="tab-table__td"><?php // $scan->getScanEndDate(); ?></td>
                                                 <td class="tab-table__td">
                                                     <a class="editKnop" href="#"><i class="fas tab-table__icon">&#xf044;</i></a>
 
@@ -227,7 +235,7 @@
                                                 </td>
                                             </tr>
                                         <?php
-                                            }
+                                            //}
                                         ?>
                                     </tbody>
                                 </table>
@@ -236,7 +244,7 @@
 
                         <div id="departments" class="tab-pane fade">
                             <div class="tab-content__container">
-                                <form method="POST" action="customer-edit?customer=<?php echo $customerID; ?>"> 
+                                <form method="POST" action="customer-edit?customer=<?php// echo $customerID; ?>"> 
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="customer__select">
@@ -266,11 +274,11 @@
                                     <tbody class="tab-table__body">
                                         <?php
                                             // Looping through the results
-                                            foreach ($listDepartments as $department) { 
+                                            //foreach ($listDepartments as $department) { 
                                         ?>
                                             <tr class="tab-table__row">
-                                                <td class="tab-table__td"><?php echo $department->getDepartmentName(); ?></td>
-                                                <td class="tab-table__td"><?php echo $department->getdepartmentComment(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $department->getDepartmentName(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $department->getdepartmentComment(); ?></td>
                                                 <td class="tab-table__td">
                                                     <a class="editKnop" href="#"><i class="fas tab-table__icon">&#xf044;</i></a>
 
@@ -278,7 +286,7 @@
                                                 </td>
                                             </tr>
                                         <?php
-                                            }
+                                            //}
                                         ?>
                                     </tbody>
                                 </table>
@@ -287,7 +295,7 @@
 
                         <div id="contacts" class="tab-pane fade">
                             <div class="tab-content__container">
-                                <form method="POST" action="customer-edit?customer=<?php echo $customerID; ?>">
+                                <form method="POST" action="customer-edit?customer=<?php //echo $customerID; ?>">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="customer__select">
@@ -319,13 +327,13 @@
                                     <tbody class="tab-table__body">
                                         <?php
                                             // Looping through the results
-                                            foreach ($listContacts as $contact) { 
+                                            //foreach ($listContacts as $contact) { 
                                         ?>
                                             <tr class="tab-table__row">
-                                                <td class="tab-table__td"><?php echo $contact->getContactDepartmentName(); ?></td>
-                                                <td class="tab-table__td"><?php echo $contact->getContactName(); ?></td>
-                                                <td class="tab-table__td"><?php echo $contact->getContactPhoneNumber(); ?></td>
-                                                <td class="tab-table__td"><?php echo $contact->getContactEmail(); ?></td>
+                                                <td class="tab-table__td"><?php // $contact->getContactDepartmentName(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $contact->getContactName(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $contact->getContactPhoneNumber(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $contact->getContactEmail(); ?></td>
                                                 <td class="tab-table__td">
                                                     <a class="editKnop" href="#"><i class="fas tab-table__icon">&#xf044;</i></a>
 
@@ -333,14 +341,14 @@
                                                 </td>
                                             </tr>
                                         <?php
-                                            }
+                                            //}
                                         ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> -->
             </div>
         </div> 
     </body>

@@ -21,7 +21,8 @@
                             INNER JOIN customer cust ON c.customerID = cust.customerID
                             INNER JOIN department_contact dc ON dc.contactID = c.contactID
                             INNER JOIN department dp ON dc.departmentID = dp.departmentID
-                            WHERE c.contactStatus = '%s'", $status);
+                            WHERE c.contactStatus = '%s'
+                            ORDER BY c.contactName ASC", $status);
             $stm = $this->db->prepare($query);
             if($stm->execute()){
                 // Getting the results fromm the database
@@ -51,7 +52,8 @@
                             INNER JOIN customer cust ON c.customerID = cust.customerID
                             INNER JOIN department_contact dc ON dc.contactID = c.contactID
                             INNER JOIN department dp ON dc.departmentID = dp.departmentID
-                            WHERE cust.customerID = %d AND c.contactStatus = '%s'", $customerID, $status);
+                            WHERE cust.customerID = %d AND c.contactStatus = '%s'
+                            ORDER BY c.contactName ASC", $customerID, $status);
             $stm = $this->db->prepare($query);
             if($stm->execute()){
                 // Getting the results fromm the database
