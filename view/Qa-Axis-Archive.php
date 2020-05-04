@@ -21,7 +21,7 @@ $Aid = "1";
             <div class="modal-body">
                 <form method="POST">
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">Weet je zeker dat je de axis: "<?php $AD->showQ($Aid); ?>" wilt archiveren?</label>
+                        <label for="message-text" class="col-form-label">Weet je zeker dat je de axis: "<?php $AD->showA($Aid); ?>" wilt archiveren?</label>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" name="btnArchiveer" id="btnArchiveer" class="btn btn-danger" value="Ja">Ja</button>
