@@ -3,17 +3,15 @@
 //Include Menu
 require('menu.php');
 
-include '../functions/datalayer/database.class.php';
-
 // Class job toevoegen aan het bestand
-include '../functions/controller/getCustList.php';
+include '../functions/controller/CustomerController.php';
 // Class used technologie toevoegen aan het bestand
 include '../functions/models/entCustomer.php';
 
 
 
 //Connectie maken met class CustomerDB
-$CustomerDB = new CustomerDB(); 
+$CustomerDB = new CustomerController(); 
 
 
 ?>
@@ -21,12 +19,12 @@ $CustomerDB = new CustomerDB();
 <html>
 <head>
 </head>
-
+    <link rel="stylesheet" href="../assests/styling/customer-edit.css">
     <body>
         <!-- Jouw container -->
         <div class="page__content">
             <!-- Bootstrap container -->
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
                         <br>
@@ -34,6 +32,24 @@ $CustomerDB = new CustomerDB();
                         <br>
                     </div>    
                 </div>
+
+                <form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="customer__select">
+                                <select id="customerStatus" name="cbxStatus" class="form-control">
+                                    <option value="Active">Active</option>
+                                    <option value="Archived">Archived</option>
+                                    <option value="Deleted">Deleted</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <input type="submit" class="btn btn-status" name="btnChangeStatus" value="Verander status">
+                        </div>
+                    </div>
+                </form>
 
                 <div class="row">
                     <div class="col-sm-12"></div>
@@ -49,23 +65,6 @@ $CustomerDB = new CustomerDB();
                         </tr>
                         </thead>
                         <tbody>
-                            <form method="POST" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="customer__select">
-                                            <select id="customerStatus" name="cbxStatus" class="form-control">
-                                                <option value="Active">Active</option>
-                                                <option value="Archived">Archived</option>
-                                                <option value="Deleted">Deleted</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-6">
-                                        <input type="submit" class="btn btn-status" name="btnChangeStatus" value="Verander status">
-                                    </div>
-                                </div>
-                            </form>
 
                             
                         <?php
@@ -87,7 +86,7 @@ $CustomerDB = new CustomerDB();
                             echo "<tr class='customer__row'>";
 
                             echo "<td class='customer__td_name' onclick='naarDetails(".$customer->getCustomerID().")'>";
-                            echo $customer->getCustomerNaam();
+                            echo $customer->getCustomerName();
                             echo "</td>";
                         
                             echo "<td class='customer__td_comment'>";
@@ -100,11 +99,11 @@ $CustomerDB = new CustomerDB();
 
                             echo "<td class='customer__td_icon'>";
                             // echo '<a class="editKnop" href="DetailsCustomer?customer='.$customer->getCustomerID().'"><i class="fas fa-edit"></i></a>
-                            echo '<a class="editKnop" href="https://youtu.be/oHg5SJYRHA0"><i class="fas fa-edit"></i></a>
+                            echo '<a class="editKnop" href="customer-edit?customer='.$customer->getCustomerID().'"><i class="fas fa-edit"></i></a>
                             <a class="deleteKnop" href="DetailsCustomer?customer='.$customer->getCustomerID().'"><i class="fas fa-trash-alt"></i></a>
                             <a class="profileKnop" href="DetailsCustomer?customer='.$customer->getCustomerID().'"><i class="fas fa-user"></i></a>';
 
-                            echo "</td>";
+                            echo "</td>"; 
 
                             echo "</tr>";
 

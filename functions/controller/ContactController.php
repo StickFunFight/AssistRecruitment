@@ -30,6 +30,5 @@
             // Returning the list given from the Database class
             return $listContacts;
         }
-        
     }
 ?>

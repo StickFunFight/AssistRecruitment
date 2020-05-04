@@ -7,6 +7,16 @@ html, body {
   font-family: "Open Sans", sans-serif;
 }
 
+::-moz-selection {
+  color: white;
+  background: #787878;
+}
+
+::selection {
+  color: white;
+  background: #787878;
+}
+
 /* Wrapper of the sidebar */
 #sidebar-wrapper {
   display: -webkit-box;
@@ -188,11 +198,6 @@ html, body {
   margin-left: -15rem;
 }
 
-.page__content {
-  width: 100%;
-  padding-right: 5rem;
-}
-
 /* Keep submenu icon visable on resize icon click */
 .submenu--icon-right {
   margin-right: -3rem;
@@ -200,9 +205,9 @@ html, body {
           transform: rotate(180deg);
 }
 
-.customer__table {
-  background-color: white;
-  width: 50%;
+.page__content {
+  width: 100%;
+  padding-right: 5rem;
 }
 
 .customer__row {
@@ -305,9 +310,5 @@ tr:hover {
 .customer__select {
   padding-bottom: 1rem;
   color: #73b99b;
-}
-
-select.form-control {
-  height: auto;
 }
 /*# sourceMappingURL=menu.css.map */

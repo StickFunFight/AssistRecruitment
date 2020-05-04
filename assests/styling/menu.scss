@@ -12,6 +12,17 @@ html, body{
     font-family: $font;
 }
 
+// Selection color
+::-moz-selection {
+    color: $white;
+    background: #787878;
+}
+  
+::selection {
+    color: $white;
+    background: #787878;
+}
+
 /* Wrapper of the sidebar */
 #sidebar-wrapper {
     display: flex;
@@ -71,10 +82,7 @@ html, body{
 .navbar__bottom {
     position: sticky;
     top: calc(100% - 15vh);
-    // top: 85rem;
     width: 8rem;
-    // bottom: 2.5rem;
-    // width: 82%;
     display: flex;
     justify-content: center;
 }
@@ -151,7 +159,7 @@ html, body{
     margin-top: 2rem;
     text-align: right;
 }
- 
+
 /* Submenu resize icon styling */
 .submenu--icon {
     font-size: 2rem;
@@ -171,25 +179,19 @@ html, body{
     margin-left: -15rem;
 }
 
-.page__content {
-    width: 100%;
-    padding-right: 5rem;
-}
-
 /* Keep submenu icon visable on resize icon click */
 .submenu--icon-right {
     margin-right: -3rem;
     transform: rotate(180deg);
 }
 
-.customer__table {
-    background-color: $white;
-    width: 50%;
+.page__content {
+    width: 100%;
+    padding-right: 5rem;
 }
   
 .customer__row {
     padding: 5px;
-
 }
 
 .customer__th_name {
@@ -289,8 +291,4 @@ tr:hover {
 .customer__select{
     padding-bottom: 1rem;
     color: $green;
-}
-
-select.form-control {
-    height: auto;
 }
