@@ -1,0 +1,141 @@
+@import "variables";
+@import "mixins";
+
+/* Container next to the sidebar */
+.page__container {
+    width: 100%;
+    height: auto;
+    padding-right: 5rem;
+}
+
+/* Page title */
+.ce__title {
+    margin: 2rem 0;
+    color: $green;
+    font-size: 3.5rem;
+}
+
+.ce--form-row{
+    padding: 1.5rem 0;
+}
+
+/* Label styling customer edit form */
+.ce__label{
+    font-size: 1.6rem;
+}
+
+/* Input styling customer edit form */
+.ce--input,
+.form-control.ce--input {
+    font-size: 1.6rem;
+}
+
+select.form-control{
+    height: auto;
+    font-size: 1.6rem;
+}
+
+/* Form validation feedback */
+.ce__feedback {
+    padding-bottom: 0.5;
+}
+
+.ce--margin{
+    margin-top: 1.5rem;
+}
+
+/* customer edit update button */
+.btn.ce__update-button{
+    color: $black;
+    font-size: 1.6rem;
+    background-color: $grey;
+    border-color: $grey;
+}
+
+.btn.ce__update-button:hover {
+    color: $white;
+    background-color: $green;
+    border-color: $green;
+}
+
+/* customer details tables */
+.ce-overview {
+    margin-top: 8rem;
+}
+
+/* section title */
+.ce-overview__title {
+    font-size: 3.2rem;
+    padding-bottom: 1.5rem;
+}
+
+/* customer edit overview pills ul and tab content */
+.nav-tabs,
+.tab-content {
+    border: 1px solid $grey;
+}
+
+/* customer edit overview pills li */
+.ce-overview__tab {
+    padding: 0.4rem 0;
+}
+
+/* customer edit overview pills link */
+.ce-overview--link {
+    color: $black;
+    font-size: 2rem;
+    padding: 0.8rem 1.25rem;
+}
+
+/* overview pills active and active hover */
+.active.ce-overview--link,
+.active.ce-overview--link:hover { 
+    color: $white;
+    font-size: 2rem;
+    background-color: #687871;
+}
+
+/* overview pills hover */
+.ce-overview__tab:hover {
+    background-color: #F7F7F7;
+}
+
+.ce-overview--link:hover {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* tab content container */
+.tab-content__container {
+    padding: 1.5rem 0 0.5rem;
+}
+
+/* customer edit overview pills tab content */
+.tab-content {
+    border-top: none;
+}
+
+/* customer edit overview pills tab container */
+.tab-pane {
+    margin: 0 1.5rem 1.5rem;
+}
+
+/* table status button */
+.btn.btn-status {
+    color: $black;
+    font-size: 1.6rem;
+    background-color: $grey;
+    border-color: $grey;
+}
+
+.btn.btn-status:hover {
+    color: $white;
+    background-color: $green;
+    border-color: $green;
+}
+
+/* set a max with for the table cell */
+.tab-table__td {
+    width: auto;
+    max-width: calc(70vw / 3);
+}
