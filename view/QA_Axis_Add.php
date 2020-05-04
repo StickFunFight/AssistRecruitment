@@ -44,7 +44,7 @@ require 'head.php';
 
     })
 
-    $('#btnOpslaan').click(function () {
+    $('#AxisAddOpslaan').click(function () {
         $.ajax({
             url: '../functions/controller/AxisAddHandler.php',
             type: 'post',

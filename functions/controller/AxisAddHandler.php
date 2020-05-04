@@ -1,7 +1,7 @@
 <?php
-require '../datalayer/AxesDatabase.php';
+require '../datalayer/AxisDatabase.php';
 
-$AD = new AxesDatabase();
+$AD = new AxisDatabase();
 
 if (isset($_POST['AxisName'])){
 

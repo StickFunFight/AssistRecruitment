@@ -2,7 +2,7 @@
 
 require_once 'database.class.php';
 
-class AxesDatabase{
+class AxisDatabase{
 
     private $conn;
 
@@ -14,10 +14,10 @@ class AxesDatabase{
     public function AxesOpslaan($AxisName){
 
 
-        $query = "INSERT INTO Axis (AxisName, AxisStatus) VALUES ('$AxisName', 'Active')";
+        $query = "INSERT INTO axis (AxisName, AxisStatus) VALUES ('$AxisName', 'Active')";
         $stm = $this->conn->prepare($query);
         if ($stm->execute()){
-            Header("Location: Qa.php");
+            
         }
 
     }
