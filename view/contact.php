@@ -55,7 +55,7 @@ $contactController = new contactController();
           <div class="col-sm-12"></div>
           <table class="table table-hover contacttable" style="font-family:verdana" id="ContactTable">
             <thead>
-              <tr class="contactrow">
+              <tr class="contacthead">
                 <th class="contact__th_name">Name</th>
                 <th class="contact__th_email">Email</th>
                 <th class="contact__th_phonenumber">Phone number</th>
@@ -90,7 +90,6 @@ $contactController = new contactController();
 
                   echo "<br>";
                   echo "<tr class='contact__row'>";
-
                   echo "<td class='contact__td_name'>";
                   echo $contact->getContactName();
                   echo "</td>";
@@ -142,9 +141,10 @@ $contactController = new contactController();
   $(document).ready(function(){
         $("#Filter").on("keyup", function() {
             var value = $(this).val().toLowerCase();
-            $("#ContactTable tr").filter(function() {
+            $("#ContactTable .contact__row").filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
     });
+
 </script>
