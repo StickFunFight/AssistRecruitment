@@ -357,6 +357,7 @@
         // Ending the customer foreach loop
         }
     //If no customer is set
+    } else {
+        header('Location: cust_listed');
     }
-     else header('Location: cust_listed');
 ?>

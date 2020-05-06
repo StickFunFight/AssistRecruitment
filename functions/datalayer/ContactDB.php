@@ -11,6 +11,7 @@
             $this->db = $database->getConnection();
         }
 
+        // Getting all contacts
         function getContacts($status) {
             // Creating a array
             $listContacts = array();
@@ -42,6 +43,7 @@
             }
         }
 
+        // Getting all contact for one customer
         function getContactsCustomer($customerID, $status){
             // Creating a array
             $listContacts = array();
