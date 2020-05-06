@@ -1,5 +1,6 @@
 <?php
 
+
 class AxisDatabase
 {
 
@@ -50,4 +51,16 @@ class AxisDatabase
             echo $result->AxisName;
         } else echo "oeps";
     }
+
+    public function AxesOpslaan($AxisName){
+
+
+        $query = "INSERT INTO axis (AxisName, AxisStatus) VALUES ('$AxisName', 'Active')";
+        $stm = $this->conn->prepare($query);
+        if ($stm->execute()){
+
+        }
+
+    }
 }
+
