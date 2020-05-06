@@ -67,7 +67,7 @@
                     <div class="col-sm-12">
                         <form method="POST">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-5">
                                     <div class="customer__select">
                                         <select id="userStatus" name="cbxStatusScans" class="form-control" onchange="updateTableStatus(<?php echo  $customerID; ?>)">
                                             <?php 
@@ -102,9 +102,26 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-5">
                                     <div class="search__icon"><i class='fas search--icon'>&#xf002;</i></div>
                                     <input class="form-control input__filter" id="Filter" type="text" placeholder="Search...">
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <div class="add-container">
+                                        <?php
+                                            // Checking for customer id to know where to add the new user to
+                                            if ($customerID != 0) {
+                                                ?>
+                                                    <a href="user-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                    <a href="user-add" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
+                                                <?php
+                                            }       
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
                         </form>
