@@ -17,14 +17,14 @@ Class CustomerDB {
     // Create an Array for the function
       $listCustomers = array();
 
-      // Query to select data from customer table
+        // Query to select data from customer table
         $query = "SELECT * FROM customer WHERE customerStatus = '$status'";
         $stm = $this->db->prepare($query);
-        if($stm->execute()){
+        if ($stm->execute()) {
             // Get Results from the Database
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
             // Create a loop to get all customers from the customer table
-            foreach($result as $customer){
+            foreach ($result as $customer) {
                 // Call Entity Class to get values for each customer
                 $entCustomer = new entCustomer($customer->customerID, $customer->customerName, $customer->customerComment, $customer->customerReference, $customer->customerStatus);
                 array_push($listCustomers, $entCustomer);

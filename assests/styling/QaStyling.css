@@ -36,7 +36,6 @@ th{
     color: white;
 }
 
-
 /* icon styling */
 .table--icon {
     display: none;
@@ -59,4 +58,10 @@ th{
 .ButtonRight{
     font-size: 1.5rem;
     float: right;
+}
+.QaTopMargin{
+    margin-top: 10%
+}
+.RuimteVragen{
+    margin-right:10px
 }
