@@ -66,5 +66,25 @@
                 echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
             }
         }
+
+        public function createDepartment($departmentName, $departmentComment, $customerID) {
+
+            $departmentStatus = 'Active';
+    
+            //A query is create here and values are being bound to the parameters inside the query.
+            $stmt = $this->db->prepare("INSERT INTO department (departmentID, departmentName, departmentComment, departmentStatus, customerID) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bindParam(1, $departmentID);
+            $stmt->bindParam(2, $departmentName);
+            $stmt->bindParam(3, $departmentComment);
+            $stmt->bindParam(4, $departmentStatus);
+            $stmt->bindParam(5, $customerID);
+    
+            //The previous query statement will be executed here.
+            try {
+                return $stmt->execute();
+            } catch (PDOException $exception){
+                return false;
+            }
+        }
     }
 ?>
