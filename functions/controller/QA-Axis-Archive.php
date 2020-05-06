@@ -8,7 +8,10 @@ if (isset($_POST['AxisID'])){
 
     $Aid = $_POST['AxisID'];
     $AD->archiveerAxis($Aid);
-    echo "Succes";
-}else echo "failed";
-?>
+}
+else if ($_POST['rowid']) {
+    $id = $_POST['rowid'];
+    $AD->showA($id);
+}
+
 

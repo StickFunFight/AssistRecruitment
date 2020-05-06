@@ -43,7 +43,7 @@ require_once 'menu.php';
                         echo '<td>';
                         echo '<a class="editKnop" id="'.$item->getAxisId().'"><i class="fas tab-table__icon">&#xf044;</i></a>';
                         echo  ' ';
-                        echo '<a class="deleteKnop"  id="'.$item->getAxisId().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisArchiveModal"><i class="fas tab-table__icon">&#xf2ed;</i></a>';
+                        echo '<a class="deleteKnop"  id="'.$item->getAxisId().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisArchiveModal" data-id="'.$item->getAxisId().'"><i class="fas tab-table__icon">&#xf2ed;</i></a>';
                         echo '</td>';
                         echo '</tr>';
                     }
@@ -67,7 +67,7 @@ require_once 'menu.php';
             <div class="modal-body">
                 <form method="POST">
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">Weet je zeker dat je de axis: "" wilt archiveren?</label>
+                        <label for="message-text" class="col-form-label fetched-data"></label>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" name="btnArchiveer" id="btnArchiveer" class="btn btn-danger" value="Ja">Ja</button>
@@ -86,6 +86,20 @@ require_once 'menu.php';
             var value = $(this).val().toLowerCase();
             $("#QaTable #RowFilter").filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    $(document).ready(function(){
+        $('#AxisArchiveModal').on('show.bs.modal', function (e) {
+            var rowid = $(e.relatedTarget).data('id');
+            $.ajax({
+                type : 'post',
+                url : '../functions/controller/QA-Axis-Archive.php', //Here you will fetch records
+                data :  'rowid='+ rowid, //Pass $id
+                success : function(data){
+                    $('.fetched-data').html("Weet je zeker dat je axis: " + data + " wilt verwijderen?");//Show fetched data from database
+                }
             });
         });
     });
