@@ -138,6 +138,7 @@ require_once 'menu.php';
     </div>
 </div>
 
+<!-- Modal Archive Category-->
 <div class="modal fade" id="deleteQuestionModal" tabindex="-1" role="dialog" aria-labelledby="deleteQuestionModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
