@@ -12,7 +12,7 @@ require 'head.php';
     Nieuwe Axis
 </button>
 
-<!-- Modal -->
+<!-- AxisAddModal -->
 <div class="modal fade" id="AxisAddModal" tabindex="-1" role="dialog" aria-labelledby="AxisAddModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -13,7 +13,7 @@ require_once 'menu.php';
                 <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een vraag of antwoord">
             </div>
             <div class="col-sm-6">
-                <button type="button" class="btn btn-success ButtonRight"><i class="fas fa-plus-circle"></i> Vraag toevoegen</button>
+                <button type="button" class="btn btn-success ButtonRight" data-toggle="modal" data-target="#AxisAddModal"><i class="fas fa-plus-circle"></i>Axis toevoegen</button>
             </div>
         </div>
             <div>
@@ -51,6 +51,30 @@ require_once 'menu.php';
                     </tbody>
                 </table>
             </div>
+    </div>
+</div>
+
+<!-- AxisAddModal -->
+<div class="modal fade" id="AxisAddModal" tabindex="-1" role="dialog" aria-labelledby="AxisAddModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Axis aanmaken</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST">
+                <div class="modal-body">
+                    <label for="AxisAddtxt">Axis aanmaken:</label>
+                    <input type="text" name="AxisAddtxt" id="AxisAddtxt"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" name="btnAnnuleer" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
+                    <input type="button" name="btnOpslaan" id="AxisAddOpslaan" class="btn btn-primary" data-dismiss="modal" value="Axis Opslaan"/>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -110,6 +134,15 @@ require_once 'menu.php';
             url: '../functions/controller/QA-Axis-Archive.php',
             type: 'post',
             data: { "AxisID": AxisID},
+            success: function(response) { window.location.href = 'Axis.php'; }
+        });
+    });
+
+    $('#AxisAddOpslaan').click(function () {
+        $.ajax({
+            url: '../functions/controller/AxisAddHandler.php',
+            type: 'post',
+            data: { "AxisName": $('#AxisAddtxt').val()},
             success: function(response) { window.location.href = 'Axis.php'; }
         });
     });
