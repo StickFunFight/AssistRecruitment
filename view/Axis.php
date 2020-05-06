@@ -4,6 +4,7 @@ require_once 'menu.php';
 ?>
 <html>
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
+<link rel="stylesheet" href="../assests/styling/customer.scss">
 <body>
 <div id="page-content">
     <div class="container-fluid">
@@ -12,7 +13,7 @@ require_once 'menu.php';
                 <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een vraag of antwoord">
             </div>
             <div class="col-sm-6">
-                <button type="button" class="btn btn-primary ButtonRight"><i class="fas fa-plus"></i> Vraag toevoegen</button>
+                <button type="button" class="btn btn-success ButtonRight"><i class="fas fa-plus-circle"></i> Vraag toevoegen</button>
             </div>
         </div>
             <div>
@@ -40,9 +41,9 @@ require_once 'menu.php';
                         echo  $item->getAxisStatus(); 
                         echo '</td>';
                         echo '<td>';
-                        echo  '<i id="'.$item->getAxisId().'" class="fas fa-pencil-alt"></i>';
+                        echo '<a class="editKnop" id="'.$item->getAxisId().'"><i class="fas tab-table__icon">&#xf044;</i></a>';
                         echo  ' ';
-                        echo  '<i id="'.$item->getAxisId().'" class="fas fa-trash-alt"></i>';
+                        echo '<a class="deleteKnop" id="'.$item->getAxisId().'"><i class="fas tab-table__icon">&#xf2ed;</i></a>';
                         echo '</td>';
                         echo '</tr>';
                     }
