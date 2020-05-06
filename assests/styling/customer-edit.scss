@@ -20,18 +20,47 @@
 }
 
 /* Label styling customer edit form */
-.ce__label{
+.ce__label,
+.au__label {
     font-size: 1.6rem;
 }
 
 /* Input styling customer edit form */
 .ce--input,
-.form-control.ce--input {
+.au--input,
+.form-control.ce--input,
+.form-control.au--input {
     font-size: 1.6rem;
 }
 
+// Styling for the search field with icon
+.search--icon {
+    position: absolute;
+    top: 20%;
+    left: 25px;
+    color: $grey;
+    font-size: 16px;
+}
+
+.input__filter {
+    font-size: 1.6rem;
+    padding-left: 35px;
+}
+
+.add-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-container__btn, 
+.add-container__btn:hover {
+    font-size: 1.6rem;
+    color: $white;
+    background-color: $green;
+}
+
 select.form-control{
-    height: auto;
+    // height: auto;
     font-size: 1.6rem;
 }
 
@@ -56,6 +85,15 @@ select.form-control{
     color: $white;
     background-color: $green;
     border-color: $green;
+}
+
+.ce-overview--link {
+    @extend .btn.ce__update-button;
+    margin-right: 1.5rem;
+}
+
+.ce-overview--link:hover {
+    @extend .btn.ce__update-button:hover;
 }
 
 /* customer details tables */
@@ -101,7 +139,7 @@ select.form-control{
 }
 
 .ce-overview--link:hover {
-    color: inherit;
+    // color: inherit;
     text-decoration: none;
 }
 
@@ -134,8 +172,39 @@ select.form-control{
     border-color: $green;
 }
 
+.tab-table__head {
+    cursor: pointer;
+}
+
 /* set a max with for the table cell */
 .tab-table__td {
     width: auto;
     max-width: calc(70vw / 3);
+}
+
+/* styling for autocomplete */
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 1.5rem;
+}
+  
+.autocomplete-items div {
+    font-size: 1.6rem;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff; 
+    border-bottom: 1px solid #d4d4d4; 
+}
+  
+/* when hovering an item: */
+.autocomplete-items div:hover {
+    background-color: #e9e9e9; 
 }
