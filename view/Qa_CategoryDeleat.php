@@ -26,7 +26,7 @@ require_once '../functions/datalayer/database.class.php';
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger">ja</button>
+                <button type="button" class="btn btn-danger" id="btnCatDelete">ja</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">nee</button>
             </div>
         </div>
@@ -40,4 +40,15 @@ require_once '../functions/datalayer/database.class.php';
         var modal = $(this)
         modal.find('.modal-title').text('New message to ' + recipient)
         modal.find('.modal-body input').val(recipient)
-    })</script>
+    });
+
+    $('#btnCatDelete').click(function () {
+        $.ajax({
+            url: '../functions/controller/catDeleteHandler.php',
+            type: 'post',
+            data: { "catID": categoryID},
+            success: function(response) { window.location.href = 'Qa.php'; }
+        });
+    });
+
+</script>
