@@ -12,11 +12,6 @@ class AxisController
     }
 
     public function GetAxis(){
-        // $Lijst = $this->db->GetAllAxis();
-        // var_dump($Lijst);
-        // return $Lijst;
-
-        // Creating a array
         $Lijst = array();
 
         $Lijst = $this->db->GetAllAxis();

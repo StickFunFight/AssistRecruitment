@@ -4,6 +4,7 @@ require_once 'menu.php';
 ?>
 <html>
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
+<body>
 <div id="page-content">
     <div class="container-fluid">
         <div class="row QaTopMargin">
@@ -51,6 +52,18 @@ require_once 'menu.php';
             </div>
     </div>
 </div>
+</body>
+</html>
+<script>
+    $(document).ready(function(){
+        $("#Filter").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#QaTable #RowFilter").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 
 
 
