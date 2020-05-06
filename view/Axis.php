@@ -10,7 +10,7 @@ require_once 'menu.php';
     <div class="container-fluid">
         <div class="row QaTopMargin">
             <div class="col-sm-6">
-                <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een vraag of antwoord">
+                <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een Axis doormiddel van de naam of status">
             </div>
             <div class="col-sm-6">
                 <button type="button" class="btn btn-success ButtonRight" data-toggle="modal" data-target="#AxisAddModal"><i class="fas fa-plus-circle"></i>Axis toevoegen</button>
