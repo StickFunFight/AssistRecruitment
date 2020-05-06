@@ -94,7 +94,7 @@ $CustomerDB = new CustomerDB();
                             echo "</td>";
 
                             echo "<td class='customer__td_refrence'>";
-                            echo $customer->getCustomerRefrence();
+                            echo $customer->getCustomerReference();
                             echo "</td>";
 
                             echo "<td class='customer__td_icon'>";

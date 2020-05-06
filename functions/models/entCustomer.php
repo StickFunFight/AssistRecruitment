@@ -27,7 +27,7 @@ class EntCustomer {
         return $this->CustomerComment;
     }
 
-    public function getCustomerRefrence() {
+    public function getCustomerReference() {
         return $this->CustomerRefrence;
     }
 
