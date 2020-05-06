@@ -43,7 +43,7 @@ require_once 'menu.php';
                         echo '<td>';
                         echo '<a class="editKnop" id="'.$item->getAxisId().'"><i class="fas tab-table__icon">&#xf044;</i></a>';
                         echo  ' ';
-                        echo '<a class="deleteKnop" id="'.$item->getAxisId().'"><i class="fas tab-table__icon">&#xf2ed;</i></a>';
+                        echo '<a class="deleteKnop"  id="'.$item->getAxisId().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisArchiveModal"><i class="fas tab-table__icon">&#xf2ed;</i></a>';
                         echo '</td>';
                         echo '</tr>';
                     }
@@ -51,6 +51,31 @@ require_once 'menu.php';
                     </tbody>
                 </table>
             </div>
+    </div>
+</div>
+
+<!--Archiving Modal-->
+<div class="modal fade" id="AxisArchiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--                <h5 class="modal-title" id="exampleModalLabel">New message</h5>-->
+                <button type="button" class="ja" data-dismiss="modal" aria-label="ja">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Weet je zeker dat je de axis: "" wilt archiveren?</label>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" name="btnArchiveer" id="btnArchiveer" class="btn btn-danger" value="Ja">Ja</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">nee</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 </body>
@@ -64,6 +89,32 @@ require_once 'menu.php';
             });
         });
     });
+
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('New message to ' + recipient)
+        modal.find('.modal-body input').val(recipient)
+    })
+
+    function SendID(clicked_id)
+    {
+        window.AxisID = clicked_id;
+    }
+
+    $('#btnArchiveer').click(function () {
+        $.ajax({
+            url: '../functions/controller/QA-Axis-Archive.php',
+            type: 'post',
+            data: { "AxisID": AxisID},
+            success: function(response) { window.location.href = 'Axis.php'; }
+        });
+    });
+
+
 </script>
 
 

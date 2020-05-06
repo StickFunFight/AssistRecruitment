@@ -43,7 +43,7 @@ class AxisDatabase
     }
 
     function showA($Aid){
-        $query = "SELECT * FROM axis WHERE AxisId = '$Aid'";
+        $query = "SELECT * FROM axis WHERE AxisId = $Aid";
         $stm = $this->conn->prepare($query);
         if ($stm->execute()) {
             $result = $stm->fetch(PDO::FETCH_OBJ);
