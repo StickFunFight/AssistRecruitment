@@ -72,6 +72,32 @@ Class CustomerDB {
         }
     }
 
+    function deleteCustomer($customerID){
+        // Create Query to update Customer Status
+        $query = "UPDATE customer SET customerStatus = 'Deleted' WHERE customerID = $customerID";
+        $stm = $this->db->prepare($query);
+        if($stm->execute()){
+            echo 'Het is gelukt';
+        }
+        // Error Text
+        else {
+            echo "Er is iets fout gegaan";
+        }
+    }
+
+    function activateCustomer($customerID){
+        // Create Query to update Customer Status
+        $query = "UPDATE customer SET customerStatus = 'Active' WHERE customerID = $customerID";
+        $stm = $this->db->prepare($query);
+        if($stm->execute()){
+            echo 'Het is gelukt';
+        }
+        // Error Text
+        else {
+            echo "Er is iets fout gegaan";
+        }
+    }
+
     // Function to get the details of a customer
     function getCustomerDetails($customerID) {
         // Array aanmaken voor de functies

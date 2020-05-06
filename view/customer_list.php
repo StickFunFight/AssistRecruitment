@@ -104,7 +104,7 @@ $CustomerDB = new CustomerDB();
                             echo "<td class='customer__td_icon'>";
                             echo'
                             <a class="editKnop" href="customer-edit?customer='.$customer->getCustomerID().'"><i class="fas fa-edit"></i></a>
-                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#exampleModal" id='.$customer->getCustomerID().' onClick="reply_click(this.id)"><i class="fas fa-archive"></i></a>';
+                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#ADModal" id='.$customer->getCustomerID().' onClick="reply_click(this.id)"><i class="fas fa-archive"></i></a>';
 
                             echo "</td>";
                             echo "</tr>";
