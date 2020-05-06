@@ -1,6 +1,6 @@
 <?php
 
-require '../datalayer/Qa_QuestionDeleteDatabase.php';
+require '../datalayer/AxisDatabase.php';
 
 $AD = new AxisDatabase();
 
