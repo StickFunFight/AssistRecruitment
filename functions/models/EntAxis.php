@@ -3,22 +3,23 @@
 
 class EntAxis
 {
-    private $AxisId;
-    private $Axisname;
-    private $AxisStatus;
+    public $AxisId;
+    public $AxisName;
+    public $AxisStatus;
 
     /**
      * EntAxis constructor.
      * @param $AxisId
-     * @param $Axisname
+     * @param $AxisName
      * @param $AxisStatus
      */
-    public function __construct($AxisId, $Axisname, $AxisStatus)
+    public function __construct($AxisId, $AxisName, $AxisStatus)
     {
         $this->AxisId = $AxisId;
-        $this->Axisname = $Axisname;
+        $this->AxisName = $AxisName;
         $this->AxisStatus = $AxisStatus;
     }
+
 
     /**
      * @return mixed
@@ -39,17 +40,17 @@ class EntAxis
     /**
      * @return mixed
      */
-    public function getAxisname()
+    public function getAxisName()
     {
-        return $this->Axisname;
+        return $this->AxisName;
     }
 
     /**
-     * @param mixed $Axisname
+     * @param mixed $AxisName
      */
-    public function setAxisname($Axisname)
+    public function setAxisName($AxisName)
     {
-        $this->Axisname = $Axisname;
+        $this->AxisName = $AxisName;
     }
 
     /**
@@ -67,7 +68,6 @@ class EntAxis
     {
         $this->AxisStatus = $AxisStatus;
     }
-
 
 
 }

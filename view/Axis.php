@@ -25,7 +25,24 @@ require_once 'menu.php';
                     <tbody>
                     <?php
                     require("../functions/controller/AxisController.php");
-
+                    require '../functions/models/EntAxis.php';
+                    $Axis = new AxisController();
+                    $lijstAxis = $Axis->getAxis();
+                    foreach ($lijstAxis as $item)
+                    {
+                        echo'<tr id="RowFilter">';
+                        echo '<td id="'.$item->getAxisName().'">';
+                        echo '</td>';
+                        echo '<td>';
+                        echo  $item->getAxisStatus();
+                        echo '</td>';
+                        echo '<td>';
+                        echo  '<i id="'.$item->getAxisId().'" class="fas fa-pencil-alt"></i>';
+                        echo  ' ';
+                        echo  '<i id="'.$item->getAxisId().'" class="fas fa-trash-alt"></i>';
+                        echo '</td>';
+                        echo '</tr>';
+                    }
                     ?>
                     </tbody>
                 </table>

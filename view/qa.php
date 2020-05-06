@@ -174,7 +174,6 @@ require_once 'menu.php';
         });
     });
 
-
     function filterSelection(ID) {
         var input, filter, table, tr, td, i;
         input = ID;

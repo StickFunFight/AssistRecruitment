@@ -1,6 +1,6 @@
 <?php
 
-require '../datalayer/AxisDatabase.php';
+require '../functions/datalayer/AxisDatabase.php';
 
 class AxisController
 {
@@ -13,6 +13,7 @@ class AxisController
 
     public function GetAxis(){
         $Lijst = $this->db->GetAllAxis();
+        var_dump($Lijst);
         return $Lijst;
     }
 }
