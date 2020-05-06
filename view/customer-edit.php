@@ -121,13 +121,13 @@
                     <div class="row justify-content-md-center ce--form-row">
                         <div class="col-sm-6">
                             <label for="customerName" class="ce__label">Name</label>
-                            <input type="text" name="txtCustomerName" id="customerName" value="<?php echo $customer->getCustomerName() ?>" class="form-control ce--input" required />
+                            <input type="text" name="txtCustomerName" id="customerName" value="<?php echo $customer->getCustomerName(); ?>" class="form-control ce--input" required />
                             <span class="ce__feedback" id="feedbackCustomerName"></span>
                         </div>
 
                         <div class="col-sm-6">
                             <label for="customerRefrence" class="ce__label">Refrence</label>
-                            <input type="text" name="txtcustomerRefrence" id="customerRefrence" value="<?php echo $customer->getCustomerRefrence(); ?>" class="form-control ce--input" required onchange=""/>
+                            <input type="text" name="txtcustomerRefrence" id="customerRefrence" value="<?php echo $customer->getCustomerReference(); ?>" class="form-control ce--input" required onchange=""/>
                             <span class="ce__feedback" id="feedbackCustomerRefrence"></span>
                         </div>
                     </div>
