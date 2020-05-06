@@ -121,7 +121,7 @@
                     <div class="row justify-content-md-center ce--form-row">
                         <div class="col-sm-6">
                             <label for="customerName" class="ce__label">Name</label>
-                            <input type="text" name="txtCustomerName" id="customerName" value="<?php echo $customer->getCustomerName() ?>" class="form-control ce--input" required />
+                            <input type="text" name="txtCustomerName" id="customerName" value="<?php echo $customer->getCustomerName(); ?>" class="form-control ce--input" required />
                             <span class="ce__feedback" id="feedbackCustomerName"></span>
                         </div>
 

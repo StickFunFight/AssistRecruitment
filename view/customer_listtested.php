@@ -281,8 +281,8 @@
         }
 
         function toDetails(customerID){
-        location.replace("customer-edit?customer=" + customerID);
-         }
+            location.assign("customer-edit?customer=" + customerID);
+        }
 
     </script>
 </html>
