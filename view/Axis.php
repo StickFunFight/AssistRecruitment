@@ -43,7 +43,7 @@ require_once 'menu.php';
                         echo '<td>';
                         echo '<a class="editKnop" id="'.$item->getAxisId().'"><i class="fas tab-table__icon">&#xf044;</i></a>';
                         echo  ' ';
-                        echo '<a class="deleteKnop" id="'.$item->getAxisId().'"><i class="fas tab-table__icon">&#xf2ed;</i></a>';
+                        echo '<a class="deleteKnop" id="'.$item->getAxisId().'"><i class="fas tab-table__icon">&#xf187;</i></a>';
                         echo '</td>';
                         echo '</tr>';
                     }
