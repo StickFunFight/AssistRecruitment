@@ -20,6 +20,7 @@ require_once 'menu.php';
                     <tr>
                         <th>Axis</th>
                         <th>Axis Status</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -32,9 +33,10 @@ require_once 'menu.php';
                     {
                         echo'<tr id="RowFilter">';
                         echo '<td id="'.$item->getAxisName().'">';
+                        echo $item->getAxisName();
                         echo '</td>';
                         echo '<td>';
-                        echo  $item->getAxisStatus();
+                        echo  $item->getAxisStatus(); 
                         echo '</td>';
                         echo '<td>';
                         echo  '<i id="'.$item->getAxisId().'" class="fas fa-pencil-alt"></i>';

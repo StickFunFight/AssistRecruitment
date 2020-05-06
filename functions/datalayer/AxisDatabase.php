@@ -11,7 +11,7 @@ class AxisDatabase
         $this->conn = $database->getConnection();
 
     }
-    public function GetAllAxis(){
+    public function GetAllAxis(){ 
         {
             $lijst = array();
             $query = "SELECT * FROM axis";
@@ -19,7 +19,8 @@ class AxisDatabase
             if ($stm->execute()) {
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 foreach ($result as $item) {
-                    $entAxis = new EntAxis($item->getAxisId, $item->getAxisName, $item->getAxisStatus);
+                    // Hier stonden de entiteit class functies maar hij wilde de database kolom namen
+                    $entAxis = new EntAxis($item->AxisId, $item->AxisName, $item->AxisStatus);
                     array_push($lijst, $entAxis);
                 }
                 return $lijst;
