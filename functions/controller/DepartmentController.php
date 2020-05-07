@@ -9,7 +9,15 @@
             $this->departmentDB = new DepartmentDB();
         }
 
-        // Funciton to get all departments
+        public function createDepartment($departmentName, $departmentComment, $customerID) {
+            
+            if($this->departmentDB->createDepartment($departmentName, $departmentComment, $customerID)){
+                echo "Department succesfully added!";
+            } else {
+                echo "An error has occured.";
+            }
+        }
+
         function getDepartments($statusDepartment){
             // Creating a array
             $listDepartments = array();
