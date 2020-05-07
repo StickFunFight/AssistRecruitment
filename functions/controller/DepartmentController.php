@@ -9,15 +9,6 @@
             $this->departmentDB = new DepartmentDB();
         }
 
-        public function createDepartment($departmentName, $departmentComment, $customerID) {
-            
-            if($this->departmentDB->createDepartment($departmentName, $departmentComment, $customerID)){
-                echo "Department succesfully added!";
-            } else {
-                echo "An error has occured.";
-            }
-        }
-
         function getDepartments($statusDepartment){
             // Creating a array
             $listDepartments = array();
@@ -39,6 +30,15 @@
             return $listDepartments;
         }
 
+        public function createDepartment($departmentName, $departmentComment, $customerID) {
+            
+            if($this->departmentDB->createDepartment($departmentName, $departmentComment, $customerID)){
+                echo "Department succesfully added!";
+            } else {
+                echo "An error has occured.";
+            }
+        }
+
         // Funciton to get details of 1 department
         function getDetailsDepartment($departmentID) {
             // Creating a array
@@ -51,8 +51,21 @@
         }
 
         // Function to update the department
-        function updateDepartment() {
-
+        function updateDepartment($departmentID, $departmentName, $departmentStatus, $departmentComment, $departmentCustomer) {
+            // Sending the variables to the database and checking the result
+            if($this->departmentDB->updateDepartment($departmentID, $departmentName, $departmentStatus, $departmentComment, $departmentCustomer)){
+                // Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "&error=none";
+                // Reloading page with succes message
+                echo '<script>location.replace("'.$newURL.'");</script>';
+            } else {
+                // Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "&error=1";
+                // Reloading page with succes message
+                echo '<script>location.replace("'.$newURL.'");</script>';
+            }
         }
 
         // Function to add contact to department

@@ -3,32 +3,32 @@
         require '../functions/datalayer/database.class.php';
         // Adding the customer controller
         require '../functions/controller/CustomerController.php';
-        // // Adding the scanDB controller
-        // require '../functions/controller/ScanController.php';
-        // // Adding the department controller
-        // require '../functions/controller/DepartmentController.php';
-        // // Adding the Contact controller
-        // require '../functions/controller/ContactController.php';
+        // Adding the scanDB controller
+        require '../functions/controller/ScanController.php';
+        // Adding the department controller
+        require '../functions/controller/DepartmentController.php';
+        // Adding the Contact controller
+        require '../functions/controller/ContactController.php';
 
 
         // Adding the customer modal
         require '../functions/models/entCustomer.php';
-        // // Adding the scan modal
-        // require '../functions/models/entScan.php';
-        // // Adding the department modal
-        // require '../functions/models/entDepartment.php';
-        // // Adding the department modal
-        // require '../functions/models/entContact.php';
+        // Adding the scan modal
+        require '../functions/models/entScan.php';
+        // Adding the department modal
+        require '../functions/models/entDepartment.php';
+        // Adding the department modal
+        require '../functions/models/entContact.php';
 
     
         // Getting the connection with the customer class
         $CustomerDB = new CustomerController(); 
-        // // Getting the connection with the scan class
-        // $ScanDB = new ScanController();
-        // // Getting the connection with the department class
-        // $DepartmentDB = new DepartmentController();
-        // // Getting the connection with the department class
-        // $ContactDB = new ContactController();
+        // Getting the connection with the scan class
+        $ScanDB = new ScanController();
+        // Getting the connection with the department class
+        $DepartmentDB = new DepartmentController();
+        // Getting the connection with the department class
+        $ContactDB = new ContactController();
 
         
         // Getting the customer
@@ -168,6 +168,30 @@
                         <div class="col-sm-12">
                             <input type="submit" name="btnUpdate" class="btn ce__update-button" value="Update customer">
                         </div>
+                    </div>
+
+                    <div class="feedback">
+                        <?php
+                            // Checking for error message 
+                            if (isset($_GET['error'])) {
+                                $error = $_GET['error'];
+
+                                // Showing the error
+                                switch ($error) {
+                                    case 'none':
+                                        ?>
+                                            <span class="feedback--good">The customer has been updated. </span>
+                                        <?php
+                                        break;
+                                    
+                                    default:
+                                        ?>
+                                            <span class="feedback--bad">The customer could not be updated, try again. </span>
+                                        <?php
+                                        break;
+                                }
+                            }
+                        ?>
                     </div>
                 </form>
 

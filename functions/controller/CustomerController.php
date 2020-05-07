@@ -45,12 +45,20 @@
 
         // Function to update the customer
         function updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus) {
-            
-            //var_dump($CustomerModal);
-
-            //echo "<br> hai ik ben iets <br>" . $CustomerModal->getCustomerName();
-
-            $this->customerDB->updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus);
+            // Sending the variables to the database and checking the result
+            if($this->customerDB->updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus)){
+                // Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "&error=none";
+                // Reloading page with succes message
+                echo '<script>location.replace("'.$newURL.'");</script>';
+            } else {
+                // Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "&error=1";
+                // Reloading page with succes message
+                echo '<script>location.replace("'.$newURL.'");</script>';
+            }
         }
     }
 ?>

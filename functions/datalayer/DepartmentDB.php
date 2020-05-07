@@ -71,6 +71,25 @@
             }
         }
 
+        // Function to add a department
+        public function createDepartment($departmentName, $departmentComment, $customerID) {
+            $departmentStatus = 'Active';
+    
+            //A query is create here and values are being bound to the parameters inside the query.
+            $stmt = $this->db->prepare("INSERT INTO department (departmentID, departmentName, departmentComment, departmentStatus, customerID) VALUES (?, ?, ?, ?, ?)");
+            $stmt->bindParam(1, $departmentID);
+            $stmt->bindParam(2, $departmentName);
+            $stmt->bindParam(3, $departmentComment);
+            $stmt->bindParam(4, $departmentStatus);
+            $stmt->bindParam(5, $customerID);
+            //The previous query statement will be executed here.
+            try {
+                return $stmt->execute();
+            } catch (PDOException $exception){
+                return false;
+            }
+        }
+
         // Function to get department details
         function getDetailsDepartment($departmentID){
             // Creating a array
@@ -97,6 +116,19 @@
             // Showing a error when the query didn't execute
             else{
                 echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
+            }
+        }
+
+        function updateDepartment($departmentID, $departmentName, $departmentStatus, $departmentComment, $departmentCustomer) {
+            // Query aanmaken om alle functies uit de database te halen
+            $query = sprintf("UPDATE department SET departmentName = '%s', departmentComment = '%s', departmentStatus = '%s', customerID = %d WHERE departmentID = %d", $departmentName, $departmentComment, $departmentStatus, $departmentCustomer, $departmentID);
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                // Sending true back for succes message
+                return true;
+            } else{
+                // Sending false back for an error
+                return false;
             }
         }
     }

@@ -259,7 +259,7 @@
     if (!empty($customerDetails)) {
         foreach ($customerDetails as $customer) {
             echo "<script> 
-                document.getElementById('pageTitle').innerHTML = 'Overview Scans of ". $customer->getCustomerName() ."'; 
+                document.getElementById('pageTitle').innerHTML = 'Overview scans of ". $customer->getCustomerName() ."'; 
             </script>";
         }
     }

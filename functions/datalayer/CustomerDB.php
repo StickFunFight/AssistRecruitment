@@ -18,7 +18,8 @@ Class CustomerDB {
       $listCustomers = array();
 
         // Query to select data from customer table
-        $query = "SELECT * FROM customer WHERE customerStatus = '$status'";
+        $query = sprintf("SELECT * FROM customer WHERE customerStatus = '%s'
+                        ORDER BY customerName ASC", $status);
         $stm = $this->db->prepare($query);
         if ($stm->execute()) {
             // Get Results from the Database
@@ -104,9 +105,12 @@ Class CustomerDB {
         // Query aanmaken om alle functies uit de database te halen
         $query = sprintf("UPDATE customer SET customerName = '%s', customerReference = '%s', customerComment = '%s', customerStatus = '%s' WHERE customerID = %d", $customerName, $customerReference, $customerComment, $customerStatus, $customerID);
         $stm = $this->db->prepare($query);
-        if(!$stm->execute()){
-            // Tekst laten zien voor als er geen functies zijn opgehaald
-            echo "Oof";
+        if($stm->execute()){
+            // Sending true back for succes message
+            return true;
+        } else {
+            // Sending false back for error message
+            return false;
         }
     }
 

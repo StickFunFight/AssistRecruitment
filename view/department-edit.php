@@ -3,12 +3,15 @@
         require '../functions/datalayer/database.class.php';
         // Adding the department controller
         require '../functions/controller/DepartmentController.php';
+        require '../functions/controller/CustomerController.php';
 
         // Adding the department modal
         require '../functions/models/entDepartment.php';
+        require '../functions/models/entCustomer.php';
 
         // Getting the connection with the department class
         $DepartmentCtrl = new DepartmentController();
+        $CustomerCtrl = new CustomerController();
 
         // Getting the department
         $departmentID = $_GET['department'];
@@ -24,32 +27,29 @@
             $customerID = 0;
         }
 
-        // Updating the customer
-        if(isset($_POST['btnUpdate'])){
+        // Updating the department
+        if(isset($_POST['btnUpdate'])) {
+
             // getting the new values
-            // $custID = $_GET["customer"];
-            // $custName = $_POST['txtCustomerName'];
-            // $custRefrence = $_POST['txtcustomerRefrence'];
-            // $custComment = $_POST['txtCustomerComment'];
-            // $custStatus = $_POST['cbxStatus'];
-
-            // Storring all variables in the customer object
-            //$CustomerModal = new EntCustomer($custID, $custName, $custRefrence, $custComment, $custStatus);
-
-            // echo "ID = " . $custID . "<br>";
-            // echo "Name = " . $custName . "<br>";
-            // echo "Refrence = " . $custRefrence . "<br>";
-            // echo "Comment = " . $custComment . "<br>";
-            // echo "Status = " . $custStatus . "<br>";
-
-            //$CustomerDB->updateCustomer($custID, $custName, $custRefrence, $custComment, $custStatus);
+            $departmentName = $_POST["txtDepartmentName"];
+            $departmentStatus = $_POST['cbxStatus'];
+            $departmentCustomer = $_POST['txtCustomerID'];
+            $departmentComment = $_POST['txtDepartmentComment'];
+ 
+            // echo "Department ID = " . $departmentID . "<br>";
+            // echo "Name = " . $departmentName . "<br>";
+            // echo "Status = " . $departmentStatus . "<br>";
+            // echo "Customer = " . $departmentCustomer . "<br>";
+            // echo "Comment = " . $departmentComment . "<br>";
+ 
+            $DepartmentCtrl->updateDepartment($departmentID, $departmentName, $departmentStatus, $departmentComment, $departmentCustomer);
         }
 
         // Getting the department details 
         $detailsDepartment = $DepartmentCtrl->getDetailsDepartment($departmentID); 
 
         // Loop through result
-        foreach($detailsCustomer as $department){
+        foreach($detailsDepartment as $department){
             // Including the menu and head
             require "menu.php";
 ?>
@@ -67,39 +67,65 @@
 
                 <form method="POST" action="department-edit?department=<?php echo $departmentID; ?>">
                     <!-- Customer ID for refrence -->
-                    <input type="hidden" name="txtCustomerID" value="<?php echo $department->getCustomerID(); ?>">
+                    <input type="hidden" name="txtCustomerID" value="<?php echo $department->getDepartmentID(); ?>">
 
-                    <div class="row justify-content-md-center ce--form-row">
+                    <div class="row ce--from-row">
                         <div class="col-sm-6">
-                            <label for="customerName" class="ce__label">Name</label>
-                            <input type="text" name="txtCustomerName" id="customerName" value="<?php echo $customer->getCustomerName(); ?>" class="form-control ce--input" required />
-                            <span class="ce__feedback" id="feedbackCustomerName"></span>
+                            <label class="ce__label">Department name</label>
+                            <input type="text" name="txtDepartmentName" class="form-control ce--input" value="<?php echo $department->getDepartmentName(); ?>" required>
                         </div>
 
                         <div class="col-sm-6">
-                            <label for="customerRefrence" class="ce__label">Refrence</label>
-                            <input type="text" name="txtcustomerRefrence" id="customerRefrence" value="<?php echo $customer->getCustomerReference(); ?>" class="form-control ce--input" required onchange=""/>
-                            <span class="ce__feedback" id="feedbackCustomerRefrence"></span>
+                            <label class="ce__label">Customer</label>
+                            <select name="cbxCustomer" class="form-control" id="customerSelect" onchange="changeSelectCustomer()">
+                                <?php 
+                                    // Checking for customer. If there is, lock it in that customer
+                                    // Creating an variable to fill it later
+                                    $listCustomers;
+
+                                    if (!empty($department->getCustomerID())) {
+                                        // Filling the list
+                                        $listCustomers =  $CustomerCtrl->getCustomerDetails($department->getCustomerID()); 
+                                        //Showing a select where you can't pick a customer
+                                        echo "<script> setCustomerSelectDisabeld(); </script>";
+                                    }  else {
+                                        $listCustomers = $CustomerCtrl->getCustomers('Active');
+                                    }
+                                    
+                                    foreach($listCustomers as $customer){
+                                        if($customer->getCustomerID() == $customerID) {
+                                            ?>
+                                                <option selected="selected" value="<?php echo $customer->getCustomerID(); ?>"><?php echo $customer->getCustomerName(); ?></option>
+                                            <?php
+                                        } else {
+                                            ?>
+                                                <option value="<?php echo $customer->getCustomerID(); ?>"><?php echo $customer->getCustomerName(); ?></option>
+                                            <?php
+                                        }
+                                    }
+                                ?>
+                            </select>
                         </div>
                     </div>
 
-                    <div class="row justify-content-md-center">
+                    
+
+                    <div class="row ce--form-row"> 
                         <div class="col-sm-6">
-                            <label for="customerComment" class="ce__label">Comment</label>
-                            <textarea name="txtCustomerComment" id="customerComment" class="form-control ce--input" rows="5" onchange=""><?php echo $customer->getCustomerComment(); ?></textarea>
-                            <span class="ce__feedback" id="feedbackCustomerComment"></span>
+                            <label class="ce__label">Department comment</label>
+                            <textarea name="txtDepartmentComment" class="form-control ce--input" rows="5"><?php echo $department->getDepartmentComment(); ?></textarea>
                         </div>
 
                         <div class="col-sm-6">
                             <label for="status" class="ce__label">Status</label>
                             <select class="form-control" name="cbxStatus" id="status">
                                <?php 
-                                    $customerStatus[]="Active";
-                                    $customerStatus[]="Archived";
-                                    $customerStatus[]="Deleted";
+                                    $departmentStatus[]="Active";
+                                    $departmentStatus[]="Archived";
+                                    $departmentStatus[]="Deleted";
                                 
-                                    foreach($customerStatus as $value){
-                                        if($value == $customer->getCustomerStatus()) {
+                                    foreach($departmentStatus as $value){
+                                        if($value == $department->getDepartmentStatus()) {
                                             ?>
                                                 <option selected="selected" value="<?php echo $value; ?>"><?php echo $value; ?></option>
                                             <?php
@@ -117,8 +143,32 @@
 
                     <div class="row ce--margin">
                         <div class="col-sm-12">
-                            <input type="submit" name="btnUpdate" class="btn ce__update-button" value="Update customer">
+                            <input type="submit" name="btnUpdate" class="btn ce__update-button" value="Update department">
                         </div>
+                    </div>
+
+                    <div class="feedback">
+                        <?php
+                            // Checking for error message 
+                            if (isset($_GET['error'])) {
+                                $error = $_GET['error'];
+
+                                // Showing the error
+                                switch ($error) {
+                                    case 'none':
+                                        ?>
+                                            <span class="feedback--good">The department has been updated. </span>
+                                        <?php
+                                        break;
+                                    
+                                    default:
+                                        ?>
+                                            <span class="feedback--bad">The department could not be updated, try again. </span>
+                                        <?php
+                                        break;
+                                }
+                            }
+                        ?>
                     </div>
                 </form>
             </div>

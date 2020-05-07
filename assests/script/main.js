@@ -174,7 +174,7 @@ function setCustomerSelectDisabeld() {
 
 // Function to udate the customer ID
 function changeSelectCustomer() {
-    document.getElementById("custID").innerHTML = document.getElementById("customerSelect").value;
+    document.getElementById("custID").value = document.getElementById("customerSelect").value;
 }
 
 
