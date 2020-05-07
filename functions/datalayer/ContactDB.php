@@ -17,13 +17,14 @@
             $listContacts = array();
 
             // Making a query to get the scans of the customer out the database
-            $query = sprintf("SELECT c.contactID, c.contactName, c.contactPhoneNumber, c.contactEmail, c.contactStatus, cust.customerName, dp.departmentName 
-                            FROM contact c
+            $query = sprintf("SELECT u.userID, u.userName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, cust.customerName, dp.departmentName
+                            FROM user u
+                            INNER JOIN contact c ON c.userID = u.userID
                             INNER JOIN customer cust ON c.customerID = cust.customerID
                             INNER JOIN department_contact dc ON dc.contactID = c.contactID
                             INNER JOIN department dp ON dc.departmentID = dp.departmentID
                             WHERE c.contactStatus = '%s'
-                            ORDER BY c.contactName ASC", $status);
+                            ORDER BY u.userName ASC", $status);
             $stm = $this->db->prepare($query);
             if($stm->execute()){
                 // Getting the results fromm the database
@@ -31,7 +32,7 @@
                 // Looping through the results
                 foreach($result as $contact){
                     // Putting it in the modal
-                    $entContact = new entContact($contact->contactID, $contact->contactName, $contact->contactPhoneNumber, $contact->contactEmail, $contact->contactStatus, $contact->customerName, $contact->departmentName);
+                    $entContact = new entContact($contact->userID, $contact->userName, $contact->contactPhoneNumber, $contact->userEmail, $contact->contactStatus, $contact->customerName, $contact->departmentName);
                     array_push($listContacts, $entContact);
                 }
                 // Returning the full list
@@ -49,13 +50,14 @@
             $listContacts = array();
 
             // Making a query to get the scans of the customer out the database
-            $query = sprintf("SELECT c.contactID, c.contactName, c.contactPhoneNumber, c.contactEmail, c.contactStatus, cust.customerName, dp.departmentName 
-                            FROM contact c
+            $query = sprintf("SELECT u.userID, u.userName, c.contactPhoneNumber, u.userEmail, c.contactStatus, cust.customerName, dp.departmentName
+                            FROM user u
+                            INNER JOIN contact c ON c.userID = u.userID
                             INNER JOIN customer cust ON c.customerID = cust.customerID
                             INNER JOIN department_contact dc ON dc.contactID = c.contactID
                             INNER JOIN department dp ON dc.departmentID = dp.departmentID
                             WHERE cust.customerID = %d AND c.contactStatus = '%s'
-                            ORDER BY c.contactName ASC", $customerID, $status);
+                            ORDER BY u.userName ASC", $customerID, $status);
             $stm = $this->db->prepare($query);
             if($stm->execute()){
                 // Getting the results fromm the database
@@ -63,7 +65,7 @@
                 // Looping through the results
                 foreach($result as $contact){
                     // Putting it in the modal
-                    $entContact = new entContact($contact->contactID, $contact->contactName, $contact->contactPhoneNumber, $contact->contactEmail, $contact->contactStatus, $contact->customerName, $contact->departmentName);
+                    $entContact = new entContact($contact->userID, $contact->userName, $contact->contactPhoneNumber, $contact->userEmail, $contact->contactStatus, $contact->customerName, $contact->departmentName);
                     array_push($listContacts, $entContact);
                 }
                 // Returning the full list

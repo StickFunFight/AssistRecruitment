@@ -19,5 +19,13 @@
             // Returning the list given from the Database class
             return $detailsUser;
         }
+
+        function updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment) {
+            // Sending the data to the database class
+            $this->UserDB->updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment);
+
+            // Checking the result
+
+        }
     }
 ?>

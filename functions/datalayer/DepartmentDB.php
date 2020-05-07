@@ -39,7 +39,7 @@
             }
         }
 
-        function getDepartmentsCustomer($customerID, $statusDepartment){
+        function getDepartmentsCustomer($customerID, $departmentStatus){
             // Creating a array
             $listDepartments = array();
 
@@ -47,7 +47,8 @@
             $query = sprintf("SELECT dp.departmentID, dp.departmentName, dp.departmentComment, dp.departmentStatus, dp.customerID
                             FROM department dp
                             INNER JOIN customer c ON dp.customerID = c.customerID
-                            WHERE c.customerID = %d AND dp.departmentStatus = '%s'", $customerID, $statusDepartment);
+                            WHERE c.customerID = %d AND dp.departmentStatus = '%s'
+                            ORDER BY dp.departmentStatus ASC", $customerID, $departmentStatus);
             $stm = $this->db->prepare($query);
             if($stm->execute()){
                 // Getting the results fromm the database
@@ -55,7 +56,7 @@
                 // Looping through the results
                 foreach($result as $department){
                     // Putting it in the modal
-                    $entDepartment = new entDepartment($department->departmentID, $department->departmentName, $department->departmentComment, $department->departmentStatus, $department->customerID);
+                    $entDepartment = new EntDepartment($department->departmentID, $department->departmentName, $department->departmentComment, $department->departmentStatus, $department->customerID);
                     array_push($listDepartments, $entDepartment);
                 }
                 // Returning the full list

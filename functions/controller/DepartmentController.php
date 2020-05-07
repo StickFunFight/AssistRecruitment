@@ -19,14 +19,20 @@
             return $listDepartments;
         }
 
-        function getDepartmentsCustomer($customerID, $statusDepartment){
+        function getDepartmentsCustomer($customerID, $departmentStatus){
             // Creating a array
             $listDepartments = array();
 
-            $listDepartments = $this->departmentDB->getDepartmentsCustomer($customerID, $statusDepartment);
+            $listDepartments = $this->departmentDB->getDepartmentsCustomer($customerID, $departmentStatus);
 
             // Returning the list given from the Database class
             return $listDepartments;
+        }
+
+        function addContactDepartment($contactID, $departmentID) {
+
+            echo $contactID . " en " .$departmentID;
+
         }
     }
 ?>

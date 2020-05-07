@@ -25,6 +25,25 @@
     font-size: 1.6rem;
 }
 
+.ue-department__title {
+    font-size: 1.8rem;
+}
+
+/* styling for feedback */ 
+.feedback {
+    padding: 0.5rem 0;
+}
+
+.feedback--good {
+    @extend .ce__label;
+    color: $feedbackGood;
+}
+
+.feedback-bad {
+    @extend .ce__label;
+    color: $feedbackBad;
+}
+
 /* Input styling customer edit form */
 .ce--input,
 .au--input,
@@ -173,6 +192,10 @@ select.form-control{
 }
 
 .tab-table__head {
+    cursor: pointer;
+}
+
+.tab-table__row {
     cursor: pointer;
 }
 

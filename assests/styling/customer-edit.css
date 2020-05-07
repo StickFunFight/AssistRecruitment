@@ -17,9 +17,26 @@
 }
 
 /* Label styling customer edit form */
-.ce__label,
+.ce__label, .feedback--good, .feedback-bad,
 .au__label {
   font-size: 1.6rem;
+}
+
+.ue-department__title {
+  font-size: 1.8rem;
+}
+
+/* styling for feedback */
+.feedback {
+  padding: 0.5rem 0;
+}
+
+.feedback--good {
+  color: #28a745;
+}
+
+.feedback-bad {
+  color: #dc3545;
 }
 
 /* Input styling customer edit form */
@@ -166,6 +183,10 @@ select.form-control {
 }
 
 .tab-table__head {
+  cursor: pointer;
+}
+
+.tab-table__row {
   cursor: pointer;
 }
 

@@ -167,6 +167,18 @@ function autocomplete(inp, arr) {
     });
 }
 
+// Setting the customer select on user-edit on disabeld when the user is connected to a customer
+function setCustomerSelectDisabeld() {
+    document.getElementById("customerSelect").disabled = true;
+}
+
+// Function to udate the customer ID
+function changeSelectCustomer() {
+    document.getElementById("custID").innerHTML = document.getElementById("customerSelect").value;
+}
+
+
+
 // Function to switch active clas on the customer-edit overviews
 // function changeTabActive(newActiveTab) {
 //     // Getting the tab li
