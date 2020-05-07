@@ -59,7 +59,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1 class="ce__title" id="pageTitle">Edit User<h1>
+                        <h1 class="ce__title" id="pageTitle">Edit User</h1>
                     </div>
                 </div>
 
@@ -253,55 +253,72 @@
                                         }
                                     ?>
                                 </div>
-                            </section>
+                            </div>
+                        </div>
                             
-                            <div class="row ce--margin">
-                                <div class="col-sm-12">
-                                    <input type="submit" name="btnUpdate" class="btn ce__update-button" value="Update user">
-                                    <div class="feedback">
-                                        <?php
-                                            // Checking for error message 
-                                            if (isset($_GET['error'])) {
-                                                $error = $_GET['error'];
+                        <div class="row ce--margin ce--form-row">
+                            <div class="col-sm-12">
+                                <input type="submit" name="btnUpdate" class="btn ce__update-button" value="Update user">
+                                <div class="feedback">
+                                    <?php
+                                        // Checking for error message 
+                                        if (isset($_GET['error'])) {
+                                            $error = $_GET['error'];
 
-                                                // Showing the error
-                                                switch ($error) {
-                                                    case 'none':
-                                                        ?>
-                                                            <span class="feedback--good">The user has been updated. </span>
-                                                        <?php
-                                                        break;
-                                                    
-                                                    default:
-                                                        ?>
-                                                            <span class="feedback--bad">The user could not be updated, try again. </span>
-                                                        <?php
-                                                        break;
-                                                }
+                                            // Showing the error
+                                            switch ($error) {
+                                                case 'none':
+                                                    ?>
+                                                        <span class="feedback--good">The user has been updated. </span>
+                                                    <?php
+                                                    break;
+                                                
+                                                default:
+                                                    ?>
+                                                        <span class="feedback--bad">The user could not be updated, try again. </span>
+                                                    <?php
+                                                    break;
                                             }
-                                        ?>
-                                    </div>
+                                        }
+                                    ?>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </section>
                 </form>
+
+                <section class="ce-overview">
+                    <div class="row ce--form-row">
+                        <div class="col-sm-12">
+                            <h2 class="ce-overview__title">User overview</h2>
+                        </div>
+                    </div>
+                    <div class="row ce--form-row">
+                        <div class="col-sm-12">
+                            <div class="btn-group" role="group" aria-label="Customer overview links">
+                                <a href="user-list?user=<?php echo $userID; ?>" class="ce-overview--link btn">Users</a>
+                                <a href="department-list?user=<?php echo $userID; ?>" class="ce-overview--link btn">Departments</a>
+                                <a href="scan-list?user=<?php echo $userID; ?>" class="ce-overview--link btn">Scans</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div> 
 
         <script>
             // Function to add a contact to department
-            function toggleContactDepartment(contactID, departmentID) {
-                <?php
-                    $contactID = '<script>contactID</script>';
-                    $departmentID = '<script>departmentID</script>';
+            // function toggleContactDepartment(contactID, departmentID) {
+            //     <?php
+            //         // $contactID = '<script>contactID</script>';
+            //         // $departmentID = '<script>departmentID</script>';
 
-                    echo "ContactID = " . $contactID;
-                    echo "DepartmentID = " . $departmentID;
+            //         // echo "ContactID = " . $contactID;
+            //         // echo "DepartmentID = " . $departmentID;
 
-                    //$DepartmentCtrl->addContactDepartment($contactID, $departmentID);
-                ?>
-            }
+            //         //$DepartmentCtrl->addContactDepartment($contactID, $departmentID);
+            //     ?>
+            // }
         </script>
     </body>
 </html>

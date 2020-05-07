@@ -3,32 +3,32 @@
         require '../functions/datalayer/database.class.php';
         // Adding the customer controller
         require '../functions/controller/CustomerController.php';
-        // Adding the scanDB controller
-        require '../functions/controller/ScanController.php';
-        // Adding the department controller
-        require '../functions/controller/DepartmentController.php';
-        // Adding the Contact controller
-        require '../functions/controller/ContactController.php';
+        // // Adding the scanDB controller
+        // require '../functions/controller/ScanController.php';
+        // // Adding the department controller
+        // require '../functions/controller/DepartmentController.php';
+        // // Adding the Contact controller
+        // require '../functions/controller/ContactController.php';
 
 
         // Adding the customer modal
         require '../functions/models/entCustomer.php';
-        // Adding the scan modal
-        require '../functions/models/entScan.php';
-        // Adding the department modal
-        require '../functions/models/entDepartment.php';
-        // Adding the department modal
-        require '../functions/models/entContact.php';
+        // // Adding the scan modal
+        // require '../functions/models/entScan.php';
+        // // Adding the department modal
+        // require '../functions/models/entDepartment.php';
+        // // Adding the department modal
+        // require '../functions/models/entContact.php';
 
     
         // Getting the connection with the customer class
         $CustomerDB = new CustomerController(); 
-        // Getting the connection with the scan class
-        $ScanDB = new ScanController();
-        // Getting the connection with the department class
-        $DepartmentDB = new DepartmentController();
-        // Getting the connection with the department class
-        $ContactDB = new ContactController();
+        // // Getting the connection with the scan class
+        // $ScanDB = new ScanController();
+        // // Getting the connection with the department class
+        // $DepartmentDB = new DepartmentController();
+        // // Getting the connection with the department class
+        // $ContactDB = new ContactController();
 
         
         // Getting the customer
@@ -172,10 +172,19 @@
                 </form>
 
                 <section class="ce-overview">
-                    <div class="btn-group" role="group" aria-label="Customer overview links">
-                        <a href="user-list-test?customer=<?php echo $customerID; ?>" class="ce-overview--link btn">Users</a>
-                        <a href="#" class="ce-overview--link btn">Departments</a>
-                        <a href="#" class="ce-overview--link btn">Scans</a>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2 class="ce-overview__title">Customer overview</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group" role="group" aria-label="Customer overview links">
+                                <a href="user-list?customer=<?php echo $customerID; ?>" class="ce-overview--link btn">Users</a>
+                                <a href="department-list?customer=<?php echo $customerID; ?>" class="ce-overview--link btn">Departments</a>
+                                <a href="scan-list?customer=<?php echo $customerID; ?>" class="ce-overview--link btn">Scans</a>
+                            </div>
+                        </div>
                     </div>
                 </section>
 

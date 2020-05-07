@@ -130,20 +130,7 @@ select.form-control {
 }
 
 /* customer edit overview pills link */
-.ce-overview--link {
-  color: black;
-  font-size: 2rem;
-  padding: 0.8rem 1.25rem;
-}
-
 /* overview pills active and active hover */
-.active.ce-overview--link,
-.active.ce-overview--link:hover {
-  color: white;
-  font-size: 2rem;
-  background-color: #687871;
-}
-
 /* overview pills hover */
 .ce-overview__tab:hover {
   background-color: #F7F7F7;

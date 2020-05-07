@@ -11,17 +11,18 @@
             $this->db = $database->getConnection();
         }
 
-        function getScansCustomer($customerID, $statusScan){
+        function getScans($statusScan){
             // Creating a array
             $listScans = array();
 
             // Making a query to get the scans of the customer out the database
-            $query = sprintf("SELECT s.scanID, s.scanName, s.scanComment, s.scanStatus, s.scanIntroductionText, s.scanReminderText, s.scanStartDate, s.scanEndDate 
+            $query = sprintf("SELECT s.scanID, s.scanName, s.scanComment, s.scanStatus, s.scanIntroductionText, s.scanReminderText, s.scanStartDate, s.scanEndDate, c.customerName 
                             FROM scan s
                             INNER JOIN scan_user su ON s.scanID = su.scanID
                             INNER JOIN user u ON su.userID = u.userID
                             INNER JOIN customer c ON u.customerID = c.customerID
-                            WHERE c.customerID = %d AND s.scanStatus = '%s'", $customerID, $statusScan);
+                            WHERE s.scanStatus = '%s'
+                            ORDER BY s.scanName ASC", $statusScan);
             $stm = $this->db->prepare($query);
             if($stm->execute()){
                 // Getting the results fromm the database
@@ -29,7 +30,39 @@
                 // Looping through the results
                 foreach($result as $scan){
                     // Putting it in the modal
-                    $entScan = new entScan($scan->scanID, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, $scan->scanReminderText, $scan->scanStartDate, $scan->scanEndDate);
+                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, $scan->scanReminderText, $scan->scanStartDate, $scan->scanEndDate, $scan->customerName);
+                    array_push($listScans, $entScan);
+                }
+                // Returning the full list
+                return $listScans;    
+            }
+            // Showing a error when the query didn't execute
+            else{
+                echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
+            }
+        }
+
+        // Getting all scans of 1 customer
+        function getScansCustomer($customerID, $statusScan){
+            // Creating a array
+            $listScans = array();
+
+            // Making a query to get the scans of the customer out the database
+            $query = sprintf("SELECT s.scanID, s.scanName, s.scanComment, s.scanStatus, s.scanIntroductionText, s.scanReminderText, s.scanStartDate, s.scanEndDate, c.customerName  
+                            FROM scan s
+                            INNER JOIN scan_user su ON s.scanID = su.scanID
+                            INNER JOIN user u ON su.userID = u.userID
+                            INNER JOIN customer c ON u.customerID = c.customerID
+                            WHERE c.customerID = %d AND s.scanStatus = '%s'
+                            ORDER BY s.scanName ASC", $customerID, $statusScan);
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                // Getting the results fromm the database
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                // Looping through the results
+                foreach($result as $scan){
+                    // Putting it in the modal
+                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, $scan->scanReminderText, $scan->scanStartDate, $scan->scanEndDate, $scan->customerName);
                     array_push($listScans, $entScan);
                 }
                 // Returning the full list

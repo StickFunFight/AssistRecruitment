@@ -13,7 +13,8 @@ $contactController = new contactController();
 
 <head>
   <link rel="stylesheet" href="../assests/styling/contact.css">
-  <title></title>
+  <link rel="stylesheet" href="../assests/styling/customer-edit.css">
+  <title>Overview contacts</title>
 </head>
 
 <body>
@@ -25,9 +26,7 @@ $contactController = new contactController();
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
-            <br>
-            <h1 class="contactheader">Overview Contacts</h1>
-            <br>
+            <h1 class="ce__title">Overview Contacts</h1>
           </div>
         </div>
         <form method="POST" action="customer-edit?customer=<?php echo $customerID; ?>&tab=scan">
@@ -115,9 +114,9 @@ $contactController = new contactController();
                   echo "</td>";
 
                   echo "<td class='contact__td_icon'>";
-                  echo '<a class="deleteKnop" href="DetailsContact?contact=' . $contact->getContactID() . '"><i class="fas fa-trash-alt"></i></a>
-                      <a class="editKnop" href="DetailsContact?contact=' . $contact->getContactID() . '"><i class="fas fa-edit"></i></a>
-                      <a class="profileKnop" href="DetailsContact?contact=' . $contact->getContactID() . '"><i class="fas fa-user"></i></a>';
+                  echo '<a class="deleteKnop" href="DetailsContact?contact=' . $contact->getUserID() . '"><i class="fas fa-trash-alt"></i></a>
+                      <a class="editKnop" href="DetailsContact?contact=' . $contact->getUserID() . '"><i class="fas fa-edit"></i></a>
+                      <a class="profileKnop" href="DetailsContact?contact=' . $contact->getUserID() . '"><i class="fas fa-user"></i></a>';
 
                   echo "</td>";
 
@@ -146,5 +145,4 @@ $contactController = new contactController();
             });
         });
     });
-
 </script>
