@@ -113,11 +113,11 @@
                                             // Checking for customer id to know where to add the new user to
                                             if ($customerID != 0) {
                                                 ?>
-                                                    <a href="user-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
+                                                    <!-- <a href="user-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a> -->
                                                 <?php
                                             } else {
                                                 ?>
-                                                    <a href="user-add" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
+                                                    <!-- <a href="user-add" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a> -->
                                                 <?php
                                             }       
                                         ?>
@@ -184,15 +184,15 @@
                                     foreach ($listUsers as $user) {                                  
                                 ?>
                                     <tr class="tab-table__row filter__row">
-                                        <td class="tab-table__td"><?php echo $user->getContactName(); ?></td>
-                                        <td class="tab-table__td"><?php echo $user->getContactPhoneNumber(); ?></td>
-                                        <td class="tab-table__td"><?php echo $user->getContactEmail(); ?></td>
-                                        <td class="tab-table__td"><?php echo $user->getContactDepartmentName(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactName(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactPhoneNumber(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactEmail(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactDepartmentName(); ?></td>
                                         <?php 
                                             // Checking if there is a customer set
                                             if($customerID == 0) {
                                                 ?>
-                                                    <td class="tab-table__td"><?php echo $user->getContactCustomerName(); ?></td>
+                                                    <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactCustomerName(); ?></td>
                                                 <?php
                                             }
                                         ?>
@@ -292,6 +292,16 @@
                 location.replace("?status=" + status);
             } else {
                 location.replace("?customer=" + customerID + "&status=" + status);
+            }
+        }
+
+        // Function to go to the details onclick
+        function toDetails(customerID, userID){
+            // Sending the user to a new page
+            if (customerID == 0) {
+                location.assign("user-edit?user=" + userID);
+            } else {
+                location.assign("user-edit?user=" + userID + "&customer=" + customerID);
             }
         }
     </script>

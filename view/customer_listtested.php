@@ -59,7 +59,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1 class="ce__title" id="pageTitle">Overview Users<h1>
+                        <h1 class="ce__title" id="pageTitle">Overview Customers<h1>
                     </div>
                 </div>
 
@@ -177,9 +177,9 @@
                                     foreach ($listUsers as $user) {                                  
                                 ?>
                                     <tr class="tab-table__row filter__row">
-                                        <td class="tab-table__td"  onclick="toDetails(<?php echo $user->getCustomerID();?>)" ><?php echo $user->getCustomerName(); ?> </td>
-                                        <td class="tab-table__td"><?php echo $user->getCustomerComment(); ?></td>
-                                        <td class="tab-table__td"><?php echo $user->getCustomerReference(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $user->getCustomerID();?>)" ><?php echo $user->getCustomerName(); ?> </td>
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $user->getCustomerID();?>)"><?php echo $user->getCustomerComment(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $user->getCustomerID();?>)"><?php echo $user->getCustomerReference(); ?></td>
 
                                         <td class="tab-table__td">
                                             <a class="editKnop" href="customer-edit?customer=<?php echo $user->getCustomerID();?>"><i class="fas tab-table__icon">&#xf044;</i></a>
@@ -360,8 +360,7 @@
         </div>
         </div>
 
-<script>
-
+    <script>
         // Filteren op de table
         $(document).ready(function() {
             $("#Filter").on("keyup", function() {
@@ -372,14 +371,14 @@
             });
         });
 
-        // Checking the table status
+        // Function set table status
         function updateTableStatus() {
             // Ophalen van de status
             var status = document.getElementById("userStatus").value;
 
             // De pagina refreshen met de nieuwe waarden
             location.replace("?status=" + status);
-        }
+}
 
         function toDetails(customerID){
             location.assign("customer-edit?customer=" + customerID);
@@ -390,11 +389,11 @@
 
 <?php 
     // Looping through the results
-    if (!empty($customerDetails)) {
-        foreach ($customerDetails as $customer) {
-            echo "<script> 
-                document.getElementById('pageTitle').innerHTML = 'Overview users of ". $customer->getCustomerName() ."'; 
-            </script>";
-        }
-    }
+    // if (!empty($customerDetails)) {
+    //     foreach ($customerDetails as $customer) {
+    //         echo "<script> 
+    //             document.getElementById('pageTitle').innerHTML = 'Overview Customers of ". $customer->getCustomerName() ."'; 
+    //         </script>";
+    //     }
+    // }
 ?>
