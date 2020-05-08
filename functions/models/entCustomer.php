@@ -3,17 +3,16 @@
 class EntCustomer
 {
     private $show_customerID;
-    private $show_customerNaam;
+    private $show_customerName;
     private $show_customerComment;
-    private $show_customerRefrence;
+    private $show_customerReference;
     
-
-    public function __construct(string $show_customerID, string $show_customerNaam, string $show_customerComment, string $show_customerRefrence)
+    public function __construct(string $show_customerID, string $show_customerName, string $show_customerComment, string $show_customerReference)
     {
         $this->show_customerID = $show_customerID;
-        $this->show_customerNaam = $show_customerNaam;
+        $this->show_customerName = $show_customerName;
         $this->show_customerComment = $show_customerComment;
-        $this->show_customerRefrence = $show_customerRefrence;
+        $this->show_customerReference = $show_customerReference;
         
     }
 
@@ -22,9 +21,9 @@ class EntCustomer
         return $this->show_customerID;
     }
 
-    public function getCustomerNaam() : string
+    public function getCustomerName() : string
     {
-        return $this->show_customerNaam;
+        return $this->show_customerName;
     }
 
     public function getCustomerComment() : string
@@ -32,9 +31,9 @@ class EntCustomer
         return $this->show_customerComment;
     }
 
-    public function getCustomerRefrence() : string
+    public function getCustomerReference() : string
     {
-        return $this->show_customerRefrence;
+        return $this->show_customerReference;
     }
 
 } 
