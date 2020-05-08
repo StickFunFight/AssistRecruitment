@@ -25,7 +25,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1 class="page__title">Create custmoer</h1>
+                        <h1 class="ce__title">Create customer</h1>
                     </div>
                 </div>
 

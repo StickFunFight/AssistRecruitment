@@ -29,16 +29,16 @@
             if($this->customerDB->createCustomer($customerName, $customerComment, $customerReference)){
                 // Getting the current url
                 $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-                $newURL = $currentURL . "&error=none";
+                $newURL = $currentURL . "?error=none";
                 // Reloading page with succes message
                 echo '<script>location.replace("'.$newURL.'");</script>';
             } else {
-                // Getting the current url
-                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-                $newURL = $currentURL . "&error=1";
-                // Reloading page with succes message
-                echo '<script>location.replace("'.$newURL.'");</script>';
-            }
+               // Getting the current url
+               $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+               $newURL = $currentURL . "?error=1";
+               // Reloading page with succes message
+               echo '<script>location.replace("'.$newURL.'");</script>';
+           }
         }
 
         // Function to get the details of a customer

@@ -181,9 +181,7 @@
                                                         <?php
                                                         break;
                                                     case 'Deleted':
-                                                        ?>
-                                                            <a class="deleteKnop" name="activeKnop" href="#" data-toggle="modal" data-target="#activeModal" id='<?php echo $user->getCustomerID();?>' onClick="reply_click(this.id)"><i class="fas fa-pastafarianism"></i></a>
-                                                        <?php
+                                                        // Leaving empty on purpose
                                                         break;
                                                     default:
                                                         ?>
@@ -287,60 +285,6 @@
                 });
 
                 </script>
-               
-            </div>
-            </form>
-
-            </div>
-        </div>
-        </div>
-
-    <!--Active Modal--->
-    <div class="modal fade" id="activeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="activeModal">Activate Customer</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to activate this costumer?
-            </div>
-
-            <form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
-                <button type="submit" name="btnActive" class="btn btn-primary" id="btnActive">Activate   </button>          
-
-                <script type="text/javascript">
-                function reply_click(clicked_id)
-                {
-                    window.yourGlobalVariable = clicked_id;
-                }
-
-                $('#btnActive').click(function () {
-
-                $.ajax({
-                    url: 'customer_handler_activate',
-                    type: 'post',
-                    data: { "CustomerID": yourGlobalVariable},
-                    success: function(response) { window.location.href='customer_listtested?status=<?php echo $userStatus;?>' }
-                });
-
-                });
-
-                </script>
-               
-            </div>
-            </form>
-
-            </div>
-        </div>
-        </div>
-
-        </script>
                
             </div>
             </form>
