@@ -1,5 +1,9 @@
 <?php
     // Checking if user exists
+
+    // including the head
+    require("head.php");
+
 ?>
 <html lang="en">
     <head>
@@ -7,9 +11,9 @@
             // including the head
             require("head.php");
         ?>
-
-        <!-- menu styling -->
-        <link rel="stylesheet" href="../assests/styling/menu.css">
+        <style><?php require("../assests/styling/menu.css"); ?></style>
+        <title>Assist menu</title>
+        <meta name="author" content="Marvin Vissers">
     </head>
 
     <body>
