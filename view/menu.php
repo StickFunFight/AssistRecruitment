@@ -61,7 +61,8 @@
                         <li class="submenu__item"> <a href="#" class="submenu--link">Customer</a> </li>
                         <li class="submenu__item"> <a href="#" class="submenu--link">Contact</a> </li>
                         <li class="submenu__item"> <a href="#" class="submenu--link">Department</a> </li>
-                        <li class="submenu__item"> <a href="#" class="submenu--link">QA</a> </li>
+                        <li class="submenu__item"> <a href="qa.php" class="submenu--link">QA</a> </li>
+                        <li class="submenu__item"> <a href="Axis.php" class="submenu--link">Axis</a> </li>
                     </ul>
 
                     <div class="submenu__resize">

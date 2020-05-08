@@ -12,7 +12,7 @@ require_once 'menu.php';
                 <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een vraag of antwoord">
             </div>
             <div class="col-sm-6">
-                <button type="button" class="btn btn-primary ButtonRight"><i class="fas fa-plus-circle"></i> Vraag toevoegen</button>
+                <button type="button" class="btn btn-success ButtonRight"><i class="fas fa-plus-circle"></i> Vraag toevoegen</button>
             </div>
         </div>
         <div id="wrapper">
@@ -176,7 +176,7 @@ require_once 'menu.php';
                 url : '../functions/handler/QaDeleteHandler.php', //Here you will fetch records
                 data :  'rowid='+ rowid, //Pass $id
                 success : function(data){
-                    $('.fetched-data').html("Weet je zeker dat je vraag: " + data + " wilt verwijderen?");//Show fetched data from database
+                    $('.fetched-data').html("Weet je zeker dat je de vraag: " + data + " wilt archiveren?");//Show fetched data from database
                 }
             });
         });

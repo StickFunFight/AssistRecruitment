@@ -43,7 +43,7 @@ require_once 'menu.php';
                         echo '<td>';
                         echo '<a class="editKnop" id="'.$item->getAxisId().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisEditModal"><i class="fas tab-table__icon">&#xf044;</i></a>';
                         echo  ' ';
-                        echo '<a class="deleteKnop"  id="'.$item->getAxisId().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisArchiveModal" data-id="'.$item->getAxisId().'"><i class="fas tab-table__icon">&#xf2ed;</i></a>';
+                        echo '<a class="deleteKnop"  id="'.$item->getAxisId().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisArchiveModal" data-id="'.$item->getAxisId().'"><i class="fas tab-table__icon">&#xf187;</i></a>';
                         echo '</td>';
                         echo '</tr>';
                     }
@@ -66,7 +66,7 @@ require_once 'menu.php';
             </div>
             <form method="POST">
                 <div class="modal-body">
-                    <label for="AxisAddtxt">Axis aanmaken:</label>
+                    <label for="AxisAddtxt">Axis naam:</label>
                     <input type="text" name="AxisAddtxt" id="AxisAddtxt"/>
                 </div>
                 <div class="modal-footer">
@@ -149,7 +149,7 @@ require_once 'menu.php';
                 url : '../functions/handler/QA-Axis-Archive.php', //Here you will fetch records
                 data :  'rowid='+ rowid, //Pass $id
                 success : function(data){
-                    $('.fetched-data').html("Weet je zeker dat je axis: " + data + " wilt verwijderen?");//Show fetched data from database
+                    $('.fetched-data').html("Weet je zeker dat je de axis: " + data + " wilt archiveren?");//Show fetched data from database
                 }
             });
         });
