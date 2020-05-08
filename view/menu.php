@@ -45,7 +45,7 @@
                                     <i class="fa navbar--icon"><a href="#" class="navbar--link">&#xf007;</a></i>
                                 </li>
                                 <li class="navbar__item">
-                                    <i class="fa navbar--icon"><a href="#" class="navbar--link">&#xf2f5;</a></i>
+                                    <i class="fa navbar--icon"><a href="loginScreen" class="navbar--link">&#xf2f5;</a></i>
                                 </li>
                             </ul>
                         </div>
