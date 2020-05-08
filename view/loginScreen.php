@@ -36,10 +36,10 @@ if(isset($_POST['submitLogin'])){
             <button name="submitLogin" type="submit" class="btn btn-block btn-primary mt-2 mb-4 float-right" id="loginFormButton">Inloggen</button>
         </form>
         <p class="mb-1"><u><a data-toggle="modal" href="#createAccount" class="font-weight-bold">Maak een account aan +</a></u></p>
-        <p><u><a id="forgotPassword"href="#" class="font-weight-bold">Wachtwoord vergeten?</a></u></p>
+        <p><u><a name="passwordReset" id="forgotPassword"href="#" class="font-weight-bold">Wachtwoord vergeten?</a></u></p>
     </div>
 
-    <div id="snackbar">lorem ipsum lorem ipsumlorem ipsumlorem ipsumlorem ipsum</div>
+    <div id="snackbar">Jij hebt grote fout gemaakt !!!</div>
 
 <!-- Modal -->
     <div class="modal fade" id="createAccount" tabindex="-1" role="dialog" aria-hidden="true">

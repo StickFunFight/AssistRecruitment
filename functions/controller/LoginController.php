@@ -32,8 +32,9 @@ class LoginController {
         }
     }
 
-    public function forgotPassword($email){
-
+    //TODO: Fix this broken functionality
+    public function forgotPassword(){
+        echo "ik zit in een functie";
     }
 
 }
