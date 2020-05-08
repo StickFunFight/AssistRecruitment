@@ -74,6 +74,33 @@
             }
         }
 
+
+        function archiveScan($scanID){
+            // Create Query to update Customer Status
+            $query = "UPDATE scan SET scanStatus = 'Archived' WHERE scanID = $scanID";
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                echo 'Het is gelukt';
+            }
+            // Error Text
+            else {
+                echo "Er is iets fout gegaan";
+            }
+        }
+    
+        function deleteScan($scanID){
+            // Create Query to update Customer Status
+            $query = "UPDATE scan SET scanStatus = 'Deleted' WHERE scanID = $scanID";
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                echo 'Het is gelukt';
+            }
+            // Error Text
+            else {
+                echo "Er is iets fout gegaan";
+            }
+        }
+
         // function deleteCustomers($customerID){
         //     // Query aanmaken om customerStatus te veranderen naar Deleted
         //     $query = "UPDATE customer SET customerStatus = 'Deleted' WHERE customerID = $customerID";

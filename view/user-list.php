@@ -203,7 +203,7 @@
                                                 switch ($userStatus) {
                                                     case 'Archived':
                                                         ?>
-                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
                                                         <?php
                                                         break;
                                                     case 'Deleted':
@@ -231,45 +231,95 @@
         </div>
     </body>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!--Delete Modal--->
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Archive Customer</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to archive this costumer?
-                </div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModal">Delete User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this user?
+            </div>
 
-                <form>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
-                        <button type="submit" name="btnDelete" class="btn btn-primary" id="btnDelete">Archive   </button>          
+            <form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                <button type="submit" name="btnDelete" class="btn btn-primary" id="btnDelete">Delete   </button>          
 
-                        <script type="text/javascript">
-                            function reply_click(clicked_id) {
-                                window.yourGlobalVariable = clicked_id;
-                            }
+                <script type="text/javascript">
+                function reply_click(clicked_id)
+                {
+                    window.yourGlobalVariable = clicked_id;
+                }
 
+                $('#btnDelete').click(function () {
 
-                            $('#btnDelete').click(function () {
-                                $.ajax({
-                                    url: 'customer_handler.php',
-                                    type: 'post',
-                                    data: { "CustomerID": yourGlobalVariable},
-                                    success: function(response) { window.location.href='customer_list.php' }
-                                });
-                            });
+                $.ajax({
+                    url: 'user_handler_delete',
+                    type: 'post',
+                    data: { "userID": yourGlobalVariable},
+                    success: function(response) { window.location.href='user-list?status=<?php echo $userStatus;?>' }
+                });
 
-                        </script>
-                    </div>
-                </form>
+                });
+
+                </script>
+               
+            </div>
+            </form>
+
             </div>
         </div>
-    </div>
+        </div>
+
+                <!--Archive Modal--->
+                <div class="modal fade" id="archiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="archiveModal">Archive User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to archive this user?
+            </div>
+
+            <form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                <button type="submit" name="btnArchive" class="btn btn-primary" id="btnArchive">Archive   </button>          
+
+                <script type="text/javascript">
+                function reply_click(clicked_id)
+                {
+                    window.yourGlobalVariable = clicked_id;
+                }
+
+                $('#btnArchive').click(function () {
+
+                $.ajax({
+                    url: 'user_handler_archive',
+                    type: 'post',
+                    data: { "userID": yourGlobalVariable},
+                    success: function(response) { window.location.href='user-list?status=<?php echo $userStatus;?>' }
+                });
+
+                });
+
+                </script>
+               
+            </div>
+            </form>
+
+            </div>
+        </div>
+        </div>
 
     <script>
         // Filteren op de table

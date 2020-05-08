@@ -60,5 +60,31 @@
                 echo '<script>location.replace("?user=" + '. $userID .' + "&error=1");</script>';
             }
         }
+
+        function archiveUser($userID){
+            // Create Query to update Customer Status
+            $query = "UPDATE user SET userStatus = 'Archived' WHERE userID = $userID";
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                echo 'Het is gelukt';
+            }
+            // Error Text
+            else {
+                echo "Er is iets fout gegaan";
+            }
+        }
+    
+        function deleteUser($userID){
+            // Create Query to update Customer Status
+            $query = "UPDATE user SET userStatus = 'Deleted' WHERE userID = $userID";
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                echo 'Het is gelukt';
+            }
+            // Error Text
+            else {
+                echo "Er is iets fout gegaan";
+            }
+        }
     }
 ?>
