@@ -40,7 +40,7 @@ require_once 'menu.php';
                                 echo '<td>';
                                 echo '<i id="'.$item->GetID().'" onClick="SendID(this.id)" data-toggle="modal" data-target="#editCategory" class="fas fa-edit table--icon"></i>';
                                 echo " ";
-                                echo '<a href="https://www.youtube.com/watch?v=i7MfrslYUac"><i id="'.$item->GetID().'" class="fa fa-archive table--icon"></i></a>';
+                                echo '<i  id="'.$item->GetID().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteCategoryModal" class="fas fa-trash-alt table--icon"></i>';
                                 echo '</td>';
                                 echo '</tr>';
                             }
@@ -140,6 +140,31 @@ require_once 'menu.php';
 </div>
 
 <!-- Modal Archive Category-->
+<div class="modal fade" id="deleteCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--                <h5 class="modal-title" id="exampleModalLabel">New message</h5>-->
+                <button type="button" class="ja" data-dismiss="modal" aria-label="ja">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="message-text" class="col-form-label">weet je zeker dat je de category wilt verwijderen?</label>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="btnCatDelete">ja</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">nee</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Archive Question-->
 <div class="modal fade" id="deleteQuestionModal" tabindex="-1" role="dialog" aria-labelledby="deleteQuestionModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -254,6 +279,19 @@ require_once 'menu.php';
             url: '../functions/handler/QaDeleteHandler.php',
             type: 'post',
             data: { "QuestionId": categoryID},
+            success: function(response) { window.location.href = 'Qa.php'; }
+        });
+    });
+
+    $('#deleteCategoryModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+    })
+
+    $('#btnCatDelete').click(function () {
+        $.ajax({
+            url: '../functions/controller/catDeleteHandler.php',
+            type: 'post',
+            data: { "catID": categoryID},
             success: function(response) { window.location.href = 'Qa.php'; }
         });
     });
