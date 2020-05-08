@@ -203,7 +203,7 @@
                                                 switch ($userStatus) {
                                                     case 'Archived':
                                                         ?>
-                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf2ed;</i></a>
                                                         <?php
                                                         break;
                                                     case 'Deleted':
