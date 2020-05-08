@@ -193,7 +193,7 @@
                                                         break;
                                                     case 'Deleted':
                                                         ?>
-                                                            <a class="deleteKnop" name="activeKnop" href="#" data-toggle="modal" data-target="#activeModal" id='<?php echo $user->getCustomerID();?>' onClick="reply_click(this.id)"><i class="fas fa-pastafarianism"></i></a>
+                                                            
                                                         <?php
                                                         break;
                                                     default:
