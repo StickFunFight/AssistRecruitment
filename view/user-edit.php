@@ -203,7 +203,7 @@
                                             ?>
                                                 <div class="col-sm-3">
                                                     <?php
-                                                        if ($dpActive->getDepartmentID() == $user->getUserDepartmentID()){
+                                                        if ($dpArchived->getDepartmentID() == $user->getUserDepartmentID()){
                                                             ?>
                                                                 <input type="checkbox" id="<?php echo $dpArchived->getDepartmentID(); ?>" name="departmentsActive[]" value="<?php echo $dpArchived->getDepartmentID(); ?>" checked>
                                                                 <label class="ce__label" for="<?php echo $dpArchived->getDepartmentID(); ?>"><?php echo $dpArchived->getDepartmentName(); ?></label>
@@ -236,7 +236,7 @@
                                             ?>
                                                 <div class="col-sm-3">
                                                     <?php
-                                                        if ($dpActive->getDepartmentID() == $user->getUserDepartmentID()){
+                                                        if ($dpADeleted->getDepartmentID() == $user->getUserDepartmentID()){
                                                             ?>
                                                                 <input type="checkbox" id="<?php echo $dpADeleted->getDepartmentID(); ?>" name="departmentsActive[]" value="<?php echo $dpADeleted->getDepartmentID(); ?>" onchange="toggleContactDepartment(1,1)" checked>
                                                                 <label class="ce__label" for="<?php echo $dpADeleted->getDepartmentID(); ?>"><?php echo $dpADeleted->getDepartmentName(); ?></label>
