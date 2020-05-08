@@ -208,17 +208,17 @@
                                                 switch ($dpStatus) {
                                                     case 'Archived':
                                                         ?>
-                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteModal" id='<?php echo $department->getDepartmentID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
                                                         <?php
                                                         break;
                                                     case 'Deleted':
                                                         ?>
-                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+
                                                         <?php
                                                         break;
                                                     default:
                                                         ?>
-                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf187;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $department->getDepartmentID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf187;</i></a>
                                                         <?php
                                                         break;
                                                 }
@@ -235,6 +235,97 @@
             </div>
         </div>
     </body>
+
+        <!--Delete Modal--->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModal">Delete Department</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this department?
+            </div>
+
+            <form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                <button type="submit" name="btnDelete" class="btn btn-primary" id="btnDelete">Delete   </button>          
+
+                <script type="text/javascript">
+                function reply_click(clicked_id)
+                {
+                    window.yourGlobalVariable = clicked_id;
+                }
+
+                $('#btnDelete').click(function () {
+
+                $.ajax({
+                    url: 'department_handler_delete',
+                    type: 'post',
+                    data: { "departmentID": yourGlobalVariable},
+                    success: function(response) { window.location.href='department-list?status=<?php echo $dpStatus;?>' }
+                });
+
+                });
+
+                </script>
+               
+            </div>
+            </form>
+
+            </div>
+        </div>
+        </div>
+
+
+         <!--Archive Modal--->
+         <div class="modal fade" id="archiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="archiveModal">Archive Department</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to archive this department?
+            </div>
+
+            <form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                <button type="submit" name="btnArchive" class="btn btn-primary" id="btnArchive">Archive   </button>          
+
+                <script type="text/javascript">
+                function reply_click(clicked_id)
+                {
+                    window.yourGlobalVariable = clicked_id;
+                }
+
+                $('#btnArchive').click(function () {
+
+                $.ajax({
+                    url: 'department_handler_archive',
+                    type: 'post',
+                    data: { "departmentID": yourGlobalVariable},
+                    success: function(response) { window.location.href='department-list?status=<?php echo $dpStatus;?>' }
+                });
+
+                });
+
+                </script>
+               
+            </div>
+            </form>
+
+            </div>
+        </div>
+        </div>
 
     <script>
         // Filteren op de table

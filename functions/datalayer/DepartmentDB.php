@@ -131,5 +131,32 @@
                 return false;
             }
         }
+
+        function deleteDepartment($departmentID){
+            // Create Query to update Customer Status
+            $query = "UPDATE department SET departmentStatus = 'Deleted' WHERE departmentID = $departmentID";
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                echo 'Het is gelukt';
+            }
+            // Error Text
+            else {
+                echo "Er is iets fout gegaan";
+            }
+        }
+
+        function archiveDepartment($departmentID){
+            // Create Query to update Customer Status
+            $query = "UPDATE department SET departmentStatus = 'Archived' WHERE departmentID = $departmentID";
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                echo 'Het is gelukt';
+            }
+            // Error Text
+            else {
+                echo "Er is iets fout gegaan";
+            }
+        }
+    
     }
 ?>
