@@ -54,7 +54,7 @@ $CustomerDB = new CustomerDB();
                                 <div class="col-sm-6">
                                     <div class="customer__select">
                                         <!-- Combobox settings -->
-                                        <select id="customerStatus" name="cbxStatus" class="form-control">
+                                        <select id="customerStatus" name="customerStatus" class="form-control" onchange="showCustomer(this.value)">
                                             <option value="Active">Active</option>
                                             <option value="Archived">Archived</option>
                                             <option value="Deleted">Deleted</option>
@@ -72,20 +72,24 @@ $CustomerDB = new CustomerDB();
 
                         <?php
 
+
+
                         //Read the Combobox Status
-                        if (isset($_POST['btnChangeStatus'])) {
-                            $status = $_POST['cbxStatus'];
+                        if (isset($_POST['customerStatus'])) {
+                            $status = $_POST['customerStatus'];
                             $listCustomer = $CustomerDB->getCustomers($status);
+
                         } else {
                             $listCustomer = $CustomerDB->getCustomers("Active");
                         }
+
                         // Loop to go through the functions for every customer in the DB table
                         foreach ($listCustomer as $customer) {
 
                             echo "<br>";
-                            echo "<tr class='customer__row'>";
+                            echo "<tr class='customer__row' onclick=toDetails()>";
 
-                            echo "<td class='customer__td_name' onclick='naarDetails(" . $customer->getCustomerID() . ")'>";
+                            echo "<td class='customer__td_name'>";
                             echo $customer->getCustomerName();
                             echo "</td>";
 
@@ -98,11 +102,9 @@ $CustomerDB = new CustomerDB();
                             echo "</td>";
 
                             echo "<td class='customer__td_icon'>";
-                            // echo '<a class="editKnop" href="DetailsCustomer?customer='.$customer->getCustomerID().'"><i class="fas fa-edit"></i></a>
                             echo'
                             <a class="editKnop" href="customer-edit?customer='.$customer->getCustomerID().'"><i class="fas fa-edit"></i></a>
-                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#exampleModal" id='.$customer->getCustomerID().' onClick="reply_click(this.id)"><i class="fas fa-trash-alt"></i></a>
-                            <a class="profileKnop" href="DetailsCustomer?customer=' . $customer->getCustomerID() . '"><i class="fas fa-user"></i></a>';
+                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#ADModal" id='.$customer->getCustomerID().' onClick="reply_click(this.id)"><i class="fas fa-archive"></i></a>';
 
                             echo "</td>";
                             echo "</tr>";
@@ -163,14 +165,16 @@ $CustomerDB = new CustomerDB();
         </div>
 
 <script>
-    // function naarDetails(var customerID) {
-    //     // document.getElementById("iets").innerHTML = "Paragraph changed!";
-    //     echo 'hey hallo en welkom';
-    // }
 
 $(document).ready(function(){
-    $("#customerStatus").val("<?php echo $_POST['cbxStatus']; ?>");
+    $("#customerStatus").val("<?php echo $_POST['customerStatus']; ?>");
 });
+
+
+function toDetails($customer){
+    location.replace("customer-edit?customer=<?php echo $customer->getCustomerID(); ?>"); 
+}
+
 
 </script>
 
