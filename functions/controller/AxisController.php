@@ -35,5 +35,4 @@ class AxisController
         $this->AxisId = $AxisId;
     }
 
-
 }

@@ -4,6 +4,7 @@ require_once 'menu.php';
 ?>
 <html>
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
+<link rel="stylesheet" href="../assests/styling/customer.scss">
 <div id="page-content">
     <div class="container-fluid">
         <div class="row QaTopMargin">
@@ -11,7 +12,7 @@ require_once 'menu.php';
                 <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een vraag of antwoord">
             </div>
             <div class="col-sm-6">
-                <button type="button" class="btn btn-primary ButtonRight"><i class="fas fa-plus"></i> Vraag toevoegen</button>
+                <button type="button" class="btn btn-primary ButtonRight"><i class="fas fa-plus-circle"></i> Vraag toevoegen</button>
             </div>
         </div>
         <div id="wrapper">
@@ -37,9 +38,9 @@ require_once 'menu.php';
                                 echo  $item->GetNaam();
                                 echo '</td>';
                                 echo '<td>';
-                                echo '<i id="'.$item->GetID().'" onClick="SendID(this.id)" data-toggle="modal" data-target="#editCategory" class="fas fa-pencil-alt table--icon"></i>';
+                                echo '<i id="'.$item->GetID().'" onClick="SendID(this.id)" data-toggle="modal" data-target="#editCategory" class="fas fa-edit table--icon"></i>';
                                 echo " ";
-                                echo '<a href="https://www.youtube.com/watch?v=i7MfrslYUac"><i id="'.$item->GetID().'" class="fas fa-trash-alt table--icon"></i></a>';
+                                echo '<a href="https://www.youtube.com/watch?v=i7MfrslYUac"><i id="'.$item->GetID().'" class="fa fa-archive table--icon"></i></a>';
                                 echo '</td>';
                                 echo '</tr>';
                             }
@@ -73,9 +74,9 @@ require_once 'menu.php';
                         }
                         echo '</td>';
                         echo '<td>';
-                        echo  '<i id="'.$item->getQuestionID().'" class="fas fa-pencil-alt"></i>';
+                        echo '<a class="editKnop" id="'.$item->getQuestionID().'" onclick="SendID(this.id)"><i class="fas tab-table__icon">&#xf044;</i></a>';
                         echo  ' ';
-                        echo  '<i data-toggle="modal" data-target="#deleteQuestionModal" id="'.$item->getQuestionID().'" onClick="SendID(this.id)" class="fas fa-trash-alt"></i>';
+                        echo '<a class="deleteKnop"  id="'.$item->getQuestionID().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteQuestionModal" data-id="'.$item->getQuestionID().'"><i class="fas tab-table__icon">&#xf187;</i></a>';
                         echo '</td>';
                         echo '</tr>';
                     }
@@ -151,7 +152,7 @@ require_once 'menu.php';
             <div class="modal-body">
                 <form method="POST">
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label">Weet je zeker dat je de vraag: "" wilt verwijderen?</label>
+                        <label for="message-text" class="col-form-label fetched-data"></label
                     </div>
                     <div class="modal-footer">
                         <button type="submit" name="btnDelete" id="btnQuestionDelete" class="btn btn-danger" value="Ja">Ja</button>
@@ -166,6 +167,21 @@ require_once 'menu.php';
 </body>
 </html>
 <script>
+
+    $(document).ready(function(){
+        $('#deleteQuestionModal').on('show.bs.modal', function (e) {
+            var rowid = $(e.relatedTarget).data('id');
+            $.ajax({
+                type : 'post',
+                url : '../functions/controller/QaDeleteHandler.php', //Here you will fetch records
+                data :  'rowid='+ rowid, //Pass $id
+                success : function(data){
+                    $('.fetched-data').html("Weet je zeker dat je vraag: " + data + " wilt verwijderen?");//Show fetched data from database
+                }
+            });
+        });
+    });
+
     $(document).ready(function(){
         $("#Filter").on("keyup", function() {
             var value = $(this).val().toLowerCase();
@@ -234,7 +250,7 @@ require_once 'menu.php';
         $.ajax({
             url: '../functions/controller/QaDeleteHandler.php',
             type: 'post',
-            data: { "CustomerID": categoryID},
+            data: { "QuestionId": categoryID},
             success: function(response) { window.location.href = 'Qa.php'; }
         });
     });

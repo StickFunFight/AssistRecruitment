@@ -64,8 +64,6 @@ class AxisDatabase
 
     public function AxisOpslaan($AxisName)
     {
-
-
         $query = "INSERT INTO axis (AxisName, AxisStatus) VALUES ('$AxisName', 'Active')";
         $stm = $this->conn->prepare($query);
         if ($stm->execute()) {
