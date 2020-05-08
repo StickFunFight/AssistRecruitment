@@ -208,7 +208,7 @@
                                                         break;
                                                     case 'Deleted':
                                                         ?>
-                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                        
                                                         <?php
                                                         break;
                                                     default:
