@@ -44,7 +44,7 @@
     }
 ?>
 
-<html>
+<html> 
     <head>
         <?php
             //Include Menu

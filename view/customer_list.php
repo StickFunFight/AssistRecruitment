@@ -189,7 +189,7 @@
                                                         ?>
                                                             <a class="deleteKnop" name="archiveKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $user->getCustomerID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf187;</i></a>
                                                         <?php
-                                                        break;
+                                                        break; 
                                                 }
                                             ?>
                                         </td>
