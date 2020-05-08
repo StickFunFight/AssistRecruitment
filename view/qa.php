@@ -173,7 +173,7 @@ require_once 'menu.php';
             var rowid = $(e.relatedTarget).data('id');
             $.ajax({
                 type : 'post',
-                url : '../functions/controller/QaDeleteHandler.php', //Here you will fetch records
+                url : '../functions/handler/QaDeleteHandler.php', //Here you will fetch records
                 data :  'rowid='+ rowid, //Pass $id
                 success : function(data){
                     $('.fetched-data').html("Weet je zeker dat je vraag: " + data + " wilt verwijderen?");//Show fetched data from database
@@ -210,12 +210,15 @@ require_once 'menu.php';
     $('#modalCatAdd').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
     })
+
     $('#btnCatOpslaan').click(function () {
         $.ajax({
-            url: '../functions/controller/catHandler.php',
+            url: '../functions/handler/catHandler.php',
             type: 'post',
             data: { "catName": $('#textField').val()},
-            success: function(response) { window.location.href = 'Qa.php'; }
+            success: function(response) {
+            window.location.href='Qa.php';
+            }
         });
     });
 
@@ -230,7 +233,7 @@ require_once 'menu.php';
 
     $('#btnCatEditOpslaan').click(function () {
         $.ajax({
-            url: '../functions/controller/catEditHandler.php',
+            url: '../functions/handler/catEditHandler.php',
             type: 'post',
             data: { "catName": $('#txtNaam').val(), "catStatus" : $('#txtStatus').val(), "CustomerID": categoryID},
 
@@ -248,7 +251,7 @@ require_once 'menu.php';
 
     $('#btnQuestionDelete').click(function () {
         $.ajax({
-            url: '../functions/controller/QaDeleteHandler.php',
+            url: '../functions/handler/QaDeleteHandler.php',
             type: 'post',
             data: { "QuestionId": categoryID},
             success: function(response) { window.location.href = 'Qa.php'; }

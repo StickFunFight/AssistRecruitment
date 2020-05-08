@@ -146,7 +146,7 @@ require_once 'menu.php';
             var rowid = $(e.relatedTarget).data('id');
             $.ajax({
                 type : 'post',
-                url : '../functions/controller/QA-Axis-Archive.php', //Here you will fetch records
+                url : '../functions/handler/QA-Axis-Archive.php', //Here you will fetch records
                 data :  'rowid='+ rowid, //Pass $id
                 success : function(data){
                     $('.fetched-data').html("Weet je zeker dat je axis: " + data + " wilt verwijderen?");//Show fetched data from database
@@ -172,7 +172,7 @@ require_once 'menu.php';
 
     $('#btnArchiveer').click(function () {
         $.ajax({
-            url: '../functions/controller/QA-Axis-Archive.php',
+            url: '../functions/handler/QA-Axis-Archive.php',
             type: 'post',
             data: { "AxisID": AxisID},
             success: function(response) { window.location.href = 'Axis.php'; }
@@ -181,7 +181,7 @@ require_once 'menu.php';
 
     $('#AxisAddOpslaan').click(function () {
         $.ajax({
-            url: '../functions/controller/AxisAddHandler.php',
+            url: '../functions/handler/AxisAddHandler.php',
             type: 'post',
             data: { "AxisName": $('#AxisAddtxt').val()},
             success: function(response) { window.location.href = 'Axis.php'; }
@@ -190,7 +190,7 @@ require_once 'menu.php';
 
     $('#AxisEditOpslaan').click(function () {
         $.ajax({
-            url: '../functions/controller/AxisEditHandler.php',
+            url: '../functions/handler/AxisEditHandler.php',
             type: 'post',
             data: { "AxisName": $('#txtAxisNaam').val(), "AxisStatus" : $('#txtAxisStatus').val(), "AxisID": AxisID},
 

@@ -12,14 +12,10 @@ class CategoryDatabase{
 
     }
 
-
     public function catOpslaan($categorieNaam){
-
-
         $query = "INSERT INTO categorie (categorieName, categorieStatus) VALUES ('$categorieNaam', 'Active')";
         $stm = $this->conn->prepare($query);
         if ($stm->execute()){
-            Header("Location: Qa.php");
         }
 
     }
