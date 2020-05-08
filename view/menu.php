@@ -1,9 +1,6 @@
 <?php
     // Checking if user exists
 
-    // including the head
-    require("head.php");
-
 ?>
 <html lang="en">
     <head>
