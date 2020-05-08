@@ -1,5 +1,6 @@
 <?php
     // Checking if user exists
+
 ?>
 <html lang="en">
     <head>
@@ -7,9 +8,9 @@
             // including the head
             require("head.php");
         ?>
-
-        <!-- menu styling -->
-        <link rel="stylesheet" href="../assests/styling/menu.css">
+        <style><?php require("../assests/styling/menu.css"); ?></style>
+        <title>Assist menu</title>
+        <meta name="author" content="Marvin Vissers">
     </head>
 
     <body>
@@ -53,9 +54,9 @@
 
                 <div class="submenu" id="maintanceSubmenu">
                     <ul class="submenu__list">
-                        <li class="submenu__item"> <a href="#" class="submenu--link">Scan</a> </li>
+                        <li class="submenu__item"> <a href="scan-list" class="submenu--link">Scan</a> </li>
                         <li class="submenu__item"> <a href="customer_list" class="submenu--link">Customer</a> </li>
-                        <li class="submenu__item"> <a href="contact" class="submenu--link">Contact</a> </li>
+                        <li class="submenu__item"> <a href="user-list" class="submenu--link">User</a> </li>
                         <li class="submenu__item"> <a href="department-list" class="submenu--link">Department</a> </li>
                         <li class="submenu__item"> <a href="#" class="submenu--link">QA</a> </li>
                     </ul>

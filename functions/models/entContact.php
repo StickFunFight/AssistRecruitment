@@ -1,7 +1,7 @@
 <?php
 
 class EntContact {
-    private $ContactID;
+    private $UserID;
     private $ContactName;
     private $ContactPhoneNumber;
     private $ContactEmail;
@@ -9,8 +9,8 @@ class EntContact {
     private $ContactCustomerName;
     private $ContactDepartmentName;
 
-    public function __construct($ContactID, $ContactName, $ContactPhoneNumber, $ContactEmail, $ContactStatus, $ContactCustomerName, $ContactDepartmentName) {
-        $this->ContactID = $ContactID;
+    public function __construct($UserID, $ContactName, $ContactPhoneNumber, $ContactEmail, $ContactStatus, $ContactCustomerName, $ContactDepartmentName) {
+        $this->UserID = $UserID;
         $this->ContactName = $ContactName;
         $this->ContactPhoneNumber = $ContactPhoneNumber;
         $this->ContactEmail = $ContactEmail;
@@ -19,8 +19,8 @@ class EntContact {
         $this->ContactDepartmentName = $ContactDepartmentName;
     }
 
-    public function getContactID() {
-        return $this->ContactID;
+    public function getUserID() {
+        return $this->UserID;
     }
 
     public function getContactName() {

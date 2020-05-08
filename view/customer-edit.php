@@ -121,13 +121,13 @@
                     <div class="row justify-content-md-center ce--form-row">
                         <div class="col-sm-6">
                             <label for="customerName" class="ce__label">Name</label>
-                            <input type="text" name="txtCustomerName" id="customerName" value="<?php echo $customer->getCustomerName() ?>" class="form-control ce--input" required />
+                            <input type="text" name="txtCustomerName" id="customerName" value="<?php echo $customer->getCustomerName(); ?>" class="form-control ce--input" required />
                             <span class="ce__feedback" id="feedbackCustomerName"></span>
                         </div>
 
                         <div class="col-sm-6">
                             <label for="customerRefrence" class="ce__label">Refrence</label>
-                            <input type="text" name="txtcustomerRefrence" id="customerRefrence" value="<?php echo $customer->getCustomerRefrence(); ?>" class="form-control ce--input" required onchange=""/>
+                            <input type="text" name="txtcustomerRefrence" id="customerRefrence" value="<?php echo $customer->getCustomerReference(); ?>" class="form-control ce--input" required onchange=""/>
                             <span class="ce__feedback" id="feedbackCustomerRefrence"></span>
                         </div>
                     </div>
@@ -143,21 +143,21 @@
                             <label for="status" class="ce__label">Status</label>
                             <select class="form-control" name="cbxStatus" id="status">
                                <?php 
-                                        $customerStatus[]="Active";
-                                        $customerStatus[]="Archived";
-                                        $customerStatus[]="Deleted";
-                                    
-                                        foreach($customerStatus as $value){
-                                            if($value == $customer->getCustomerStatus()) {
-                                                ?>
-                                                    <option selected="selected" value="<?php echo $value; ?>"><?php echo $value; ?></option>
-                                                <?php
-                                            } else {
-                                                ?>
-                                                    <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
-                                                <?php
-                                            }
+                                    $customerStatus[]="Active";
+                                    $customerStatus[]="Archived";
+                                    $customerStatus[]="Deleted";
+                                
+                                    foreach($customerStatus as $value){
+                                        if($value == $customer->getCustomerStatus()) {
+                                            ?>
+                                                <option selected="selected" value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                            <?php
+                                        } else {
+                                            ?>
+                                                <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                            <?php
                                         }
+                                    }
                                ?>
                             </select>
                             <span class="ce__feedback" id="feedbackCustomerStatus"></span>
@@ -169,9 +169,50 @@
                             <input type="submit" name="btnUpdate" class="btn ce__update-button" value="Update customer">
                         </div>
                     </div>
+
+                    <div class="feedback">
+                        <?php
+                            // Checking for error message 
+                            if (isset($_GET['error'])) {
+                                $error = $_GET['error'];
+
+                                // Showing the error
+                                switch ($error) {
+                                    case 'none':
+                                        ?>
+                                            <span class="feedback--good">The customer has been updated. </span>
+                                        <?php
+                                        break;
+                                    
+                                    default:
+                                        ?>
+                                            <span class="feedback--bad">The customer could not be updated, try again. </span>
+                                        <?php
+                                        break;
+                                }
+                            }
+                        ?>
+                    </div>
                 </form>
 
                 <section class="ce-overview">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2 class="ce-overview__title">Customer overview</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="btn-group" role="group" aria-label="Customer overview links">
+                                <a href="user-list?customer=<?php echo $customerID; ?>" class="ce-overview--link btn">Users</a>
+                                <a href="department-list?customer=<?php echo $customerID; ?>" class="ce-overview--link btn">Departments</a>
+                                <a href="scan-list?customer=<?php echo $customerID; ?>" class="ce-overview--link btn">Scans</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- <section class="ce-overview">
                     <h2 class="ce-overview__title">Customer overview</h2>
 
                     <ul class="nav nav-tabs">
@@ -183,7 +224,7 @@
                     <div class="tab-content">
                         <div id="scans" class="tab-pane fade in active show">
                             <div class="tab-content__container">
-                                <form method="POST" action="customer-edit?customer=<?php echo $customerID; ?>&tab=scan">
+                                <form method="POST" action="customer-edit?customer=<?php //echo $customerID; ?>&tab=scan">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="customer__select">
@@ -214,12 +255,12 @@
                                     <tbody class="tab-table__body">
                                         <?php
                                             // Looping through the results
-                                            foreach ($listScans as $scan) { 
+                                            //foreach ($listScans as $scan) { 
                                         ?>
                                             <tr class="tab-table__row">
-                                                <td class="tab-table__td"><?php echo $scan->getScanName(); ?></td>
-                                                <td class="tab-table__td"><?php echo $scan->getScanStartDate(); ?></td>
-                                                <td class="tab-table__td"><?php echo $scan->getScanEndDate(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $scan->getScanName(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $scan->getScanStartDate(); ?></td>
+                                                <td class="tab-table__td"><?php // $scan->getScanEndDate(); ?></td>
                                                 <td class="tab-table__td">
                                                     <a class="editKnop" href="#"><i class="fas tab-table__icon">&#xf044;</i></a>
 
@@ -227,7 +268,7 @@
                                                 </td>
                                             </tr>
                                         <?php
-                                            }
+                                            //}
                                         ?>
                                     </tbody>
                                 </table>
@@ -236,7 +277,7 @@
 
                         <div id="departments" class="tab-pane fade">
                             <div class="tab-content__container">
-                                <form method="POST" action="customer-edit?customer=<?php echo $customerID; ?>"> 
+                                <form method="POST" action="customer-edit?customer=<?php// echo $customerID; ?>"> 
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="customer__select">
@@ -266,11 +307,11 @@
                                     <tbody class="tab-table__body">
                                         <?php
                                             // Looping through the results
-                                            foreach ($listDepartments as $department) { 
+                                            //foreach ($listDepartments as $department) { 
                                         ?>
                                             <tr class="tab-table__row">
-                                                <td class="tab-table__td"><?php echo $department->getDepartmentName(); ?></td>
-                                                <td class="tab-table__td"><?php echo $department->getdepartmentComment(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $department->getDepartmentName(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $department->getdepartmentComment(); ?></td>
                                                 <td class="tab-table__td">
                                                     <a class="editKnop" href="#"><i class="fas tab-table__icon">&#xf044;</i></a>
 
@@ -278,7 +319,7 @@
                                                 </td>
                                             </tr>
                                         <?php
-                                            }
+                                            //}
                                         ?>
                                     </tbody>
                                 </table>
@@ -287,7 +328,7 @@
 
                         <div id="contacts" class="tab-pane fade">
                             <div class="tab-content__container">
-                                <form method="POST" action="customer-edit?customer=<?php echo $customerID; ?>">
+                                <form method="POST" action="customer-edit?customer=<?php //echo $customerID; ?>">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="customer__select">
@@ -319,13 +360,13 @@
                                     <tbody class="tab-table__body">
                                         <?php
                                             // Looping through the results
-                                            foreach ($listContacts as $contact) { 
+                                            //foreach ($listContacts as $contact) { 
                                         ?>
                                             <tr class="tab-table__row">
-                                                <td class="tab-table__td"><?php echo $contact->getContactDepartmentName(); ?></td>
-                                                <td class="tab-table__td"><?php echo $contact->getContactName(); ?></td>
-                                                <td class="tab-table__td"><?php echo $contact->getContactPhoneNumber(); ?></td>
-                                                <td class="tab-table__td"><?php echo $contact->getContactEmail(); ?></td>
+                                                <td class="tab-table__td"><?php // $contact->getContactDepartmentName(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $contact->getContactName(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $contact->getContactPhoneNumber(); ?></td>
+                                                <td class="tab-table__td"><?php //echo $contact->getContactEmail(); ?></td>
                                                 <td class="tab-table__td">
                                                     <a class="editKnop" href="#"><i class="fas tab-table__icon">&#xf044;</i></a>
 
@@ -333,14 +374,14 @@
                                                 </td>
                                             </tr>
                                         <?php
-                                            }
+                                            //}
                                         ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                </section>
+                </section> -->
             </div>
         </div> 
     </body>
@@ -349,6 +390,7 @@
         // Ending the customer foreach loop
         }
     //If no customer is set
+    } else {
+        header('Location: cust_listed');
     }
-     else header('Location: cust_listed');
 ?>

@@ -6,13 +6,15 @@ class EntDepartment {
     private $DepartmentComment;
     private $DepartmentStatus;
     private $CustomerID;
+    private $CustomerName;
 
-    public function __construct($DepartmentID, $DepartmentName, $DepartmentComment, $DepartmentStatus, $CustomerID) {
+    public function __construct($DepartmentID, $DepartmentName, $DepartmentComment, $DepartmentStatus, $CustomerID, $CustomerName) {
         $this->DepartmentID = $DepartmentID;
         $this->DepartmentName = $DepartmentName;
         $this->DepartmentComment = $DepartmentComment;
         $this->DepartmentStatus = $DepartmentStatus;
         $this->CustomerID = $CustomerID;
+        $this->CustomerName = $CustomerName;
     }
 
     public function getDepartmentID() {
@@ -33,6 +35,10 @@ class EntDepartment {
 
     public function getCustomerID() {
         return $this->CustomerID;
+    }
+
+    public function getCustomerName() {
+        return $this->CustomerName;
     }
 } 
 

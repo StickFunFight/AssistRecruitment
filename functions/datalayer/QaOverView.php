@@ -7,15 +7,15 @@ class QaOverView
 
     public function __construct()
     {
-        require_once '../functions/datalayer/database.class.php';
+        require_once 'database.class.php';
         $database = new Database();
         $this->db = $database->getConnection();
     }
 
-    function GetAllCatergies()
+    function GetAllCategories()
     {
         $lijst = array();
-        $query = "SELECT * FROM categorie where categorieStatus = 'Actief'";
+        $query = "SELECT * FROM categorie where categorieStatus = 'Active'";
         $stm = $this->db->prepare($query);
         if ($stm->execute()) {
             $result = $stm->fetchAll(PDO::FETCH_OBJ);

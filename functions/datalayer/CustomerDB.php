@@ -17,14 +17,15 @@ Class CustomerDB {
     // Create an Array for the function
       $listCustomers = array();
 
-      // Query to select data from customer table
-        $query = "SELECT * FROM customer WHERE customerStatus = '$status'";
+        // Query to select data from customer table
+        $query = sprintf("SELECT * FROM customer WHERE customerStatus = '%s'
+                        ORDER BY customerName ASC", $status);
         $stm = $this->db->prepare($query);
-        if($stm->execute()){
+        if ($stm->execute()) {
             // Get Results from the Database
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
             // Create a loop to get all customers from the customer table
-            foreach($result as $customer){
+            foreach ($result as $customer) {
                 // Call Entity Class to get values for each customer
                 $entCustomer = new entCustomer($customer->customerID, $customer->customerName, $customer->customerComment, $customer->customerReference, $customer->customerStatus);
                 array_push($listCustomers, $entCustomer);
@@ -72,6 +73,32 @@ Class CustomerDB {
         }
     }
 
+    function deleteCustomer($customerID){
+        // Create Query to update Customer Status
+        $query = "UPDATE customer SET customerStatus = 'Deleted' WHERE customerID = $customerID";
+        $stm = $this->db->prepare($query);
+        if($stm->execute()){
+            echo 'Het is gelukt';
+        }
+        // Error Text
+        else {
+            echo "Er is iets fout gegaan";
+        }
+    }
+
+    function activateCustomer($customerID){
+        // Create Query to update Customer Status
+        $query = "UPDATE customer SET customerStatus = 'Active' WHERE customerID = $customerID";
+        $stm = $this->db->prepare($query);
+        if($stm->execute()){
+            echo 'Het is gelukt';
+        }
+        // Error Text
+        else {
+            echo "Er is iets fout gegaan";
+        }
+    }
+
     // Function to get the details of a customer
     function getCustomerDetails($customerID) {
         // Array aanmaken voor de functies
@@ -104,9 +131,12 @@ Class CustomerDB {
         // Query aanmaken om alle functies uit de database te halen
         $query = sprintf("UPDATE customer SET customerName = '%s', customerReference = '%s', customerComment = '%s', customerStatus = '%s' WHERE customerID = %d", $customerName, $customerReference, $customerComment, $customerStatus, $customerID);
         $stm = $this->db->prepare($query);
-        if(!$stm->execute()){
-            // Tekst laten zien voor als er geen functies zijn opgehaald
-            echo "Oof";
+        if($stm->execute()){
+            // Sending true back for succes message
+            return true;
+        } else {
+            // Sending false back for error message
+            return false;
         }
     }
 

@@ -9,6 +9,18 @@
             $this->ScanDB = new ScanDB();
         }
 
+        // Getting all scans
+        function getScans($statusScan){
+            // Creating a array
+            $listScans = array();
+
+            $listScans = $this->ScanDB->getScans($statusScan);
+
+            // Returning the list given from the Database class
+            return $listScans;
+        }  
+
+        // Getting all scan form 1 customer
         function getScansCustomer($customerID, $statusScan){
             // Creating a array
             $listScans = array();

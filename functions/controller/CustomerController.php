@@ -27,10 +27,18 @@
         public function createCustomer($customerName, $customerComment, $customerReference) {
             //$this->customerDB->createCustomer($customerName, $customerComment, $customerReference);
             if($this->customerDB->createCustomer($customerName, $customerComment, $customerReference)){
-                echo "Customer succesfully added!";
+                // Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "?error=none";
+                // Reloading page with succes message
+                echo '<script>location.replace("'.$newURL.'");</script>';
             } else {
-                echo "An error occured in the createCustomer function within the customerAdd class.";
-            }
+               // Getting the current url
+               $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+               $newURL = $currentURL . "?error=1";
+               // Reloading page with succes message
+               echo '<script>location.replace("'.$newURL.'");</script>';
+           }
         }
 
         // Function to get the details of a customer
@@ -45,12 +53,20 @@
 
         // Function to update the customer
         function updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus) {
-            
-            //var_dump($CustomerModal);
-
-            //echo "<br> hai ik ben iets <br>" . $CustomerModal->getCustomerName();
-
-            $this->customerDB->updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus);
+            // Sending the variables to the database and checking the result
+            if($this->customerDB->updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus)){
+                // Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "&error=none";
+                // Reloading page with succes message
+                echo '<script>location.replace("'.$newURL.'");</script>';
+            } else {
+                // Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "&error=1";
+                // Reloading page with succes message
+                echo '<script>location.replace("'.$newURL.'");</script>';
+            }
         }
     }
 ?>
