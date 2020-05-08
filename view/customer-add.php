@@ -55,6 +55,30 @@
                             <input name="submitCreateCustomer" class="btn btn-add" type="submit" id="createCustomerButton" value="Add customer">
                         </div>
                     </div>
+
+                    <div class="feedback">
+                        <?php
+                            // Checking for error message 
+                            if (isset($_GET['error'])) {
+                                $error = $_GET['error'];
+
+                                // Showing the error
+                                switch ($error) {
+                                    case 'none':
+                                        ?>
+                                            <span class="feedback--good">The customer has been added. </span>
+                                        <?php
+                                        break;
+                                    
+                                    default:
+                                        ?>
+                                            <span class="feedback--bad">The customer could not be updated, try again. </span>
+                                        <?php
+                                        break;
+                                }
+                            }
+                        ?>
+                    </div>
                 </form>
             </div>
         </div>

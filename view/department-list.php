@@ -181,13 +181,13 @@
                                     foreach ($listDepartments as $department) {                                  
                                 ?>
                                     <tr class="tab-table__row filter__row">
-                                        <td class="tab-table__td"><?php echo $department->getDepartmentName(); ?></td>
-                                        <td class="tab-table__td"><?php echo $department->getDepartmentComment(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $department->getDepartmentID(); ?>)"><?php echo $department->getDepartmentName(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $department->getDepartmentID(); ?>)"><?php echo $department->getDepartmentComment(); ?></td>
                                         <?php 
                                             // Checking if there is a customer set
                                             if($customerID == 0) {
                                                 ?>
-                                                    <td class="tab-table__td"><?php echo $department->getCustomerName(); ?></td>
+                                                    <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $department->getDepartmentID(); ?>)"><?php echo $department->getCustomerName(); ?></td>
                                                 <?php
                                             }
                                         ?>
@@ -348,6 +348,16 @@
                 location.replace("?status=" + status);
             } else {
                 location.replace("?customer=" + customerID + "&status=" + status);
+            }
+        }
+
+        // Function to go to the details onclick
+        function toDetails(customerID, departmentID){
+            // Sending the user to a new page
+            if (customerID == 0) {
+                location.assign("department-edit?department=" + departmentID);
+            } else {
+                location.assign("department-edit?department=" + departmentID + "&customer=" + customerID);
             }
         }
     </script>

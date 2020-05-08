@@ -27,9 +27,17 @@
         public function createCustomer($customerName, $customerComment, $customerReference) {
             //$this->customerDB->createCustomer($customerName, $customerComment, $customerReference);
             if($this->customerDB->createCustomer($customerName, $customerComment, $customerReference)){
-                echo "Customer succesfully added!";
+                // Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "&error=none";
+                // Reloading page with succes message
+                echo '<script>location.replace("'.$newURL.'");</script>';
             } else {
-                echo "An error occured in the createCustomer function within the customerAdd class.";
+                // Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "&error=1";
+                // Reloading page with succes message
+                echo '<script>location.replace("'.$newURL.'");</script>';
             }
         }
 
