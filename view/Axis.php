@@ -5,6 +5,7 @@ require_once 'menu.php';
 <html>
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
 <link rel="stylesheet" href="../assests/styling/customer.scss">
+<link rel="stylesheet" href="../assests/styling/customer-edit.css">
 <body>
 <div id="page-content">
     <div class="container-fluid">
@@ -13,7 +14,7 @@ require_once 'menu.php';
                 <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een Axis doormiddel van de naam of status">
             </div>
             <div class="col-sm-6">
-                <button type="button" class="btn btn-success ButtonRight" data-toggle="modal" data-target="#AxisAddModal"><i class="fas fa-plus-circle"></i>Axis toevoegen</button>
+                <button type="button" class="btn add-container__btn ButtonRight" data-toggle="modal" data-target="#AxisAddModal"><i class="fas fa-plus-circle"></i>Axis toevoegen</button>
             </div>
         </div>
             <div>
@@ -41,9 +42,9 @@ require_once 'menu.php';
                         echo  $item->getAxisStatus(); 
                         echo '</td>';
                         echo '<td>';
-                        echo '<a class="editKnop" id="'.$item->getAxisId().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisEditModal"><i class="fas tab-table__icon">&#xf044;</i></a>';
+                        echo '<a id="'.$item->getAxisId().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisEditModal"><i class="fas tab-table__icon editKnop">&#xf044;</i></a>';
                         echo  ' ';
-                        echo '<a class="deleteKnop"  id="'.$item->getAxisId().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisArchiveModal" data-id="'.$item->getAxisId().'"><i class="fas tab-table__icon">&#xf187;</i></a>';
+                        echo '<a id="'.$item->getAxisId().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisArchiveModal" data-id="'.$item->getAxisId().'"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
                         echo '</td>';
                         echo '</tr>';
                     }
