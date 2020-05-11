@@ -35,7 +35,7 @@ class AxisDatabase
 
      function archiveerAxis($Aid){
         //variabele (n) uit de url halen
-        $query = "UPDATE axis SET AxisStatus = 'Archived' WHERE AxisId = $Aid";
+        $query = sprintf("UPDATE axis SET AxisStatus = 'Archived' WHERE AxisId = %d", $Aid);
 
         $stm = $this->conn->prepare($query);
         if ($stm->execute()) {
@@ -44,7 +44,7 @@ class AxisDatabase
     }
 
     function showA($Aid){
-        $query = "SELECT * FROM axis WHERE AxisId = $Aid";
+        $query = sprintf("SELECT * FROM axis WHERE AxisId = %d", $Aid);
         $stm = $this->conn->prepare($query);
         if ($stm->execute()) {
             $result = $stm->fetch(PDO::FETCH_OBJ);
@@ -53,9 +53,9 @@ class AxisDatabase
     }
 
     public function AxisAanpassen($AxisName, $AxisStatus, $AxisID){
-        $query = sprintf("UPDATE axis SET AxisName = '$AxisName',
-                                       AxisStatus= '$AxisStatus'
-                                       WHERE AxisID = $AxisID");
+        $query = sprintf("UPDATE axis SET AxisName ='%s',
+                                       AxisStatus= '%s'
+                                       WHERE AxisID = %d",$AxisName, $AxisStatus,$AxisID);
         $stm = $this->conn->prepare($query);
         if ($stm->execute()){
 

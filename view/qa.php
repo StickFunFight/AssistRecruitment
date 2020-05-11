@@ -289,7 +289,7 @@ require_once 'menu.php';
 
     $('#btnCatDelete').click(function () {
         $.ajax({
-            url: '../functions/controller/catDeleteHandler.php',
+            url: '../functions/handler/catDeleteHandler.php',
             type: 'post',
             data: { "catID": categoryID},
             success: function(response) { window.location.href = 'Qa.php'; }

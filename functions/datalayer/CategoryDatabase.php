@@ -19,7 +19,6 @@ class CategoryDatabase
         $query = "INSERT INTO categorie (categorieName, categorieStatus) VALUES ('$categorieNaam', 'Active')";
         $stm = $this->conn->prepare($query);
         if ($stm->execute()) {
-            Header("Location: Qa.php");
         }
 
     }
@@ -37,10 +36,10 @@ class CategoryDatabase
 
     function checkScan($cID)
     {
-        $query = "SELECT scanStatus FROM scan 
+        $query =sprintf("SELECT scanStatus FROM scan 
                   JOIN scan_question ON scan_question.scanID = scan.scanID
                   JOIN question ON question.questionID = scan_question.questionID
-                  WHERE question.categorieID = $cID";
+                  WHERE question.categorieID = %d", $cID);
         $stm = $this->conn->prepare($query);
         if ($stm->execute()) {
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -58,7 +57,7 @@ class CategoryDatabase
 
     function checkQuestion($cID)
     {
-        $query = "SELECT questionStatus from question WHERE categorieID = $cID";
+        $query =sprintf("SELECT questionStatus from question WHERE categorieID = %d",$cID);
         $stm = $this->conn->prepare($query);
         if ($stm->execute()) {
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -79,7 +78,7 @@ class CategoryDatabase
     {
         if ($this->checkScan($cID) == false) {
             if ($this->checkQuestion($cID)==false) {
-                $query = "UPDATE categorie SET categorieStatus = 'Archived' WHERE categorieID = $cID";
+                $query = sprintf("UPDATE categorie SET categorieStatus = 'Archived' WHERE categorieID = %d", $cID);
                 $stm = $this->conn->prepare($query);
                 if ($stm->execute()) {
                     echo "Categorie op 'deleted' gezet";
