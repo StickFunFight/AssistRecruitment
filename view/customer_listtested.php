@@ -69,7 +69,7 @@
                             <div class="row">
                                 <div class="col-sm-5">
                                     <div class="customer__select">
-                                        <select id="customerStatus" name="cbxStatusScans" class="form-control" onchange="updateTableStatus()">
+                                        <select id="userStatus" name="cbxStatusScans" class="form-control" onchange="updateTableStatus()">
                                             <?php 
                                                 // Checking if a status has been set
                                                 if ($userStatus != "none") {
@@ -109,7 +109,18 @@
 
                                 <div class="col-sm-2">
                                     <div class="add-container">
-                                        <a href="customer-add" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add customer</a>
+                                        <?php
+                                            // Checking for customer id to know where to add the new user to
+                                            if ($customerID != 0) {
+                                                ?>
+                                                    <a href="user-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                    <a href="user-add" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
+                                                <?php
+                                            }       
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -181,13 +192,15 @@
                                                         <?php
                                                         break;
                                                     case 'Deleted':
-                                                        // Leaving empty on purpose
+                                                        ?>
+                                                            <a class="deleteKnop" name="activeKnop" href="#" data-toggle="modal" data-target="#activeModal" id='<?php echo $user->getCustomerID();?>' onClick="reply_click(this.id)"><i class="fas fa-pastafarianism"></i></a>
+                                                        <?php
                                                         break;
                                                     default:
                                                         ?>
                                                             <a class="deleteKnop" name="archiveKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $user->getCustomerID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf187;</i></a>
                                                         <?php
-                                                        break; 
+                                                        break;
                                                 }
                                             ?>
                                         </td>
@@ -293,6 +306,60 @@
         </div>
         </div>
 
+    <!--Active Modal--->
+    <div class="modal fade" id="activeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="activeModal">Activate Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to activate this costumer?
+            </div>
+
+            <form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                <button type="submit" name="btnActive" class="btn btn-primary" id="btnActive">Activate   </button>          
+
+                <script type="text/javascript">
+                function reply_click(clicked_id)
+                {
+                    window.yourGlobalVariable = clicked_id;
+                }
+
+                $('#btnActive').click(function () {
+
+                $.ajax({
+                    url: 'customer_handler_activate',
+                    type: 'post',
+                    data: { "CustomerID": yourGlobalVariable},
+                    success: function(response) { window.location.href='customer_listtested?status=<?php echo $userStatus;?>' }
+                });
+
+                });
+
+                </script>
+               
+            </div>
+            </form>
+
+            </div>
+        </div>
+        </div>
+
+        </script>
+               
+            </div>
+            </form>
+
+            </div>
+        </div>
+        </div>
+
     <script>
         // Filteren op de table
         $(document).ready(function() {
@@ -307,7 +374,7 @@
         // Function set table status
         function updateTableStatus() {
             // Ophalen van de status
-            var status = document.getElementById("customerStatus").value;
+            var status = document.getElementById("userStatus").value;
 
             // De pagina refreshen met de nieuwe waarden
             location.replace("?status=" + status);

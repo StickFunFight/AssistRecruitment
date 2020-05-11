@@ -59,7 +59,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1 class="ce__title" id="pageTitle">Overview Customers<h1>
+                        <h1 class="ce__title" id="pageTitle">Overview Users<h1>
                     </div>
                 </div>
 
@@ -69,7 +69,7 @@
                             <div class="row">
                                 <div class="col-sm-5">
                                     <div class="customer__select">
-                                        <select id="customerStatus" name="cbxStatusScans" class="form-control" onchange="updateTableStatus()">
+                                        <select id="userStatus" name="cbxStatusScans" class="form-control" onchange="updateTableStatus(<?php echo  $customerID; ?>)">
                                             <?php 
                                                 // Checking if a status has been set
                                                 if ($userStatus != "none") {
@@ -109,7 +109,18 @@
 
                                 <div class="col-sm-2">
                                     <div class="add-container">
-                                        <a href="customer-add" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add customer</a>
+                                        <?php
+                                            // Checking for customer id to know where to add the new user to
+                                            if ($customerID != 0) {
+                                                ?>
+                                                    <a href="user-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                    <a href="user-add" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
+                                                <?php
+                                            }       
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -166,9 +177,9 @@
                                     foreach ($listUsers as $user) {                                  
                                 ?>
                                     <tr class="tab-table__row filter__row">
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $user->getCustomerID();?>)" ><?php echo $user->getCustomerName(); ?> </td>
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $user->getCustomerID();?>)"><?php echo $user->getCustomerComment(); ?></td>
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $user->getCustomerID();?>)"><?php echo $user->getCustomerReference(); ?></td>
+                                        <td class="tab-table__td"><?php echo $user->getCustomerName(); ?></td>
+                                        <td class="tab-table__td"><?php echo $user->getCustomerComment(); ?></td>
+                                        <td class="tab-table__td"><?php echo $user->getCustomerReference(); ?></td>
 
                                         <td class="tab-table__td">
                                             <a class="editKnop" href="customer-edit?customer=<?php echo $user->getCustomerID();?>"><i class="fas tab-table__icon">&#xf044;</i></a>
@@ -177,17 +188,19 @@
                                                 switch ($userStatus) {
                                                     case 'Archived':
                                                         ?>
-                                                            <a class="deleteKnop" name="deleteKnop" href="#" data-toggle="modal" data-target="#deleteModal" id='<?php echo $user->getCustomerID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf2ed;</i></a>
                                                         <?php
                                                         break;
                                                     case 'Deleted':
-                                                        // Leaving empty on purpose
+                                                        ?>
+                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                        <?php
                                                         break;
                                                     default:
                                                         ?>
-                                                            <a class="deleteKnop" name="archiveKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $user->getCustomerID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf187;</i></a>
+                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf187;</i></a>
                                                         <?php
-                                                        break; 
+                                                        break;
                                                 }
                                             ?>
                                         </td>
@@ -203,95 +216,45 @@
         </div>
     </body>
 
-    <!--Archive Modal--->
-    <div class="modal fade" id="archiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="archiveModalLabel">Archive Customer</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to archive this costumer?
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Archive Customer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to archive this costumer?
+                </div>
 
-            <form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
-                <button type="submit" name="btnDelete" class="btn btn-primary" id="btnArchive">Archive   </button>          
+                <form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                        <button type="submit" name="btnDelete" class="btn btn-primary" id="btnDelete">Archive   </button>          
 
-                <script type="text/javascript">
-                function reply_click(clicked_id)
-                {
-                    window.yourGlobalVariable = clicked_id;
-                }
+                        <script type="text/javascript">
+                            function reply_click(clicked_id) {
+                                window.yourGlobalVariable = clicked_id;
+                            }
 
-                $('#btnArchive').click(function () {
 
-                $.ajax({
-                    url: 'customer_handler_archive',
-                    type: 'post',
-                    data: { "CustomerID": yourGlobalVariable},
-                    success: function(response) { window.location.href='customer_listtested?status=<?php echo $userStatus;?>' }
-                });
+                            $('#btnDelete').click(function () {
+                                $.ajax({
+                                    url: 'customer_handler.php',
+                                    type: 'post',
+                                    data: { "CustomerID": yourGlobalVariable},
+                                    success: function(response) { window.location.href='customer_list.php' }
+                                });
+                            });
 
-                });
-
-                </script>
-               
-            </div>
-            </form>
-
+                        </script>
+                    </div>
+                </form>
             </div>
         </div>
-        </div>
-            
-    <!--Delete Modal--->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModal">Delete Customer</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this costumer?
-            </div>
-
-            <form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
-                <button type="submit" name="btnDelete" class="btn btn-primary" id="btnDelete">Delete   </button>          
-
-                <script type="text/javascript">
-                function reply_click(clicked_id)
-                {
-                    window.yourGlobalVariable = clicked_id;
-                }
-
-                $('#btnDelete').click(function () {
-
-                $.ajax({
-                    url: 'customer_handler_delete',
-                    type: 'post',
-                    data: { "CustomerID": yourGlobalVariable},
-                    success: function(response) { window.location.href='customer_listtested?status=<?php echo $userStatus;?>' }
-                });
-
-                });
-
-                </script>
-               
-            </div>
-            </form>
-
-            </div>
-        </div>
-        </div>
+    </div>
 
     <script>
         // Filteren op de table
@@ -304,29 +267,28 @@
             });
         });
 
-        // Function set table status
-        function updateTableStatus() {
+        // Checking the table status
+        function updateTableStatus(customerID) {
             // Ophalen van de status
-            var status = document.getElementById("customerStatus").value;
+            var status = document.getElementById("userStatus").value;
 
             // De pagina refreshen met de nieuwe waarden
-            location.replace("?status=" + status);
-}
-
-        function toDetails(customerID){
-            location.assign("customer-edit?customer=" + customerID);
+            if (customerID == 0) {
+                location.replace("?status=" + status);
+            } else {
+                location.replace("?customer=" + customerID + "&status=" + status);
+            }
         }
-
     </script>
 </html>
 
 <?php 
     // Looping through the results
-    // if (!empty($customerDetails)) {
-    //     foreach ($customerDetails as $customer) {
-    //         echo "<script> 
-    //             document.getElementById('pageTitle').innerHTML = 'Overview Customers of ". $customer->getCustomerName() ."'; 
-    //         </script>";
-    //     }
-    // }
+    if (!empty($customerDetails)) {
+        foreach ($customerDetails as $customer) {
+            echo "<script> 
+                document.getElementById('pageTitle').innerHTML = 'Overview users of ". $customer->getCustomerName() ."'; 
+            </script>";
+        }
+    }
 ?>

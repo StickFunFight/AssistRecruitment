@@ -2,15 +2,15 @@
     // Inlcude Database class
     require '../functions/datalayer/database.class.php';
     // Including controller
-    require '../functions/controller/contactController.php';
+    require '../functions/controller/DepartmentController.php';
     require '../functions/controller/CustomerController.php';
     // Including entity classes
-    require '../functions/models/entContact.php';
+    require '../functions/models/EntDepartment.php';
     require '../functions/models/entCustomer.php';
 
     // Creating connections with the classes
     $CustomerCtrl = new CustomerController();
-    $ContactCtrl = new ContactController();
+    $departmentCtrl = new DepartmentController();
 
     // Creating a customer id to fil it later
     $customerID;
@@ -34,13 +34,13 @@
     }    
 
     // Creating a status variable to fill it later
-    $userStatus;
+    $dpStatus;
 
-    // Checking for a status and filling userStatus with that status
+    // Checking for a status and filling dpStatus with that status
     if (isset($_GET['status'])) {
-        $userStatus = $_GET['status'];
+        $dpStatus = $_GET['status'];
     } else {
-        $userStatus = "none";
+        $dpStatus = "none";
     }
 ?>
 
@@ -59,27 +59,27 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1 class="ce__title" id="pageTitle">Overview Customers<h1>
+                        <h1 class="ce__title" id="pageTitle">Overview Departments<h1>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <form method="POST">
+                        <form method="POST" action="testfile?customer=<?php echo $customerID; ?>&tab=scan">
                             <div class="row">
                                 <div class="col-sm-5">
                                     <div class="customer__select">
-                                        <select id="customerStatus" name="cbxStatusScans" class="form-control" onchange="updateTableStatus()">
+                                        <select id="dpStatus" name="cbxDepartmentStatus" class="form-control" onchange="updateTableStatus(<?php echo  $customerID; ?>)">
                                             <?php 
                                                 // Checking if a status has been set
-                                                if ($userStatus != "none") {
-                                                    $customerStatus[]="Active";
-                                                    $customerStatus[]="Archived";
-                                                    $customerStatus[]="Deleted";
+                                                if ($dpStatus != "none") {
+                                                    $overviewStatus[]="Active";
+                                                    $overviewStatus[]="Archived";
+                                                    $overviewStatus[]="Deleted";
                                                 
                                                     // Looping through the statusses and checking wich one is equeal
-                                                    foreach($customerStatus as $value){
-                                                        if($value == $userStatus) {
+                                                    foreach($overviewStatus as $value){
+                                                        if($value == $dpStatus) {
                                                             ?>
                                                                 <option selected="selected" value="<?php echo $value; ?>"><?php echo $value; ?></option>
                                                             <?php
@@ -109,7 +109,18 @@
 
                                 <div class="col-sm-2">
                                     <div class="add-container">
-                                        <a href="customer-add" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add customer</a>
+                                        <?php
+                                            // Checking for customer id to know where to add the new user to
+                                            if ($customerID != 0) {
+                                                ?>
+                                                    <a href="department-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add department</a>
+                                                <?php
+                                            } else {
+                                                ?>
+                                                    <a href="department-add" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add department</a>
+                                                <?php
+                                            }       
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -118,74 +129,96 @@
                         <table class="tab-table table table-hover" id="filterTable">
                             <thead class="tab-table__header">
                                 <tr class="tab-table__row">
-                                    <!-- Voor de onlcick gebruik maken van int zodat JavaScript de column kan vinden -->
-                                    <th class="customer__th_name" onclick="sortTable(0)">Name</th>
-                                    <th class="customer__th_comment" onclick="sortTable(1)">Comment</th>
-                                    <th class="customer__td_refrence" onclick="sortTable(2)">Reference</th>
-                                    <th class="customer__td_icon" onclick="sortTable(3)">Actions</th>
-                                   
-                                    </tr>
-
+                                    <th class="tab-table__head" onclick="sortTable(0)">Name</th>
+                                    <th class="tab-table__head" onclick="sortTable(1)">Comment</th>
+                                    <?php 
+                                        // Checking if there is a customer set
+                                        if($customerID == 0) {
+                                            ?>
+                                                <th class="tab-table__head" onclick="sortTable(2)">Customer</td>
+                                            <?php
+                                        }
+                                    ?>
+                                    <th class="tab-table__head">Actions</th>
+                                </tr>
                             </thead>
 
                             <tbody class="tab-table__body">
                                 <?php
                                     // Creating a list to fill it later 
-                                    $listUsers;
+                                    $listDepartments;
                                     
                                     // Checking if a customer id is set
                                     if ($customerID != 0) {
                                         // Checking for the status
-                                        switch ($userStatus) {
+                                        switch ($dpStatus) {
                                             case 'Archived':
-                                                $listUsers = $CustomerCtrl->getCustomers($customerID, 'Archived');
+                                                $listDepartments = $departmentCtrl->getDepartmentsCustomer($customerID, 'Archived');
                                                 break;
                                             case 'Deleted':
-                                                $listUsers = $CustomerCtrl->getCustomers($customerID, 'Deleted');
+                                                $listDepartments = $departmentCtrl->getDepartmentsCustomer($customerID, 'Deleted');
                                                 break;
                                             default:
-                                                $listUsers = $CustomerCtrl->getCustomers($customerID, 'Active');
+                                                $listDepartments = $departmentCtrl->getDepartmentsCustomer($customerID, 'Active');
                                                 break;
                                         }
                                     } else {
                                          // Checking for the status
-                                         switch ($userStatus) {
+                                         switch ($dpStatus) {
                                             case 'Archived':
-                                                $listUsers = $CustomerCtrl->getCustomers('Archived');
+                                                $listDepartments = $departmentCtrl->getDepartments('Archived');
                                                 break;
                                             case 'Deleted':
-                                                $listUsers = $CustomerCtrl->getCustomers('Deleted');
+                                                $listDepartments = $departmentCtrl->getDepartments('Deleted');
                                                 break;
                                             default:
-                                                $listUsers = $CustomerCtrl->getCustomers('Active');
+                                                $listDepartments = $departmentCtrl->getDepartments('Active');
                                                 break;
                                         }
                                     }
 
                                     // Looping through the results
-                                    foreach ($listUsers as $user) {                                  
+                                    foreach ($listDepartments as $department) {                                  
                                 ?>
                                     <tr class="tab-table__row filter__row">
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $user->getCustomerID();?>)" ><?php echo $user->getCustomerName(); ?> </td>
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $user->getCustomerID();?>)"><?php echo $user->getCustomerComment(); ?></td>
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $user->getCustomerID();?>)"><?php echo $user->getCustomerReference(); ?></td>
-
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $department->getDepartmentID(); ?>)"><?php echo $department->getDepartmentName(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $department->getDepartmentID(); ?>)"><?php echo $department->getDepartmentComment(); ?></td>
+                                        <?php 
+                                            // Checking if there is a customer set
+                                            if($customerID == 0) {
+                                                ?>
+                                                    <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $department->getDepartmentID(); ?>)"><?php echo $department->getCustomerName(); ?></td>
+                                                <?php
+                                            }
+                                        ?>
                                         <td class="tab-table__td">
-                                            <a class="editKnop" href="customer-edit?customer=<?php echo $user->getCustomerID();?>"><i class="fas tab-table__icon">&#xf044;</i></a>
                                             <?php
+                                                // Checking if there is a customer set
+                                                if($customerID == 0) {
+                                                    ?>
+                                                        <a class="editKnop" href="department-edit?department=<?php echo $department->getDepartmentID(); ?>"><i class="fas tab-table__icon">&#xf044;</i></a>
+                                                    <?php
+                                                } else {
+                                                    ?>
+                                                      <a class="editKnop" href="department-edit?department=<?php echo $department->getDepartmentID(); ?>&customer=<?php echo $customerID; ?>"><i class="fas tab-table__icon">&#xf044;</i></a>
+                                                    <?php
+                                                }
+
                                                 // Checking for status and user an different icon for a different icon for that status
-                                                switch ($userStatus) {
+                                                switch ($dpStatus) {
                                                     case 'Archived':
                                                         ?>
-                                                            <a class="deleteKnop" name="deleteKnop" href="#" data-toggle="modal" data-target="#deleteModal" id='<?php echo $user->getCustomerID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteModal" id='<?php echo $department->getDepartmentID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
                                                         <?php
                                                         break;
                                                     case 'Deleted':
-                                                        // Leaving empty on purpose
+                                                        ?>
+
+                                                        <?php
                                                         break;
                                                     default:
                                                         ?>
-                                                            <a class="deleteKnop" name="archiveKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $user->getCustomerID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf187;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $department->getDepartmentID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf187;</i></a>
                                                         <?php
                                                         break; 
                                                 }
@@ -203,63 +236,18 @@
         </div>
     </body>
 
-    <!--Archive Modal--->
-    <div class="modal fade" id="archiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!--Delete Modal--->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="archiveModalLabel">Archive Customer</h5>
+                <h5 class="modal-title" id="deleteModal">Delete Department</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to archive this costumer?
-            </div>
-
-            <form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
-                <button type="submit" name="btnDelete" class="btn btn-primary" id="btnArchive">Archive   </button>          
-
-                <script type="text/javascript">
-                function reply_click(clicked_id)
-                {
-                    window.yourGlobalVariable = clicked_id;
-                }
-
-                $('#btnArchive').click(function () {
-
-                $.ajax({
-                    url: 'customer_handler_archive',
-                    type: 'post',
-                    data: { "CustomerID": yourGlobalVariable},
-                    success: function(response) { window.location.href='customer_listtested?status=<?php echo $userStatus;?>' }
-                });
-
-                });
-
-                </script>
-               
-            </div>
-            </form>
-
-            </div>
-        </div>
-        </div>
-            
-    <!--Delete Modal--->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModal">Delete Customer</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this costumer?
+                Are you sure you want to delete this department?
             </div>
 
             <form>
@@ -276,10 +264,56 @@
                 $('#btnDelete').click(function () {
 
                 $.ajax({
-                    url: 'customer_handler_delete',
+                    url: 'department_handler_delete',
                     type: 'post',
-                    data: { "CustomerID": yourGlobalVariable},
-                    success: function(response) { window.location.href='customer_listtested?status=<?php echo $userStatus;?>' }
+                    data: { "departmentID": yourGlobalVariable},
+                    success: function(response) { window.location.href='department-list?status=<?php echo $dpStatus;?>' }
+                });
+
+                });
+
+                </script>
+               
+            </div>
+            </form>
+
+            </div>
+        </div>
+        </div>
+
+
+         <!--Archive Modal--->
+         <div class="modal fade" id="archiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="archiveModal">Archive Department</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to archive this department?
+            </div>
+
+            <form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                <button type="submit" name="btnArchive" class="btn btn-primary" id="btnArchive">Archive   </button>          
+
+                <script type="text/javascript">
+                function reply_click(clicked_id)
+                {
+                    window.yourGlobalVariable = clicked_id;
+                }
+
+                $('#btnArchive').click(function () {
+
+                $.ajax({
+                    url: 'department_handler_archive',
+                    type: 'post',
+                    data: { "departmentID": yourGlobalVariable},
+                    success: function(response) { window.location.href='department-list?status=<?php echo $dpStatus;?>' }
                 });
 
                 });
@@ -304,29 +338,38 @@
             });
         });
 
-        // Function set table status
-        function updateTableStatus() {
+        // Checking the table status
+        function updateTableStatus(customerID) {
             // Ophalen van de status
-            var status = document.getElementById("customerStatus").value;
+            var status = document.getElementById("dpStatus").value;
 
             // De pagina refreshen met de nieuwe waarden
-            location.replace("?status=" + status);
-}
-
-        function toDetails(customerID){
-            location.assign("customer-edit?customer=" + customerID);
+            if (customerID == 0) {
+                location.replace("?status=" + status);
+            } else {
+                location.replace("?customer=" + customerID + "&status=" + status);
+            }
         }
 
+        // Function to go to the details onclick
+        function toDetails(customerID, departmentID){
+            // Sending the user to a new page
+            if (customerID == 0) {
+                location.assign("department-edit?department=" + departmentID);
+            } else {
+                location.assign("department-edit?department=" + departmentID + "&customer=" + customerID);
+            }
+        }
     </script>
 </html>
 
 <?php 
     // Looping through the results
-    // if (!empty($customerDetails)) {
-    //     foreach ($customerDetails as $customer) {
-    //         echo "<script> 
-    //             document.getElementById('pageTitle').innerHTML = 'Overview Customers of ". $customer->getCustomerName() ."'; 
-    //         </script>";
-    //     }
-    // }
+    if (!empty($customerDetails)) {
+        foreach ($customerDetails as $customer) {
+            echo "<script> 
+                document.getElementById('pageTitle').innerHTML = 'Overview departments of ". $customer->getCustomerName() ."'; 
+            </script>";
+        }
+    }
 ?>
