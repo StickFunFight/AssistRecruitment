@@ -1,41 +1,39 @@
 <?php
 
-class EntCustomer
-{
-    private $show_customerID;
-    private $show_customerName;
-    private $show_customerComment;
-    private $show_customerReference;
-    
-    public function __construct(string $show_customerID, string $show_customerName, string $show_customerComment, string $show_customerReference)
-    {
-        $this->show_customerID = $show_customerID;
-        $this->show_customerName = $show_customerName;
-        $this->show_customerComment = $show_customerComment;
-        $this->show_customerReference = $show_customerReference;
-        
+class EntCustomer {
+    private $CustomerID;
+    private $CustomerName;
+    private $CustomerComment;
+    private $CustomerRefrence;
+    private $CustomerStatus;
+
+    public function __construct($CustomerID, $CustomerName, $CustomerComment, $CustomerRefrence, $CustomerStatus) {
+        $this->CustomerID = $CustomerID;
+        $this->CustomerName = $CustomerName;
+        $this->CustomerComment = $CustomerComment;
+        $this->CustomerRefrence = $CustomerRefrence;
+        $this->CustomerStatus = $CustomerStatus;
     }
 
-    public function getCustomerID() : string
-    {
-        return $this->show_customerID;
+    public function getCustomerID() {
+        return $this->CustomerID;
     }
 
-    public function getCustomerName() : string
-    {
-        return $this->show_customerName;
+    public function getCustomerName() {
+        return $this->CustomerName;
+    }
+ 
+    public function getCustomerComment() {
+        return $this->CustomerComment;
     }
 
-    public function getCustomerComment() : string
-    {
-        return $this->show_customerComment;
+    public function getCustomerReference() {
+        return $this->CustomerRefrence;
     }
 
-    public function getCustomerReference() : string
-    {
-        return $this->show_customerReference;
+    public function getCustomerStatus() {
+        return $this->CustomerStatus;
     }
-
 } 
 
 ?>

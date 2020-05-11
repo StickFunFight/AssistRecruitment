@@ -36,10 +36,6 @@
     <!-- Linking to own CSS -->
     <link rel="stylesheet" href="../assests/styling/main.css">
 
-
-    <link rel="stylesheet" href="../assests/styling/menu.css">
-
-
     <!-- Linking to own JavaScript -->
     <script src="../assests/script/validation.js"></script>
     <script src="../assests/script/main.js"></script>
