@@ -10,7 +10,7 @@ $results = $QF->getQuestionData($questionID);
     <body>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editQuestion">
     Modal
 </button>
 
