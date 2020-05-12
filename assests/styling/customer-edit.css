@@ -173,7 +173,10 @@ select.form-control {
   border-color: #73b99b;
 }
 
-.tab-table__head {
+.tab-table__head,
+.customer__th_name,
+.customer__th_comment,
+.customer__td_refrence {
   position: relative;
 }
 

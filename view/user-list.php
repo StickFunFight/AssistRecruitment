@@ -130,15 +130,15 @@
                             <thead class="tab-table__header">
                                 <tr class="tab-table__row">
                                     <!-- Voor de onlcick gebruik maken van int zodat JavaScript de column kan vinden -->
-                                    <th class="tab-table__head" onclick="sortTable(0)">Name</th>
-                                    <th class="tab-table__head" onclick="sortTable(1)">Phone number</th>
-                                    <th class="tab-table__head" onclick="sortTable(2)">Email</th>
-                                    <th class="tab-table__head" onclick="sortTable(3)">Department</th>
+                                    <th class="tab-table__head">Name <div class="table__icon-top" onclick="sortTable('filterTable', 0, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 0, 'desc')"></div></th>
+                                    <th class="tab-table__head">Phone number <div class="table__icon-top" onclick="sortTable('filterTable', 1, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 1, 'desc')"></div></th>
+                                    <th class="tab-table__head">Email <div class="table__icon-top" onclick="sortTable('filterTable', 2, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 2, 'desc')"></div></th>
+                                    <th class="tab-table__head">Department <div class="table__icon-top" onclick="sortTable('filterTable', 3, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 3, 'desc')"></div></th>
                                     <?php 
                                         // Checking if there is a customer set
                                         if($customerID == 0) {
                                             ?>
-                                                <th class="tab-table__head" onclick="sortTable(4)">Customer</th>
+                                                <th class="tab-table__head">Customer <div class="table__icon-top" onclick="sortTable('filterTable', 4, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 4, 'desc')"></div></th>
                                             <?php
                                         }
                                     ?>

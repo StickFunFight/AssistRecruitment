@@ -119,10 +119,10 @@
                             <thead class="tab-table__header">
                                 <tr class="tab-table__row">
                                     <!-- Voor de onlcick gebruik maken van int zodat JavaScript de column kan vinden -->
-                                    <th class="customer__th_name" onclick="sortTable(0)">Name</th>
-                                    <th class="customer__th_comment" onclick="sortTable(1)">Comment</th>
-                                    <th class="customer__td_refrence" onclick="sortTable(2)">Reference</th>
-                                    <th class="customer__td_icon" onclick="sortTable(3)">Actions</th>
+                                    <th class="customer__th_name">Name <div class="table__icon-top" onclick="sortTable('filterTable', 0, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 0, 'desc')"></div></th>
+                                    <th class="customer__th_comment">Comment <div class="table__icon-top" onclick="sortTable('filterTable', 1, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 1, 'desc')"></div></th>
+                                    <th class="customer__td_refrence">Reference <div class="table__icon-top" onclick="sortTable('filterTable', 2, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 2, 'desc')"></div></th>
+                                    <th class="customer__td_icon">Actions  <div class="table__icon-top" onclick="sortTable('filterTable', 3, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 3, 'desc')"></div></th>
                                    
                                     </tr>
 
@@ -311,7 +311,7 @@
 
             // De pagina refreshen met de nieuwe waarden
             location.replace("?status=" + status);
-}
+        }
 
         function toDetails(customerID){
             location.assign("customer-edit?customer=" + customerID);
@@ -319,14 +319,3 @@
 
     </script>
 </html>
-
-<?php 
-    // Looping through the results
-    // if (!empty($customerDetails)) {
-    //     foreach ($customerDetails as $customer) {
-    //         echo "<script> 
-    //             document.getElementById('pageTitle').innerHTML = 'Overview Customers of ". $customer->getCustomerName() ."'; 
-    //         </script>";
-    //     }
-    // }
-?>

@@ -195,7 +195,10 @@ select.form-control{
     border-color: $green;
 }
 
-.tab-table__head {
+.tab-table__head,
+.customer__th_name,
+.customer__th_comment, 
+.customer__td_refrence {
     // cursor: pointer;
     position: relative;
 }
@@ -243,36 +246,6 @@ select.form-control{
 .table__icon-active {
     opacity: 1;
 }
-
-// .tab-table__bottom::after {
-//     content: '';
-//     width: 0;
-//     height: 0;
-//     border-left: 8px solid transparent;
-//     border-right: 8px solid transparent;
-//     border-top: 10px solid white;
-//     display: inline-block;
-//     line-height: inherit;
-//     vertical-align: middle;
-//     position: relative;
-//     left: 16px;
-//     bottom: -8px;
-// }
-
-// .tab-table__top::after {
-//     content: '';
-//     width: 0;
-//     height: 0;
-//     border-left: 8px solid transparent;
-//     border-right: 8px solid transparent;
-//     border-bottom: 10px solid white;
-//     display: flex;
-//     line-height: inherit;
-//     vertical-align: middle;
-//     position: absolute;
-//     left: 0px;
-//     top: -18px;
-// }
 
 .tab-table__row {
     cursor: pointer;
