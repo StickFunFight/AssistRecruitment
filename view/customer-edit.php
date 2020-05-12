@@ -280,10 +280,10 @@
                                     foreach ($listUsers as $user) {                                  
                                 ?>
                                     <tr class="tab-table__row filter__row">
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactName(); ?></td>
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserPhoneNumber(); ?></td>
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserEmail(); ?></td>
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserDepartmentName(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails('Users', <?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactName(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails('Users', <?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserPhoneNumber(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails('Users', <?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserEmail(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails('Users', <?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserDepartmentName(); ?></td>
                                         <?php 
                                             // Checking if there is a customer set
                                             if($customerID == 0) {
@@ -411,8 +411,8 @@
                                     foreach ($listDepartments as $department) {                                  
                                 ?>
                                     <tr class="tab-table__row filter__row">
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $department->getDepartmentID(); ?>)"><?php echo $department->getDepartmentName(); ?></td>
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $department->getDepartmentID(); ?>)"><?php echo $department->getDepartmentComment(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails('Departments', <?php echo $customerID; ?>, <?php echo $department->getDepartmentID(); ?>)"><?php echo $department->getDepartmentName(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails('Departments', <?php echo $customerID; ?>, <?php echo $department->getDepartmentID(); ?>)"><?php echo $department->getDepartmentComment(); ?></td>
                                         <td class="tab-table__td">
                                             <?php
                                                 // Checking if there is a customer set
@@ -543,9 +543,9 @@
                                     foreach ($listScans as $scan) {                                  
                                 ?>
                                     <tr class="tab-table__row filter__row">
-                                        <td class="tab-table__td"><?php echo $scan->getScanName(); ?></td>
-                                        <td class="tab-table__td"><?php echo $scan->getScanStartDate(); ?></td>
-                                        <td class="tab-table__td"><?php echo $scan->getScanEndDate(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails('Departments', <?php echo $customerID; ?>, <?php echo $scan->getScanID(); ?>)"><?php echo $scan->getScanName(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails('Departments', <?php echo $customerID; ?>, <?php echo $scan->getScanID(); ?> )"><?php echo $scan->getScanStartDate(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails('Departments', <?php echo $customerID; ?>, <?php echo $scan->getScanID(); ?> )"><?php echo $scan->getScanEndDate(); ?></td>
                                         <td class="tab-table__td">
                                             <a class="editKnop" href="#"><i class="fas tab-table__icon">&#xf044;</i></a>
                                             <?php
@@ -611,22 +611,6 @@
                 });
             });
         });
-
-        // Function to go to the details onclick
-        function toDetails(overviewTable, overviewID){
-            // Checking wich table has been clicked
-            switch (overiewTable) {
-                case "Departments":
-                    location.assign("department-edit?department=" + overviewID + "&customer=" + customerID);
-                    break;
-                case "Scans":
-                    location.assign("scan-edit?department=" + overviewID + "&customer=" + customerID);
-                    break;
-                default:
-                    location.assign("user-edit?user=" + overviewID + "&customer=" + customerID);
-                    break;
-            }
-        }
     </script>
 </html>
 <?php

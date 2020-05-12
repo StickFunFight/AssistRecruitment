@@ -7,63 +7,6 @@ function maintenceSubMenu(){
     submenu.classList.toggle("submenu--show");
 }
 
-// Function to sort the tables
-// function sortTable(n) {
-//     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-//     table = document.getElementById("filterTable");
-//     switching = true;
-//     // Setting the sort direction
-//     dir = "asc";
-//     /* Make a loop that will continue until
-//     no switching has been done: */
-//     while (switching) {
-//         // Start by saying: no switching is done:
-//         switching = false;
-//         rows = table.rows;
-//         /* Loop through all table rows (except the
-//         first, which contains table headers): */
-//         for (i = 1; i < (rows.length - 1); i++) {
-//             // Start by saying there should be no switching:
-//             shouldSwitch = false;
-//             /* Get the two elements you want to compare,
-//             one from current row and one from the next: */
-//             x = rows[i].getElementsByTagName("TD")[n];
-//             y = rows[i + 1].getElementsByTagName("TD")[n];
-//             /* Check if the two rows should switch place,
-//             based on the direction, asc or desc: */
-//             if (dir == "asc") {
-//                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-//                     // If so, mark as a switch and break the loop:
-//                     shouldSwitch = true;
-//                     break;
-//                 }
-//             } else if (dir == "desc") {
-//                 if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-//                     // If so, mark as a switch and break the loop:
-//                     shouldSwitch = true;
-//                     break;
-//                 }
-//             }
-//         }
-
-//         if (shouldSwitch) {
-//             /* If a switch has been marked, make the switch
-//             and mark that a switch has been done: */
-//             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-//             switching = true;
-//             // Each time a switch is done, increase this count by 1:
-//             switchcount ++;
-//         } else {
-//             /* If no switching has been done AND the direction is "asc",
-//             set the direction to "desc" and run the while loop again. */
-//             if (switchcount == 0 && dir == "asc") {
-//                 dir = "desc";
-//                 switching = true;
-//             }
-//         }
-//     }
-// }
-
 // Test function to sort the tables
 function sortTable(sortTable, tableColumn, direction) {
     var table, column, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0, tableIconTop, tableIconBottom, restTableIconTop, restTableIconBottom;
@@ -140,6 +83,79 @@ function sortTable(sortTable, tableColumn, direction) {
                 switching = true;
             }
         }
+    }
+}
+
+// function to get url of customer edit and change a overview status
+// Checking the table status
+function updateTableStatus(overviewTable, overviewStatus) { 
+    // Checking wich table has been clicked
+    var status = document.getElementById(overviewStatus).value;
+    // Getting the url of
+    var url = window.location.href.toString();
+
+    console.log(url);
+
+    // Checking wich table status has been updated
+    switch (overviewTable) {
+        case "Departments":
+            // Checking if department status has been changed
+            if (url.includes("department-status", 0)) {
+                // Looking in the url for the parameter and value to replace with the new status
+                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'department-status=' + status);
+
+                // Refreshing the page with the new url
+                location.replace(newUrl);
+            } else {
+                // The status has not yet been updated so the status is placed new in the url
+                location.replace(url + "&department-status=" + status);
+            }
+            break;
+    
+        case "Scans":
+            // Checking if scan status has been changed
+            if (url.includes("scan-status", 0)) {
+                // Looking in the url for the parameter and value to replace with the new status
+                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'scan-status=' + status);
+
+                // Refreshing the page with the new url
+                location.replace(newUrl);
+            } else {
+                // The status has not yet been updated so the status is placed new in the url
+                location.replace(url + "&scan-status=" + status);
+            }
+            break;
+
+        default:
+            // Checking if scan status has been changed
+            if (url.includes("user-status", 0)) {
+                // Looking in the url for the parameter and value to replace with the new status
+                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'user-status=' + status);
+
+                // Refreshing the page with the new url
+                location.replace(newUrl);
+            } else {
+                // The status has not yet been updated so the status is placed new in the url
+                location.replace(url + "&user-status=" + status);
+            }
+            break;
+    }
+}
+
+// Function to go to the details page onclick of table cell
+function toDetails(overviewTable, overviewID, customerID){
+    // Checking wich table has been clicked
+    switch (overviewTable) {
+        case "Departments":
+            location.allign("department-edit?department=" + overviewID + "&customer=" + customerID);
+            //console.log("department-edit?department=" + overviewID + "&customer=" + customerID);
+            break;
+        case "Scans":
+            location.assign("scan-edit?scan=" + overviewID + "&customer=" + customerID);
+            break;
+        default:
+            location.assign("user-edit?user=" + overviewID + "&customer=" + customerID);
+            break;
     }
 }
 
@@ -254,61 +270,4 @@ function setCustomerSelectDisabeld() {
 // Function to udate the customer ID
 function changeSelectCustomer() {
     document.getElementById("custID").value = document.getElementById("customerSelect").value;
-}
-
-
-// function to get url of customer edit and change a overview status
-// Checking the table status
-function updateTableStatus(overviewTable, overviewStatus) { 
-    // Checking wich table has been clicked
-    var status = document.getElementById(overviewStatus).value;
-    // Getting the url of
-    var url = window.location.href.toString();
-
-    console.log(url);
-
-    // Checking wich table status has been updated
-    switch (overviewTable) {
-        case "Departments":
-            // Checking if department status has been changed
-            if (url.includes("department-status", 0)) {
-                // Looking in the url for the parameter and value to replace with the new status
-                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'department-status=' + status);
-
-                // Refreshing the page with the new url
-                location.replace(newUrl);
-            } else {
-                // The status has not yet been updated so the status is placed new in the url
-                location.replace(url + "&department-status=" + status);
-            }
-            break;
-    
-        case "Scans":
-            // Checking if scan status has been changed
-            if (url.includes("scan-status", 0)) {
-                // Looking in the url for the parameter and value to replace with the new status
-                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'scan-status=' + status);
-
-                // Refreshing the page with the new url
-                location.replace(newUrl);
-            } else {
-                // The status has not yet been updated so the status is placed new in the url
-                location.replace(url + "&scan-status=" + status);
-            }
-            break;
-
-        default:
-            // Checking if scan status has been changed
-            if (url.includes("user-status", 0)) {
-                // Looking in the url for the parameter and value to replace with the new status
-                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'user-status=' + status);
-
-                // Refreshing the page with the new url
-                location.replace(newUrl);
-            } else {
-                // The status has not yet been updated so the status is placed new in the url
-                location.replace(url + "&user-status=" + status);
-            }
-            break;
-    }
 }
