@@ -45,4 +45,26 @@ class LoginDatabase {
         }
     }
 
+    public function getUserByEmail($email) {
+        $connection = new Database();
+        $getUser = null;
+        $db = $connection->getConnection();
+
+        $stmt = $db->prepare("SELECT * FROM user WHERE userEmail = ?");
+        $stmt->bindParam(1, $email);
+
+        try {
+            $stmt->execute();
+            $resultSet = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+            foreach($resultSet as $user) {
+                $setUser = new User($user->userID, $user->userName, $user->userEmail, $user->userPassword, $user->userRights, $user->userStatus);
+                $getUser = $setUser;
+            }
+
+            return $getUser;
+        } catch(PDOException $exception){
+            return null;
+        }
+    }
 }
