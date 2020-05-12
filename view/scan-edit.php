@@ -9,8 +9,7 @@ require '../functions/models/entScan.php';
 $Scan = new ScanController();
 $lijstScan = $Scan->GetScan($id);
 foreach ($lijstScan as $item){
-echo $item->getScanReminderText();
-}
+
 ?>
 <html>
 <head>
@@ -21,7 +20,7 @@ echo $item->getScanReminderText();
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <h1 class="ce__title" id="pageTitle">Edit User</h1>
+                <h1 class="ce__title" id="pageTitle">Edit Scan</h1>
             </div>
         </div>
 
@@ -31,22 +30,21 @@ echo $item->getScanReminderText();
                     <label for="Name" class="ce__label">Name</label>
                     <input type="text" name="txtName" id="name" value="" class="form-control ce--input" required/>
                 </div>
-
-                <div class="col-sm-6">
-                    <label for="Comment" class="ce__label">Comment</label>
-                    <input type="text" name="TxtComment" id="Comment" value="" class="form-control ce--input" required/>
-                </div>
-            </div>
-            <div class="row ce--form-row">
                 <div class="col-sm-6">
                     <label for="Introduction" class="ce__label">Introductie</label>
                     <input type="text" name="Txtintro" id="name" value="" class="form-control ce--input" required/>
+
+            </div>
+            <div class="row ce--form-row">
+            </div>
+                <div class="col-sm-6">
+                    <label for="Comment" class="ce__label">Comment</label>
+                    <textarea name="TxtComment" id="Comment" class="form-control ce--input" rows="5" onchange=""></textarea>
                 </div>
 
                 <div class="col-sm-6">
                     <label for="Reminder" class="ce__label">Reminder</label>
-                    <input type="tel" name="TxtReminder" id="Reminder" value="" class="form-control ce--input"
-                           required/>
+                    <textarea name="TxtReminder" id="Reminder" class="form-control ce--input" rows="5" onchange=""></textarea>
                 </div>
             </div>
             <div class="row ce--form-row">
@@ -88,3 +86,5 @@ echo $item->getScanReminderText();
     </div>
 </body>
 </html>
+<?php
+}
