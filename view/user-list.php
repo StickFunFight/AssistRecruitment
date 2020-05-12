@@ -2,7 +2,7 @@
     // Inlcude Database class
     require '../functions/datalayer/database.class.php';
     // Including controller
-    require '../functions/controller/contactController.php';
+    require '../functions/controller/UserController.php';
     require '../functions/controller/CustomerController.php';
     // Including entity classes
     require '../functions/models/entContact.php';
@@ -10,7 +10,7 @@
 
     // Creating connections with the classes
     $CustomerCtrl = new CustomerController();
-    $ContactCtrl = new ContactController();
+    $userCtrl = new UserController();
 
     // Creating a customer id to fil it later
     $customerID;
@@ -156,26 +156,26 @@
                                         // Checking for the status
                                         switch ($userStatus) {
                                             case 'Archived':
-                                                $listUsers = $ContactCtrl->getContactsCustomer($customerID, 'Archived');
+                                                $listUsers = $userCtrl->getUsersCustomer($customerID, 'Archived');
                                                 break;
                                             case 'Deleted':
-                                                $listUsers = $ContactCtrl->getContactsCustomer($customerID, 'Deleted');
+                                                $listUsers = $userCtrl->getUsersCustomer($customerID, 'Deleted');
                                                 break;
                                             default:
-                                                $listUsers = $ContactCtrl->getContactsCustomer($customerID, 'Active');
+                                                $listUsers = $userCtrl->getUsersCustomer($customerID, 'Active'); 
                                                 break;
                                         }
                                     } else {
                                          // Checking for the status
                                          switch ($userStatus) {
                                             case 'Archived':
-                                                $listUsers = $ContactCtrl->getContacts('Archived');
+                                                $listUsers = $userCtrl->getUsers('Archived');
                                                 break;
                                             case 'Deleted':
-                                                $listUsers = $ContactCtrl->getContacts('Deleted');
+                                                $listUsers = $userCtrl->getUsers('Deleted');
                                                 break;
                                             default:
-                                                $listUsers = $ContactCtrl->getContacts('Active');
+                                                $listUsers = $userCtrl->getUsers('Active');
                                                 break;
                                         }
                                     }
@@ -185,14 +185,14 @@
                                 ?>
                                     <tr class="tab-table__row filter__row">
                                         <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactName(); ?></td>
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactPhoneNumber(); ?></td>
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactEmail(); ?></td>
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactDepartmentName(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserPhoneNumber(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserEmail(); ?></td>
+                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserDepartmentName(); ?></td>
                                         <?php 
                                             // Checking if there is a customer set
                                             if($customerID == 0) {
                                                 ?>
-                                                    <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactCustomerName(); ?></td>
+                                                    <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserCustomerName(); ?></td>
                                                 <?php
                                             }
                                         ?>

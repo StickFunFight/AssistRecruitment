@@ -2,49 +2,73 @@
 
 class EntContact {
     private $UserID;
+    private $ContactID;
     private $ContactName;
-    private $ContactPhoneNumber;
-    private $ContactEmail;
-    private $ContactStatus;
-    private $ContactCustomerName;
-    private $ContactDepartmentName;
+    private $UserPhoneNumber;
+    private $UserEmail;
+    private $UserComment;
+    private $UserStatus;
+    private $UserCustomerName;
+    private $UserDepartmentName;
+    private $UserCustomerID;
+    private $userDepartmentID;
 
-    public function __construct($UserID, $ContactName, $ContactPhoneNumber, $ContactEmail, $ContactStatus, $ContactCustomerName, $ContactDepartmentName) {
+    public function __construct($UserID, $ContactID, $ContactName, $UserPhoneNumber, $UserEmail, $UserComment, $UserStatus, $UserCustomerName, $UserDepartmentName, $UserCustomerID, $userDepartmentID) {
         $this->UserID = $UserID;
+        $this->ContactID = $ContactID;
         $this->ContactName = $ContactName;
-        $this->ContactPhoneNumber = $ContactPhoneNumber;
-        $this->ContactEmail = $ContactEmail;
-        $this->ContactStatus = $ContactStatus;
-        $this->ContactCustomerName = $ContactCustomerName;
-        $this->ContactDepartmentName = $ContactDepartmentName;
+        $this->UserPhoneNumber = $UserPhoneNumber;
+        $this->UserEmail = $UserEmail;
+        $this->UserComment = $UserComment;
+        $this->UserStatus = $UserStatus;
+        $this->UserCustomerName = $UserCustomerName; 
+        $this->UserDepartmentName = $UserDepartmentName;
+        $this->UserCustomerID = $UserCustomerID;
+        $this->userDepartmentID = $userDepartmentID;
     }
 
     public function getUserID() {
         return $this->UserID;
     }
 
+    public function getContactID() {
+        return $this->ContactID;
+    }
+
     public function getContactName() {
         return $this->ContactName;
     }
- 
-    public function getContactPhoneNumber() {
-        return $this->ContactPhoneNumber;
+
+    public function getUserPhoneNumber() {
+        return $this->UserPhoneNumber;
     }
 
-    public function getContactEmail() {
-        return $this->ContactEmail;
+    public function getUserEmail() {
+        return $this->UserEmail;
     }
 
-    public function getContactStatus() {
-        return $this->ContactStatus;
+    public function getUserComment() {
+        return $this->UserComment;
     }
 
-    public function getContactCustomerName() {
-        return $this->ContactCustomerName;
+    public function getUserStatus() {
+        return $this->UserStatus;
     }
 
-    public function getContactDepartmentName() {
-        return $this->ContactDepartmentName;
+    public function getUserCustomerName() {
+        return $this->UserCustomerName;
+    }
+
+    public function getUserDepartmentName() {
+        return $this->UserDepartmentName;
+    }
+
+    public function getUserCustomerID() {
+        return $this->UserCustomerID;
+    }
+
+    public function getuserDepartmentID() {
+        return $this->userDepartmentID;
     }
 } 
 

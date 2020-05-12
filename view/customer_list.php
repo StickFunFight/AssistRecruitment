@@ -2,7 +2,7 @@
     // Inlcude Database class
     require '../functions/datalayer/database.class.php';
     // Including controller
-    require '../functions/controller/contactController.php';
+    require '../functions/controller/UserController.php';
     require '../functions/controller/CustomerController.php';
     // Including entity classes
     require '../functions/models/entContact.php';
@@ -10,7 +10,7 @@
 
     // Creating connections with the classes
     $CustomerCtrl = new CustomerController();
-    $ContactCtrl = new ContactController();
+    $UserCtrl = new UserController();
 
     // Creating a customer id to fil it later
     $customerID;
@@ -234,7 +234,7 @@
                     url: 'customer_handler_archive',
                     type: 'post',
                     data: { "CustomerID": yourGlobalVariable},
-                    success: function(response) { window.location.href='customer_listtested?status=<?php echo $userStatus;?>' }
+                    success: function(response) { window.location.href='customer_list?status=<?php echo $userStatus;?>' }
                 });
 
                 });
@@ -279,7 +279,7 @@
                     url: 'customer_handler_delete',
                     type: 'post',
                     data: { "CustomerID": yourGlobalVariable},
-                    success: function(response) { window.location.href='customer_listtested?status=<?php echo $userStatus;?>' }
+                    success: function(response) { window.location.href='customer_list?status=<?php echo $userStatus;?>' }
                 });
 
                 });

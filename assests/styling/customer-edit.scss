@@ -120,6 +120,10 @@ select.form-control{
     margin-top: 8rem;
 }
 
+.ce-overview__table {
+    padding: 50px 0;
+}
+
 /* section title */
 .ce-overview__title {
     font-size: 3.2rem;
@@ -192,8 +196,83 @@ select.form-control{
 }
 
 .tab-table__head {
-    cursor: pointer;
+    // cursor: pointer;
+    position: relative;
 }
+
+/* Styling for the sorting icons */
+.table__icon-top,
+.table__icon-bottom {
+    position: relative;
+}
+
+/* Shared styling */
+.table__icon {
+    width: 0;
+    height: 0;
+    display: inline-block;
+    line-height: inherit;
+    vertical-align: middle;
+    position: absolute;
+    margin-left: 15px;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+/* Top styling */
+.table__icon-top {
+    @extend .table__icon;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 10px solid white;
+    top: 5px;
+}
+
+/* Bottom styling */
+.table__icon-bottom {
+    @extend .table__icon;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 10px solid white;
+    bottom: 5px;
+}
+
+/* Active styling */
+.table__icon-top:hover,
+.table__icon-bottom:hover,
+.table__icon-active {
+    opacity: 1;
+}
+
+// .tab-table__bottom::after {
+//     content: '';
+//     width: 0;
+//     height: 0;
+//     border-left: 8px solid transparent;
+//     border-right: 8px solid transparent;
+//     border-top: 10px solid white;
+//     display: inline-block;
+//     line-height: inherit;
+//     vertical-align: middle;
+//     position: relative;
+//     left: 16px;
+//     bottom: -8px;
+// }
+
+// .tab-table__top::after {
+//     content: '';
+//     width: 0;
+//     height: 0;
+//     border-left: 8px solid transparent;
+//     border-right: 8px solid transparent;
+//     border-bottom: 10px solid white;
+//     display: flex;
+//     line-height: inherit;
+//     vertical-align: middle;
+//     position: absolute;
+//     left: 0px;
+//     top: -18px;
+// }
 
 .tab-table__row {
     cursor: pointer;

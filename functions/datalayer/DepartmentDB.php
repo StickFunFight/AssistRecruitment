@@ -17,12 +17,13 @@
             $listDepartments = array();
 
             // Making a query to get the scans of the customer out the database
-            $query = sprintf("SELECT dp.departmentID, dp.departmentName, dp.departmentComment, dp.departmentStatus, dp.customerID, c.customerName
-                            FROM department dp
-                            INNER JOIN customer c ON dp.customerID = c.customerID
-                            WHERE dp.departmentStatus = '%s'
-                            ORDER BY dp.departmentName ASC", $statusDepartment);
+            $query = "SELECT dp.departmentID, dp.departmentName, dp.departmentComment, dp.departmentStatus, dp.customerID, c.customerName
+                        FROM department dp
+                        INNER JOIN customer c ON dp.customerID = c.customerID
+                        WHERE dp.departmentStatus = ?
+                        ORDER BY dp.departmentName ASC";
             $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $statusDepartment);
             if($stm->execute()){
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -47,12 +48,14 @@
             $listDepartments = array();
 
             // Making a query to get the scans of the customer out the database
-            $query = sprintf("SELECT dp.departmentID, dp.departmentName, dp.departmentComment, dp.departmentStatus, dp.customerID, c.customerName
-                            FROM department dp
-                            INNER JOIN customer c ON dp.customerID = c.customerID
-                            WHERE c.customerID = %d AND dp.departmentStatus = '%s'
-                            ORDER BY dp.departmentName ASC", $customerID, $departmentStatus);
+            $query = "SELECT dp.departmentID, dp.departmentName, dp.departmentComment, dp.departmentStatus, dp.customerID, c.customerName
+                      FROM department dp
+                      INNER JOIN customer c ON dp.customerID = c.customerID
+                      WHERE c.customerID = ? AND dp.departmentStatus = ?
+                      ORDER BY dp.departmentName ASC";
             $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $customerID);
+            $stm->bindParam(2, $departmentStatus);
             if($stm->execute()){
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -96,11 +99,12 @@
             $detailsDepartment = array();
 
             // Making a query to get the scans of the customer out the database
-            $query = sprintf("SELECT dp.departmentID, dp.departmentName, dp.departmentComment, dp.departmentStatus, dp.customerID, c.customerName
-                            FROM department dp
-                            INNER JOIN customer c ON dp.customerID = c.customerID
-                            WHERE dp.departmentID = %d", $departmentID);
+            $query = "SELECT dp.departmentID, dp.departmentName, dp.departmentComment, dp.departmentStatus, dp.customerID, c.customerName
+                      FROM department dp
+                      INNER JOIN customer c ON dp.customerID = c.customerID
+                      WHERE dp.departmentID = ?";
             $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $departmentID);
             if($stm->execute()){
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -121,8 +125,13 @@
 
         function updateDepartment($departmentID, $departmentName, $departmentStatus, $departmentComment, $departmentCustomer) {
             // Query aanmaken om alle functies uit de database te halen
-            $query = sprintf("UPDATE department SET departmentName = '%s', departmentComment = '%s', departmentStatus = '%s', customerID = %d WHERE departmentID = %d", $departmentName, $departmentComment, $departmentStatus, $departmentCustomer, $departmentID);
+            $query = "UPDATE department SET departmentName = ?, departmentComment = ?, departmentStatus = ?, customerID = ? WHERE departmentID = ?";
             $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $departmentName);
+            $stm->bindParam(2, $departmentComment);
+            $stm->bindParam(3, $departmentStatus);
+            $stm->bindParam(4, $departmentCustomer);
+            $stm->bindParam(5, $departmentID);
             if($stm->execute()){
                 // Sending true back for succes message
                 return true;
@@ -134,8 +143,9 @@
 
         function deleteDepartment($departmentID){
             // Create Query to update Customer Status
-            $query = "UPDATE department SET departmentStatus = 'Deleted' WHERE departmentID = $departmentID";
+            $query = "UPDATE department SET departmentStatus = 'Deleted' WHERE departmentID = ?";
             $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $departmentID);
             if($stm->execute()){
                 echo 'Het is gelukt';
             }
@@ -147,8 +157,9 @@
 
         function archiveDepartment($departmentID){
             // Create Query to update Customer Status
-            $query = "UPDATE department SET departmentStatus = 'Archived' WHERE departmentID = $departmentID";
+            $query = "UPDATE department SET departmentStatus = 'Archived' WHERE departmentID = ?";
             $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $departmentID);
             if($stm->execute()){
                 echo 'Het is gelukt';
             }
