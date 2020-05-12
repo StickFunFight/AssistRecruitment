@@ -1,17 +1,20 @@
 <?php
     require_once 'database.class.php';
 
-    Class ScanDB {
-        
-        private $db;   
-    
-        public function __construct(){
+    Class ScanDB
+    {
+
+        private $db;
+
+        public function __construct()
+        {
             //maakt een nieuwe connectie 
             $database = new Database();
             $this->db = $database->getConnection();
         }
 
-        function getScans($statusScan){
+        function getScans($statusScan)
+        {
             // Creating a array
             $listScans = array();
 
@@ -24,26 +27,26 @@
                             WHERE s.scanStatus = '%s'
                             ORDER BY s.scanName ASC", $statusScan);
             $stm = $this->db->prepare($query);
-            if($stm->execute()){
+            if ($stm->execute()) {
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // Looping through the results
-                foreach($result as $scan){
+                foreach ($result as $scan) {
                     // Putting it in the modal
                     $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, $scan->scanReminderText, $scan->scanStartDate, $scan->scanEndDate, $scan->customerName);
                     array_push($listScans, $entScan);
                 }
                 // Returning the full list
-                return $listScans;    
-            }
-            // Showing a error when the query didn't execute
-            else{
+                return $listScans;
+            } // Showing a error when the query didn't execute
+            else {
                 echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
             }
         }
 
         // Getting all scans of 1 customer
-        function getScansCustomer($customerID, $statusScan){
+        function getScansCustomer($customerID, $statusScan)
+        {
             // Creating a array
             $listScans = array();
 
@@ -56,24 +59,35 @@
                             WHERE c.customerID = %d AND s.scanStatus = '%s'
                             ORDER BY s.scanName ASC", $customerID, $statusScan);
             $stm = $this->db->prepare($query);
-            if($stm->execute()){
+            if ($stm->execute()) {
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // Looping through the results
-                foreach($result as $scan){
+                foreach ($result as $scan) {
                     // Putting it in the modal
                     $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, $scan->scanReminderText, $scan->scanStartDate, $scan->scanEndDate, $scan->customerName);
                     array_push($listScans, $entScan);
                 }
                 // Returning the full list
-                return $listScans;    
-            }
-            // Showing a error when the query didn't execute
-            else{
+                return $listScans;
+            } // Showing a error when the query didn't execute
+            else {
                 echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
             }
         }
 
+        function duplicateScan($scanID){
+            // Create Query to duplicate scan data
+            $query = "INSERT INTO scan SELECT 0, scan.* WHERE scanID = $scanID";
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                echo 'Het is gelukt';
+            }
+            // Error Text
+            else {
+                echo "Er is iets fout gegaan";
+            }
+        }
 
         function archiveScan($scanID){
             // Create Query to update Customer Status

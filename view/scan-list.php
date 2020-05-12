@@ -64,6 +64,7 @@
                 </div>
 
                 <div class="row">
+
                     <div class="col-sm-12">
                         <form method="POST" action="testfile?customer=<?php echo $customerID; ?>&tab=scan">
                             <div class="row">
@@ -109,6 +110,7 @@
 
                                 <div class="col-sm-2">
                                     <div class="add-container">
+
                                         <?php
                                             // Checking for customer id to know where to add the new user to
                                             if ($customerID != 0) {
@@ -121,7 +123,10 @@
                                                 <?php
                                             }       
                                         ?>
+
+
                                     </div>
+
                                 </div>
                             </div>
                         </form>
@@ -215,6 +220,17 @@
                                                         break;
                                                 }
                                             ?>
+                                            <a  href="" class="btn add-container__btn"><i id="popoverActions" class='fas fa-ellipsis-h'></i></a>
+                                            <script>
+                                                $(document).ready(function() {
+                                                    // This is to overwrite the boostrap default and show it allways
+                                                    $('#popoverActions').popover('show');
+                                                    // This is to destroy the popover when you click the title
+                                                    $('.popover-title').click(function(){
+                                                        $('#popoverActions').popover('destroy');
+                                                    });
+                                                });
+                                            </script>
                                         </td>
                                     </tr>
                                 <?php
