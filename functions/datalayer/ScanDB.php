@@ -100,6 +100,30 @@
                 echo "Er is iets fout gegaan";
             }
         }
+        function getScan($scanID){
+            // Creating a array
+            $listScans = array();
+
+            // Making a query to get the scans of the customer out the database
+            $query = sprintf("Select * from scan where scanID = $scanID");
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                // Getting the results fromm the database
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                // Looping through the results
+                foreach($result as $scan){
+                    // Putting it in the modal
+                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, $scan->scanReminderText, $scan->scanStartDate, $scan->scanEndDate, '');
+                    array_push($listScans, $entScan);
+                }
+                // Returning the full list
+                return $listScans;
+            }
+            // Showing a error when the query didn't execute
+            else{
+                echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
+            }
+        }
 
         // function deleteCustomers($customerID){
         //     // Query aanmaken om customerStatus te veranderen naar Deleted

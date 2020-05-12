@@ -29,6 +29,14 @@
 
             // Returning the list given from the Database class
             return $listScans;
-        }  
+        }
+        Function GetScan($scanID){
+            $listScans = array();
+
+            $listScans = $this->ScanDB->getScan($scanID);
+
+            return $listScans;
+        }
+
     }
 ?>
