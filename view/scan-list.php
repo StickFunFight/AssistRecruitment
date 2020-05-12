@@ -232,11 +232,7 @@ if (isset($_GET['status'])) {
                                             break;
                                     }
                                     ?>
-<!--                                    <button type="button" class="btn btn-info" data-toggle="popover" title="Popover title">Toggle popover</button>-->
-<!--                                    <a class="deleteKnop" data-toggle="popover"><i class="fas tab-table__icon">&#xf187;</i></a>-->
                                     <button type="button" class="btn btn-info" data-toggle="popover" title="Popover title">Toggle popover</button>
-
-
 
                                     <script>
                                         $(function() {
@@ -251,8 +247,9 @@ if (isset($_GET['status'])) {
                                     </script>
                                     <ul id="popover-content" class="list-group" style="display: none">
                                         <a href="#" class="list-group-item">Dupliceren</a>
+                                        <a href="#" class="list-group-item">Dupliceren</a>
+                                        <a href="#" class="list-group-item">Dupliceren</a>
                                     </ul>
-
                                 </td>
                             </tr>
                             <?php
