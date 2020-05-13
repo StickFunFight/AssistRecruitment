@@ -58,6 +58,7 @@ th{
 .ButtonRight{
     font-size: 1.5rem;
     float: right;
+    background-color: #73b99b;
 }
 .QaTopMargin{
     margin-top: 10%
