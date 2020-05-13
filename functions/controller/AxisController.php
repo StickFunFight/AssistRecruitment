@@ -5,6 +5,7 @@ require '../functions/datalayer/AxisDatabase.php';
 class AxisController
 {
     private $db;
+    private $AxisId;
 
     public function __construct()
     {
@@ -12,11 +13,6 @@ class AxisController
     }
 
     public function GetAxis(){
-        // $Lijst = $this->db->GetAllAxis();
-        // var_dump($Lijst);
-        // return $Lijst;
-
-        // Creating a array
         $Lijst = array();
 
         $Lijst = $this->db->GetAllAxis();
@@ -24,4 +20,19 @@ class AxisController
         // Returning the list given from the Database class
         return $Lijst;
     }
+
+    public function showAxisName($Aid){
+        $this->AxisId = $Aid;
+        $AxisName = $this->db->showA($this->AxisId);
+        return $AxisName;
+    }
+
+    /**
+     * @param mixed $AxisId
+     */
+    public function setAxisId($AxisId)
+    {
+        $this->AxisId = $AxisId;
+    }
+
 }

@@ -3,12 +3,12 @@ require '../datalayer/CategoryDatabase.php';
 
 $CAF = new CategoryDatabase();
 
-if (isset($_POST['catName'])){
+if (isset($_POST['catID'])){
 
-    $catName = $_POST['catName'];
+    $catID = $_POST['catID'];
 
 
-    $CAF->catOpslaan($catName);
+    $CAF->DeleteQaCategory($catID);
     echo "Succes";
 
 }else echo "failed";
