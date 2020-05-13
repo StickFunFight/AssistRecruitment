@@ -29,6 +29,11 @@
 
             // Returning the list given from the Database class
             return $listScans;
-        }  
+        }
+
+        function addScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $type){
+            $listScanAdd = $this->ScanDB->setScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $type);
+            return $listScanAdd;
+        }
     }
 ?>

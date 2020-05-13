@@ -101,6 +101,18 @@
             }
         }
 
+        function setScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $type){
+            $sql = "INSERT INTO scan (scanName, scanComment, scanStatus, scanIntroductionText, scanReminderText, scanStartDate, scanEndDate) VALUES ('$name', '$comment', '$status', '$introductiontext', '$remindertext', '$startdate', '$enddate')";
+            $stm = $this->db->prepare($sql);
+            if($stm->execute()){
+                echo 'Het is gelukt';
+            }
+            // Error Text
+            else {
+                echo "Er is iets fout gegaan";
+            }
+        }
+
         // function deleteCustomers($customerID){
         //     // Query aanmaken om customerStatus te veranderen naar Deleted
         //     $query = "UPDATE customer SET customerStatus = 'Deleted' WHERE customerID = $customerID";
