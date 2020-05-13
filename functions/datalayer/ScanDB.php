@@ -125,6 +125,27 @@
             }
         }
 
+        function EditScan($scanID, $scanName, $scanComment, $scanStatus,$scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate){
+            $query = sprintf("update scan set scanName = ?, scanComment=?, scanStatus = ? ,scanIntroductionText = ?, scanReminderText =? , scanStartDate = ?, scanEndDate = ? where scanID = ?");
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $scanName);
+            $stm->bindParam(2, $scanComment);
+            $stm->bindParam(3, $scanStatus);
+            $stm->bindParam(4, $scanIntroductionText);
+            $stm->bindParam(5, $scanReminderText);
+            $stm->bindParam(6, $scanStartDate);
+            $stm->bindParam(7, $scanEndDate);
+            $stm->bindParam(8, $scanID);
+            if($stm->execute()){
+                $newURL = "scan-list.php";
+                echo '<script>location.replace("'.$newURL.'");</script>';
+            }
+            // Showing a error when the query didn't execute
+            else{
+                echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
+            }
+        }
+
         // function deleteCustomers($customerID){
         //     // Query aanmaken om customerStatus te veranderen naar Deleted
         //     $query = "UPDATE customer SET customerStatus = 'Deleted' WHERE customerID = $customerID";

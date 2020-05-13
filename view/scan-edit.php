@@ -8,83 +8,107 @@ require("../functions/controller/ScanController.php");
 require '../functions/models/entScan.php';
 $Scan = new ScanController();
 $lijstScan = $Scan->GetScan($id);
-foreach ($lijstScan as $item){
+foreach ($lijstScan as $item) {
 
-?>
-<html>
-<head>
-    <link rel="stylesheet" href="../assests/styling/customer-edit.css">
-</head>
-<body>
-<div class="page__container">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <h1 class="ce__title" id="pageTitle">Edit Scan</h1>
+    ?>
+    <html>
+    <head>
+        <link rel="stylesheet" href="../assests/styling/customer-edit.css">
+    </head>
+    <body>
+    <div class="page__container">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="ce__title" id="pageTitle">Edit Scan</h1>
+                </div>
             </div>
+
+            <form method="POST" autocomplete="off">
+                <div class="row ce--form-row">
+                    <div class="col-sm-6">
+                        <label for="Name" class="ce__label">Name</label>
+                        <input type="text" name="txtName" id="name" value="<?php echo $item->getScanName(); ?>"
+                               class="form-control ce--input" required/>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="Introduction" class="ce__label">Introductie</label>
+                        <input type="text" name="Txtintro" id="name"
+                               value="<?php echo $item->getScanIntroductionText(); ?>" class="form-control ce--input"
+                               required/>
+
+                    </div>
+                    <div class="row ce--form-row">
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="Comment" class="ce__label">Comment</label>
+                        <textarea name="TxtComment" id="Comment" class="form-control ce--input"
+                                  rows="5" required><?php echo $item->getScanComment(); ?></textarea>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="Reminder" class="ce__label">Reminder</label>
+                        <textarea name="TxtReminder" id="Reminder" class="form-control ce--input"
+                                  rows="5" required><?php echo $item->getScanReminderText(); ?> </textarea>
+                    </div>
+                </div>
+                <div class="row ce--form-row">
+                    <div class="col-sm-6">
+                        <label for="StartDate" class="ce__label">Start Date</label>
+                        <input type="date" name="DpStart" id="EndDate" value="<?php echo $item->getScanStartDate(); ?>"
+                               class="form-control ce--input" required/>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="EndDate" class="ce__label">End date</label>
+                        <input type="date" name="DpEnd" id="EndDate" value="<?php echo $item->getScanEndDate(); ?>"
+                               class="form-control ce--input" required/>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <label for="status" class="ce__label">Status</label>
+                        <select class="form-control" name="cbxStatus">
+                            <?php
+                            $scanStatus[] = "Active";
+                            $scanStatus[] = "Archived";
+                            $scanStatus[] = "Deleted";
+
+                            foreach ($scanStatus as $value) {
+                                if ($value == $item->getScanStatus()) {
+                                    ?>
+                                    <option selected="selected"
+                                            value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                    <?php
+                                } else {
+                                    ?>
+                                    <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="row ce--form-row">
+                    <div class="col-sm-6">
+                        <input type="submit" class="btn btn-secondary btn-lg" value="Opslaan" name="BtnOpslaan"
+                               id="BtnOpslaan"/>
+                    </div>
+            </form>
         </div>
-
-        <form method="POST" autocomplete="off">
-            <div class="row ce--form-row">
-                <div class="col-sm-6">
-                    <label for="Name" class="ce__label">Name</label>
-                    <input type="text" name="txtName" id="name" value="" class="form-control ce--input" required/>
-                </div>
-                <div class="col-sm-6">
-                    <label for="Introduction" class="ce__label">Introductie</label>
-                    <input type="text" name="Txtintro" id="name" value="" class="form-control ce--input" required/>
-
-            </div>
-            <div class="row ce--form-row">
-            </div>
-                <div class="col-sm-6">
-                    <label for="Comment" class="ce__label">Comment</label>
-                    <textarea name="TxtComment" id="Comment" class="form-control ce--input" rows="5" onchange=""></textarea>
-                </div>
-
-                <div class="col-sm-6">
-                    <label for="Reminder" class="ce__label">Reminder</label>
-                    <textarea name="TxtReminder" id="Reminder" class="form-control ce--input" rows="5" onchange=""></textarea>
-                </div>
-            </div>
-            <div class="row ce--form-row">
-                <div class="col-sm-6">
-                    <label for="StartDate" class="ce__label">Start Date</label>
-                    <input type="date" name="DpStart" id="EndDate" value="" class="form-control ce--input" required/>
-                </div>
-
-                <div class="col-sm-6">
-                    <label for="EndDate" class="ce__label">End date</label>
-                    <input type="date" name="DpEnd" id="EndDate" value="" class="form-control ce--input" required/>
-                </div>
-
-                <div class="col-sm-6">
-                    <label for="status" class="ce__label">Status</label>
-                    <select class="form-control" name="cbxStatus" id="status">
-<!--                        --><?php
-//                        $customerStatus[] = "Active";
-//                        $customerStatus[] = "Archived";
-//                        $customerStatus[] = "Deleted";
-//
-//                        foreach ($customerStatus as $value) {
-//                            if ($value == $customer->getCustomerStatus()) {
-//                                ?>
-<!--                                <option selected="selected" value="--><?php //echo $value; ?><!--">--><?php //echo $value; ?><!--</option>-->
-<!--                                --><?php
-//                            } else {
-//                                ?>
-<!--                                <option value="--><?php //echo $value; ?><!--">--><?php //echo $value; ?><!--</option>-->
-<!--                                --><?php
-//                            }
-//                        }
-//                        ?>
-                    </select>
-                    <span class="ce__feedback" id="feedbackCustomerStatus"></span>
-                </div>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
-<?php
+    </body>
+    </html>
+    <?php
 }
+if(isset($_POST['BtnOpslaan'])) {
+        $scanName= $_POST['txtName'];
+        $scanComment= $_POST['TxtComment'];
+        $scanStatus= $_POST['cbxStatus'];
+        $scanIntroductionText= $_POST['Txtintro'];
+        $scanReminderText= $_POST['TxtReminder'];
+        $scanStartDate= $_POST['DpStart'];
+        $scanEndDate= $_POST['DpEnd'];
+        $Scan->UpdateScan($id, $scanName,$scanComment, $scanStatus,$scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate);
+}
+
+
