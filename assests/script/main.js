@@ -209,7 +209,7 @@ function updateTableStatus(overviewTable, overviewStatus) {
             // Checking if scan status has been changed
             if (url.includes("scan-status", 0)) {
                 // Looking in the url for the parameter and value to replace with the new status
-                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'scan-status=' + status);
+                var newUrl = url.replace(/\bscan-status=[a-zA-Z]{1,50}\b/, 'scan-status=' + status);
 
                 // Refreshing the page with the new url
                 location.replace(newUrl);

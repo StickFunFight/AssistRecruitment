@@ -469,18 +469,6 @@
             });
         });
 
-        // Checking the table status
-        function updateTableStatus($customerID) {
-            // Ophalen van de status
-            var status = document.getElementById("scanStatus").value;
-
-            // De pagina refreshen met de nieuwe waarden
-            if (customerID == 0) {
-                location.replace("?status=" + status);
-            } else {
-                location.replace("?customer=" + customerID + "&status=" + status);
-            }
-        }
     </script>
 
 </html>
