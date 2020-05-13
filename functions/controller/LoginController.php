@@ -40,7 +40,8 @@ class LoginController {
         $user = $this->ldb->getUserByEmail($email);
 
         if(!is_null($user)){
-            $this->mailHelper->mail();
+            $token = uniqid(mt_rand(), true);
+            $this->mailHelper->forgotPassword($email, $token);
         } else {
             echo "Het lijkt er op dat er is mis ging.";
         }
