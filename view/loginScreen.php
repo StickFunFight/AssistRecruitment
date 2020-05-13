@@ -17,6 +17,12 @@ if(isset($_POST['submitLogin'])){
 
     $lc->logIn($username, $password);
 }
+
+if(isset($_POST['resetPassword'])){
+    $email = $_POST['email'];
+
+    $lc->forgotPassword($email);
+}
 ?>
 
 <head>
@@ -36,12 +42,13 @@ if(isset($_POST['submitLogin'])){
             <button name="submitLogin" type="submit" class="btn btn-block btn-primary mt-2 mb-4 float-right" id="loginFormButton">Inloggen</button>
         </form>
         <p class="mb-1"><u><a data-toggle="modal" href="#createAccount" class="font-weight-bold">Maak een account aan +</a></u></p>
-        <p><u><a name="passwordReset" id="forgotPassword"href="#" class="font-weight-bold">Wachtwoord vergeten?</a></u></p>
+        <p><u><a data-toggle="modal" href="#forgotPassword" class="font-weight-bold">Wachtwoord vergeten?</a></u></p>
     </div>
 
     <div id="snackbar">Jij hebt grote fout gemaakt !!!</div>
 
 <!-- Modal -->
+    <!-- Create Account Modal -->
     <div class="modal fade" id="createAccount" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -78,6 +85,31 @@ if(isset($_POST['submitLogin'])){
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary float-left" data-dismiss="modal">Sluiten</button>
                         <button name="submitCreateAccount" id="submitCreateAccount" type="submit" class="btn btn-success">Bevestigen</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Reset Modal -->
+    <div class="modal fade" id="forgotPassword" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Reset wachtwoord</h5>
+                </div>
+                <form method="post" class="form-group">
+                    <div class="modal-body">
+                        <div class="form-group form-row mb-4">
+                            <label class="col col-form-label">Email</label>
+                            <div class="col-7">
+                                <input name="email" id="email" class="form-control" type="email" placeholder="Email"">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary float-left" data-dismiss="modal">Sluiten</button>
+                        <button name="resetPassword" type="submit" class="btn btn-success">Bevestigen</button>
                     </div>
                 </form>
             </div>
