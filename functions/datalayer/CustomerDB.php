@@ -35,7 +35,7 @@ Class CustomerDB {
             }
         // Error Text
         else {
-            echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
+            echo "Er is iets fout gegaan waardoor er geen functies opgehaald konden worden";
         }
     }
          
