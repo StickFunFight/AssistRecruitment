@@ -7,16 +7,16 @@ class User {
     private $username;
     private $userEmail;
     private $userPassword;
-    private $isAdmin;
+    private $userRight;
     private $userStatus;
 
-    public function __construct($userId, $username, $userEmail, $userPassword, $isAdmin, $userStatus)
+    public function __construct($userId, $username, $userEmail, $userPassword, $userRight, $userStatus)
     {
         $this->userId = $userId;
         $this->username = $username;
         $this->userEmail = $userEmail;
         $this->userPassword = $userPassword;
-        $this->isAdmin = $isAdmin;
+        $this->userRight = $userRight;
         $this->userStatus = $userStatus;
     }
 
@@ -60,14 +60,14 @@ class User {
         $this->userPassword = $userPassword;
     }
 
-    public function getIsAdmin()
+    public function getUserRight()
     {
-        return $this->isAdmin;
+        return $this->userRight;
     }
 
-    public function setIsAdmin($isAdmin)
+    public function setUserRight($userRight)
     {
-        $this->isAdmin = $isAdmin;
+        $this->userRight = $userRight;
     }
 
     public function getUserStatus()
