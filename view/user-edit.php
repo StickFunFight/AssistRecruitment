@@ -10,8 +10,8 @@
         require '../functions/controller/DepartmentController.php';
         // Including entity classes
         require '../functions/models/entCustomer.php';
-        require '../functions/models/entUser.php';
-        require '../functions/models/entDepartment.php';
+        require '../functions/models/entContact.php';
+        require '../functions/models/entDepartment.php'; 
 
         // Including the head and menu
         require 'menu.php';
@@ -33,14 +33,14 @@
             $contactCustomer = $_POST['txtCustomerID'];
             $contactComment = $_POST['txtUserComment'];
  
-            echo "User ID = " . $userID . "<br>";
-            echo "Contact ID = " . $contactID . "<br>";
-            echo "Name = " . $userName . "<br>";
-            echo "Phone = " . $contactPhone . "<br>";
-            echo "Email = " . $userEmail . "<br>";
-            echo "Status = " . $userStatus . "<br>";
-            echo "Customer = " . $contactCustomer . "<br>";
-            echo "Comment = " . $contactComment . "<br>";
+            // echo "User ID = " . $userID . "<br>";
+            // echo "Contact ID = " . $contactID . "<br>";
+            // echo "Name = " . $userName . "<br>";
+            // echo "Phone = " . $contactPhone . "<br>";
+            // echo "Email = " . $userEmail . "<br>";
+            // echo "Status = " . $userStatus . "<br>";
+            // echo "Customer = " . $contactCustomer . "<br>";
+            // echo "Comment = " . $contactComment . "<br>";
  
             $UserCtrl->updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment);
         }

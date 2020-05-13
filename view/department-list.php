@@ -129,13 +129,13 @@
                         <table class="tab-table table table-hover" id="filterTable">
                             <thead class="tab-table__header">
                                 <tr class="tab-table__row">
-                                    <th class="tab-table__head" onclick="sortTable(0)">Name</th>
-                                    <th class="tab-table__head" onclick="sortTable(1)">Comment</th>
+                                    <th class="tab-table__head">Name <div class="table__icon-top" onclick="sortTable('filterTable', 0, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 0, 'desc')"></div></th>
+                                    <th class="tab-table__head">Comment <div class="table__icon-top" onclick="sortTable('filterTable', 1, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 1, 'desc')"></div></th>
                                     <?php 
                                         // Checking if there is a customer set
                                         if($customerID == 0) {
                                             ?>
-                                                <th class="tab-table__head" onclick="sortTable(2)">Customer</td>
+                                                <th class="tab-table__head">Customer <div class="table__icon-top" onclick="sortTable('filterTable', 2, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 2, 'desc')"></div></td>
                                             <?php
                                         }
                                     ?>

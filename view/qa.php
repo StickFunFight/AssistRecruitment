@@ -7,6 +7,7 @@ require_once 'menu.php';
 <html>
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
 <link rel="stylesheet" href="../assests/styling/customer.scss">
+<link rel="stylesheet" href="../assests/styling/customer-edit.css">
 <div id="page-content">
     <div class="container-fluid">
         <div class="row QaTopMargin">
@@ -14,7 +15,7 @@ require_once 'menu.php';
                 <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een vraag of antwoord">
             </div>
             <div class="col-sm-6">
-                <button type="button" class="btn btn-success ButtonRight" data-target="#modaladdQuestion" data-toggle="modal"><i class="fas fa-plus-circle" ></i> Vraag toevoegen</button>
+                <button type="button" class="btn add-container__btn ButtonRight"><i class="fas fa-plus-circle"></i> Vraag toevoegen</button>
             </div>
         </div>
         <div id="wrapper">
@@ -77,8 +78,9 @@ require_once 'menu.php';
                         echo '</td>';
                         echo '<td>';
                         echo '<a href="QA_QuestionEdit.php?questionID='.$item->getQuestionID().'" class="editKnop" id="'.$item->getQuestionID().'" onclick="SendID(this.id)"><i class="fas tab-table__icon">&#xf044;</i></a>';
+                        echo '<a id="'.$item->getQuestionID().'" onclick="SendID(this.id)"><i class="fas tab-table__icon editKnop">&#xf044;</i></a>';
                         echo  ' ';
-                        echo '<a class="deleteKnop"  id="'.$item->getQuestionID().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteQuestionModal" data-id="'.$item->getQuestionID().'"><i class="fas tab-table__icon">&#xf187;</i></a>';
+                        echo '<a id="'.$item->getQuestionID().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteQuestionModal" data-id="'.$item->getQuestionID().'"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
                         echo '</td>';
                         echo '</tr>';
                     }
