@@ -28,9 +28,9 @@ class CategoryDatabase
 
     public function catAanpassen($categorieNaam, $categorieStatus, $customerID)
     {
-        $query = sprintf("UPDATE categorie SET categorieName = ?,
+        $query = "UPDATE categorie SET categorieName = ?,
                                        categorieStatus= ?
-                                       WHERE categorieID = ?");
+                                       WHERE categorieID = ?";
         $stm = $this->conn->prepare($query);
         $stm->bindParam(1, $categorieNaam);
         $stm->bindParam(2, $categorieStatus);
@@ -42,10 +42,10 @@ class CategoryDatabase
 
     function checkScan($cID)
     {
-        $query =sprintf("SELECT scanStatus FROM scan 
+        $query ="SELECT scanStatus FROM scan 
                   JOIN scan_question ON scan_question.scanID = scan.scanID
                   JOIN question ON question.questionID = scan_question.questionID
-                  WHERE question.categorieID = ?");
+                  WHERE question.categorieID = ?";
         $stm = $this->conn->prepare($query);
         $stm->bindParam(1, $cID);
         if ($stm->execute()) {
@@ -64,7 +64,7 @@ class CategoryDatabase
 
     function checkQuestion($cID)
     {
-        $query =sprintf("SELECT questionStatus from question WHERE categorieID = ?");
+        $query ="SELECT questionStatus from question WHERE categorieID = ?";
         $stm = $this->conn->prepare($query);
         $stm->bindParam(1, $cID);
         if ($stm->execute()) {
@@ -84,11 +84,13 @@ class CategoryDatabase
 
     function DeleteQaCategory($cID)
     {
+        $catStatus = 'Archive';
         if ($this->checkScan($cID) == false) {
             if ($this->checkQuestion($cID)==false) {
-                $query = sprintf("UPDATE categorie SET categorieStatus = 'Archived' WHERE categorieID = ?");
+                $query = "UPDATE categorie SET categorieStatus = ? WHERE categorieID = ?";
                 $stm = $this->conn->prepare($query);
-                $stm->bindParam(1, $cID);
+                $stm->bindParam(1, $catStatus);
+                $stm->bindParam(2, $cID);
                 if ($stm->execute()) {
                     echo "Categorie op 'deleted' gezet";
                 }

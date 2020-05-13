@@ -35,7 +35,7 @@ class AxisDatabase
 
      function archiveerAxis($Aid){
         //variabele (n) uit de url halen
-        $query = sprintf("UPDATE axis SET AxisStatus = 'Archived' WHERE AxisId = ?");
+        $query = "UPDATE axis SET AxisStatus = 'Archived' WHERE AxisId = ?";
         $stm = $this->conn->prepare($query);
          $stm->bindParam(1, $Aid);
         if ($stm->execute()) {
@@ -44,7 +44,7 @@ class AxisDatabase
     }
 
     function showA($Aid){
-        $query = sprintf("SELECT * FROM axis WHERE AxisId = ?");
+        $query = "SELECT * FROM axis WHERE AxisId = ?";
         $stm = $this->conn->prepare($query);
         $stm->bindParam(1, $Aid);
         if ($stm->execute()) {
@@ -54,9 +54,9 @@ class AxisDatabase
     }
 
     public function AxisAanpassen($AxisName, $AxisStatus, $AxisID){
-        $query = sprintf("UPDATE axis SET AxisName =? ,
+        $query = "UPDATE axis SET AxisName =? ,
                                        AxisStatus= ?
-                                       WHERE AxisID = ?");
+                                       WHERE AxisID = ?";
         $stm = $this->conn->prepare($query);
         $stm->bindParam(1, $AxisName);
         $stm->bindParam(2, $AxisStatus);
