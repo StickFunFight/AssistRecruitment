@@ -16,8 +16,11 @@ class CategoryDatabase
 
     public function catOpslaan($categorieNaam)
     {
-        $query = "INSERT INTO categorie (categorieName, categorieStatus) VALUES ('$categorieNaam', 'Active')";
+        $catStatus = 'Active';
+        $query = "INSERT INTO categorie (categorieName, categorieStatus) VALUES (? ,?)";
         $stm = $this->conn->prepare($query);
+        $stm->bindParam(1, $categorieNaam);
+        $stm->bindParam(2, $catStatus);
         if ($stm->execute()) {
         }
 
@@ -25,10 +28,13 @@ class CategoryDatabase
 
     public function catAanpassen($categorieNaam, $categorieStatus, $customerID)
     {
-        $query = sprintf("UPDATE categorie SET categorieName = '%s',
-                                       categorieStatus= '%s'
-                                       WHERE categorieID = %d", $categorieNaam, $categorieStatus, $customerID);
+        $query = sprintf("UPDATE categorie SET categorieName = ?,
+                                       categorieStatus= ?
+                                       WHERE categorieID = ?");
         $stm = $this->conn->prepare($query);
+        $stm->bindParam(1, $categorieNaam);
+        $stm->bindParam(2, $categorieStatus);
+        $stm->bindParam(3, $customerID);
         if ($stm->execute()) {
 
         }
@@ -39,8 +45,9 @@ class CategoryDatabase
         $query =sprintf("SELECT scanStatus FROM scan 
                   JOIN scan_question ON scan_question.scanID = scan.scanID
                   JOIN question ON question.questionID = scan_question.questionID
-                  WHERE question.categorieID = %d", $cID);
+                  WHERE question.categorieID = ?");
         $stm = $this->conn->prepare($query);
+        $stm->bindParam(1, $cID);
         if ($stm->execute()) {
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
             $count = 0;
@@ -57,8 +64,9 @@ class CategoryDatabase
 
     function checkQuestion($cID)
     {
-        $query =sprintf("SELECT questionStatus from question WHERE categorieID = %d",$cID);
+        $query =sprintf("SELECT questionStatus from question WHERE categorieID = ?");
         $stm = $this->conn->prepare($query);
+        $stm->bindParam(1, $cID);
         if ($stm->execute()) {
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
             $count = 0;
@@ -78,8 +86,9 @@ class CategoryDatabase
     {
         if ($this->checkScan($cID) == false) {
             if ($this->checkQuestion($cID)==false) {
-                $query = sprintf("UPDATE categorie SET categorieStatus = 'Archived' WHERE categorieID = %d", $cID);
+                $query = sprintf("UPDATE categorie SET categorieStatus = 'Archived' WHERE categorieID = ?");
                 $stm = $this->conn->prepare($query);
+                $stm->bindParam(1, $cID);
                 if ($stm->execute()) {
                     echo "Categorie op 'deleted' gezet";
                 }

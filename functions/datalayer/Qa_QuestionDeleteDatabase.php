@@ -12,17 +12,18 @@ class Qa_QuestionDeleteDatabase
     }
     function DeleteQaQuestion($Qid){
         //variabele (n) uit de url halen
-        $query =sprintf("UPDATE question SET questionStatus = 'Archived' WHERE questionID = %d",$Qid);
-
+        $query =sprintf("UPDATE question SET questionStatus = 'Archived' WHERE questionID = ?");
         $stm = $this->db->prepare($query);
+        $stm->bindParam(1, $Qid);
         if ($stm->execute()) {
 
         } else echo "oeps";
     }
 
     function showQ($Qid){
-        $query =sprintf("SELECT * FROM question WHERE questionID = %d", $Qid);
+        $query =sprintf("SELECT * FROM question WHERE questionID = ?");
         $stm = $this->db->prepare($query);
+        $stm->bindParam(1, $Qid);
         if ($stm->execute()) {
             $result = $stm->fetch(PDO::FETCH_OBJ);
                 echo $result->questionName;

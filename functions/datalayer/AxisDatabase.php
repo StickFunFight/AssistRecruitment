@@ -35,17 +35,18 @@ class AxisDatabase
 
      function archiveerAxis($Aid){
         //variabele (n) uit de url halen
-        $query = sprintf("UPDATE axis SET AxisStatus = 'Archived' WHERE AxisId = %d", $Aid);
-
+        $query = sprintf("UPDATE axis SET AxisStatus = 'Archived' WHERE AxisId = ?");
         $stm = $this->conn->prepare($query);
+         $stm->bindParam(1, $Aid);
         if ($stm->execute()) {
 
         } else echo "oeps";
     }
 
     function showA($Aid){
-        $query = sprintf("SELECT * FROM axis WHERE AxisId = %d", $Aid);
+        $query = sprintf("SELECT * FROM axis WHERE AxisId = ?");
         $stm = $this->conn->prepare($query);
+        $stm->bindParam(1, $Aid);
         if ($stm->execute()) {
             $result = $stm->fetch(PDO::FETCH_OBJ);
             echo $result->AxisName;
@@ -53,10 +54,13 @@ class AxisDatabase
     }
 
     public function AxisAanpassen($AxisName, $AxisStatus, $AxisID){
-        $query = sprintf("UPDATE axis SET AxisName ='%s',
-                                       AxisStatus= '%s'
-                                       WHERE AxisID = %d",$AxisName, $AxisStatus,$AxisID);
+        $query = sprintf("UPDATE axis SET AxisName =? ,
+                                       AxisStatus= ?
+                                       WHERE AxisID = ?");
         $stm = $this->conn->prepare($query);
+        $stm->bindParam(1, $AxisName);
+        $stm->bindParam(2, $AxisStatus);
+        $stm->bindParam(3, $AxisID);
         if ($stm->execute()){
 
         }
@@ -64,8 +68,11 @@ class AxisDatabase
 
     public function AxisOpslaan($AxisName)
     {
-        $query = "INSERT INTO axis (AxisName, AxisStatus) VALUES ('$AxisName', 'Active')";
+        $AxisStatus= 'Active';
+        $query = "INSERT INTO axis (AxisName, AxisStatus) VALUES (?, ?)";
         $stm = $this->conn->prepare($query);
+        $stm->bindParam(1, $AxisName);
+        $stm->bindParam(2, $AxisStatus);
         if ($stm->execute()) {
 
         }
