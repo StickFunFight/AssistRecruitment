@@ -20,18 +20,7 @@
             return $listScans;
         }  
 
-            // Getting all scans
-            function getScan(){
-            // Creating a array
-            $listScans = array();
-
-            $listScans = $this->ScanDB->getScans();
-
-            // Returning the list given from the Database class
-            return $listScans;
-        }  
-
-        // Getting all scan form 1 customer
+        // Getting all scan from 1 customer
         function getScansCustomer($customerID, $statusScan){
             // Creating a array
             $listScans = array();
@@ -42,16 +31,16 @@
             return $listScans;
         }  
 
-        // Getting all scan from 1 user
-        function getScansUser($userID, $statusScan){
+        // Getting all scans from 1 user
+        function getScansUser($userID) {
             // Creating a array
             $listScans = array();
 
-            $listScans = $this->ScanDB->getScansUser($userID, $statusScan);
+            $listScans = $this->ScanDB->getScansUser($userID);
 
             // Returning the list given from the Database class
             return $listScans;
-        }  
+        }
     }
 
 

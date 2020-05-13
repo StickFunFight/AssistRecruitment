@@ -108,8 +108,13 @@ select.form-control {
 }
 
 /* customer details tables */
-.ce-overview {
+.ce-overview,
+.dashboard__department {
   margin-top: 8rem;
+}
+
+.ce-overview__table {
+  padding: 50px 0;
 }
 
 /* section title */
@@ -129,8 +134,6 @@ select.form-control {
   padding: 0.4rem 0;
 }
 
-/* customer edit overview pills link */
-/* overview pills active and active hover */
 /* overview pills hover */
 .ce-overview__tab:hover {
   background-color: #F7F7F7;
@@ -169,8 +172,53 @@ select.form-control {
   border-color: #73b99b;
 }
 
-.tab-table__head {
+.tab-table__head,
+.customer__th_name,
+.customer__th_comment,
+.customer__td_refrence {
+  position: relative;
+}
+
+/* Styling for the sorting icons */
+.table__icon-top,
+.table__icon-bottom {
+  position: relative;
+}
+
+/* Shared styling */
+.table__icon, .table__icon-top, .table__icon-bottom {
+  width: 0;
+  height: 0;
+  display: inline-block;
+  line-height: inherit;
+  vertical-align: middle;
+  position: absolute;
+  margin-left: 15px;
   cursor: pointer;
+  opacity: 0.5;
+}
+
+/* Top styling */
+.table__icon-top {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 10px solid white;
+  top: 5px;
+}
+
+/* Bottom styling */
+.table__icon-bottom {
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid white;
+  bottom: 5px;
+}
+
+/* Active styling */
+.table__icon-top:hover,
+.table__icon-bottom:hover,
+.table__icon-active {
+  opacity: 1;
 }
 
 .tab-table__row {
@@ -223,7 +271,8 @@ select.form-control {
   font-size: 16px;
 }
 
-.ce-overview__table {
-  padding: 50px 0;
+.dashboard--subtitle {
+  font-size: 2rem;
+  padding-bottom: 1.5rem;
 }
 /*# sourceMappingURL=customer-edit.css.map */
