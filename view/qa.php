@@ -76,7 +76,7 @@ require_once 'menu.php';
                         }
                         echo '</td>';
                         echo '<td>';
-                        echo '<a data-target="#modalEditQuestion" data-toggle="modal" class="editKnop" id="'.$item->getQuestionID().'" onclick="SendID(this.id)"><i class="fas tab-table__icon">&#xf044;</i></a>';
+                        echo '<a href="QA_QuestionEdit.php?questionID='.$item->getQuestionID().'" class="editKnop" id="'.$item->getQuestionID().'" onclick="SendID(this.id)"><i class="fas tab-table__icon">&#xf044;</i></a>';
                         echo  ' ';
                         echo '<a class="deleteKnop"  id="'.$item->getQuestionID().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteQuestionModal" data-id="'.$item->getQuestionID().'"><i class="fas tab-table__icon">&#xf187;</i></a>';
                         echo '</td>';
@@ -90,84 +90,8 @@ require_once 'menu.php';
     </div>
 </div>
 
-<!-- Modal Edit Question -->
-<?php
-require_once '../functions/controller/QA_QuestionFunctions.php';
-$QF = new QA_QuestionFunctions(); ?>
-<script>
-    var response = {};
-    response.val = <?php echo $results['questionName']; ?>;
+<!-- Edit Question -->
 
-    $("#selCategoryQuestionEdit option[data-value='" + response.val +"']").attr("selected","selected");
-
-
-</script>
-<div class="modal fade" id="modalEditQuestion" tabindex="-1" role="dialog" aria-labelledby="modalEditQuestion" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Vraag veranderen</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="POST">
-                <div class="modal-body">
-                    <div class="form-group row">
-                        <label for="selCategoryQuestionEdit" class="col-sm-2 col-form-label" >Categorie</label>
-                        <div class="col-sm-10">
-                            <select required id="selCategoryQuestionEdit" name="selCategoryQuestionEdit" class="form-control">
-                                <?php $QF->getCategories(); ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="txQuestionEdit" class="col-sm-2 col-form-label" >Vraag</label>
-                        <div class="col-sm-10">
-                            <input id="txQuestionEdit" name="txQuestionEdit" class="form-control" value="<?php echo $results['questionName']; ?>" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="taExampleEdit" class="col-sm-2 col-form-label" >Voorbeeld</label>
-                        <div class="col-sm-10">
-                            <textarea id="taExampleEdit" name="taExampleEdit" class="form-control" required><?php echo $results['questionExemple']; ?></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="selStatusQuestEdit" class="col-sm-2 col-form-label" >Status</label>
-                        <div class="col-sm-10">
-                            <select id="selStatusQuestEdit" name="selStatusQuestEdit" class="form-control" required>
-                                <option value="Active">Actief</option>
-                                <option value="Archived">Gearchiveerd</option>
-                                <option value="Deleted">Verwijderd</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="selQuestionTypeQuestionEdit" class="col-sm-2 col-form-label" >Vraag type</label>
-                        <div class="col-sm-10">
-                            <select id="selQuestionTypeQuestionEdit" name="selQuestionTypeQuestionEdit" class="form-control" required>
-                                <option value="OCAI">OCAI</option>
-                                <option value="Question-answer">Vraag-antwoord</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div name="divAnswerOptionsEdit" id="divAnswerOptionsEdit" class="form-group row" style="display:none;">
-                        <label for="answerOptionsQuestionEdit" class="col-sm-2 col-form-label" >Antwoord opties</label>
-                        <div class="col-sm-10">
-                            <table name="answerOptionsQuestionEdit"></table>
-                            <label>OPEN</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" name="btnQuestionCancel" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
-                    <input type="button" name="btnQuestionEditSubmit" id="btnQuestionEditSubmit" class="btn btn-primary" data-dismiss="modal" value="Verzenden"/>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <!-- Modal Add Question -->
 <div class="modal fade" id="modaladdQuestion" name="modaladdQuestion" tabindex="-1" role="dialog" aria-labelledby="modaladdQuestion" aria-hidden="true">
@@ -350,14 +274,6 @@ if(isset($_POST['btConfirmAddQuestion'])){
 </html>
 <script>
 
-    $('#selQuestionTypeQuestionEdit').change(function(){
-        if($(this).val() == "Question-answer") {
-            $('#divAnswerOptionsEdit').show();
-        }
-        else{
-            $('#divAnswerOptionsEdit').hide();
-        }
-    });
 
     $('#selQuestionType').change(function(){
         if($(this).val() == "Question-answer") {
@@ -366,16 +282,6 @@ if(isset($_POST['btConfirmAddQuestion'])){
         else{
             $('#divAnswerOptions').hide();
         }
-    });
-
-    $('#btnQuestionEditSubmit').click(function () {
-        $.ajax({
-            url: '../functions/handler/QA_QuestionEditHandler.php',
-            type: 'post',
-            data: { "questionID" : categoryID,"CategoryQuestionEdit": $('#selCategoryQuestionEdit').val(), "QuestionNameEdit" : $('#txQuestionEdit').val(), "QuestionExampleEdit" : $('#taExampleEdit').val(), "QuestionStatusEdit" : $('#selStatusQuestEdit').val(), "QuestionTypeEdit" : $('#selQuestionTypeQuestionEdit').val()},
-
-            success: function(response) { window.location.href = 'Qa.php'; },
-        });
     });
 
     $(document).ready(function(){
