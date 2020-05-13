@@ -29,6 +29,17 @@
             return $listUsers;
         }
 
+        // Getting all the departments of the user
+        function getDepartmentsUser($userID, $status) {
+             // Creating a array
+             $listDepartmentsUser = array();
+
+             $listDepartmentsUser = $this->UserDB->getDepartmentsUser($userID, $status);
+ 
+             // Returning the list given from the Database class
+             return $listDepartmentsUser;
+        }
+
         // Getting al the contact
         function getDetailsUser($userID){
             // Creating a array

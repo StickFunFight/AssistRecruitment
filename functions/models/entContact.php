@@ -8,12 +8,13 @@ class EntContact {
     private $UserEmail;
     private $UserComment;
     private $UserStatus;
+    private $ContactBirth;
     private $UserCustomerName;
     private $UserDepartmentName;
     private $UserCustomerID;
     private $userDepartmentID;
 
-    public function __construct($UserID, $ContactID, $ContactName, $UserPhoneNumber, $UserEmail, $UserComment, $UserStatus, $UserCustomerName, $UserDepartmentName, $UserCustomerID, $userDepartmentID) {
+    public function __construct($UserID, $ContactID, $ContactName, $UserPhoneNumber, $UserEmail, $UserComment, $UserStatus, $ContactBirth, $UserCustomerName, $UserDepartmentName, $UserCustomerID, $userDepartmentID) {
         $this->UserID = $UserID;
         $this->ContactID = $ContactID;
         $this->ContactName = $ContactName;
@@ -21,6 +22,7 @@ class EntContact {
         $this->UserEmail = $UserEmail;
         $this->UserComment = $UserComment;
         $this->UserStatus = $UserStatus;
+        $this->ContactBirth = $ContactBirth;
         $this->UserCustomerName = $UserCustomerName; 
         $this->UserDepartmentName = $UserDepartmentName;
         $this->UserCustomerID = $UserCustomerID;
@@ -53,6 +55,10 @@ class EntContact {
 
     public function getUserStatus() {
         return $this->UserStatus;
+    }
+
+    public function getContactBirth() {
+        return $this->ContactBirth;
     }
 
     public function getUserCustomerName() {

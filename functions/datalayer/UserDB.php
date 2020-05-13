@@ -17,7 +17,7 @@
             $listUsers = array();
 
             // Making a query to get the scans of the customer out the database
-            $query = sprintf("SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, cust.customerName, dp.departmentName, cust.customerID, dp.departmentID
+            $query = sprintf("SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, c.contactBirth, cust.customerName, dp.departmentName, cust.customerID, dp.departmentID
                             FROM user u
                             INNER JOIN contact c ON c.userID = u.userID
                             INNER JOIN customer cust ON c.customerID = cust.customerID
@@ -32,7 +32,7 @@
                 // Looping through the results
                 foreach($result as $user){
                     // Putting it in the modal
-                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
+                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
                     array_push($listUsers, $entUser);
                 }
                 // Returning the full list
@@ -50,7 +50,7 @@
             $listUsers = array();
 
             // Making a query to get the scans of the customer out the database
-            $query = "SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, cust.customerName, dp.departmentName, cust.customerID, dp.departmentID
+            $query = "SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, c.contactBirth, cust.customerName, dp.departmentName, cust.customerID, dp.departmentID
                       FROM user u 
                       INNER JOIN contact c ON c.userID = u.userID
                       INNER JOIN customer cust ON c.customerID = cust.customerID
@@ -67,7 +67,42 @@
                 // Looping through the results
                 foreach($result as $user){
                     // Putting it in the modal
-                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
+                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
+                    array_push($listUsers, $entUser);
+                }
+                // Returning the full list
+                return $listUsers;    
+            }
+            // Showing a error when the query didn't execute
+            else{
+                echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
+            }
+        }
+
+        // Getting all contact for one customer
+        function getDepartmentsUser($userID, $status){
+            // Creating a array
+            $listUsers = array();
+
+            // Making a query to get the scans of the customer out the database
+            $query = "SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, c.contactBirth, cust.customerName, dp.departmentName, cust.customerID, dp.departmentID
+                      FROM user u 
+                      INNER JOIN contact c ON c.userID = u.userID
+                      INNER JOIN customer cust ON c.customerID = cust.customerID
+                      INNER JOIN department_contact dc ON dc.contactID = c.contactID
+                      INNER JOIN department dp ON dc.departmentID = dp.departmentID
+                      WHERE u.userID = ? AND c.contactStatus = ?
+                      ORDER BY c.contactName ASC";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $userID);
+            $stm->bindParam(2, $status);
+            if($stm->execute()){
+                // Getting the results fromm the database
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                // Looping through the results
+                foreach($result as $user){
+                    // Putting it in the modal
+                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
                     array_push($listUsers, $entUser);
                 }
                 // Returning the full list
@@ -85,7 +120,7 @@
             $detailsUser = array();
 
             // Making a query to get the scans of the customer out the database
-            $query = "SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, cust.customerName, dp.departmentName, cust.customerID, dp.departmentID
+            $query = "SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, c.contactBirth, cust.customerName, dp.departmentName, cust.customerID, dp.departmentID
                       FROM user u
                       INNER JOIN contact c ON c.userID = u.userID
                       INNER JOIN customer cust ON c.customerID = cust.customerID
@@ -101,7 +136,7 @@
                 // Looping through the results
                 foreach($result as $user){
                     // Putting it in the modal
-                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
+                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
                     array_push($detailsUser, $entUser);
                 }
                 // Returning the full list

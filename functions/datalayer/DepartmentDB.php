@@ -74,6 +74,38 @@
             }
         }
 
+        // Function to get departments for 1 user
+        function getDepartmentsUser($userID, $departmentStatus){
+            // Creating a array
+            $listDepartments = array();
+
+            // Making a query to get the scans of the customer out the database
+            $query = "SELECT dp.departmentID, dp.departmentName, dp.departmentComment, dp.departmentStatus, dp.customerID, c.customerName
+                      FROM department dp
+                      INNER JOIN customer c ON dp.customerID = c.customerID
+                      WHERE c.customerID = ? AND dp.departmentStatus = ?
+                      ORDER BY dp.departmentName ASC";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $customerID);
+            $stm->bindParam(2, $departmentStatus);
+            if($stm->execute()){
+                // Getting the results fromm the database
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                // Looping through the results
+                foreach($result as $department){
+                    // Putting it in the modal
+                    $entDepartment = new EntDepartment($department->departmentID, $department->departmentName, $department->departmentComment, $department->departmentStatus, $department->customerID, $department->customerName);
+                    array_push($listDepartments, $entDepartment);
+                }
+                // Returning the full list
+                return $listDepartments;    
+            }
+            // Showing a error when the query didn't execute
+            else{
+                echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
+            }
+        }
+
         // Function to add a department
         public function createDepartment($departmentName, $departmentComment, $customerID) {
             $departmentStatus = 'Active';

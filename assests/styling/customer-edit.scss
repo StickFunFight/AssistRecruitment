@@ -116,7 +116,8 @@ select.form-control{
 }
 
 /* customer details tables */
-.ce-overview {
+.ce-overview,
+.dashboard__department {
     margin-top: 8rem;
 }
 
@@ -140,21 +141,6 @@ select.form-control{
 .ce-overview__tab {
     padding: 0.4rem 0;
 }
-
-/* customer edit overview pills link */
-// .ce-overview--link {
-//     color: $black;
-//     font-size: 2rem;
-//     padding: 0.8rem 1.25rem;
-// }
-
-/* overview pills active and active hover */
-// .active.ce-overview--link,
-// .active.ce-overview--link:hover { 
-//     color: $white;
-//     font-size: 2rem;
-//     background-color: #687871;
-// }
 
 /* overview pills hover */
 .ce-overview__tab:hover {
@@ -295,4 +281,9 @@ select.form-control{
 
 .modal-body, .modal-footer button {
     font-size: 16px;
+}
+
+.dashboard--subtitle {
+    font-size: 2rem;
+    padding-bottom: 1.5rem;
 }
