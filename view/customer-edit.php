@@ -33,6 +33,10 @@
         // Getting the customer
         $customerID = $_GET['customer'];
 
+        if(isset($_POST['btnAddUser'])) {
+            echo "noice";
+        }
+
         
         // Updating the customer
         if(isset($_POST['btnUpdate'])){
@@ -238,7 +242,7 @@
 
                                         <div class="col-sm-2">
                                             <div class="add-container">
-                                                <a href="user-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
+                                                <a href="#" class="btn add-container__btn" data-toggle="modal" data-target="#addUserModal"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
                                             </div>
                                         </div>
                                     </div>
@@ -579,6 +583,75 @@
                 </section>              
             </div>
         </div> 
+
+        <!--Archive Modal--->
+        <div class="modal fade" id="addUserModal" tabindex="-1" role="add-user" aria-labelledby="add-user" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="archiveModalLabel">Add user</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="iets">Naam</label>
+                                    <input type="text" name="txtAddUserName" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="iets">Email</label>
+                                    <input type="email" name="txtAddUserEmail" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="iets">Type</label>
+                                    <select name="txtAddUserType" class="form-control ce--input" required>
+                                        <option value="Employee" selected="selected">Employee</option>
+                                        <option value="Candidate">Candidate</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="iets">Phonenumber</label>
+                                    <input type="phone" name="txtAdPhoneNumber" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="iets">Date</label>
+                                    <input type="date" name="txtAddBirth" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="iets">Comment</label>
+                                    <textarea name="txtAddUserComment" class="form-control ce--input" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" name="btnAddUser" class="btn btn-primary">Save user</button>          
+                            </script>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 
     <script>
