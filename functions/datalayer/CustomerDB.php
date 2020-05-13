@@ -18,9 +18,9 @@ Class CustomerDB {
       $listCustomers = array();
 
         // Query to select data from customer table
-        $query = sprintf("SELECT * FROM customer WHERE customerStatus = '%s'
-                        ORDER BY customerName ASC", $status);
+        $query = "SELECT * FROM customer WHERE customerStatus = ? ORDER BY customerName ASC";
         $stm = $this->db->prepare($query);
+        $stm->bindParam(1, $status);
         if ($stm->execute()) {
             // Get Results from the Database
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -35,7 +35,7 @@ Class CustomerDB {
             }
         // Error Text
         else {
-            echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
+            echo "Er is iets fout gegaan waardoor er geen functies opgehaald konden worden";
         }
     }
          
@@ -62,8 +62,9 @@ Class CustomerDB {
 
     function archiveCustomer($customerID){
         // Create Query to update Customer Status
-        $query = "UPDATE customer SET customerStatus = 'Archived' WHERE customerID = $customerID";
+        $query = "UPDATE customer SET customerStatus = 'Archived' WHERE customerID = ?";
         $stm = $this->db->prepare($query);
+        $stm->bindParam(1, $customerID);
         if($stm->execute()){
             echo 'Het is gelukt';
         }
@@ -75,21 +76,9 @@ Class CustomerDB {
 
     function deleteCustomer($customerID){
         // Create Query to update Customer Status
-        $query = "UPDATE customer SET customerStatus = 'Deleted' WHERE customerID = $customerID";
+        $query = "UPDATE customer SET customerStatus = 'Deleted' WHERE customerID = ?";
         $stm = $this->db->prepare($query);
-        if($stm->execute()){
-            echo 'Het is gelukt';
-        }
-        // Error Text
-        else {
-            echo "Er is iets fout gegaan";
-        }
-    }
-
-    function activateCustomer($customerID){
-        // Create Query to update Customer Status
-        $query = "UPDATE customer SET customerStatus = 'Active' WHERE customerID = $customerID";
-        $stm = $this->db->prepare($query);
+        $stm->bindParam(1, $customerID);
         if($stm->execute()){
             echo 'Het is gelukt';
         }
@@ -129,8 +118,13 @@ Class CustomerDB {
     // Function to update the customer
     function updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus) {
         // Query aanmaken om alle functies uit de database te halen
-        $query = sprintf("UPDATE customer SET customerName = '%s', customerReference = '%s', customerComment = '%s', customerStatus = '%s' WHERE customerID = %d", $customerName, $customerReference, $customerComment, $customerStatus, $customerID);
+        $query = "UPDATE customer SET customerName = ?, customerReference = ?, customerComment = ?, customerStatus = ? WHERE customerID = ?";
         $stm = $this->db->prepare($query);
+        $stm->bindParam(1, $customerName);
+        $stm->bindParam(2, $customerReference);
+        $stm->bindParam(3, $customerComment);
+        $stm->bindParam(4, $customerStatus);
+        $stm->bindParam(5, $customerID);
         if($stm->execute()){
             // Sending true back for succes message
             return true;
