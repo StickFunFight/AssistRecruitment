@@ -79,7 +79,6 @@ class CategoryDatabase
                 return true;
             }
         }
-
     }
 
     function DeleteQaCategory($cID)
@@ -98,7 +97,7 @@ class CategoryDatabase
                 echo "Er zijn vragen met de status 'Active' die bij deze categorie horen!";
             }
         }else{
-            echo "Er zijn scans met de status Actief die gebruik maken van deze categorie!";
+            echo "Er zijn scans met de status 'Active' die gebruik maken van deze categorie!";
         }
     }
 }
