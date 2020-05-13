@@ -25,7 +25,6 @@
         //This function creates a new customer using the values obtained from the customerDatabase (createCustomer) function.
         //Also gives an echo as feedback to assure the user that the statement has succesfully been executed or not.
         public function createCustomer($customerName, $customerComment, $customerReference) {
-            //$this->customerDB->createCustomer($customerName, $customerComment, $customerReference);
             if($this->customerDB->createCustomer($customerName, $customerComment, $customerReference)){
                 // Getting the current url
                 $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
