@@ -38,14 +38,27 @@
 
         // Creating a status variable to fill it later
         $scanStatus;
+        $departmentStatus;
 
         // Checking for a status and filling scanStatus with that status
-        if (isset($_GET['status'])) {
-            $scanStatus = $_GET['status'];
+        if (isset($_GET['scan-status'])) {
+            $scanStatus = $_GET['scan-status'];
         } else {
             $scanStatus = "none";
         }
 
+        // Checking for a status and filling departmentStatus with that status
+
+        if (isset($_GET['department-status'])) {
+            $departmentStatus = $_GET['department-status'];
+        } else {
+            $departmentStatus = "none";
+        }
+
+        // Creating an array to check to statusses on the overview
+        $overviewStatus[]="Active";
+        $overviewStatus[]="Archived";
+        $overviewStatus[]="Deleted";
 
         // Updateting the user
         if (isset($_POST['btnUpdate'])) {
@@ -293,40 +306,35 @@
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <form method="POST" action="testfile?customer=<?php echo $customerID; ?>&tab=scan">
                             <div class="row">
                                 <div class="col-sm-5">
                                     <div class="customer__select">
-                                        <select id="scanStatus" name="cbxStatusScans" class="form-control" onchange="updateTableStatus(<?php echo  $customerID; ?>)">
-                                            <?php 
-                                                // Checking if a status has been set
-                                                if ($scanStatus != "none") {
-                                                    $overviewStatus[]="Active";
-                                                    $overviewStatus[]="Archived";
-                                                    $overviewStatus[]="Deleted";
-                                                
-                                                    // Looping through the statusses and checking wich one is equeal
-                                                    foreach($overviewStatus as $value){
-                                                        if($value == $scanStatus) {
-                                                            ?>
-                                                                <option selected="selected" value="<?php echo $value; ?>"><?php echo $value; ?></option>
-                                                            <?php
+                                    <select id="scanStatus" name="cbxScanStatus" class="form-control" onchange="updateTableStatus('Scans', 'scanStatus')">
+                                                    <?php 
+                                                        // Checking if a status has been set
+                                                        if ($scanStatus != "none") {                                                        
+                                                            // Looping through the statusses and checking wich one is equeal
+                                                            foreach($overviewStatus as $value){
+                                                                if($value == $scanStatus) {
+                                                                    ?>
+                                                                        <option selected="selected" value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                                                    <?php
+                                                                } else {
+                                                                    ?>
+                                                                        <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                                                    <?php
+                                                                }
+                                                            }
                                                         } else {
+                                                            // No status set
                                                             ?>
-                                                                <option value="<?php echo $value; ?>"><?php echo $value; ?></option>
+                                                                <option selected="selected" value="Active">Active</option>
+                                                                <option value="Archived">Archived</option>
+                                                                <option value="Deleted">Deleted</option>
                                                             <?php
                                                         }
-                                                    }
-                                                } else {
-                                                    // No status set
                                                     ?>
-                                                        <option selected="selected" value="Active">Active</option>
-                                                        <option value="Archived">Archived</option>
-                                                        <option value="Deleted">Deleted</option>
-                                                    <?php
-                                                }
-                                            ?>
-                                        </select>
+                                                </select>
                                     </div>
                                 </div>
 

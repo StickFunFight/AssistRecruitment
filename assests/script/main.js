@@ -177,6 +177,64 @@ function changeSelectCustomer() {
     document.getElementById("custID").value = document.getElementById("customerSelect").value;
 }
 
+// function to get url of customer edit and change a overview status
+// Checking the table status
+function updateTableStatus(overviewTable, overviewStatus) { 
+    console.log("Hoi Marvin");
+
+    // Checking wich table has been clicked
+    var status = document.getElementById(overviewStatus).value;
+    // Getting the url of
+    var url = window.location.href.toString();
+
+    console.log(url);
+
+    // Checking wich table status has been updated
+    switch (overviewTable) {
+        case "Departments":
+            // Checking if department status has been changed
+            if (url.includes("department-status", 0)) {
+                // Looking in the url for the parameter and value to replace with the new status
+                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'department-status=' + status);
+
+                // Refreshing the page with the new url
+                location.replace(newUrl);
+            } else {
+                // The status has not yet been updated so the status is placed new in the url
+                location.replace(url + "&department-status=" + status);
+            }
+            break;
+    
+        case "Scans":
+            // Checking if scan status has been changed
+            if (url.includes("scan-status", 0)) {
+                // Looking in the url for the parameter and value to replace with the new status
+                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'scan-status=' + status);
+
+                // Refreshing the page with the new url
+                location.replace(newUrl);
+            } else {
+                // The status has not yet been updated so the status is placed new in the url
+                location.replace(url + "&scan-status=" + status);
+            }
+            break;
+
+        default:
+            // Checking if scan status has been changed
+            if (url.includes("user-status", 0)) {
+                // Looking in the url for the parameter and value to replace with the new status
+                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'user-status=' + status);
+
+                // Refreshing the page with the new url
+                location.replace(newUrl);
+            } else {
+                // The status has not yet been updated so the status is placed new in the url
+                location.replace(url + "&user-status=" + status);
+            }
+            break;
+    }
+}
+
 
 
 // Function to switch active clas on the customer-edit overviews
