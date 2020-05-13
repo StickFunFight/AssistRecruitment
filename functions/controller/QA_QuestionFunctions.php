@@ -13,7 +13,6 @@ class QA_QuestionFunctions
 
     public function setQuestion($categorieID, $questionName, $questionExemple, $questionStatus, $questionType)
     {
-
         $sql = "INSERT INTO question (categorieID, questionName, questionExemple, questionStatus, questionType) VALUES ($categorieID, '$questionName', '$questionExemple', '$questionStatus', '$questionType')";
         $stm = $this->conn->prepare($sql);
         echo $sql;
