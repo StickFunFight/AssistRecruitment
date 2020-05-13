@@ -33,7 +33,7 @@
                 // Looping through the results
                 foreach($result as $user){
                     // Putting it in the modal
-                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
+                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID, null);
                     array_push($listUsers, $entUser);
                 }
                 // Returning the full list
@@ -68,7 +68,7 @@
                 // Looping through the results
                 foreach($result as $user){
                     // Putting it in the modal
-                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
+                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID, null);
                     array_push($listUsers, $entUser);
                 }
                 // Returning the full list
@@ -86,7 +86,7 @@
             $listUsers = array();
 
             // Making a query to get the scans of the customer out the database
-            $query = "SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, c.contactBirth, cust.customerName, dp.departmentName, cust.customerID, dp.departmentID
+            $query = "SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, c.contactBirth, cust.customerName, dp.departmentName, cust.customerID, dp.departmentID, dp.departmentComment
                       FROM user u 
                       INNER JOIN contact c ON c.userID = u.userID
                       INNER JOIN customer cust ON c.customerID = cust.customerID
@@ -103,7 +103,7 @@
                 // Looping through the results
                 foreach($result as $user){
                     // Putting it in the modal
-                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
+                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID,$user->departmentComment);
                     array_push($listUsers, $entUser);
                 }
                 // Returning the full list
@@ -137,7 +137,7 @@
                 // Looping through the results
                 foreach($result as $user){
                     // Putting it in the modal
-                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
+                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID, null);
                     array_push($detailsUser, $entUser);
                 }
                 // Returning the full list
@@ -202,5 +202,21 @@
                 echo "Er is iets fout gegaan";
             }
         }
+
+        function deleteUserScan($userID, $scanID){
+            // Create Query to update Customer Status
+            $query = "DELETE * FROM scan_user WHERE scanID = ? AND userID = ?";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $scanID);
+            $stm->bindParam(2, $userID);
+            if($stm->execute()){
+                echo 'Het is gelukt';
+            }
+            // Error Text
+            else {
+                echo "Er is iets fout gegaan";
+            }
+        }
+        
     }
 ?>

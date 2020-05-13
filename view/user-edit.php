@@ -14,6 +14,8 @@
         require '../functions/models/entCustomer.php';
         require '../functions/models/entContact.php';
         require '../functions/models/entDepartment.php'; 
+        require '../functions/models/entScan.php'; 
+
 
         // Including the head and menu
         require 'menu.php';
@@ -514,14 +516,6 @@
                                 <tr class="tab-table__row">
                                     <th class="tab-table__head" onclick="sortTable(0)">Name</th>
                                     <th class="tab-table__head" onclick="sortTable(1)">Comment</th>
-                                    <?php 
-                                        // Checking if there is a customer set
-                                        if($customerID == 0) {
-                                            ?>
-                                                <th class="tab-table__head" onclick="sortTable(4)">Customer</td>
-                                            <?php
-                                        }
-                                    ?>
                                     <th class="tab-table__head">Actions</th>
                                 </tr>
                             </thead>
@@ -533,13 +527,13 @@
                                     
                                     switch ($departmentStatus) {
                                         case 'Archived':
-                                            $listDepartments = $DepartmentCtrl->getDepartmentUser($userID, 'Archived');
+                                            $listDepartments = $UserCtrl->getDepartmentsUser($userID, 'Archived');
                                             break;
                                         case 'Deleted':
-                                            $listDepartments = $DepartmentCtrl->getDepartmentUser($userID, 'Deleted');
+                                            $listDepartments = $UserCtrl->getDepartmentsUser($userID, 'Deleted');
                                             break;
                                         default:
-                                            $listDepartments = $DepartmentCtrl->getDepartmentUser($userID, 'Active');
+                                            $listDepartments = $UserCtrl->getDepartmentsUser($userID, 'Active');
                                             break;
                                     }
 
@@ -548,17 +542,9 @@
                                     foreach ($listDepartments as $department) {                                  
                                 ?>
                                     <tr class="tab-table__row filter__row">
-                                        <td class="tab-table__td"><?php echo $department->getDepartmentName(); ?></td>
-                                        <td class="tab-table__td"><?php echo $department->getDepartmentComment(); ?></td>
-                                        <td class="tab-table__td"><?php echo $department->getCustomerName(); ?></td>
-                                        <?php 
-                                            // Checking if there is a customer set
-                                            if($customerID == 0) {
-                                                ?>
-                                                    <td class="tab-table__td"><?php echo $department->getDepartmentCustomerName(); ?></td>
-                                                <?php
-                                            }
-                                        ?>
+                                        <td class="tab-table__td"><?php echo $department->getUserDepartmentName(); ?></td>
+                                        <td class="tab-table__td"><?php echo $department->getuserDepartmentComment(); ?></td>
+
                                         <td class="tab-table__td">
                                             <a class="editKnop" href="#"><i class="fas tab-table__icon">&#xf044;</i></a>
                                             <?php
@@ -576,7 +562,7 @@
                                                         break;
                                                     default:
                                                         ?>
-                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas fa-minus-circle"></i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $scan->getScanID();?>' onClick="deleteUserScan($userID, $scanID)"><i class="fas fa-minus-circle"></i></a>
                                                         <?php
                                                         break;
                                                 }
