@@ -11,8 +11,13 @@
         private $UserDepartmentName;
         private $UserCustomerID;
         private $userDepartmentID;
+        private $userRights;
+        private $userBirthDate;
+        private $userPassword;
+        private $userType;
 
-        public function __construct($UserID, $ContactID, $ContactName, $UserPhoneNumber, $UserEmail, $UserComment, $UserStatus, $UserCustomerName, $UserDepartmentName, $UserCustomerID, $userDepartmentID) {
+        public function __construct($UserID, $ContactID, $ContactName, $UserPhoneNumber, $UserEmail, $UserComment, $UserStatus, $UserCustomerName, 
+                                    $UserDepartmentName, $UserCustomerID, $userDepartmentID, $userRights, $userBirthDate, $userPassword, $userType) {
             $this->UserID = $UserID;
             $this->ContactID = $ContactID;
             $this->ContactName = $ContactName;
@@ -24,6 +29,10 @@
             $this->UserDepartmentName = $UserDepartmentName;
             $this->UserCustomerID = $UserCustomerID;
             $this->userDepartmentID = $userDepartmentID;
+            $this->userRights = $userRights;
+            $this->userBirthDate = $userBirthDate;
+            $this->userPassword = $userPassword;
+            $this->userType = $userType;
         }
 
         public function getUserID() {
@@ -68,6 +77,21 @@
 
         public function getuserDepartmentID() {
             return $this->userDepartmentID;
+        }
+        public function getUserRights() {
+            return $this->userRights;
+        }
+        
+        public function getUserBirthDate() {
+            return $this->userBirthDate;
+        }
+
+        public function getUserPassword() {
+            return $this->userPassword;
+        }
+
+        public function getUserType() {
+            return $this->userType;
         }
     } 
 ?>

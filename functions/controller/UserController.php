@@ -27,5 +27,11 @@
             // Checking the result
 
         }
+
+        function createUser($UserID, $UserName, $UserEmail, $userType, $userPassword, $UserStatus){
+            //semding the data to the databqaseclass
+            $this->UserDB->addUser($UserID, $UserName, $UserEmail, $userType, $userPassword, $userType, $UserStatus);
+
+        }
     }
 ?>
