@@ -5,6 +5,7 @@
         // Inlcude Database class
         require '../functions/datalayer/database.class.php';
         require '../functions/datalayer/ScanDB.php';
+        require '../functions/datalayer/UserDB.php';
         // Including controller
         require '../functions/controller/CustomerController.php';
         require '../functions/controller/UserController.php';
@@ -25,6 +26,9 @@
         $UserCtrl = new UserController();
         $DepartmentCtrl =new DepartmentController();
         $scanCtrl = new ScanController();
+
+        // Connect DB to a variable
+        $UserDB = new UserDB();
 
         // Creating a customer id to fil it later
         $customerID;
@@ -419,17 +423,17 @@
                                                 switch ($scanStatus) {
                                                     case 'Archived':
                                                         ?>
-                                                        <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas fa-minus-circle"></i></a>
+                                                        <a class="deleteKnop" href="#" data-toggle="modal" data-target="#disconnectScanModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas fa-minus-circle"></i></a>
                                                         <?php
                                                         break;
                                                     case 'Deleted':
                                                         ?>
-                                                        <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas fa-minus-circle"></i></a>
+                                                        <a class="deleteKnop" href="#" data-toggle="modal" data-target="#disconnectScanModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas fa-minus-circle"></i></a>
                                                         <?php
                                                         break;
                                                     default:
                                                         ?>
-                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas fa-minus-circle"></i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#disconnectScanModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas fa-minus-circle"></i></a>
                                                         <?php
                                                         break;
                                                 }
@@ -562,7 +566,7 @@
                                                         break;
                                                     default:
                                                         ?>
-                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $scan->getScanID();?>' onClick="deleteUserScan($userID, $scanID)"><i class="fas fa-minus-circle"></i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas fa-minus-circle"></i></a>
                                                         <?php
                                                         break;
                                                 }
@@ -588,6 +592,57 @@
             // }
         </script>
     </body>
+
+    <!--DisconnectScan Modal--->
+    <div class="modal fade" id="disconnectScanModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="disconnectScanModal">Disconnect Scan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to disconnect this scan?
+            </div>
+
+            <form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                <button type="submit" name="btnDisconnectModal" class="btn btn-primary" id="btnDisconnectModal">Disconnect   </button>          
+
+                <script type="text/javascript">
+                function reply_click(clicked_id)
+                {
+                    window.yourGlobalVariable = clicked_id;
+                }
+
+                var userID = <? echo $userID; ?>;
+                console.log(userID);
+                console.log(yourGlobalVariable);
+
+
+                $('#btnDisconnectModal').click(function () {
+
+
+                // $.ajax({
+                //     url: 'scan_disconnect_handler',
+                //     type: 'post',
+                //     data: { "scanID": yourGlobalVariable, "userID": userID},
+                //     success: ""
+                // });
+
+                });
+
+                </script>
+               
+            </div>
+            </form>
+
+            </div>
+        </div>
+        </div>
 
     <script>
         // Filteren op de table

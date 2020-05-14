@@ -205,7 +205,7 @@
 
         function deleteUserScan($userID, $scanID){
             // Create Query to update Customer Status
-            $query = "DELETE * FROM scan_user WHERE scanID = ? AND userID = ?";
+            $query = "DELETE FROM scan_user WHERE scanID = ? AND userID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $scanID);
             $stm->bindParam(2, $userID);
