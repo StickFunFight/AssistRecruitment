@@ -42,8 +42,6 @@
          $this->ScanDB->EditScan($scanID, $scanName,$scanComment, $scanStatus,$scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate);
         }
 
-        }  
-
         // Getting all scans from 1 user
         function getScansUser($userID) {
             // Creating a array
