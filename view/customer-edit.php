@@ -33,64 +33,8 @@
         // Getting the customer
         $customerID = $_GET['customer'];
 
-        // Adding an user through the modal
-        if(isset($_POST['btnAddUser'])) {
-            // Getting the values
-            $contactName = $_POST['txtAddUserName'];
-            $userEmail = $_POST['txtAddUserEmail'];
-            $userType = $_POST['txtAddUserType'];
-            $contactPhone = $_POST['txtAdPhoneNumber'];
-            $contactBirthDay = $_POST['txtAddBirth'];
-            $contactComment = $_POST['txtAddUserComment'];
-            $contactCustomer = null;
-
-            // Checking for type
-            if($userType == "Employee") {
-                $contactCustomer = $customerID;
-            }
-
-            // echo "Naam " . $contactName . "<br>";
-            // echo "Email " . $userEmail . "<br>";
-            // echo "Type " . $userType . "<br>";
-            // echo "Phone " . $contactPhone . "<br>";
-            // echo "Birthday " . $contactBirth . "<br>";
-            // echo "Customer " . $contactCustomer . "<br>";
-
-            $userCtrl->addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer);
-        }
-        
-        // Adding a department through the modal
-        if(isset($_POST['btnDepartmentAdd'])) {
-            // getting the values of the input fields
-            $dpName = $_POST["txtAddDepartmentName"];
-            $dpComment = $_POST['txtAddDepartmentComment']; 
-            
-            $departmentCtrl->createDepartment($dpName, $dpComment, $customerID);
-        }
-
-        // Adding a department through the modal
-        if(isset($_POST['btnDepartmentAdd'])) {
-            // getting the values of the input fields
-            $dpName = $_POST["txtAddDepartmentName"];
-            $dpComment = $_POST['txtAddDepartmentComment']; 
-            
-            $departmentCtrl->createDepartment($dpName, $dpComment, $customerID);
-        }
-
-        if(isset($_POST['btnAddScan'])) {
-            // getting the new values
-            // $scanName = $_POST['txtAddScanName'];
-            // $scanComment = $_POST['txtAddScanComment'];
-            // $scanIntroductionText = $_POST['txtAddScanIntroduction'];
-            // $scanReminderText = $_POST['txtAddScanReminder'];
-            // $scanStartDate = $_POST['txtAddStartDate'];
-            // $scanEndDate = $_POST['txtAddStartEnd'];
-
-            // Send to add scan, waiting for Marvin Boschman to finish it first
-        }
-
         // Updating the customer
-        if(isset($_POST['btnUpdate']) || isset($_POST['btnUpdateAndExit'])){
+        if (isset($_POST['btnUpdate']) || isset($_POST['btnUpdateAndExit'])){
             // getting the new values
             $custID = $_GET["customer"];
             $custName = $_POST['txtCustomerName'];
@@ -116,6 +60,101 @@
             // echo "Status = " . $custStatus . "<br>";
 
             $customerCtrl->updateCustomer($custID, $custName, $custRefrence, $custComment, $custStatus, $exitWindow);
+        }
+
+        // Adding an user through the modal
+        if (isset($_POST['btnAddUser'])) {
+            // Getting the values
+            $contactName = $_POST['txtAddUserName'];
+            $userEmail = $_POST['txtAddUserEmail'];
+            $userType = $_POST['txtAddUserType'];
+            $contactPhone = $_POST['txtAdPhoneNumber'];
+            $contactBirthDay = $_POST['txtAddBirth'];
+            $contactComment = $_POST['txtAddUserComment'];
+            $contactCustomer = null;
+
+            // Checking for type
+            if ($userType == "Employee") {
+                $contactCustomer = $customerID;
+            }
+
+            // echo "Naam " . $contactName . "<br>";
+            // echo "Email " . $userEmail . "<br>";
+            // echo "Type " . $userType . "<br>";
+            // echo "Phone " . $contactPhone . "<br>";
+            // echo "Birthday " . $contactBirth . "<br>";
+            // echo "Customer " . $contactCustomer . "<br>";
+
+            $userCtrl->addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer);
+        }
+        
+        // Adding a department through the modal
+        if (isset($_POST['btnDepartmentAdd'])) {
+            // getting the values of the input fields
+            $dpName = $_POST["txtAddDepartmentName"];
+            $dpComment = $_POST['txtAddDepartmentComment']; 
+            
+            $departmentCtrl->createDepartment($dpName, $dpComment, $customerID);
+        }
+
+        if (isset($_POST['btnAddScan'])) {
+            // getting the new values
+            // $scanName = $_POST['txtAddScanName'];
+            // $scanComment = $_POST['txtAddScanComment'];
+            // $scanIntroductionText = $_POST['txtAddScanIntroduction'];
+            // $scanReminderText = $_POST['txtAddScanReminder'];
+            // $scanStartDate = $_POST['txtAddStartDate'];
+            // $scanEndDate = $_POST['txtAddStartEnd'];
+
+            // Send to add scan, waiting for Marvin Boschman to finish it first
+        }
+
+        // Archiving the contact
+        if (isset($_POST['btnArchiveContact'])) {
+            // Getting the department id and sending to the controller
+            $userID = $_POST['txtContactID'];
+
+            $userCtrl->archiveUser($userID);
+        }
+
+        // Deleting the contact
+        if (isset($_POST['btnDeleteContact'])) {
+            // Getting the txtContactID id and sending to the controller
+            $userID = $_POST['txtContactID'];
+
+            $userCtrl->deleteUser($userID);
+        }
+
+        // Archiving the department
+        if (isset($_POST['btnArchiveDepartment'])) {
+            // Getting the department id and sending to the controller
+            $departmentID = $_POST['txtDepartmentID'];
+
+            $departmentCtrl->archiveDepartment($departmentID);
+        }
+
+        // Deleting the department
+        if (isset($_POST['btnDeleteDepartment'])) {
+            // Getting the department id and sending to the controller
+            $departmentID = $_POST['txtDepartmentID'];
+
+            $departmentCtrl->deleteDepartment($departmentID);
+        }
+
+        // Archiving the scan
+        if (isset($_POST['btnArchiveScan'])) {
+            // Getting the department id and sending to the controller
+            $scanID = $_POST['txtScanID'];
+
+            $scanCtrl->archiveScan($scanID);
+        }
+
+        // Deleting the scan
+        if (isset($_POST['btnDeleteScan'])) {
+            // Getting the department id and sending to the controller
+            $scanID = $_POST['txtScanID'];
+
+            $scanCtrl->deleteScan($scanID);
         }
 
         // Getting the customer
@@ -363,7 +402,7 @@
                                                 switch ($userStatus) {
                                                     case 'Archived':
                                                         ?>
-                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteContact" id='<?php echo $user->getUserID(); ?>' onclick="setContactIDModalCustomerEdit(<?php echo $user->getUserID(); ?>)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
                                                         <?php
                                                         break;
                                                     case 'Deleted':
@@ -373,7 +412,7 @@
                                                         break;
                                                     default:
                                                         ?>
-                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf187;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveContact" id='<?php echo $user->getUserID(); ?>' onclick="setContactIDModalCustomerEdit(<?php echo $user->getUserID(); ?>)"><i class="fas tab-table__icon">&#xf187;</i></a>
                                                         <?php
                                                         break;
                                                 }
@@ -494,19 +533,19 @@
                                                 switch ($departmentStatus) {
                                                     case 'Archived':
                                                         ?>
-                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteModal" id='<?php echo $department->getDepartmentID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteDepartment" id='<?php echo $department->getDepartmentID();?>' onclick="setDepartmentIDModalCustomerEdit(<?php echo $department->getDepartmentID();?>)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
                                                         <?php
                                                         break;
                                                     case 'Deleted':
                                                         ?>
-
-                                                        <?php
-                                                        break;
-                                                    default:
-                                                        ?>
-                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $department->getDepartmentID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf187;</i></a>
+                                                            
                                                         <?php
                                                         break; 
+                                                    default:
+                                                        ?>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveDepartment" id='<?php echo $department->getDepartmentID();?>' onclick="setDepartmentIDModalCustomerEdit(<?php echo $department->getDepartmentID();?>)"><i class="fas tab-table__icon">&#xf187;</i></a>
+                                                        <?php
+                                                        break;
                                                 }
                                             ?>
                                         </td>
@@ -617,17 +656,15 @@
                                                 switch ($scanStatus) {
                                                     case 'Archived':
                                                         ?>
-                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteScan" id='<?php echo $scan->getScanID();?>' onclick="setScanIDModalCustomerEdit(<?php echo $scan->getScanID();?>)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
                                                         <?php
                                                         break;
                                                     case 'Deleted':
-                                                        ?>
-                                                            
-                                                        <?php
+                                                       
                                                         break;
                                                     default:
                                                         ?>
-                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf187;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveScan" id='<?php echo $scan->getScanID();?>' onclick="setScanIDModalCustomerEdit(<?php echo $scan->getScanID();?>)"><i class="fas tab-table__icon">&#xf187;</i></a>
                                                         <?php
                                                         break;
                                                 }
@@ -817,42 +854,76 @@
             </div>
         </div>
 
-            <!-- Department Archive Modal -->
-    <div class="modal fade" id="archiveDepartment" tabindex="-1" role="dialog" aria-labelledby="archiveDepartment" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="archiveModalLabel">Archive department</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+        <!-- Contact Archive Modal -->
+        <div class="modal fade" id="archiveContact" tabindex="-1" role="dialog" aria-labelledby="archiveContact" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="archiveModalLabel">Archive contact</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to archive this contact?
+                    </div>
+
+                    <form method="post">
+                        <div class="modal-footer">
+                            <input type="hidden" name="txtContactID" id="ContactIDArchive">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                            <button type="submit" name="btnArchiveContact" class="btn btn-primary" id="btnArchive">Archive</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="modal-body">
-                Are you sure you want to archive this department?
+        </div>
+            
+        <!-- Contact Delete Modal -->
+        <div class="modal fade" id="deleteContact" tabindex="-1" role="dialog" aria-labelledby="deleteContact" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModal">Delete contact</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        Are you sure you want to delete this contact?
+                    </div>
+                    
+                    <form method="POST">
+                        <div class="modal-footer">
+                            <input type="hidden" name="txtContactID" id="ContactIDDelete">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                            <button type="submit" name="btnDeleteContact" class="btn btn-primary modal--button" id="btnDelete">Delete</button>
+                        </div>
+                    </form>
+                </div>
             </div>
+        </div>
 
-            <form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
-                <button type="submit" name="btnDelete" class="btn btn-primary" id="btnArchive">Archive   </button>          
+        <!-- Department Archive Modal -->
+        <div class="modal fade" id="archiveDepartment" tabindex="-1" role="dialog" aria-labelledby="archiveDepartment" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="archiveModalLabel">Archive department</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to archive this department?
+                    </div>
 
-                        <script type="text/javascript">
-                            function reply_click(clicked_id)
-                            {
-                                window.yourGlobalVariable = clicked_id;
-                            }
-
-                            // Getting the id of the clicked button
-                            $('#btnArchive').click(function () {
-                                // Sending the variables to the handler
-                                $.ajax({
-                                    url: '../functions/handler/departmentArchiveHandler.php',
-                                    type: 'post',
-                                    data: { "departmentID": yourGlobalVariable},
-                                    success: function(response) { window.location.href = window.location; }
-                                });
-                            });
-                        </script>
+                    <form method="post">
+                        <div class="modal-footer">
+                            <input type="hidden" name="txtDepartmentID" id="departmentIDArchive">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                            <button type="submit" name="btnArchiveDepartment" class="btn btn-primary" id="btnArchive">Archive</button>
                         </div>
                     </form>
                 </div>
@@ -873,27 +944,63 @@
                     <div class="modal-body">
                         Are you sure you want to delete this department?
                     </div>
-
-                    <form>
+                    
+                    <form method="POST">
                         <div class="modal-footer">
+                            <input type="hidden" name="txtDepartmentID" id="departmentIDDelete">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
-                            <button type="submit" name="btnDelete" class="btn btn-primary" id="btnDelete">Delete</button>          
-                            <script type="text/javascript">
-                                // Getting the id of the clicked button
-                                function reply_click(clicked_id){
-                                    window.yourGlobalVariable = clicked_id;
-                                }
+                            <button type="submit" name="btnDeleteDepartment" class="btn btn-primary modal--button" id="btnDelete">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-                                $('#btnDelete').click(function () {
-                                    // Sending the variables to the handler
-                                    $.ajax({
-                                        url: '../functions/handler/departmentDeleteHandler.php',
-                                        type: 'post',
-                                        data: { "departmentID": yourGlobalVariable},
-                                        success: function(response) { window.location.href = window.location; }
-                                    });
-                                });
-                            </script>
+        <!-- Scan Archive Modal -->
+        <div class="modal fade" id="archiveScan" tabindex="-1" role="dialog" aria-labelledby="archiveScan" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="archiveModalLabel">Archive scan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to archive this scan?
+                    </div>
+
+                    <form method="post">
+                        <div class="modal-footer">
+                            <input type="hidden" name="txtScanID" id="ScanIDArchive">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                            <button type="submit" name="btnArchiveScan" class="btn btn-primary" id="btnArchive">Archive</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+            
+        <!-- Scan Delete Modal -->
+        <div class="modal fade" id="deleteScan" tabindex="-1" role="dialog" aria-labelledby="deleteScan" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModal">Delete scan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        Are you sure you want to delete this scan?
+                    </div>
+                    
+                    <form method="POST">
+                        <div class="modal-footer">
+                            <input type="hidden" name="txtScanID" id="ScanIDDelete">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                            <button type="submit" name="btnDeleteScan" class="btn btn-primary modal--button" id="btnDelete">Delete</button>
                         </div>
                     </form>
                 </div>

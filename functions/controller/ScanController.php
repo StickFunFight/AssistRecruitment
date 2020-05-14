@@ -41,5 +41,15 @@
             // Returning the list given from the Database class
             return $listScans;
         }
+
+        // Function to archive scan
+        function archiveScan($scanID) {
+            $this->ScanDB->archiveScan($scanID);
+        }
+
+        // Function to delete scan
+        function deleteScan($scanID) {
+            $this->ScanDB->deleteScan($scanID);
+        }
     }
 ?>

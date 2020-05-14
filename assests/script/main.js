@@ -116,7 +116,7 @@ function updateTableStatus(overviewTable, overviewStatus) {
             // Checking if scan status has been changed
             if (url.includes("scan-status", 0)) {
                 // Looking in the url for the parameter and value to replace with the new status
-                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'scan-status=' + status);
+                var newUrl = url.replace(/\bscan-status=[a-zA-Z]{1,50}\b/, 'scan-status=' + status);
 
                 // Refreshing the page with the new url
                 location.replace(newUrl);
@@ -130,7 +130,7 @@ function updateTableStatus(overviewTable, overviewStatus) {
             // Checking if scan status has been changed
             if (url.includes("user-status", 0)) {
                 // Looking in the url for the parameter and value to replace with the new status
-                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'user-status=' + status);
+                var newUrl = url.replace(/\buser-status=[a-zA-Z]{1,50}\b/, 'user-status=' + status);
 
                 // Refreshing the page with the new url
                 location.replace(newUrl);
@@ -270,4 +270,22 @@ function setCustomerSelectDisabeld() {
 // Function to udate the customer ID
 function changeSelectCustomer() {
     document.getElementById("custID").value = document.getElementById("customerSelect").value;
+}
+
+// Function to get department and use it in the modal
+function setContactIDModalCustomerEdit(contactID) {
+    document.getElementById("ContactIDArchive").value = contactID;
+    document.getElementById("ContactIDDelete").value = contactID;
+}
+
+// Function to get department and use it in the modal
+function setDepartmentIDModalCustomerEdit(departmentID) {
+    document.getElementById("departmentIDArchive").value = departmentID;
+    document.getElementById("departmentIDDelete").value = departmentID;
+}
+
+// Function to get scan and use it in the modal
+function setScanIDModalCustomerEdit(scanID) {
+    document.getElementById("ScanIDArchive").value = scanID;
+    document.getElementById("ScanIDDelete").value = scanID;
 }

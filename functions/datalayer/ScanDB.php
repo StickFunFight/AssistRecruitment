@@ -118,11 +118,7 @@
             $query = "UPDATE scan SET scanStatus = 'Archived' WHERE scanID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $scanID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
+            if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
         }
@@ -132,11 +128,7 @@
             $query = "UPDATE scan SET scanStatus = 'Deleted' WHERE scanID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $scanID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
+            if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
         }

@@ -83,5 +83,15 @@
                 echo '<script>location.replace("'.$newURL.'");</script>';
             }
         }
+
+        // Function to archive user
+        function archiveUser($userID){
+            $this->UserDB->archiveUser($userID);
+        }
+    
+        // Function to delete user
+        function deleteUser($userID){
+            $this->UserDB->deleteUser($userID);
+        }
     }
 ?>

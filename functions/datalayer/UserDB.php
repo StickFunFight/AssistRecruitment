@@ -245,11 +245,7 @@
             $query = "UPDATE user SET userStatus = 'Archived' WHERE userID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
+            if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
         }
@@ -259,11 +255,7 @@
             $query = "UPDATE user SET userStatus = 'Deleted' WHERE userID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
+            if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
         }
