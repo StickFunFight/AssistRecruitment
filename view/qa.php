@@ -1,5 +1,4 @@
 <?php
-require_once 'head.php';
 require_once 'menu.php';
 
 
@@ -78,7 +77,6 @@ require_once 'menu.php';
                         echo '</td>';
                         echo '<td>';
                         echo '<a href="QA_QuestionEdit.php?questionID='.$item->getQuestionID().'" class="editKnop" id="'.$item->getQuestionID().'" onclick="SendID(this.id)"><i class="fas tab-table__icon">&#xf044;</i></a>';
-                        echo '<a id="'.$item->getQuestionID().'" onclick="SendID(this.id)"><i class="fas tab-table__icon editKnop">&#xf044;</i></a>';
                         echo  ' ';
                         echo '<a id="'.$item->getQuestionID().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteQuestionModal" data-id="'.$item->getQuestionID().'"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
                         echo '</td>';
@@ -91,9 +89,6 @@ require_once 'menu.php';
         </div>
     </div>
 </div>
-
-<!-- Edit Question -->
-
 
 <!-- Modal Add Question -->
 <div class="modal fade" id="modaladdQuestion" name="modaladdQuestion" tabindex="-1" role="dialog" aria-labelledby="modaladdQuestion" aria-hidden="true">

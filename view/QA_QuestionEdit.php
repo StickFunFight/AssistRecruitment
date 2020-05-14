@@ -73,10 +73,7 @@ $resultQuestionData = $QF->getQuestionData($questionID);
             </div>
         </div>
         <div class="footer">
-            <button type="button" name="btnQuestionCancel" class="btn btn-danger" data-dismiss="modal">Annuleren
-            </button>
-            <input type="button" name="btnQuestionEditSubmit" id="btnQuestionEditSubmit" class="btn btn-primary"
-                   data-dismiss="modal" value="Verzenden"/>
+            <input type="submit" name="btnQuestionEditSubmit" id="btnQuestionEditSubmit" class="btn btn-primary" value="Verzenden"/>
         </div>
     </form>
 </div>
@@ -89,7 +86,7 @@ $resultQuestionData = $QF->getQuestionData($questionID);
             url: '../functions/handler/QA_QuestionEditHandler.php',
             type: 'post',
             data: {
-                "questionID": categoryID,
+                "questionID": $questionID,
                 "CategoryQuestionEdit": $('#selCategoryQuestionEdit').val(),
                 "QuestionNameEdit": $('#txQuestionEdit').val(),
                 "QuestionExampleEdit": $('#taExampleEdit').val(),

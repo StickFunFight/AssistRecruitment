@@ -20,7 +20,7 @@ class QA_QuestionFunctions
     }
 
     public function updateQuestion($questionID, $categorieID, $questionname, $questionExemple, $questionStatus, $questionType){
-        $sql = "UPDATE question SET categorieID = '$categorieID', questionname = '$questionname', questionExemple = '$questionExemple', questionStatus = '$questionStatus', questionType = '$questionType' WHERE questionID = '$questionID'";
+        $sql = "UPDATE question SET categorieID = '$categorieID', questionName = '$questionname', questionExemple = '$questionExemple', questionStatus = '$questionStatus', questionType = '$questionType' WHERE questionID = '$questionID'";
         $stm = $this->conn->prepare($sql);
         $stm->execute();
     }
