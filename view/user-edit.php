@@ -89,6 +89,15 @@
             $UserCtrl->updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment);
         }
 
+        // Disconneting user from scan
+        if (isset($_POST['btnDisconnectModal'])) {
+            $scanID = $_POST['txtScanIDDisconnect'];
+
+            //echo "Scan id = " . $scanID . " User id = " . $userID;
+
+            //TODO doorsturene naar controller en dan de database
+        }
+
         // Getting the details of the user
         $detailsUser = $UserCtrl->getDetailsUser($userID);
 
@@ -433,7 +442,7 @@
                                                         break;
                                                     default:
                                                         ?>
-                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#disconnectScanModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas fa-minus-circle"></i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#disconnectScanModal" id='<?php echo $scan->getScanID();?>' onclick="setScanIDModal(<?php echo $scan->getScanID(); ?>)"><i class="fas fa-minus-circle"></i></a>
                                                         <?php
                                                         break;
                                                 }
@@ -609,14 +618,18 @@
 
             <form>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
-                <button type="submit" name="btnDisconnectModal" class="btn btn-primary" id="btnDisconnectModal">Disconnect   </button>          
+                <form method="POST" autocomplete="off">
+                    <input type="hidden" name="txtScanIDDisconnect" id="scanIDDisconnect">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                    <input type="submit" name="btnDisconnectModal" class="btn btn-primary" value="Disconnect" id="btnDisconnectModal"> 
+                </form>
 
                 <script type="text/javascript">
-                function reply_click(clicked_id)
-                {
-                    window.yourGlobalVariable = clicked_id;
-                }
+                // function reply_click(clicked_id)
+                // {
+                //     var scanID = clicked_id;
+                //     document.getElementById("scanIDDisconnect").innerHTML = scanID;
+                // }
 
                 var userID = <? echo $userID; ?>;
                 console.log(userID);

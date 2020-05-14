@@ -271,3 +271,9 @@ function setCustomerSelectDisabeld() {
 function changeSelectCustomer() {
     document.getElementById("custID").value = document.getElementById("customerSelect").value;
 }
+
+// Function to set scanID from the overview and use it in the modal
+function setScanIDModal(scanID) {
+    // Setting the value of the scan id in the modal
+    document.getElementById("scanIDDisconnect").value = scanID;
+}
