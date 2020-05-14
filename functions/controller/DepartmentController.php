@@ -68,11 +68,19 @@
             }
         }
 
+        // Function to archive department
+        function archiveDepartment($departmentID){
+            $this->departmentDB->archiveDepartment($departmentID);
+        }
+
+        // Function to delete department
+        function deleteDepartment($departmentID){
+            $this->departmentDB->deleteDepartment($departmentID);
+        }
+
         // Function to add contact to department
         function addContactDepartment($contactID, $departmentID) {
-
             echo $contactID . " en " .$departmentID;
-
         }
     }
 ?>

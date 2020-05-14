@@ -33,13 +33,64 @@
         // Getting the customer
         $customerID = $_GET['customer'];
 
+        // Adding an user through the modal
         if(isset($_POST['btnAddUser'])) {
-            echo "noice";
+            // Getting the values
+            $contactName = $_POST['txtAddUserName'];
+            $userEmail = $_POST['txtAddUserEmail'];
+            $userType = $_POST['txtAddUserType'];
+            $contactPhone = $_POST['txtAdPhoneNumber'];
+            $contactBirthDay = $_POST['txtAddBirth'];
+            $contactComment = $_POST['txtAddUserComment'];
+            $contactCustomer = null;
+
+            // Checking for type
+            if($userType == "Employee") {
+                $contactCustomer = $customerID;
+            }
+
+            // echo "Naam " . $contactName . "<br>";
+            // echo "Email " . $userEmail . "<br>";
+            // echo "Type " . $userType . "<br>";
+            // echo "Phone " . $contactPhone . "<br>";
+            // echo "Birthday " . $contactBirth . "<br>";
+            // echo "Customer " . $contactCustomer . "<br>";
+
+            $userCtrl->addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer);
+        }
+        
+        // Adding a department through the modal
+        if(isset($_POST['btnDepartmentAdd'])) {
+            // getting the values of the input fields
+            $dpName = $_POST["txtAddDepartmentName"];
+            $dpComment = $_POST['txtAddDepartmentComment']; 
+            
+            $departmentCtrl->createDepartment($dpName, $dpComment, $customerID);
         }
 
-        
+        // Adding a department through the modal
+        if(isset($_POST['btnDepartmentAdd'])) {
+            // getting the values of the input fields
+            $dpName = $_POST["txtAddDepartmentName"];
+            $dpComment = $_POST['txtAddDepartmentComment']; 
+            
+            $departmentCtrl->createDepartment($dpName, $dpComment, $customerID);
+        }
+
+        if(isset($_POST['btnAddScan'])) {
+            // getting the new values
+            // $scanName = $_POST['txtAddScanName'];
+            // $scanComment = $_POST['txtAddScanComment'];
+            // $scanIntroductionText = $_POST['txtAddScanIntroduction'];
+            // $scanReminderText = $_POST['txtAddScanReminder'];
+            // $scanStartDate = $_POST['txtAddStartDate'];
+            // $scanEndDate = $_POST['txtAddStartEnd'];
+
+            // Send to add scan, waiting for Marvin Boschman to finish it first
+        }
+
         // Updating the customer
-        if(isset($_POST['btnUpdate'])){
+        if(isset($_POST['btnUpdate']) || isset($_POST['btnUpdateAndExit'])){
             // getting the new values
             $custID = $_GET["customer"];
             $custName = $_POST['txtCustomerName'];
@@ -50,13 +101,21 @@
             // Storring all variables in the customer object
             //$CustomerModal = new EntCustomer($custID, $custName, $custRefrence, $custComment, $custStatus);
 
+            // Checking if user wants to exit page
+            $exitWindow = 0;
+
+            if (isset($_POST['btnUpdateAndExit'])) {
+                // User wants to leave
+                $exitWindow = 1;
+            }
+
             // echo "ID = " . $custID . "<br>";
             // echo "Name = " . $custName . "<br>";
             // echo "Refrence = " . $custRefrence . "<br>";
             // echo "Comment = " . $custComment . "<br>";
             // echo "Status = " . $custStatus . "<br>";
 
-            $customerCtrl->updateCustomer($custID, $custName, $custRefrence, $custComment, $custStatus);
+            $customerCtrl->updateCustomer($custID, $custName, $custRefrence, $custComment, $custStatus, $exitWindow);
         }
 
         // Getting the customer
@@ -164,6 +223,7 @@
                     <div class="row ce--margin">
                         <div class="col-sm-12">
                             <input type="submit" name="btnUpdate" class="btn ce__update-button" value="Update customer">
+                            <input type="submit" name="btnUpdateAndExit" class="btn ce__update-button" value="Update customer and exit">
                         </div>
                     </div>
 
@@ -376,7 +436,7 @@
 
                                         <div class="col-sm-2">
                                             <div class="add-container">  
-                                                <a href="department-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add department</a>
+                                                <a href="#" class="btn add-container__btn" data-toggle="modal" data-target="#addDepartmentModal"><i class='fas add-container--icon'>&#xf055;</i> Add department</a>
                                             </div>
                                         </div>
                                     </div>
@@ -507,7 +567,7 @@
 
                                         <div class="col-sm-2">
                                             <div class="add-container">  
-                                                <a href="scan-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add Scan</a>
+                                            <a href="#" class="btn add-container__btn" data-toggle="modal" data-target="#addScanModal"><i class='fas add-container--icon'>&#xf055;</i> Add scan</a>
                                             </div>
                                         </div>
                                     </div>
@@ -584,7 +644,7 @@
             </div>
         </div> 
 
-        <!--Archive Modal--->
+        <!--User add modal --->
         <div class="modal fade" id="addUserModal" tabindex="-1" role="add-user" aria-labelledby="add-user" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -599,21 +659,21 @@
                         <form method="POST">
                             <div class="row ce--form-row">
                                 <div class="col-sm-12">
-                                    <label class="iets">Naam</label>
+                                    <label class="">Name</label>
                                     <input type="text" name="txtAddUserName" class="form-control ce--input" required/>
                                 </div>
                             </div>
 
                             <div class="row ce--form-row">
                                 <div class="col-sm-12">
-                                    <label class="iets">Email</label>
+                                    <label class="">Email</label>
                                     <input type="email" name="txtAddUserEmail" class="form-control ce--input" required/>
                                 </div>
                             </div>
 
                             <div class="row ce--form-row">
                                 <div class="col-sm-12">
-                                    <label class="iets">Type</label>
+                                    <label class="">Type</label>
                                     <select name="txtAddUserType" class="form-control ce--input" required>
                                         <option value="Employee" selected="selected">Employee</option>
                                         <option value="Candidate">Candidate</option>
@@ -623,21 +683,21 @@
 
                             <div class="row ce--form-row">
                                 <div class="col-sm-12">
-                                    <label class="iets">Phonenumber</label>
+                                    <label class="">Phonenumber</label>
                                     <input type="phone" name="txtAdPhoneNumber" class="form-control ce--input" required/>
                                 </div>
                             </div>
 
                             <div class="row ce--form-row">
                                 <div class="col-sm-12">
-                                    <label class="iets">Date</label>
+                                    <label class="">Date of birth</label>
                                     <input type="date" name="txtAddBirth" class="form-control ce--input" required/>
                                 </div>
                             </div>
 
                             <div class="row ce--form-row">
                                 <div class="col-sm-12">
-                                    <label class="iets">Comment</label>
+                                    <label class="">Comment</label>
                                     <textarea name="txtAddUserComment" class="form-control ce--input" rows="5"></textarea>
                                 </div>
                             </div>
@@ -645,7 +705,194 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" name="btnAddUser" class="btn btn-primary">Save user</button>          
+                            <button type="submit" name="btnAddScan" class="btn btn-primary">Save user</button>          
+                            </script>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Department add modal --->
+        <div class="modal fade" id="addDepartmentModal" tabindex="-1" role="add-department" aria-labelledby="add-department" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="archiveModalLabel">Add department</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Name</label>
+                                    <input type="text" name="txtAddDepartmentName" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Comment</label>
+                                    <textarea name="txtAddDepartmentComment" class="form-control ce--input" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" name="btnDepartmentAdd" class="btn btn-primary">Save department</button>          
+                            </script>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scan add modal --->
+        <div class="modal fade" id="addScanModal" tabindex="-1" role="add-scan" aria-labelledby="add-scan" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="archiveModalLabel">Add Scan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Name</label>
+                                    <input type="text" name="txtAddScanName" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Comment</label>
+                                    <textarea name="txtAddScanComment" class="form-control ce--input" rows="5"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Introduction text</label>
+                                    <textarea name="txtAddScanIntroduction" class="form-control ce--input" rows="5" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Reminder text</label>
+                                    <textarea name="txtAddScanReminder" class="form-control ce--input" rows="5" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Start date</label>
+                                    <input type="date" name="txtAddStartDate" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">End date</label>
+                                    <input type="date" name="txtAddStartEnd" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" name="btnAddScan" class="btn btn-primary">Save Scan</button>          
+                            </script>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+            <!-- Department Archive Modal -->
+    <div class="modal fade" id="archiveDepartment" tabindex="-1" role="dialog" aria-labelledby="archiveDepartment" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="archiveModalLabel">Archive department</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to archive this department?
+            </div>
+
+            <form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                <button type="submit" name="btnDelete" class="btn btn-primary" id="btnArchive">Archive   </button>          
+
+                        <script type="text/javascript">
+                            function reply_click(clicked_id)
+                            {
+                                window.yourGlobalVariable = clicked_id;
+                            }
+
+                            // Getting the id of the clicked button
+                            $('#btnArchive').click(function () {
+                                // Sending the variables to the handler
+                                $.ajax({
+                                    url: '../functions/handler/departmentArchiveHandler.php',
+                                    type: 'post',
+                                    data: { "departmentID": yourGlobalVariable},
+                                    success: function(response) { window.location.href = window.location; }
+                                });
+                            });
+                        </script>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+            
+        <!-- Department Delete Modal -->
+        <div class="modal fade" id="deleteDepartment" tabindex="-1" role="dialog" aria-labelledby="deleteDepartment" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModal">Delete department</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        Are you sure you want to delete this department?
+                    </div>
+
+                    <form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                            <button type="submit" name="btnDelete" class="btn btn-primary" id="btnDelete">Delete</button>          
+                            <script type="text/javascript">
+                                // Getting the id of the clicked button
+                                function reply_click(clicked_id){
+                                    window.yourGlobalVariable = clicked_id;
+                                }
+
+                                $('#btnDelete').click(function () {
+                                    // Sending the variables to the handler
+                                    $.ajax({
+                                        url: '../functions/handler/departmentDeleteHandler.php',
+                                        type: 'post',
+                                        data: { "departmentID": yourGlobalVariable},
+                                        success: function(response) { window.location.href = window.location; }
+                                    });
+                                });
                             </script>
                         </div>
                     </form>
