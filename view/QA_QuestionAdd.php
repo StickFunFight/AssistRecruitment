@@ -2,7 +2,7 @@
     require_once 'menu.php';
 require_once '../functions/controller/QA_QuestionFunctions.php';
     $QF = new QA_QuestionFunctions();
-
+    $arrayAnswer = [];
 ?>
 <link rel="stylesheet" type="text/css" href="../assests/styling/QA_QuestionStyle.css">
 <body>
@@ -87,7 +87,19 @@ require_once '../functions/controller/QA_QuestionFunctions.php';
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <?php //$QF->getQuestionAnswer($questionID); ?>
+                                        <?php //$QF->getQuestionAnswer($questionID);
+                                        if(isset($_POST['btnConfirmAnswerAdd'])){
+                                            foreach($arrayAnswer as $item){
+                                                "<tr>
+                                                    <td>".$item."</td>
+                                                    <td>Nog niet bestaande score</td>
+                                                    <td>Nog niet bestaande axis</td>
+                                                    </tr>";
+                                                //$questionID = $_POST['']
+                                                //$QF->setQuestionAnswer($answerAdd, $questionID);
+                                            }
+                                        }
+                                        ?>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -143,13 +155,12 @@ require_once '../functions/controller/QA_QuestionFunctions.php';
                     </div>
                     <div class="modal-footer">
                         <button type="button" name="btnCancel" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
-                        <input type="button" name="btnConfirm" id="btnConfirm" class="btn btn-primary" data-dismiss="modal" value="Antwoord Opslaan"/>
+                        <input type="button" name="btnConfirmAnswerAdd" id="btnConfirmAnswerAdd" class="btn btn-primary" data-dismiss="modal" value="Antwoord Opslaan"/>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
     <script>
 
         $('#selQuestionType').change(function () {
@@ -175,5 +186,14 @@ if(isset($_POST['btConfirm'])){
         $QF->setQuestion($selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
     }
 }
+
+//During the process of making a new question, the user adds an answer.
+//This answer does not have a questionID that it should connect to, yet.
+
+if(isset($_POST['btnConfirmAnswerAdd'])){
+    $answerAdd = $_POST['txAnswer'];
+    array_push($arrayAnswer, $answerAdd);
+    //$QF->setQuestionAnswer($answerAdd, $questionID);
+    }
 ?>
 </body>

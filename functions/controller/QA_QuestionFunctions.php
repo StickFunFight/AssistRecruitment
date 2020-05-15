@@ -84,7 +84,7 @@ class QA_QuestionFunctions
     }
 
     public function getQuestionAnswer($questionID){
-        $sql = "SELECT * FROM answer WHERE ?";
+        $sql = "SELECT * FROM answer WHERE questionID = ?";
         $stm = $this->conn->prepare($sql);
         $stm->bindParam(1, $questionID);
         if($stm->execute()){
@@ -98,6 +98,15 @@ class QA_QuestionFunctions
                         </tr>";
             }
         }
+    }
+
+    public function setQuestionAnswer($answer, $questionID){
+        //Score en Axis moeten nog toegevoegd worden
+        $sql = "INSERT INTO answer (answer, questionID) VALUES (?, ?)";
+        $stm = $this->conn->prepare($sql);
+        $stm->bindParam(1, $answer);
+        $stm->bindParam(2, $questionID);
+        $stm->execute();
     }
 
     public function getDataFromSelectedQuestionID($questionID){
