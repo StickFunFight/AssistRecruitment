@@ -706,7 +706,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form method="POST">
+                        <form method="POST" autocomplete="off">
                             <div class="row ce--form-row">
                                 <div class="col-sm-12">
                                     <label class="">Name</label>
@@ -775,7 +775,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form method="POST">
+                        <form method="POST" autocomplete="off">
                             <div class="row ce--form-row">
                                 <div class="col-sm-12">
                                     <label class="">Name</label>
@@ -813,7 +813,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form method="POST">
+                        <form method="POST" autocomplete="off">
                             <div class="row ce--form-row">
                                 <div class="col-sm-12">
                                     <label class="">Name</label>
