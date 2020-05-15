@@ -76,18 +76,18 @@
             }
         }
 
-        function duplicateScan($scanID){
-            // Create Query to duplicate scan data
-            $query = "INSERT INTO scan SELECT 0, scan.* WHERE scanID = $scanID";
-            $stm = $this->db->prepare($query);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
-                echo "Er is iets fout gegaan";
-            }
-        }
+//        function duplicateScan($scanID){
+//            // Create Query to duplicate scan data
+//            $query = "INSERT INTO scan SELECT 0, scan.* WHERE scanID = $scanID";
+//            $stm = $this->db->prepare($query);
+//            if($stm->execute()){
+//                echo 'Het is gelukt';
+//            }
+//            // Error Text
+//            else {
+//                echo "Er is iets fout gegaan";
+//            }
+//        }
 
         function archiveScan($scanID){
             // Create Query to update Customer Status

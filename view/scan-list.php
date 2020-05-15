@@ -232,24 +232,8 @@ if (isset($_GET['status'])) {
                                             break;
                                     }
                                     ?>
-                                    <button type="button" class="btn btn-info" data-toggle="popover" title="Popover title">Toggle popover</button>
+                                    <button type="button" class="btn btn-info" data-toggle="popover" title="Popover title" onclick="showScanPopover(<?php echo $scan->getScanID(); ?>, this)">Toggle popover</button>
 
-                                    <script>
-                                        $(function() {
-                                            $('[data-toggle="popover"]').popover({
-                                                html: true,
-                                                content: function() {
-                                                    return $('#popover-content').html();
-                                                }
-                                            });
-                                        })
-
-                                    </script>
-                                    <ul id="popover-content" class="list-group" style="display: none">
-                                        <a href="#" class="list-group-item">Dupliceren</a>
-                                        <a href="#" class="list-group-item">Dupliceren</a>
-                                        <a href="#" class="list-group-item">Dupliceren</a>
-                                    </ul>
                                 </td>
                             </tr>
                             <?php
@@ -261,6 +245,9 @@ if (isset($_GET['status'])) {
             </div>
         </div>
     </div>
+
+<!--    <ul id="popover-content" class="list-group" style="display: none"> <a id="btnDupliceren" href="#" class="list-group-item">Dupliceren</a> </ul>-->
+
     </body>
 
 
@@ -380,6 +367,41 @@ if (isset($_GET['status'])) {
             }
         }
     </script>
+
+<!--    <script>-->
+<!--        function showScanPopover(scanID, el) {-->
+<!--            console.log(scanID);-->
+<!---->
+<!--            $(el).popover({-->
+<!--                trigger: 'focus',-->
+<!--                html: true,-->
+<!--                content: function() {-->
+<!--                    return '<ul id="popover-content" class="list-group" style="display: none"> <a id="btnDupliceren" onclick="duplicate(scanID)" href="#" class="list-group-item btn-dup">Dupliceren</a> </ul>';-->
+<!--                }-->
+<!--            });-->
+<!---->
+<!--            $(el).on('shown.bs.popover', function() {-->
+<!--                var button = document.getElementsByClassName("btn-dup");-->
+<!--                for (var i = 0; i < button.length; i++) {-->
+<!--                    button[i].onclick = duplicate(scanID);-->
+<!--                }-->
+<!--            })-->
+<!---->
+<!--            $(el).popover('toggle');-->
+<!--        }-->
+<!---->
+<!--        function duplicate(scanID) {-->
+<!--            $.ajax({-->
+<!--                type:'POST',-->
+<!--                url: '../functions/handler/scanDuplicateHandler.php',-->
+<!--                data: { "scanID": scanID},-->
+<!--                success: function(response) {-->
+<!--                    alert('werkt!');-->
+<!--                    // window.location.href = 'scan-list.php';-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+<!--    </script>-->
     </html>
 
 <?php
