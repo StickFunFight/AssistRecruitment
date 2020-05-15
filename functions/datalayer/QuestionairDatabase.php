@@ -6,6 +6,7 @@ class QuestionairDatabase
 {
     private $db;
 
+
     public function __construct()
     {
         require_once 'database.class.php';
@@ -29,5 +30,7 @@ class QuestionairDatabase
                 echo "oef foutje";
             }
         }
+
     }
+
 }

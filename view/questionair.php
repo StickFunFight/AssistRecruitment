@@ -1,6 +1,8 @@
 <?php
 require_once 'head.php';
 require_once 'menu.php';
+
+
 ?>
 <html>
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
@@ -69,3 +71,6 @@ require_once 'menu.php';
         });
     });
 </script>
+
+
+
