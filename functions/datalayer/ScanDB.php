@@ -154,7 +154,7 @@
                 // Looping through the results
                 foreach($result as $scan){
                     // Putting it in the modal
-                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, $scan->scanReminderText, $scan->scanStartDate, $scan->scanEndDate, '');
+                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, $scan->scanReminderText, $scan->scanStartDate, $scan->scanEndDate, '','','','');
                     array_push($listScans, $entScan);
                 }
                 // Returning the full list
