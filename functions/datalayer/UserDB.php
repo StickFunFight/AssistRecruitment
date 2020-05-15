@@ -177,9 +177,13 @@
 
         function archiveUser($userID){
             // Create Query to update Customer Status
-            $query = "UPDATE user SET userStatus = 'Archived' WHERE userID = ?";
+            $query = "START TRANSACTION;
+                        UPDATE contact SET contactStatus = 'Archived' WHERE userID = ?;
+                        UPDATE user SET userStatus = 'Archived' WHERE userID = ?;
+                        COMMIT; ";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
+            $stm->bindParam(2, $userID);
             if($stm->execute()){
                 echo 'Het is gelukt';
             }
@@ -191,9 +195,13 @@
     
         function deleteUser($userID){
             // Create Query to update Customer Status
-            $query = "UPDATE user SET userStatus = 'Deleted' WHERE userID = ?";
+            $query = "START TRANSACTION;
+                        UPDATE contact SET contactStatus = 'Deleted' WHERE userID = ?;
+                        UPDATE user SET userStatus = 'Deleted' WHERE userID = ?;
+                        COMMIT; ";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
+            $stm->bindParam(2, $userID);
             if($stm->execute()){
                 echo 'Het is gelukt';
             }
