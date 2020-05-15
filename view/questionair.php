@@ -36,18 +36,18 @@ require_once 'menu.php';
                 {
                     echo'<tr id="RowFilter">';
                     echo '<td>';
-                    echo $item->getName();
+                    echo $item->getQuestionairName();
                     echo '</td>';
                     echo '<td>';
-                    echo  $item->getComment();
+                    echo  $item->getQuestionairComment();
                     echo '</td>';
                     echo '<td>';
-                    echo  $item->getStatus();
+                    echo  $item->getQuestionairStatus();
                     echo '</td>';
                     echo '<td>';
-                    echo '<a id="'.$item->getId().'" onclick="SendID(this.id)"><i class="fas tab-table__icon editKnop">&#xf044;</i></a>';
+                    echo '<a id="'.$item->getQuestionairID().'" onclick="SendID(this.id)"><i class="fas tab-table__icon editKnop">&#xf044;</i></a>';
                     echo  ' ';
-                    echo '<a id="'.$item->getId().'" onclick="SendID(this.id)" data-id="'.$item->getId().'"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
+                    echo '<a id="'.$item->getQuestionairID().'" onclick="SendID(this.id)" data-id="'.$item->getQuestionairID().'"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
                     echo '</td>';
                     echo '</tr>';
                 }

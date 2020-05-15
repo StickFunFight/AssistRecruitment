@@ -21,7 +21,7 @@ class QuestionairDatabase
             if ($stm->execute()) {
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 foreach ($result as $item) {
-                    $entQuestionair = new EntQuestionair($item->id, $item->Name, $item->Comment, $item->Status);
+                    $entQuestionair = new EntQuestionair($item->questionairID, $item->questionairName, $item->questionairComment, $item->questionairStatus);
                     array_push($lijst, $entQuestionair);
                 }
                 return $lijst;

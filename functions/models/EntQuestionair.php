@@ -2,89 +2,93 @@
 
 class EntQuestionair{
 
-    private $id;
-    private $Name;
-    private $Comment;
-    private $Status;
+
+
+    private $questionairID;
+    private $questionairName;
+    private $questionairComment;
+    private $questionairStatus;
 
     /**
      * EntQuestionair constructor.
-     * @param $id
-     * @param $Name
-     * @param $Comment
-     * @param $Status
+     * @param $questionairID
+     * @param $questionairName
+     * @param $questionairComment
+     * @param $questionairStatus
      */
-    public function __construct($id, $Name, $Comment, $Status)
+    public function __construct($questionairID, $questionairName, $questionairComment, $questionairStatus)
     {
-        $this->id = $id;
-        $this->Name = $Name;
-        $this->Comment = $Comment;
-        $this->Status = $Status;
+        $this->questionairID = $questionairID;
+        $this->questionairName = $questionairName;
+        $this->questionairComment = $questionairComment;
+        $this->questionairStatus = $questionairStatus;
     }
 
     /**
      * @return mixed
      */
-    public function getId()
+    public function getQuestionairID()
     {
-        return $this->id;
+        return $this->questionairID;
     }
 
     /**
-     * @param mixed $id
+     * @param mixed $questionairID
      */
-    public function setId($id)
+    public function setQuestionairID($questionairID)
     {
-        $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->Name;
-    }
-
-    /**
-     * @param mixed $Name
-     */
-    public function setName($Name)
-    {
-        $this->Name = $Name;
+        $this->questionairID = $questionairID;
     }
 
     /**
      * @return mixed
      */
-    public function getComment()
+    public function getQuestionairName()
     {
-        return $this->Comment;
+        return $this->questionairName;
     }
 
     /**
-     * @param mixed $Comment
+     * @param mixed $questionairName
      */
-    public function setComment($Comment)
+    public function setQuestionairName($questionairName)
     {
-        $this->Comment = $Comment;
+        $this->questionairName = $questionairName;
     }
 
     /**
      * @return mixed
      */
-    public function getStatus()
+    public function getQuestionairComment()
     {
-        return $this->Status;
+        return $this->questionairComment;
     }
 
     /**
-     * @param mixed $Status
+     * @param mixed $questionairComment
      */
-    public function setStatus($Status)
+    public function setQuestionairComment($questionairComment)
     {
-        $this->Status = $Status;
+        $this->questionairComment = $questionairComment;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getQuestionairStatus()
+    {
+        return $this->questionairStatus;
+    }
+
+    /**
+     * @param mixed $questionairStatus
+     */
+    public function setQuestionairStatus($questionairStatus)
+    {
+        $this->questionairStatus = $questionairStatus;
+    }
+
+
 
 
 }
