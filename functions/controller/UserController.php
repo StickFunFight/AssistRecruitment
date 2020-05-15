@@ -31,13 +31,13 @@
 
         // Getting all the departments of the user
         function getDepartmentsUser($userID, $status) {
-             // Creating a array
-             $listDepartmentsUser = array();
+            // Creating a array
+            $listDepartmentsUser = array();
 
-             $listDepartmentsUser = $this->UserDB->getDepartmentsUser($userID, $status);
- 
-             // Returning the list given from the Database class
-             return $listDepartmentsUser;
+            $listDepartmentsUser = $this->UserDB->getDepartmentsUser($userID, $status);
+
+            // Returning the list given from the Database class
+            return $listDepartmentsUser;
         }
 
         // Getting al the contact
@@ -49,6 +49,23 @@
 
             // Returning the list given from the Database class
             return $detailsUser;
+        }
+
+        function addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer) {
+            // Creating the user
+            if($this->UserDB->addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer)) {
+               // Getting the current url
+               $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+               $newURL = $currentURL . "?user-error=none";
+               // Reloading page with succes message
+               //echo '<script>location.replace("'.$newURL.'");</script>';
+            } else {
+                //Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "?user-error=none";
+                // Reloading page with succes message
+                //echo '<script>location.replace("'.$newURL.'");</script>';
+            }
         }
 
         function updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment) {
@@ -65,6 +82,16 @@
                 // Reloading page with succes message
                 echo '<script>location.replace("'.$newURL.'");</script>';
             }
+        }
+
+        // Function to archive user
+        function archiveUser($userID){
+            $this->UserDB->archiveUser($userID);
+        }
+    
+        // Function to delete user
+        function deleteUser($userID){
+            $this->UserDB->deleteUser($userID);
         }
     }
 ?>

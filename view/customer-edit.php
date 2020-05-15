@@ -18,6 +18,8 @@
         require '../functions/models/entDepartment.php';
         // Adding the department modal
         require '../functions/models/entContact.php';
+        // Adding the questionair modal
+        require '../functions/models/entQuestionair.php';
 
     
         // Getting the connection with the customer class
@@ -33,9 +35,8 @@
         // Getting the customer
         $customerID = $_GET['customer'];
 
-        
         // Updating the customer
-        if(isset($_POST['btnUpdate'])){
+        if (isset($_POST['btnUpdate']) || isset($_POST['btnUpdateAndExit'])){
             // getting the new values
             $custID = $_GET["customer"];
             $custName = $_POST['txtCustomerName'];
@@ -46,13 +47,127 @@
             // Storring all variables in the customer object
             //$CustomerModal = new EntCustomer($custID, $custName, $custRefrence, $custComment, $custStatus);
 
+            // Checking if user wants to exit page
+            $exitWindow = 0;
+
+            if (isset($_POST['btnUpdateAndExit'])) {
+                // User wants to leave
+                $exitWindow = 1;
+            }
+
             // echo "ID = " . $custID . "<br>";
             // echo "Name = " . $custName . "<br>";
             // echo "Refrence = " . $custRefrence . "<br>";
             // echo "Comment = " . $custComment . "<br>";
             // echo "Status = " . $custStatus . "<br>";
 
-            $customerCtrl->updateCustomer($custID, $custName, $custRefrence, $custComment, $custStatus);
+            $customerCtrl->updateCustomer($custID, $custName, $custRefrence, $custComment, $custStatus, $exitWindow);
+        }
+
+        // Adding an user through the modal
+        if (isset($_POST['btnAddUser'])) {
+            // Getting the values
+            $contactName = $_POST['txtAddUserName'];
+            $userEmail = $_POST['txtAddUserEmail'];
+            $userType = $_POST['txtAddUserType'];
+            $contactPhone = $_POST['txtAdPhoneNumber'];
+            $contactBirthDay = $_POST['txtAddBirth'];
+            $contactComment = $_POST['txtAddUserComment'];
+            $contactCustomer = null;
+
+            // Checking for type
+            if ($userType == "Employee") {
+                $contactCustomer = $customerID;
+            }
+
+            // echo "Naam " . $contactName . "<br>";
+            // echo "Email " . $userEmail . "<br>";
+            // echo "Type " . $userType . "<br>";
+            // echo "Phone " . $contactPhone . "<br>";
+            // echo "Birthday " . $contactBirth . "<br>";
+            // echo "Customer " . $contactCustomer . "<br>";
+
+            $userCtrl->addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer);
+        }
+        
+        // Adding a department through the modal
+        if (isset($_POST['btnDepartmentAdd'])) {
+            // getting the values of the input fields
+            $dpName = $_POST["txtAddDepartmentName"];
+            $dpComment = $_POST['txtAddDepartmentComment']; 
+            
+            $departmentCtrl->createDepartment($dpName, $dpComment, $customerID);
+        }
+
+        if (isset($_POST['btnAddScan'])) {
+            // getting the new values
+            $scanName = $_POST['txtAddScanName'];
+            $scanComment = $_POST['txtAddScanComment'];
+            $scanIntroductionText = $_POST['txtAddScanIntroduction'];
+            $scanReminderText = $_POST['txtAddScanReminder'];
+            $scanStartDate = $_POST['txtAddStartDate'];
+            $scanEndDate = $_POST['txtAddStartEnd'];
+
+            // Checking if question air is empty
+            $scanQuestionair;
+
+            if (!empty($_POST['txtQuestionair'])) {
+                $scanQuestionair = $_POST['txtQuestionair'];
+
+                // Getting the id
+                $scanQuestionairID = $scanCtrl->getQuestionairID($scanQuestionair);
+            }
+
+            // Send to add scan
+            $scanCtrl->addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionairID);
+        }
+
+        // Archiving the contact
+        if (isset($_POST['btnArchiveContact'])) {
+            // Getting the department id and sending to the controller
+            $userID = $_POST['txtContactID'];
+
+            $userCtrl->archiveUser($userID);
+        }
+
+        // Deleting the contact
+        if (isset($_POST['btnDeleteContact'])) {
+            // Getting the txtContactID id and sending to the controller
+            $userID = $_POST['txtContactID'];
+
+            $userCtrl->deleteUser($userID);
+        }
+
+        // Archiving the department
+        if (isset($_POST['btnArchiveDepartment'])) {
+            // Getting the department id and sending to the controller
+            $departmentID = $_POST['txtDepartmentID'];
+
+            $departmentCtrl->archiveDepartment($departmentID);
+        }
+
+        // Deleting the department
+        if (isset($_POST['btnDeleteDepartment'])) {
+            // Getting the department id and sending to the controller
+            $departmentID = $_POST['txtDepartmentID'];
+
+            $departmentCtrl->deleteDepartment($departmentID);
+        }
+
+        // Archiving the scan
+        if (isset($_POST['btnArchiveScan'])) {
+            // Getting the department id and sending to the controller
+            $scanID = $_POST['txtScanID'];
+
+            $scanCtrl->archiveScan($scanID);
+        }
+
+        // Deleting the scan
+        if (isset($_POST['btnDeleteScan'])) {
+            // Getting the department id and sending to the controller
+            $scanID = $_POST['txtScanID'];
+
+            $scanCtrl->deleteScan($scanID);
         }
 
         // Getting the customer
@@ -160,6 +275,7 @@
                     <div class="row ce--margin">
                         <div class="col-sm-12">
                             <input type="submit" name="btnUpdate" class="btn ce__update-button" value="Update customer">
+                            <input type="submit" name="btnUpdateAndExit" class="btn ce__update-button" value="Update customer and exit">
                         </div>
                     </div>
 
@@ -238,7 +354,7 @@
 
                                         <div class="col-sm-2">
                                             <div class="add-container">
-                                                <a href="user-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
+                                                <a href="#" class="btn add-container__btn" data-toggle="modal" data-target="#addUserModal"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
                                             </div>
                                         </div>
                                     </div>
@@ -299,7 +415,7 @@
                                                 switch ($userStatus) {
                                                     case 'Archived':
                                                         ?>
-                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteContact" id='<?php echo $user->getUserID(); ?>' onclick="setContactIDModalCustomerEdit(<?php echo $user->getUserID(); ?>)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
                                                         <?php
                                                         break;
                                                     case 'Deleted':
@@ -309,7 +425,7 @@
                                                         break;
                                                     default:
                                                         ?>
-                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf187;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveContact" id='<?php echo $user->getUserID(); ?>' onclick="setContactIDModalCustomerEdit(<?php echo $user->getUserID(); ?>)"><i class="fas tab-table__icon">&#xf187;</i></a>
                                                         <?php
                                                         break;
                                                 }
@@ -372,7 +488,7 @@
 
                                         <div class="col-sm-2">
                                             <div class="add-container">  
-                                                <a href="department-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add department</a>
+                                                <a href="#" class="btn add-container__btn" data-toggle="modal" data-target="#addDepartmentModal"><i class='fas add-container--icon'>&#xf055;</i> Add department</a>
                                             </div>
                                         </div>
                                     </div>
@@ -430,19 +546,19 @@
                                                 switch ($departmentStatus) {
                                                     case 'Archived':
                                                         ?>
-                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteModal" id='<?php echo $department->getDepartmentID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteDepartment" id='<?php echo $department->getDepartmentID();?>' onclick="setDepartmentIDModalCustomerEdit(<?php echo $department->getDepartmentID();?>)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
                                                         <?php
                                                         break;
                                                     case 'Deleted':
                                                         ?>
-
-                                                        <?php
-                                                        break;
-                                                    default:
-                                                        ?>
-                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $department->getDepartmentID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf187;</i></a>
+                                                            
                                                         <?php
                                                         break; 
+                                                    default:
+                                                        ?>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveDepartment" id='<?php echo $department->getDepartmentID();?>' onclick="setDepartmentIDModalCustomerEdit(<?php echo $department->getDepartmentID();?>)"><i class="fas tab-table__icon">&#xf187;</i></a>
+                                                        <?php
+                                                        break;
                                                 }
                                             ?>
                                         </td>
@@ -503,7 +619,7 @@
 
                                         <div class="col-sm-2">
                                             <div class="add-container">  
-                                                <a href="scan-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add Scan</a>
+                                            <a href="#" class="btn add-container__btn" data-toggle="modal" data-target="#addScanModal"><i class='fas add-container--icon'>&#xf055;</i> Add scan</a>
                                             </div>
                                         </div>
                                     </div>
@@ -553,17 +669,15 @@
                                                 switch ($scanStatus) {
                                                     case 'Archived':
                                                         ?>
-                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteScan" id='<?php echo $scan->getScanID();?>' onclick="setScanIDModalCustomerEdit(<?php echo $scan->getScanID();?>)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
                                                         <?php
                                                         break;
                                                     case 'Deleted':
-                                                        ?>
-                                                            
-                                                        <?php
+                                                       
                                                         break;
                                                     default:
                                                         ?>
-                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $scan->getScanID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf187;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveScan" id='<?php echo $scan->getScanID();?>' onclick="setScanIDModalCustomerEdit(<?php echo $scan->getScanID();?>)"><i class="fas tab-table__icon">&#xf187;</i></a>
                                                         <?php
                                                         break;
                                                 }
@@ -579,7 +693,358 @@
                 </section>              
             </div>
         </div> 
+
+        <!--User add modal --->
+        <div class="modal fade" id="addUserModal" tabindex="-1" role="add-user" aria-labelledby="add-user" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="archiveModalLabel">Add user</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Name</label>
+                                    <input type="text" name="txtAddUserName" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Email</label>
+                                    <input type="email" name="txtAddUserEmail" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Type</label>
+                                    <select name="txtAddUserType" class="form-control ce--input" required>
+                                        <option value="Employee" selected="selected">Employee</option>
+                                        <option value="Candidate">Candidate</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Phonenumber</label>
+                                    <input type="phone" name="txtAdPhoneNumber" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Date of birth</label>
+                                    <input type="date" name="txtAddBirth" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Comment</label>
+                                    <textarea name="txtAddUserComment" class="form-control ce--input" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" name="btnAddScan" class="btn btn-primary">Save user</button>          
+                            </script>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Department add modal --->
+        <div class="modal fade" id="addDepartmentModal" tabindex="-1" role="add-department" aria-labelledby="add-department" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="archiveModalLabel">Add department</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Name</label>
+                                    <input type="text" name="txtAddDepartmentName" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Comment</label>
+                                    <textarea name="txtAddDepartmentComment" class="form-control ce--input" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" name="btnDepartmentAdd" class="btn btn-primary">Save department</button>          
+                            </script>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scan add modal --->
+        <div class="modal fade" id="addScanModal" tabindex="-1" role="add-scan" aria-labelledby="add-scan" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="archiveModalLabel">Add Scan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form method="POST">
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Name</label>
+                                    <input type="text" name="txtAddScanName" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Introduction text</label>
+                                    <textarea name="txtAddScanIntroduction" class="form-control ce--input" rows="5" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Reminder text</label>
+                                    <textarea name="txtAddScanReminder" class="form-control ce--input" rows="5" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Start date</label>
+                                    <input type="date" name="txtAddStartDate" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">End date</label>
+                                    <input type="date" name="txtAddStartEnd" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Comment</label>
+                                    <textarea name="txtAddScanComment" class="form-control ce--input" rows="5"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Template name *</label>
+                                    <input type="text" class="form-control ce--input" name="txtQuestionair" id="searchTemplate" placeholder="type a template name">
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <span class="ce--feedback">* = Not necessary</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" name="btnAddScan" class="btn btn-primary">Save Scan</button>          
+                            </script>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Archive Modal -->
+        <div class="modal fade" id="archiveContact" tabindex="-1" role="dialog" aria-labelledby="archiveContact" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="archiveModalLabel">Archive contact</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to archive this contact?
+                    </div>
+
+                    <form method="post">
+                        <div class="modal-footer">
+                            <input type="hidden" name="txtContactID" id="ContactIDArchive">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                            <button type="submit" name="btnArchiveContact" class="btn btn-primary" id="btnArchive">Archive</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+            
+        <!-- Contact Delete Modal -->
+        <div class="modal fade" id="deleteContact" tabindex="-1" role="dialog" aria-labelledby="deleteContact" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModal">Delete contact</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        Are you sure you want to delete this contact?
+                    </div>
+                    
+                    <form method="POST">
+                        <div class="modal-footer">
+                            <input type="hidden" name="txtContactID" id="ContactIDDelete">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                            <button type="submit" name="btnDeleteContact" class="btn btn-primary modal--button" id="btnDelete">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Department Archive Modal -->
+        <div class="modal fade" id="archiveDepartment" tabindex="-1" role="dialog" aria-labelledby="archiveDepartment" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="archiveModalLabel">Archive department</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to archive this department?
+                    </div>
+
+                    <form method="post">
+                        <div class="modal-footer">
+                            <input type="hidden" name="txtDepartmentID" id="departmentIDArchive">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                            <button type="submit" name="btnArchiveDepartment" class="btn btn-primary" id="btnArchive">Archive</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+            
+        <!-- Department Delete Modal -->
+        <div class="modal fade" id="deleteDepartment" tabindex="-1" role="dialog" aria-labelledby="deleteDepartment" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModal">Delete department</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        Are you sure you want to delete this department?
+                    </div>
+                    
+                    <form method="POST">
+                        <div class="modal-footer">
+                            <input type="hidden" name="txtDepartmentID" id="departmentIDDelete">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                            <button type="submit" name="btnDeleteDepartment" class="btn btn-primary modal--button" id="btnDelete">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scan Archive Modal -->
+        <div class="modal fade" id="archiveScan" tabindex="-1" role="dialog" aria-labelledby="archiveScan" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="archiveModalLabel">Archive scan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to archive this scan?
+                    </div>
+
+                    <form method="post">
+                        <div class="modal-footer">
+                            <input type="hidden" name="txtScanID" id="ScanIDArchive">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                            <button type="submit" name="btnArchiveScan" class="btn btn-primary" id="btnArchive">Archive</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+            
+        <!-- Scan Delete Modal -->
+        <div class="modal fade" id="deleteScan" tabindex="-1" role="dialog" aria-labelledby="deleteScan" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModal">Delete scan</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        Are you sure you want to delete this scan?
+                    </div>
+                    
+                    <form method="POST">
+                        <div class="modal-footer">
+                            <input type="hidden" name="txtScanID" id="ScanIDDelete">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                            <button type="submit" name="btnDeleteScan" class="btn btn-primary modal--button" id="btnDelete">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
+
+    <?php
+        // Getting all question air templates to use for the autofill array in de script tag
+        $listQuestionair = $scanCtrl->getScanQuestionAir();
+
+        // Creating the array
+        $questionairNameArray;
+
+        foreach ($listQuestionair as $questionair) {
+            $questionairNameArray[] = $questionair->getQuestionairName();
+        }
+    ?>
 
     <script>
         // Filter on the user table
@@ -611,6 +1076,12 @@
                 });
             });
         });
+
+        /* An array containing all template names: */
+        var templateNames = <?php echo json_encode($questionairNameArray); ?>;
+
+        /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+        autocomplete(document.getElementById("searchTemplate"), templateNames);
     </script>
 </html>
 <?php

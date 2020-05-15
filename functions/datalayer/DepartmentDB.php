@@ -178,11 +178,7 @@
             $query = "UPDATE department SET departmentStatus = 'Deleted' WHERE departmentID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $departmentID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
+            if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
         }
@@ -192,11 +188,7 @@
             $query = "UPDATE department SET departmentStatus = 'Archived' WHERE departmentID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $departmentID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
+            if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
         }

@@ -41,6 +41,39 @@
             // Returning the list given from the Database class
             return $listScans;
         }
+
+        // Function to archive scan
+        function archiveScan($scanID) {
+            $this->ScanDB->archiveScan($scanID);
+        }
+
+        // Function to delete scan
+        function deleteScan($scanID) {
+            $this->ScanDB->deleteScan($scanID);
+        }
+
+        // Function to get templates
+        function getScanQuestionAir() {
+            // Creating a array
+            $listQuestionair = array();
+
+            $listQuestionair = $this->ScanDB->getScanQuestionAir();
+
+            // Returning the list given from the Database class
+            return $listQuestionair;
+        }
+
+        // Getting the id of the autocomplete questionair
+        function getQuestionairID($scanQuestionair) {
+            $QuestionairID = $this->ScanDB->getQuestionairID($scanQuestionair);
+
+            return $QuestionairID;
+        }
+
+        // Function to add scan
+        function addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair) {
+            $this->ScanDB->addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair);
+        }
     }
 
 

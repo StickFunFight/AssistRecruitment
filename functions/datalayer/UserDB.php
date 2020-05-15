@@ -147,6 +147,71 @@
             }
         }
 
+        // Function to add user
+        function addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer) {
+            // Fake data for now
+            $userStatus = "Active";
+            $userPassword = password_hash(uniqid(), PASSWORD_DEFAULT);
+
+            $dbDate = date("Y-m-d", strtotime($contactBirthDay));
+            echo $dbDate . "<br>";
+
+            $queryInsertUser = "INSERT INTO user(userName, userEmail, userPassword, userRights, userStatus) VALUES(?, ?, ?, ?, ?)";
+            $stm = $this->db->prepare($queryInsertUser);
+            $stm->bindParam(1, $userEmail);
+            $stm->bindParam(2, $userEmail);
+            $stm->bindParam(3, $userPassword);
+            $stm->bindParam(4, $userType);
+            $stm->bindParam(5, $userStatus);
+            if ($stm->execute()) {
+                // Getting the user to create a contact
+                $queryGetUser = "SELECT * FROM user WHERE userEmail = ?";
+                $stmt = $this->db->prepare($queryGetUser);
+                $stmt->bindParam(1, $userEmail);
+                if ($stmt->execute()) {
+                    // Getting the results fromm the database
+                    $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+                    // Looping through the results
+                    foreach($result as $user){
+                        echo $user->userID;
+
+                        $queryInsertContact = "INSERT INTO contact(contactName, contactPhoneNumber, contactEmail, contactComment, contactStatus, customerID, userID, contactBirth) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+
+                        echo "Deze gegevens zijn van ons contact: <br>";
+                        echo "Naam: " . $contactName . " <br>";
+                        echo "Phone: " . $contactPhone . " <br>";
+                        echo "Email: " . $userEmail . " <br>";
+                        echo "Comment: " . $contactComment . " <br>";
+                        echo "Satus: " . $userStatus . " <br>";
+                        echo "Customer: " . $customerID . " <br>";
+                        echo "User: " . $$user->userID . " <br>";
+                        echo "Date of birth: " . $dbDate . " <br>";
+
+                        $statement = $this->db->prepare($queryInsertContact);
+                        $statement->bindParam(1, $contactName);
+                        $statement->bindParam(2, $contactPhone);
+                        $statement->bindParam(3, $userEmail);
+                        $statement->bindParam(4, $contactComment);
+                        $statement->bindParam(5, $userStatus);
+                        $statement->bindParam(6, $customerID);
+                        $statement->bindParam(7, $user->userID);
+                        $statement->bindParam(8, $dbDate);
+                        if ($statement->execute()) {
+                            return true;
+                        } else {
+                            return false;
+                        }                 
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                // Returning false because user isnt created
+                return false;
+            }
+        }
+
+        // Updateing the user
         function updateUser($userID, $contactID, $contactName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment) {
             $query = "START TRANSACTION;
                       UPDATE user SET userEmail = ? AND userStatus = ? WHERE userID = ?;
@@ -178,11 +243,7 @@
             $query = "UPDATE user SET userStatus = 'Archived' WHERE userID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
+            if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
         }
@@ -192,11 +253,7 @@
             $query = "UPDATE user SET userStatus = 'Deleted' WHERE userID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
+            if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
         }
