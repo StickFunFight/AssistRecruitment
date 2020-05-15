@@ -133,12 +133,11 @@
                                     <th class="tab-table__head">Name <div class="table__icon-top" onclick="sortTable('filterTable', 0, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 0, 'desc')"></div></th>
                                     <th class="tab-table__head">Phone number <div class="table__icon-top" onclick="sortTable('filterTable', 1, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 1, 'desc')"></div></th>
                                     <th class="tab-table__head">Email <div class="table__icon-top" onclick="sortTable('filterTable', 2, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 2, 'desc')"></div></th>
-                                    <th class="tab-table__head">Department <div class="table__icon-top" onclick="sortTable('filterTable', 3, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 3, 'desc')"></div></th>
                                     <?php 
                                         // Checking if there is a customer set
                                         if($customerID == 0) {
                                             ?>
-                                                <th class="tab-table__head">Customer <div class="table__icon-top" onclick="sortTable('filterTable', 4, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 4, 'desc')"></div></th>
+                                                <th class="tab-table__head">Customer <div class="table__icon-top" onclick="sortTable('filterTable', 3, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 3, 'desc')"></div></th>
                                             <?php
                                         }
                                     ?>
@@ -187,7 +186,6 @@
                                         <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactName(); ?></td>
                                         <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserPhoneNumber(); ?></td>
                                         <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserEmail(); ?></td>
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserDepartmentName(); ?></td>
                                         <?php 
                                             // Checking if there is a customer set
                                             if($customerID == 0) {

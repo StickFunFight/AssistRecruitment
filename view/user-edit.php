@@ -377,9 +377,9 @@
                         <table class="tab-table table table-hover" id="filterTable">
                             <thead class="tab-table__header">
                                 <tr class="tab-table__row">
-                                    <th class="tab-table__head" onclick="sortTable(0)">Name</th>
-                                    <th class="tab-table__head" onclick="sortTable(1)">Start date</th>
-                                    <th class="tab-table__head" onclick="sortTable(2)">End date</th>
+                                    <th class="tab-table__head" onclick="sortTable(0)">Name <div class="table__icon-top" onclick="sortTable('filterTable', 0, 'desc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 0, 'asc')"></div></th>
+                                    <th class="tab-table__head" onclick="sortTable(1)">Start date<div class="table__icon-top" onclick="sortTable('filterTable', 1, 'desc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 1, 'asc')"></div></th>
+                                    <th class="tab-table__head" onclick="sortTable(2)">End date <div class="table__icon-top" onclick="sortTable('filterTable', 2, 'desc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 2, 'asc')"></div></th>
                                     <?php 
                                         // Checking if there is a customer set
                                         if($customerID == 0) {
@@ -527,8 +527,8 @@
                             <table class="tab-table table table-hover" id="filterTable">
                             <thead class="tab-table__header">
                                 <tr class="tab-table__row">
-                                    <th class="tab-table__head" onclick="sortTable(0)">Name</th>
-                                    <th class="tab-table__head" onclick="sortTable(1)">Comment</th>
+                                    <th class="tab-table__head" onclick="sortTable(0)">Name <div class="table__icon-top" onclick="sortTable('filterTable', 0, 'desc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 0, 'asc')"></div></th>
+                                    <th class="tab-table__head" onclick="sortTable(1)">Comment <div class="table__icon-top" onclick="sortTable('filterTable', 1, 'desc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 1, 'asc')"></div></th>
                                     <th class="tab-table__head">Actions</th>
                                 </tr>
                             </thead>
