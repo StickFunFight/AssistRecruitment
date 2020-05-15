@@ -61,9 +61,9 @@ $resultQuestionData = $QF->getQuestionData($questionID);
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="selQuestionType" class="col-sm-2 col-form-label">Vraag type</label>
+                        <label for="selQuestionTypeQuestionEdit" class="col-sm-2 col-form-label">Vraag type</label>
                         <div class="col-sm-10">
-                            <select id="selQuestionType" name="selQuestionType" class="form-control">
+                            <select id="selQuestionTypeQuestionEdit" name="selQuestionTypeQuestionEdit" class="form-control">
                                 <option value="OCAI">OCAI</option>
                                 <option value="Question-answer">Vraag-antwoord</option>
                             </select>

@@ -173,7 +173,7 @@ require_once '../functions/controller/QA_QuestionFunctions.php';
 </script>
 <?php
 if(isset($_POST['btConfirm'])){
-    $selAxis = $_POST['selAxisEdit'];
+    //$selAxis = $_POST['selAxisEdit'];
     $selCategory = $_POST['selCategory'];
     $txQuestion = $_POST['txQuestion'];
     $taExemple = $_POST['taExample'];
