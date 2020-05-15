@@ -39,7 +39,7 @@ class QuestionairDatabase
 
         $stm = $this->db->prepare($query);
         if ($stm->execute()) {
-
+            return "wowiepowie";
         } else return "oeps";
     }
 

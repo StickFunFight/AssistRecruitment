@@ -71,7 +71,7 @@ require_once 'menu.php';
                         <label for="message-text" class="col-form-label">Weet je zeker dat je de questionair: "" wilt archiveren?</label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" name="btnArchiveerQair" id="btnArchiveer" class="btn btn-danger" value="Ja">Ja</button>
+                        <button type="button" name="btnArchiveerQair" id="btnArchiveer" class="btn btn-danger" value="Ja">Ja</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">nee</button>
                     </div>
                 </form>
@@ -108,15 +108,21 @@ require_once 'menu.php';
 
     $('#btnArchiveer').click(function () {
         $.ajax({
-            url: '../functions/handler/questionairArchiveHandler.php',
+            url: 'questionairArchiveHandler.php',
             type: 'post',
             data: { "questionairID": QuestionairID},
-            success: function(response) { window.location.href = 'questionair.php';}
+            success: function(response) {
+                window.location.href = 'questionair.php';
+                console.log(response);
+                },
+            error: function (exception){
+                console.log(exception);
+            }
         });
     });
 </script>
 </html>
-
+<?php
 
 
 

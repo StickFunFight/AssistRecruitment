@@ -1,5 +1,5 @@
 <?php
-require_once '../datalayer/QuestionairDatabase.php';
+require_once '../functions/datalayer/QuestionairDatabase.php';
 
 if (isset($_POST['questionairID'])){
     $QD = new QuestionairDatabase();
