@@ -235,13 +235,17 @@
         function archiveUser($userID){
             // Create Query to update Customer Status
             $query = "START TRANSACTION;
-                      UPDATE contact SET contactStatus = 'Archive' WHERE userID = ?;
-                      UPDATE user SET userStatus = 'Archive' WHERE userID = ?;
-                      COMMIT; ";
+                        UPDATE contact SET contactStatus = 'Archived' WHERE userID = ?;
+                        UPDATE user SET userStatus = 'Archived' WHERE userID = ?;
+                        COMMIT; ";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
             $stm->bindParam(2, $userID);
-            if(!$stm->execute()){
+            if($stm->execute()){
+                echo 'Het is gelukt';
+            }
+            // Error Text
+            else {
                 echo "Er is iets fout gegaan";
             }
         }
@@ -249,13 +253,17 @@
         function deleteUser($userID){
             // Create Query to update Customer Status
             $query = "START TRANSACTION;
-                      UPDATE contact SET contactStatus = 'Archive' WHERE userID = ?;
-                      UPDATE user SET userStatus = 'Archive' WHERE userID = ?;
-                      COMMIT; ";
+                        UPDATE contact SET contactStatus = 'Deleted' WHERE userID = ?;
+                        UPDATE user SET userStatus = 'Deleted' WHERE userID = ?;
+                        COMMIT; ";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
             $stm->bindParam(2, $userID);
-            if(!$stm->execute()){
+            if($stm->execute()){
+                echo 'Het is gelukt';
+            }
+            // Error Text
+            else {
                 echo "Er is iets fout gegaan";
             }
         }
