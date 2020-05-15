@@ -15,7 +15,6 @@ class QA_QuestionFunctions
     {
         $sql = "INSERT INTO question (categorieID, questionName, questionExemple, questionStatus, questionType) VALUES ($categorieID, '$questionName', '$questionExemple', '$questionStatus', '$questionType')";
         $stm = $this->conn->prepare($sql);
-        echo $sql;
         $stm->execute();
     }
 
