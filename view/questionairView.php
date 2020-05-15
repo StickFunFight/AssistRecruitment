@@ -3,7 +3,7 @@ require_once 'head.php';
 require_once '../functions/datalayer/database.class.php';
 require_once '../functions/datalayer/QuestionairArchiveerDB.php';
 $QRD = new QuestionairArchiveerDB();
-$QairID = "1";
+$QairID = "2";
 
 ?>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >archiveer questionair</button>
