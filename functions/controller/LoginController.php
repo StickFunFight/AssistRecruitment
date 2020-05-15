@@ -1,11 +1,14 @@
 <?php
-include '../functions/datalayer/LoginDatabase.php';
+require '../functions/datalayer/LoginDatabase.php';
+require '../functions/mailHelper/Mailer.php';
 
 class LoginController {
     private $ldb;
+    private $mailHelper;
 
     public function __construct() {
         $this->ldb = new LoginDatabase();
+        $this->mailHelper = new Mailer();
     }
 
     public function createUser($username, $password, $email) {
@@ -33,8 +36,26 @@ class LoginController {
     }
 
     //TODO: Fix this broken functionality
-    public function forgotPassword(){
-        echo "ik zit in een functie";
+    public function forgotPassword($email){
+        $user = $this->ldb->getUserByEmail($email);
+
+        if(!is_null($user)){
+            $this->mailHelper->mail();
+        } else {
+            echo "Het lijkt er op dat er is mis ging.";
+        }
+    }
+
+    // Function to logg of
+    function userLogOff() {
+        // Getting the session and destroying it
+        session_start();
+
+        session_unset();
+        session_destroy();
+
+        // Sending user to login page
+        header("Location: loginScreen");
     }
 
 }

@@ -25,7 +25,6 @@
         //This function creates a new customer using the values obtained from the customerDatabase (createCustomer) function.
         //Also gives an echo as feedback to assure the user that the statement has succesfully been executed or not.
         public function createCustomer($customerName, $customerComment, $customerReference) {
-            //$this->customerDB->createCustomer($customerName, $customerComment, $customerReference);
             if($this->customerDB->createCustomer($customerName, $customerComment, $customerReference)){
                 // Getting the current url
                 $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -52,14 +51,20 @@
         }
 
         // Function to update the customer
-        function updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus) {
+        function updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus, $exitWindow) {
             // Sending the variables to the database and checking the result
             if($this->customerDB->updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus)){
-                // Getting the current url
-                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-                $newURL = $currentURL . "&error=none";
-                // Reloading page with succes message
-                echo '<script>location.replace("'.$newURL.'");</script>';
+                 // Checking if user want to leave customer edit
+                 if ($exitWindow == 1) {
+                    // Sending user to customer listed
+                    echo '<script>location.assign("customer_list");</script>';
+                } else {
+                    // Getting the current url
+                    $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                    $newURL = $currentURL . "?error=none";
+                    // Reloading page with succes message
+                    echo '<script>location.replace("'.$newURL.'");</script>';
+                }
             } else {
                 // Getting the current url
                 $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";

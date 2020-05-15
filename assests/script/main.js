@@ -7,13 +7,25 @@ function maintenceSubMenu(){
     submenu.classList.toggle("submenu--show");
 }
 
-// Function to sort the tables
-function sortTable(n) {
-    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = document.getElementById("filterTable");
+// Test function to sort the tables
+function sortTable(sortTable, tableColumn, direction) {
+    var table, column, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0, tableIconTop, tableIconBottom, restTableIconTop, restTableIconBottom;
+    // Getting the table and the column
+    table = document.getElementById(sortTable);
+    column = document.getElementById(tableColumn);
+
+    // Getting the sorting icons
+    tableIconTop = document.getElementById(sortTable).getElementsByClassName("table__icon-top")[tableColumn];
+    tableIconBottom = document.getElementById(sortTable).getElementsByClassName("table__icon-bottom")[tableColumn];  
+
+    // Getting the other sorting icons
+    restTableIconTop = document.querySelector("#" + CSS.escape(sortTable) + " .table__icon-top").classList.remove("table__icon-active");
+    restTableIconBottom = document.querySelector("#" + CSS.escape(sortTable) + " .table__icon-bottom").classList.remove("table__icon-active");
+
+    console.log(tableIconTop);
+    console.log(tableIconBottom);
+
     switching = true;
-    // Setting the sort direction
-    dir = "asc";
     /* Make a loop that will continue until
     no switching has been done: */
     while (switching) {
@@ -27,20 +39,30 @@ function sortTable(n) {
             shouldSwitch = false;
             /* Get the two elements you want to compare,
             one from current row and one from the next: */
-            x = rows[i].getElementsByTagName("TD")[n];
-            y = rows[i + 1].getElementsByTagName("TD")[n];
+            x = rows[i].getElementsByTagName("TD")[tableColumn];
+            y = rows[i + 1].getElementsByTagName("TD")[tableColumn];
             /* Check if the two rows should switch place,
             based on the direction, asc or desc: */
-            if (dir == "asc") {
+            if (direction == "asc") {
                 if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                     // If so, mark as a switch and break the loop:
                     shouldSwitch = true;
+
+                    // Styling the column icons
+                    tableIconTop.classList.add("table__icon-active");
+                    tableIconBottom.classList.remove("table__icon-active");
+
                     break;
                 }
-            } else if (dir == "desc") {
+            } else if (direction == "desc") {
                 if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
                     // If so, mark as a switch and break the loop:
                     shouldSwitch = true;
+
+                   // Styling the column icons
+                   tableIconTop.classList.remove("table__icon-active");
+                   tableIconBottom.classList.add("table__icon-active");
+
                     break;
                 }
             }
@@ -61,6 +83,79 @@ function sortTable(n) {
                 switching = true;
             }
         }
+    }
+}
+
+// function to get url of customer edit and change a overview status
+// Checking the table status
+function updateTableStatus(overviewTable, overviewStatus) { 
+    // Checking wich table has been clicked
+    var status = document.getElementById(overviewStatus).value;
+    // Getting the url of
+    var url = window.location.href.toString();
+
+    console.log(url);
+
+    // Checking wich table status has been updated
+    switch (overviewTable) {
+        case "Departments":
+            // Checking if department status has been changed
+            if (url.includes("department-status", 0)) {
+                // Looking in the url for the parameter and value to replace with the new status
+                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'department-status=' + status);
+
+                // Refreshing the page with the new url
+                location.replace(newUrl);
+            } else {
+                // The status has not yet been updated so the status is placed new in the url
+                location.replace(url + "&department-status=" + status);
+            }
+            break;
+    
+        case "Scans":
+            // Checking if scan status has been changed
+            if (url.includes("scan-status", 0)) {
+                // Looking in the url for the parameter and value to replace with the new status
+                var newUrl = url.replace(/\bscan-status=[a-zA-Z]{1,50}\b/, 'scan-status=' + status);
+
+                // Refreshing the page with the new url
+                location.replace(newUrl);
+            } else {
+                // The status has not yet been updated so the status is placed new in the url
+                location.replace(url + "&scan-status=" + status);
+            }
+            break;
+
+        default:
+            // Checking if scan status has been changed
+            if (url.includes("user-status", 0)) {
+                // Looking in the url for the parameter and value to replace with the new status
+                var newUrl = url.replace(/\buser-status=[a-zA-Z]{1,50}\b/, 'user-status=' + status);
+
+                // Refreshing the page with the new url
+                location.replace(newUrl);
+            } else {
+                // The status has not yet been updated so the status is placed new in the url
+                location.replace(url + "&user-status=" + status);
+            }
+            break;
+    }
+}
+
+// Function to go to the details page onclick of table cell
+function toDetails(overviewTable, overviewID, customerID){
+    // Checking wich table has been clicked
+    switch (overviewTable) {
+        case "Departments":
+            location.allign("department-edit?department=" + overviewID + "&customer=" + customerID);
+            //console.log("department-edit?department=" + overviewID + "&customer=" + customerID);
+            break;
+        case "Scans":
+            location.assign("scan-edit?scan=" + overviewID + "&customer=" + customerID);
+            break;
+        default:
+            location.assign("user-edit?user=" + overviewID + "&customer=" + customerID);
+            break;
     }
 }
 
@@ -177,35 +272,20 @@ function changeSelectCustomer() {
     document.getElementById("custID").value = document.getElementById("customerSelect").value;
 }
 
+// Function to get department and use it in the modal
+function setContactIDModalCustomerEdit(contactID) {
+    document.getElementById("ContactIDArchive").value = contactID;
+    document.getElementById("ContactIDDelete").value = contactID;
+}
 
+// Function to get department and use it in the modal
+function setDepartmentIDModalCustomerEdit(departmentID) {
+    document.getElementById("departmentIDArchive").value = departmentID;
+    document.getElementById("departmentIDDelete").value = departmentID;
+}
 
-// Function to switch active clas on the customer-edit overviews
-// function changeTabActive(newActiveTab) {
-//     // Getting the tab li
-//     var scans = document.getElementById("scansTab");
-//     var departments = document.getElementById("departmentsTab");
-//     var contacts = document.getElementById("contactsTab");
-
-//     if(newActiveTab == "scansTab") {
-//         // Remove active class
-//         departments.classList.remove('active');
-//         contacts.classList.remove('active');
-
-//         // Add active class
-//         scans.classList.add('active');
-//     } else if(newActiveTab == "departmentsTab") {
-//         // Remove active class
-//         scans.classList.remove('active');
-//         contacts.classList.remove('active');
-
-//         // Add active class
-//         departments.classList.add('active');
-//     } else if(newActiveTab == "contactsTab") {
-//         // Remove active class
-//         scans.classList.remove('active');
-//         departments.classList.remove('active');
-
-//         // Add active class
-//         contacts.classList.add('active');
-//     }
-// }
+// Function to get scan and use it in the modal
+function setScanIDModalCustomerEdit(scanID) {
+    document.getElementById("ScanIDArchive").value = scanID;
+    document.getElementById("ScanIDDelete").value = scanID;
+}
