@@ -22,7 +22,6 @@ require_once 'menu.php';
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Comment</th>
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
@@ -37,9 +36,6 @@ require_once 'menu.php';
                     echo'<tr id="RowFilter">';
                     echo '<td>';
                     echo $item->getQuestionairName();
-                    echo '</td>';
-                    echo '<td>';
-                    echo  $item->getQuestionairComment();
                     echo '</td>';
                     echo '<td>';
                     echo  $item->getQuestionairStatus();
