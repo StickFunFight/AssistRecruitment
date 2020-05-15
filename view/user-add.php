@@ -2,21 +2,19 @@
     // Inlcude Database class
     require '../functions/datalayer/database.class.php';
     // Including controller
-    require '../functions/controller/contactController.php';
     require '../functions/controller/CustomerController.php';
-    require '../functions/controller/userController.php';
+    require '../functions/controller/UserController.php';
     // Including entity classes
-    require '../functions/models/entUser.php';
+    require '../functions/models/entContact.php';
 
     // Including the head and menu
     require 'menu.php';
 
     // Creating connections with the classes
     $UserCtrl = new UserController();
-    $ContactCtrl = new ContactController();
 
     // Creating a customer id to fil it later
-    $customerID;
+    $customerID = 0;
 
     // If there is a customer id, it will be of the customer, else it will be 0
     // This is to later check wich functions shouldn't be activeted
@@ -24,9 +22,13 @@
         $UserName = $_POST['userName'];
         $UserEmail = $_POST['userEmail'];
         $UserType = $_POST['userType'];
-        $userPassword = $_POST['']
+        $userPassword = $_POST[''];
 
         $UserCtrl->createUser($UserName, $UserEmail, $UserType, $userPassword);
+    }
+
+    if (isset($_GET['customer'])) {
+        $customerID = $_GET['customer'];
     }
 
     // Creating the list for the customer details
@@ -66,43 +68,43 @@
                 <form method="post" class="user-form">
                     <div class="row ce--form-row">
                         <div class="col-sm-6">
-                            <label class="ce__label">E-mail:</label>
-                            <input name="userEmail" class="form-control user-add__input" type="text" value="<?php echo $UserEmail; ?>">
+                            <label class="ce__label">E-mail</label>
+                            <input name="userEmail" class="form-control user-add__input" type="text">
                         </div>
 
                         <div class="col-sm-6 ">
-                            <label class="ce__label">Username:</label>
-                            <input name="userName" class="form-control user-add__input" type="text" value="<?php echo $UserName; ?>">
+                            <label class="ce__label">Username</label>
+                            <input name="userName" class="form-control user-add__input" type="text">
                         </div>
                     </div>
                 
                     <div class="row page__row ce--form-row">
                         <div class="col-sm-6">
-                            <label class="ce__label">Type:</label>
-                            <input name="userType" class="form-control user-add__input" type="text" value="<?php echo $UserType; ?>">
+                            <label class="ce__label">Type</label>
+                            <input name="userType" class="form-control user-add__input" type="text">
                         </div>
                     </div>
 
                     <div class="row page__row ce--form-row">
                         <div class="col-sm-6">
-                            <label class="ce__label">Phone number:</label>
+                            <label class="ce__label">Phone number</label>
                             <input name="userPhonenumber" class="form-control user-add__input" type="text" required>
                         </div>
 
                         <div class="col-sm-6 ">
-                            <label class="ce__label">Date of birth:</label>
+                            <label class="ce__label">Date of birth</label>
                             <input name="userBirthdate" class="form-control user-add__input" type="date" required>
                         </div>
                     </div>
 
                     <div class="row page__row ce--form-row">
                         <div class="col-sm-6">
-                            <label class="ce__label">Comment:</label>
+                            <label class="ce__label">Comment</label>
                             <textarea name="userComment" class="form-control user-add__input" rows="5"></textarea>
                         </div>
 
                         <div class="col-sm-6 ">
-                            <label class="ce__label">Customer:</label>
+                            <label class="ce__label">Customer</label>
                             <select class="form-control" name="cbxCustomer" id="customerSelect" onchange="changeSelectCustomer()">
                                 <?php 
                                     // Checking for customer. If there is, lock it in that customer

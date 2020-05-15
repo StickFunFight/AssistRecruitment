@@ -113,11 +113,11 @@
                                             // Checking for customer id to know where to add the new user to
                                             if ($customerID != 0) {
                                                 ?>
-                                                    <!-- <a href="user-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a> -->
+                                                    <a href="user-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
                                                 <?php
                                             } else {
                                                 ?>
-                                                    <!-- <a href="user-add" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a> -->
+                                                    <a href="user-add" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
                                                 <?php
                                             }       
                                         ?>
