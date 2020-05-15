@@ -220,6 +220,23 @@ if (isset($_GET['status'])) {
                                         case 'Deleted':
                                             ?>
 
+                                    // Looping through the results
+                                    foreach ($listScans as $scan) {                                  
+                                ?>
+                                    <tr class="tab-table__row filter__row">
+                                        <td class="tab-table__td"><?php echo $scan->getScanName(); ?></td>
+                                        <td class="tab-table__td"><?php echo $scan->getScanStartDate(); ?></td>
+                                        <td class="tab-table__td"><?php echo $scan->getScanEndDate(); ?></td>
+                                        <?php 
+                                            // Checking if there is a customer set
+                                            if($customerID == 0) {
+                                                ?>
+                                                    <td class="tab-table__td"><?php echo $scan->getScanCustomerName(); ?></td>
+                                                <?php
+                                            }
+                                        ?>
+                                        <td class="tab-table__td">
+                                            <a class="editKnop" href="scan-edit.php?Id=<?php echo $scan->getScanID();?>"><i class="fas tab-table__icon">&#xf044;</i></a>
                                             <?php
                                             break;
                                         default:
