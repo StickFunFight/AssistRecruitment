@@ -33,4 +33,23 @@ class QuestionairDatabase
 
     }
 
+    function archiveerQuestionair($QairID){
+        //variabele (n) uit de url halen
+        $query = "UPDATE questionair SET questionairStatus = 'Archived' WHERE questionairID = $QairID";
+
+        $stm = $this->db->prepare($query);
+        if ($stm->execute()) {
+            return "wowiepowie";
+        } else return "oeps";
+    }
+
+    function showQuestionair($QairID){
+        $query = "SELECT * FROM questionair WHERE questionairID = '$QairID'";
+        $stm = $this->db->prepare($query);
+        if ($stm->execute()) {
+            $result = $stm->fetch(PDO::FETCH_OBJ);
+            echo $result->questionairName;
+        } else echo "oeps";
+    }
+
 }
