@@ -43,6 +43,9 @@
     <!-- Linking voor jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+    <!-- Linking voor popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+
     <!-- Linking to Bootstrap CSS -->
     <link rel="stylesheet" href="../assests/bootstrap/css/bootstrap.min.css">
 
