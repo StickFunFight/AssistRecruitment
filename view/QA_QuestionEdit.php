@@ -70,7 +70,7 @@ $resultQuestionData = $QF->getQuestionData($questionID);
                         </div>
                     </div>
 
-                    <div name="divAnswerOptions" id="divAnswerOptions" class="form-group row" style="display:none;">
+                    <div name="divAnswerOptions" id="divAnswerOptions" class="form-group row">
                         <label for="answerOptions" class="col-sm-2 col-form-label">Antwoord opties</label>
                         <div class="col-sm-10">
                             <i class="fas fa-plus"  data-toggle="modal" data-target="#modalAnswerEdit" ></i>
@@ -169,14 +169,18 @@ $resultQuestionData = $QF->getQuestionData($questionID);
     $('#selStatusQuestEdit').val("<?php echo $resultQuestionData['questionStatus'] ?>");
 
 
+    $(document).ready(function(){
 
-    $('#selQuestionType').change(function () {
-        if ($(this).val() == "Question-answer") {
-            $('#divAnswerOptions').show();
-        } else {
-            $('#divAnswerOptions').hide();
-        }
+        if('')
+        $('#selQuestionType').change(function () {
+            if ($(this).val() == "Question-answer") {
+                $('#divAnswerOptions').show();
+            } else {
+                $('#divAnswerOptions').hide();
+            }
+        });
     });
+
 
 </script>
     </body><?php
