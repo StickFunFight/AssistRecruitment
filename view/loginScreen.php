@@ -39,7 +39,7 @@ if(isset($_POST['resetPassword'])){
         <form method="post" class="form-group">
             <input name="username" class="form-control mt-2" type="text" placeholder="Gebruikersnaam"><br>
             <input name="password" class="form-control mt-n2" type="password" placeholder="Wachtwoord"><br>
-            <button name="submitLogin" type="submit" class="btn btn-block btn-primary mt-2 mb-4 float-right" id="loginFormButton">Inloggen</button>
+            <button name="submitLogin" type="submit" class="btn btn-block btn-primary mt-2 mb-4 float-right formButton">Inloggen</button>
         </form>
         <p class="mb-1"><u><a data-toggle="modal" href="#createAccount" class="font-weight-bold">Maak een account aan +</a></u></p>
         <p><u><a data-toggle="modal" href="#forgotPassword" class="font-weight-bold">Wachtwoord vergeten?</a></u></p>

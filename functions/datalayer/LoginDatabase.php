@@ -67,4 +67,9 @@ class LoginDatabase {
             return null;
         }
     }
+
+    public function createPasswordToken($token){
+        $connection = new Database();
+        $db = $connection->getConnection();
+    }
 }

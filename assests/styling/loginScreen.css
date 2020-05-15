@@ -27,6 +27,6 @@ a{
     min-width: 350px
 }
 
-#loginFormButton{
+.formButton{
     width: 30%;
 }
