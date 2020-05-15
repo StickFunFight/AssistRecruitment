@@ -265,26 +265,5 @@
                 echo "Er is iets fout gegaan";
             }
         }
-
-        public function addUser($UserID, $UserName, $UserEmail, $userPassword, $userType, $userStatus){
-            $userStatus = 'Active';
-            $userPassword = uniqid();
-            //create Query to add a User
-            $query = "INSERT INTO user (userID, userName, userEmail, userRights, userPassword, userStatus) VALUES (?, ?, ?, ?, ?, ?)";
-            $stm = $this->db->prepare($query);
-            $stm->bindParam(1, $UserID);
-            $stm->bindParam(2, $UserName);
-            $stm->bindParam(3, $UserEmail);
-            $stm->bindParam(4, $userType);
-            $stm->bindParam(5, $userPassword);
-            $stm->bindParam(6, $userStatus);
-            
-            try{
-                return $stm->execute();
-            }
-            catch(PDOException $exception){
-                return false;
-            }
-        }
     }
 ?>
