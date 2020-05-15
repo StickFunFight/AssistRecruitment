@@ -36,6 +36,20 @@ class QA_QuestionFunctions
         }
     }
 
+    public function getCategoryName($categoryID){
+        $sql = "SELECT * FROM categorie WHERE categorieID = ?";
+        $stm = $this->conn->prepare($sql);
+        $stm->bindParam(1, $categoryID);
+        if($stm->execute()){
+            while($row = $stm->fetch(PDO::FETCH_ASSOC)){
+                return $row;
+            }
+        }
+        else{
+            echo "OEPS";
+        }
+    }
+
     public function getQuestionID(){
         $sql = "SELECT * FROM question";
         $stm = $this->conn->prepare($sql);
@@ -48,11 +62,40 @@ class QA_QuestionFunctions
     }
 
     public function getQuestionData($questionID){
-        $sql = "SELECT q.questionID, q.questionName, q.questionExemple, q.questionStatus, q.questionType, c.categorieName FROM question q JOIN categorie c ON c.categorieID = q.categorieID WHERE q.questionID = '$questionID'";
+        $sql = "SELECT q.questionID, q.questionName, q.questionExemple, q.questionStatus, q.questionType, c.categorieName, q.categorieID FROM question q JOIN categorie c ON c.categorieID = q.categorieID WHERE q.questionID = '$questionID'";
         $stm = $this->conn->prepare($sql);
         if($stm->execute()){
             while($row = $stm->fetch(PDO::FETCH_ASSOC)){
                return $row;
+            }
+        }
+    }
+
+    public function getAllAxis(){
+        $sql = "SELECT * FROM axis";
+        $stm = $this->conn->prepare($sql);
+        if($stm->execute()) {
+            $result = $stm->fetchAll(PDO::FETCH_OBJ);
+            foreach ($result as $axis) {
+                echo "<option value=".$axis->AxisId.">".$axis->AxisName."</option>";
+            }
+        }
+
+    }
+
+    public function getQuestionAnswer($questionID){
+        $sql = "SELECT * FROM answer WHERE ?";
+        $stm = $this->conn->prepare($sql);
+        $stm->bindParam(1, $questionID);
+        if($stm->execute()){
+            $result = $stm->fetchAll(PDO::FETCH_OBJ);
+            foreach($result as $answer){
+                echo "<tr>
+                        <td value=".$answer->answerID.">".$answer->answer."</td>
+                        <td>Nog niet bestaande score</td>
+                        <td>Nog niet bestaande axis</td>
+                        <td><i class='fas fa-pencil-alt'></i> <i class='fas fa-trash-alt'></i></td>
+                        </tr>";
             }
         }
     }

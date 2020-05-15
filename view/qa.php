@@ -14,7 +14,7 @@ require_once 'menu.php';
                 <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een vraag of antwoord">
             </div>
             <div class="col-sm-6">
-                <button type="button" class="btn add-container__btn ButtonRight"><i class="fas fa-plus-circle"></i> Vraag toevoegen</button>
+                <button onclick="window.location.href='QA_QuestionAdd.php'" type="button" class="btn add-container__btn ButtonRight"><i class="fas fa-plus-circle"></i> Vraag toevoegen</button>
             </div>
         </div>
         <div id="wrapper">
@@ -89,83 +89,6 @@ require_once 'menu.php';
         </div>
     </div>
 </div>
-
-<!-- Modal Add Question -->
-<div class="modal fade" id="modaladdQuestion" name="modaladdQuestion" tabindex="-1" role="dialog" aria-labelledby="modaladdQuestion" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Vraag toevoegen</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="POST">
-                <div class="modal-body">
-                    <div class="form-group row">
-                        <label for="selCategoryQuestionAdd" class="col-sm-2 col-form-label" >Categorie</label>
-                        <div class="col-sm-10">
-                            <select required id="selCategoryQuestionAdd" name="selCategoryQuestionAdd" class="form-control">
-                                <?php $QF->getCategories(); ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="txQuestionAdd" class="col-sm-2 col-form-label" >Vraag</label>
-                        <div class="col-sm-10">
-                            <input id="txQuestionAdd" name="txQuestionAdd" class="form-control" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="taExampleAdd" class="col-sm-2 col-form-label" >Voorbeeld</label>
-                        <div class="col-sm-10">
-                            <textarea id="taExampleAdd" name="taExampleAdd" class="form-control" required></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="selStatusQuestAdd" class="col-sm-2 col-form-label" >Status</label>
-                        <div class="col-sm-10">
-                            <select id="selStatusQuestAdd" name="selStatusQuestAdd" class="form-control" required>
-                                <option value="Active">Actief</option>
-                                <option value="Archived">Gearchiveerd</option>
-                                <option value="Deleted">Verwijderd</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="selQuestionTypeQuestionAdd" class="col-sm-2 col-form-label" >Vraag type</label>
-                        <div class="col-sm-10">
-                            <select id="selQuestionTypeQuestionAdd" name="selQuestionTypeQuestionAdd" class="form-control" required>
-                                <option value="OCAI">OCAI</option>
-                                <option value="Question-answer">Vraag-antwoord</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div name="divAnswerOptionsAdd" id="divAnswerOptions" class="form-group row" style="display:none;">
-                        <label for="answerOptionsQuestionAdd" class="col-sm-2 col-form-label" >Antwoord opties</label>
-                        <div class="col-sm-10">
-                            <table name="answerOptionsQuestionAdd"></table>
-                            <label>OPEN</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                    <input type="submit" class="btn btn-primary" name="btConfirmAddQuestion" id="btConfirmAddQuestion" name="btConfirmAddQuestion" value="Verzenden"/>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<?php
-if(isset($_POST['btConfirmAddQuestion'])){
-    $selCategoryAdd = $_POST['selCategoryQuestionAdd'];
-    $txQuestionAdd = $_POST['txQuestionAdd'];
-    $taExempleAdd = $_POST['taExampleAdd'];
-    $selStatusAdd = $_POST['selStatusQuestAdd'];
-    $selQuestionTypeAdd = $_POST['selQuestionTypeQuestionAdd'];
-    $QF->setQuestion($selCategoryAdd, $txQuestionAdd, $taExempleAdd, $selStatusAdd, $selQuestionTypeAdd);
-}?>
 
 <!-- Modal AddCategory-->
 <div class="modal fade" id="modalCatAdd" tabindex="-1" role="dialog" aria-labelledby="modalCatAdd" aria-hidden="true">

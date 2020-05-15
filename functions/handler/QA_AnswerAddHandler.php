@@ -10,4 +10,8 @@ if(isset($_POST['questionID']) && isset($_POST['CategoryQuestionEdit']) && isset
     $selQuestionType = $_POST['QuestionTypeEdit'];
 
     $QF->updateQuestion($questionID, $selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
+    ?><script>alert("STOP");</script><?php
+}
+else{
+    ?><script>alert("STOP");</script><?php
 }
