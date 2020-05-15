@@ -177,17 +177,9 @@
                     foreach($result as $user){
                         echo $user->userID;
 
-                        $queryInsertContact = "INSERT INTO contact(contactName, contactPhoneNumber, contactEmail, contactComment, contactStatus, customerID, userID, contactBirth) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-
-                        echo "Deze gegevens zijn van ons contact: <br>";
-                        echo "Naam: " . $contactName . " <br>";
-                        echo "Phone: " . $contactPhone . " <br>";
-                        echo "Email: " . $userEmail . " <br>";
-                        echo "Comment: " . $contactComment . " <br>";
-                        echo "Satus: " . $userStatus . " <br>";
-                        echo "Customer: " . $customerID . " <br>";
-                        echo "User: " . $$user->userID . " <br>";
-                        echo "Date of birth: " . $dbDate . " <br>";
+                        //$queryInsertContact = "INSERT INTO contact(contactName, contactPhoneNumber, contactEmail, contactComment, contactStatus, customerID, userID, contactBirth) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+                        $queryInsertContact = "INSERT INTO contact(contactName, contactPhoneNumber, contactEmail, contactComment, contactStatus, customerID, userID, contactBirth) 
+                        VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
                         $statement = $this->db->prepare($queryInsertContact);
                         $statement->bindParam(1, $contactName);
@@ -195,7 +187,7 @@
                         $statement->bindParam(3, $userEmail);
                         $statement->bindParam(4, $contactComment);
                         $statement->bindParam(5, $userStatus);
-                        $statement->bindParam(6, $customerID);
+                        $statement->bindParam(6, $contactCustomer);
                         $statement->bindParam(7, $user->userID);
                         $statement->bindParam(8, $dbDate);
                         if ($statement->execute()) {
@@ -242,9 +234,13 @@
 
         function archiveUser($userID){
             // Create Query to update Customer Status
-            $query = "UPDATE user SET userStatus = 'Archived' WHERE userID = ?";
+            $query = "START TRANSACTION;
+                      UPDATE contact SET contactStatus = 'Archive' WHERE userID = ?;
+                      UPDATE user SET userStatus = 'Archive' WHERE userID = ?;
+                      COMMIT; ";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
+            $stm->bindParam(2, $userID);
             if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
@@ -252,9 +248,13 @@
     
         function deleteUser($userID){
             // Create Query to update Customer Status
-            $query = "UPDATE user SET userStatus = 'Deleted' WHERE userID = ?";
+            $query = "START TRANSACTION;
+                      UPDATE contact SET contactStatus = 'Archive' WHERE userID = ?;
+                      UPDATE user SET userStatus = 'Archive' WHERE userID = ?;
+                      COMMIT; ";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
+            $stm->bindParam(2, $userID);
             if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
