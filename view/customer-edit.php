@@ -18,6 +18,8 @@
         require '../functions/models/entDepartment.php';
         // Adding the department modal
         require '../functions/models/entContact.php';
+        // Adding the questionair modal
+        require '../functions/models/entQuestionair.php';
 
     
         // Getting the connection with the customer class
@@ -99,14 +101,25 @@
 
         if (isset($_POST['btnAddScan'])) {
             // getting the new values
-            // $scanName = $_POST['txtAddScanName'];
-            // $scanComment = $_POST['txtAddScanComment'];
-            // $scanIntroductionText = $_POST['txtAddScanIntroduction'];
-            // $scanReminderText = $_POST['txtAddScanReminder'];
-            // $scanStartDate = $_POST['txtAddStartDate'];
-            // $scanEndDate = $_POST['txtAddStartEnd'];
+            $scanName = $_POST['txtAddScanName'];
+            $scanComment = $_POST['txtAddScanComment'];
+            $scanIntroductionText = $_POST['txtAddScanIntroduction'];
+            $scanReminderText = $_POST['txtAddScanReminder'];
+            $scanStartDate = $_POST['txtAddStartDate'];
+            $scanEndDate = $_POST['txtAddStartEnd'];
 
-            // Send to add scan, waiting for Marvin Boschman to finish it first
+            // Checking if question air is empty
+            $scanQuestionair;
+
+            if (!empty($_POST['txtQuestionair'])) {
+                $scanQuestionair = $_POST['txtQuestionair'];
+
+                // Getting the id
+                $scanQuestionairID = $scanCtrl->getQuestionairID($scanQuestionair);
+            }
+
+            // Send to add scan
+            $scanCtrl->addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionairID);
         }
 
         // Archiving the contact
@@ -810,13 +823,6 @@
 
                             <div class="row ce--form-row">
                                 <div class="col-sm-12">
-                                    <label class="">Comment</label>
-                                    <textarea name="txtAddScanComment" class="form-control ce--input" rows="5"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="row ce--form-row">
-                                <div class="col-sm-12">
                                     <label class="">Introduction text</label>
                                     <textarea name="txtAddScanIntroduction" class="form-control ce--input" rows="5" required></textarea>
                                 </div>
@@ -840,6 +846,26 @@
                                 <div class="col-sm-12">
                                     <label class="">End date</label>
                                     <input type="date" name="txtAddStartEnd" class="form-control ce--input" required/>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Comment</label>
+                                    <textarea name="txtAddScanComment" class="form-control ce--input" rows="5"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <label class="">Template name *</label>
+                                    <input type="text" class="form-control ce--input" name="txtQuestionair" id="searchTemplate" placeholder="type a template name">
+                                </div>
+                            </div>
+
+                            <div class="row ce--form-row">
+                                <div class="col-sm-12">
+                                    <span class="ce--feedback">* = Not necessary</span>
                                 </div>
                             </div>
                         </div>
@@ -1008,6 +1034,18 @@
         </div>
     </body>
 
+    <?php
+        // Getting all question air templates to use for the autofill array in de script tag
+        $listQuestionair = $scanCtrl->getScanQuestionAir();
+
+        // Creating the array
+        $questionairNameArray;
+
+        foreach ($listQuestionair as $questionair) {
+            $questionairNameArray[] = $questionair->getQuestionairName();
+        }
+    ?>
+
     <script>
         // Filter on the user table
         $(document).ready(function() {
@@ -1038,6 +1076,12 @@
                 });
             });
         });
+
+        /* An array containing all template names: */
+        var templateNames = <?php echo json_encode($questionairNameArray); ?>;
+
+        /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+        autocomplete(document.getElementById("searchTemplate"), templateNames);
     </script>
 </html>
 <?php
