@@ -18,11 +18,11 @@
 
             // Making a query to get the scans of the customer out the database
             $query = "SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, c.contactBirth, cust.customerName, dp.departmentName, cust.customerID, dp.departmentID
-                      FROM user u
+                      FROM user u 
                       INNER JOIN contact c ON c.userID = u.userID
                       INNER JOIN customer cust ON c.customerID = cust.customerID
-                      INNER JOIN department_contact dc ON dc.contactID = c.contactID
-                      INNER JOIN department dp ON dc.departmentID = dp.departmentID
+                      LEFT JOIN department_contact dc ON dc.contactID = c.contactID
+                      LEFT JOIN department dp ON dc.departmentID = dp.departmentID
                       WHERE c.contactStatus = ?
                       ORDER BY c.contactName ASC";
             $stm = $this->db->prepare($query);
@@ -55,8 +55,8 @@
                       FROM user u 
                       INNER JOIN contact c ON c.userID = u.userID
                       INNER JOIN customer cust ON c.customerID = cust.customerID
-                      INNER JOIN department_contact dc ON dc.contactID = c.contactID
-                      INNER JOIN department dp ON dc.departmentID = dp.departmentID
+                      LEFT JOIN department_contact dc ON dc.contactID = c.contactID
+                      LEFT JOIN department dp ON dc.departmentID = dp.departmentID
                       WHERE cust.customerID = ? AND c.contactStatus = ?
                       ORDER BY c.contactName ASC";
             $stm = $this->db->prepare($query);

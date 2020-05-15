@@ -174,7 +174,7 @@
         }
 
         // Function to add scan
-        function addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair) { 
+        function addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair, $customerID) { 
             $scanStatus = 'Active';
 
             // Changing date for the database
@@ -195,7 +195,26 @@
             $stm->bindParam(8, $scanQuestionair);
             if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
-            }
+            } 
+            // else {
+            //     // Adding scan to user
+            //     $getAddedScan = "SELECT scanID WHERE scanName = ?";
+            //     $stmt = $this->db->prepare($getAddedScan);
+            //     $stmt->bindParam(1, $scanName);
+            //     if($stmt->execute()){
+            //         // Getting the results fromm the database
+            //         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+            //         // Looping through the results
+            //         foreach($result as $scan){
+            //             // Adding scan to customer
+            //             $addScanCustomer = "INSERT INTO scan_user VALUES(?, ?)";
+            //             $stmt = $this->db->prepare($getAddedScan);
+            //             $stmt->bindParam(1, $scan->scanID);
+            //             $stmt->bindParam(2, $customerID);
+            //             if($stmt->execute()){
+            //         }
+            //     }
+            // }
         }
     }
 ?>

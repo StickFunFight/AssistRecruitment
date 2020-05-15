@@ -114,12 +114,12 @@
             if (!empty($_POST['txtQuestionair'])) {
                 $scanQuestionair = $_POST['txtQuestionair'];
 
-                // Getting the id
+                // Getting the ids
                 $scanQuestionairID = $scanCtrl->getQuestionairID($scanQuestionair);
             }
 
             // Send to add scan
-            $scanCtrl->addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionairID);
+            $scanCtrl->addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionairID, $customerID);
         }
 
         // Archiving the contact
@@ -755,7 +755,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" name="btnAddScan" class="btn btn-primary">Save user</button>          
+                            <button type="submit" name="btnAddUser" class="btn btn-primary">Save user</button>          
                             </script>
                         </div>
                     </form>
