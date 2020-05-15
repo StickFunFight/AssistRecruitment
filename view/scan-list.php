@@ -205,7 +205,7 @@ if (isset($_GET['status'])) {
                                 }
                                 ?>
                                 <td class="tab-table__td">
-                                    <a class="editKnop" href="#"><i class="fas tab-table__icon">&#xf044;</i></a>
+                                    <a class="editKnop" href="scan-edit.php?Id=<?php echo $scan->getScanID(); ?>"><i class="fas tab-table__icon">&#xf044;</i></a>
                                     <?php
                                     // Checking for status and user an different icon for a different icon for that status
                                     switch ($scanStatus) {
