@@ -75,4 +75,8 @@
             $this->ScanDB->addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair, $customerID);
         }
     }
+
+
+    
+
 ?>

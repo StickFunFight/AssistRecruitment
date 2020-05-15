@@ -30,6 +30,17 @@
             return $listDepartments;
         }
 
+        // Function to get all departments for 1 customer
+        function getDepartmentUser($userID, $departmentStatus){
+            // Creating a array
+            $listDepartments = array();
+
+            $listDepartments = $this->departmentDB->getDepartmentsCustomer($userID, $departmentStatus);
+
+            // Returning the list given from the Database class
+            return $listDepartments;
+        }
+
         public function createDepartment($departmentName, $departmentComment, $customerID) {
             
             if($this->departmentDB->createDepartment($departmentName, $departmentComment, $customerID)){
