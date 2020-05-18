@@ -192,6 +192,5 @@
                 echo "Er is iets fout gegaan";
             }
         }
-    
     }
 ?>
