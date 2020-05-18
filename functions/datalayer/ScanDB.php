@@ -143,8 +143,16 @@
 
 
         function setScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $type){
-            $sql = "INSERT INTO scan (scanName, scanComment, scanStatus, scanIntroductionText, scanReminderText, scanStartDate, scanEndDate) VALUES ('$name', '$comment', '$status', '$introductiontext', '$remindertext', '$startdate', '$enddate')";
+            $sql = "INSERT INTO scan (scanName, scanComment, scanStatus, scanIntroductionText, scanReminderText, scanStartDate, scanEndDate) VALUES (?,?,?,?,?,?,?)";
             $stm = $this->db->prepare($sql);
+
+            $stm->bindParam(1, $name);
+            $stm->bindParam(2, $comment);
+            $stm->bindParam(3, $status);
+            $stm->bindParam(4, $introductiontext);
+            $stm->bindParam(5, $remindertext);
+            $stm->bindParam(6, $startdate);
+            $stm->bindParam(7, $enddate);
             if($stm->execute()){
                 echo 'Het is gelukt';
             }
