@@ -81,7 +81,6 @@ require_once '../functions/controller/QA_QuestionFunctions.php';
                                     <tr>
                                         <th scope="col">Answer</th>
                                         <th scope="col">Score</th>
-                                        <th scope="col">Axis</th>
                                         <th scope="col">Actions</th>
                                     </tr>
                                     </thead>
@@ -143,15 +142,6 @@ require_once '../functions/controller/QA_QuestionFunctions.php';
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="selAxis" class="col-sm-2 col-form-label">Axis</label>
-                            <div class="col-sm-10">
-                                <select required id="selAxisAdd" name="selAxisAdd"
-                                        class="form-control">
-                                    <?php $QF->getAllAxis(); ?>
-                                </select>
-                            </div>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" name="btnCancel" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
@@ -192,8 +182,8 @@ if(isset($_POST['btConfirm'])){
 
 if(isset($_POST['btnConfirmAnswerAdd'])){
     $answerAdd = $_POST['txAnswer'];
-    array_push($arrayAnswer, $answerAdd);
-    //$QF->setQuestionAnswer($answerAdd, $questionID);
-    }
+    $arrayScore = $_POST['txScore'];
+    $QF->putinArrayAnswer($arrayAnswer, $arrayScore);
+}
 ?>
 </body>

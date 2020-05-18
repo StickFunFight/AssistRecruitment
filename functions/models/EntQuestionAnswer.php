@@ -2,32 +2,31 @@
 
 class EntQuestionAnswer
 {
+    private $answerScore;
     private $questionID;
-    private $categorieID;
-    private $questionStatus;
-    private $questionName;
-    private $questionType;
     private $answerID;
     private $answer;
 
-    /**
-     * EntQuestionAnswer constructor.
-     * @param $questionID
-     * @param $categorieID
-     * @param $questionStatus
-     * @param $questionName
-     * @param $questionType
-     * @param $answerID
-     * @param $answer
-     */
-    public function __construct($questionID,$categorieID, $questionStatus, $questionName, $questionType, $answerID)
+    public function __construct($answer, $answerScore)
     {
-        $this->questionID = $questionID;
-        $this->categorieID = $categorieID;
-        $this->questionStatus = $questionStatus;
-        $this->questionName = $questionName;
-        $this->questionType = $questionType;
-        $this->answerID = $answerID;
+        $this->answer = $answer;
+        $this->answerScore = $answerScore;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnswerScore()
+    {
+        return $this->answerScore;
+    }
+
+    /**
+     * @param mixed $answerScore
+     */
+    public function setAnswerScore($answerScore)
+    {
+        $this->answerScore = $answerScore;
     }
 
     /**
@@ -39,36 +38,11 @@ class EntQuestionAnswer
     }
 
     /**
-     * @return mixed
+     * @param mixed $questionID
      */
-    public function getCategorieID()
+    public function setQuestionID($questionID)
     {
-        return $this->categorieID;
-    }
-
-
-    /**
-     * @return mixed
-     */
-    public function getQuestionStatus()
-    {
-        return $this->questionStatus;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getQuestionName()
-    {
-        return $this->questionName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getQuestionType()
-    {
-        return $this->questionType;
+        $this->questionID = $questionID;
     }
 
     /**
@@ -80,69 +54,27 @@ class EntQuestionAnswer
     }
 
     /**
-     * @return mixed
-     */
-    public function getAnswers()
-    {
-        if($this->answer == null){
-            return array();
-        }
-        return $this->answer;
-    }
-
-    /**
-     * @param mixed $answer
-     */
-    public function setAnswers($answer)
-    {
-        $this->answer = $answer;
-    }
-
-    /**
-     * @param mixed $questionID
-     */
-    public function setQuestionID($questionID)
-    {
-        $this->questionID = $questionID;
-    }
-
-    /**
-     * @param mixed $categorieID
-     */
-    public function setCategorieID($categorieID)
-    {
-        $this->categorieID = $categorieID;
-    }
-
-    /**
-     * @param mixed $questionStatus
-     */
-    public function setQuestionStatus($questionStatus)
-    {
-        $this->questionStatus = $questionStatus;
-    }
-
-    /**
-     * @param mixed $questionName
-     */
-    public function setQuestionName($questionName)
-    {
-        $this->questionName = $questionName;
-    }
-
-    /**
-     * @param mixed $questionType
-     */
-    public function setQuestionType($questionType)
-    {
-        $this->questionType = $questionType;
-    }
-
-    /**
      * @param mixed $answerID
      */
     public function setAnswerID($answerID)
     {
         $this->answerID = $answerID;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAnswer()
+    {
+        return $this->answer;
+    }
+
+    /**
+     * @param mixed $answer
+     */
+    public function setAnswer($answer)
+    {
+        $this->answer = $answer;
+    }
+
 }

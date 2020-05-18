@@ -4,19 +4,37 @@ class EntQuestionn{
 
     private $questionID;
     private $categorieID;
+    private $axisID;
     private $questionName;
     private $questionExemple;
     private $questionStatus;
     private $questionType;
 
-    public function __construct(string $questionID, string $categorieID, string $questionName, string $questionExemple, string $questionStatus, string $questionType){
+    public function __construct(string $questionID, string $categorieID, string $axisID, string $questionName, string $questionExemple, string $questionStatus, string $questionType){
         $this->questionID = $questionID;
         $this->categorieID = $categorieID;
+        $this->axisID = $axisID;
         $this->questionName = $questionName;
         $this->questionExemple = $questionExemple;
         $this->questionStatus = $questionStatus;
         $this->questionType = $questionType;
 
+    }
+
+    /**
+     * @return string
+     */
+    public function getAxisID(): string
+    {
+        return $this->axisID;
+    }
+
+    /**
+     * @param string $axisID
+     */
+    public function setAxisID(string $axisID)
+    {
+        $this->axisID = $axisID;
     }
 
     /**

@@ -81,7 +81,6 @@ $resultQuestionData = $QF->getQuestionData($questionID);
                                 <tr>
                                     <th scope="col">Answer</th>
                                     <th scope="col">Score</th>
-                                    <th scope="col">Axis</th>
                                     <th scope="col">Actions</th>
                                 </tr>
                                 </thead>
@@ -128,15 +127,6 @@ $resultQuestionData = $QF->getQuestionData($questionID);
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <label for="selAxis" class="col-sm-2 col-form-label">Axis</label>
-                        <div class="col-sm-10">
-                            <select required id="selAxisAdd" name="selAxisAdd"
-                                    class="form-control">
-                                <?php $QF->getAllAxis(); ?>
-                            </select>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" name="btnCancel" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
