@@ -202,57 +202,36 @@
             }
         }
 
-        // function deleteCustomers($customerID){
-        //     // Query aanmaken om customerStatus te veranderen naar Deleted
-        //     $query = "UPDATE customer SET customerStatus = 'Deleted' WHERE customerID = $customerID";
-        //     $stm = $this->db->prepare($query);
-        //     if($stm->execute()){
+        // Function to get scans for a department
+        function getScansDepartment($departmentID) {
+            // Creating a array
+            $listScans = array();
 
-        //     echo 'Het is gelukt';
-
-        //     }
-        //     // Tekst laten zien voor als er geen functies zijn opgehaald
-        //     else{
-        //         echo "Er is iets fout gegaan";
-        //     }
-        // }
-
-        // // Function to get the details of a customer
-        // function getCustomerDetails($customerID) {
-        //     // Array aanmaken voor de functies
-        //     $detailsCustomer = array();
-
-        //     // Query  to get the customer
-        //     $query = "SELECT * FROM customer WHERE customerID = ?";
-        //     $stm = $this->db->prepare($query);
-        //     $stm->bindParam(1, $customerID);
-        //     if($stm->execute()){
-        //         // Resultaten uit de database halen
-        //         $result = $stm->fetchAll(PDO::FETCH_OBJ);
-        //         // Loop aanmaken om alle rijen in een array te doen
-        //         foreach($result as $customer){
-        //             // Entiteit aanroepen om de waardes op te halen en in de array te doen
-        //             $entCustomer = new EntCustomer($customer->customerID, $customer->customerName, $customer->customerComment, $customer->customerReference, $customer->customerStatus);
-        //             array_push($detailsCustomer, $entCustomer);
-        //         }
-        //         // De volledige lijst teruggeven
-        //         return $detailsCustomer;    
-        //     }
-        //     // Tekst laten zien voor als er geen functies zijn opgehaald
-        //     else{
-        //         echo "Oof";
-        //     }
-        // }
-
-        // // Function to update the customer
-        // function updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus) {
-        //     // Query aanmaken om alle functies uit de database te halen
-        //     $query = sprintf("UPDATE customer SET customerName = '%s', customerReference = '%s', customerComment = '%s', customerStatus = '%s' WHERE customerID = %d", $customerName, $customerReference, $customerComment, $customerStatus, $customerID);
-        //     $stm = $this->db->prepare($query);
-        //     if(!$stm->execute()){
-        //         // Tekst laten zien voor als er geen functies zijn opgehaald
-        //         echo "Oof";
-        //     }
-        // }
+            $query = "SELECT s.scanID, s.scanName, s.scanComment, s.scanStatus, s.scanIntroductionText, s.scanReminderText, s.scanStartDate, s.scanEndDate, dp.departmentID, c.customerID, c.customerName
+                      FROM scan s
+                      INNER JOIN scan_department sd ON s.scanID = sd.scanID
+                      INNER JOIN department dp ON sd.departmentID = dp.departmentID 
+                      INNER JOIN customer c ON dp.customerID = c.customerID
+                      WHERE s.scanStatus = 'Active' AND dp.departmentID = 5
+                      AND s.scanStartDate <= '2020-05-18' AND s.scanEndDate >= '2020-05-18'
+                      ORDER BY s.scanEndDate ASC";
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                // Getting the results fromm the database
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                // Looping through the results
+                foreach($result as $scan){
+                    // Putting it in the modal
+                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, $scan->scanReminderText, $scan->scanStartDate, $scan->scanEndDate, $scan->customerName, $scan->customerID, $scan->departmentID, null);
+                    array_push($listScans, $entScan);
+                }
+                // Returning the full list
+                return $listScans;
+            }
+            // Showing a error when the query didn't execute
+            else{
+                echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
+            }
+        }
     }
 ?>

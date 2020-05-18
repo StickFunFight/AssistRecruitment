@@ -52,5 +52,16 @@
             // Returning the list given from the Database class
             return $listScans;
         }
+
+         // Function to get scans for a department
+        function getScansDepartment($departmentID) {
+             // Creating a array
+            $listScans = array();
+
+            $listScans = $this->ScanDB->getScansDepartment($departmentID);
+
+            // Returning the list given from the Database class
+            return $listScans;
+        }
     }
 ?>
