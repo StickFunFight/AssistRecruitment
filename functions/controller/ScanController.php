@@ -29,14 +29,18 @@
 
             // Returning the list given from the Database class
             return $listScans;
+        }
+        Function GetScan($scanID){
+            $listScans = array();
 
+            $listScans = $this->ScanDB->getScan($scanID);
+
+            return $listScans;
         }
 
-        function addScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $type){
-            $listScanAdd = $this->ScanDB->setScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $type);
-            return $listScanAdd;
-
-        }  
+        function UpdateScan($scanID, $scanName,$scanComment, $scanStatus,$scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate){
+         $this->ScanDB->EditScan($scanID, $scanName,$scanComment, $scanStatus,$scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate);
+        }
 
         // Getting all scans from 1 user
         function getScansUser($userID) {
@@ -47,7 +51,6 @@
 
             // Returning the list given from the Database class
             return $listScans;
-
         }
     }
 ?>

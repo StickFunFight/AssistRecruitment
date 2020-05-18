@@ -24,6 +24,8 @@
     <link rel="preload" href="../assests/script/validation.js" as="script">
     <link rel="preload" href="../assests/bootstrap/css/bootstrap.min.css" as="style">
     <link rel="preload" href="../assests/bootstrap/js/bootstrap.min.js" as="script">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
 
 
 
