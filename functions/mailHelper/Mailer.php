@@ -26,16 +26,19 @@ class Mailer {
 
     //email functionality must always call to mailSetup() function or they wont work!
 
-    function forgotPassword($email) {
+    function forgotPassword($email, $token) {
         $mail = $this->mailSetup();
+
+        $emailBody = 'Er is een wachtwoord reset aangevraagd voor jou account.<br/>'
+            . 'Als jij dit niet zelf hebt gedaan dan kun je deze mail negeren.<br/><br/>'
+            . '<p><a href=http://localhost/AssistRecruitment/view/passwordReset.php?token=' . $token .'>Klik hier om naar de website te gaan en een nieuw wachtwoord te kiezen !</a></p>';
 
         //Set email information
         try{
             $mail->setFrom('Assist@gmail.com');
             $mail->addAddress($email);
             $mail->Subject = 'Wachtwoord vergeten';
-            $mail->Body = 'Het lijkt er op dat je een fatoe bent en niet normaal om kan gaan met je wachtwoord. 
-            Bij deze sturen wij je een link toe om zelf je wachtwoord te reseten !';
+            $mail->msgHTML($emailBody);
 
             $mail->send();
         } catch (Exception $e) {
