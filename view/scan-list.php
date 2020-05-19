@@ -249,7 +249,6 @@ if (isset($_GET['status'])) {
                                             break;
                                     }
                                     ?>
-                                    <button type="button" class="btn btn-info btn-more-action" data-toggle="popover" scan-id="<?php echo $scan->getScanID(); ?>">...</button>
 
                                 </td>
                             </tr>
@@ -387,40 +386,6 @@ if (isset($_GET['status'])) {
         }
     </script>
 
-    <script>
-        $(document).ready(function() {
-            $('.btn-more-action').each(function(i, obj) {
-                var scanID = $(this).attr('scan-id');
-
-                $(this).popover({
-                    title: '<h4>Meer Acties</h4>',
-                    container: 'body',
-                    placement: 'right',
-                    html: true,
-                    content: function() {
-                        var popupContent = $('#popover-form');
-                        popupContent.find("a").attr('title', scanID);
-
-                        return popupContent.html();
-
-                        // return '<div id="popover-form" style="opacity: 0;"> <a class="btn btn-warning btn-dup" scan-id="' + scanID + '">Dupliceren</a> </div>';
-                    }
-                });
-            });
-
-            $('body').on('click', '.btn-dup', function() {
-                $.ajax({
-                    url: '../functions/handler/scanDuplicateHandler.php',
-                    type: 'post',
-                    data: {"scanID": $(this).attr('title')},
-                    success: function (response) {
-                        console.log(response)
-                        window.location.href = 'scan-list.php'
-                    }
-                });
-            });
-        });
-    </script>
     </html>
 
 <?php
