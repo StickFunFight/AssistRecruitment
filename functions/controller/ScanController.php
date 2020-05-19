@@ -52,5 +52,14 @@
             // Returning the list given from the Database class
             return $listScans;
         }
+
+        function fillScanAddContact(){
+            $this->ScanDB->getAllContacts();
+
+        }
+
+        function addScan(){
+            $this->scanDB->addScan();
+        }
     }
 ?>

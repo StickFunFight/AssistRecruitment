@@ -202,6 +202,41 @@
             }
         }
 
+        function getAllContacts(){
+            $sql = "SELECT * FROM contact";
+            $stm = $this->db->prepare($sql);
+            if($stm->execute()) {
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                foreach ($result as $contact) {
+                    echo "<option value=".$contact->contactID.">".$contact->contactName."</option>";
+                    $contactID = $contact->contactID;
+                    $contactName = $contact->contactName;
+                    //Iedere functie hier gebruikt bij de select een return, maar ik snap niet hoe je deze option value returned.
+                }
+            }
+        }
+
+        function addScan($scanName, $scanComment, $scanStatus, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $questionairID){
+            // Create Query to add Scan data
+            $query = $query = "INSERT INTO scan(scanName,scanComment,scanStatus,scanIntroductionText,scanReminderText,scanStartDate,scanEndDate,questionairID) VALUES (?,?,?,?,?,?,?,?)";
+            $stm->bindParam(1, $scanName);
+            $stm->bindParam(2, $scanComment);
+            $stm->bindParam(3, $scanStatus);
+            $stm->bindParam(4, $scanIntroductionText);
+            $stm->bindParam(5, $scanReminderText);
+            $stm->bindParam(6, $scanStartDate);
+            $stm->bindParam(7, $scanEndDate);
+            $stm->bindParam(8, $questionairID);
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                echo 'Het is gelukt';
+            }
+            // Error Text
+            else {
+                echo "Er is iets fout gegaan";
+            }
+        }
+
         // function deleteCustomers($customerID){
         //     // Query aanmaken om customerStatus te veranderen naar Deleted
         //     $query = "UPDATE customer SET customerStatus = 'Deleted' WHERE customerID = $customerID";

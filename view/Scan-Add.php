@@ -1,6 +1,7 @@
 <?php
 require('menu.php');
-
+require ("../functions/controller/ScanController.php");
+$Scan = new ScanController();
 ?>
 <link href="../assests/styling/Scan-AddCSS.css" rel="stylesheet">
 <body>
@@ -26,7 +27,7 @@ require('menu.php');
         <div class="row page__row">
             <!-- bootstrap column -->
             <div class="col-sm-12">
-                <h1 class="page__title">Customer aanmaken</h1>
+                <h1 class="page__title">Scan add</h1>
             </div>
         </div>
 
@@ -35,17 +36,15 @@ require('menu.php');
             <div class="row page__row">
                 <!-- bootstrap column, 6 van de 12 breed -->
                 <div class="col-sm-6">
-                    <label class="form__label">Customer name</label>
+                    <label class="form__label">Scan name</label>
                     <!-- form-control is een bootstrap input class -->
-                    <!-- Met required checkt je browser of het leef blijft -->
+                    <!-- Met required checkt je browser of het leeg blijft -->
                     <input type="text" class="form-control marvin__input" id="txtName" name="txtName"
-                           value="Peitje pans pettenfabriek" required>
+                           value="Scan Name" required>
                 </div>
 
-                <!-- bootstrap column, 6 van de 12 breed -->
                 <div class="col-sm-6">
-                    <label class="form__label">Customer type</label>
-                    <!-- bootstrap combobox heeft bijna altijd een extra class nodig met height:auto. Dit komt door de manier waarop form-control gestyled is -->
+                    <label class="form__label">Scan type</label>
                     <select class="form-control marvin__input marvin__select" id="cbxType" name="cbxType" required>
                         <!-- Hoe je opties krijgt in een combobox -->
                         <option value="type1" selected="selected">Internal Scan</option>
@@ -55,59 +54,79 @@ require('menu.php');
                 </div>
             </div>
 
-            <!-- Nieuwe boostrap row maken -->
-            <!-- Elke nieuwe row heeft 12 colummen -->
+
             <div class="row page__row">
-                <!-- bootstrap column, 8 van de 12 breed -->
-                <div class="col-sm-8">
-                    <label class="form__label">Customer comment</label>
+                <!-- bootstrap column, 6 van de 12 breed -->
+                <div class="col-sm-6">
+                    <label class="form__label">Scan Comment</label>
                     <!-- Textarea is een input type die grooter is. Voor lappen teksten -->
-                    <textarea name="txtComment" class="form-control marvin__input" id="txtComment" rows="5">Pietje pan is een fabriek waar petten gemaakt worden. </textarea>
+                    <textarea name="txtComment" class="form-control marvin__input" id="txtComment" rows="2">Scan Comment </textarea>
                 </div>
 
-                <div class="col-sm-5">
-                    <label class="form__label">Start date</label>
-                    <!-- Textarea is een input type die grooter is. Voor lappen teksten -->
-                    <datepicker name="txtSDatum" class="form-control marvin__input" id="txtSDatum" rows="1">Datum </datepicker>
+
+                <div class="col-sm-3">
+                    <label for="StartDate" class="ce__label">Start Date</label>
+                    <input type="date" name="StartDate" id="StartDate"
+                               class="form-control ce--input" required/>
                 </div>
 
-                <div class="col-sm-5">
-                    <label class="form__label">End date</label>
-                    <!-- Textarea is een input type die grooter is. Voor lappen teksten -->
-                    <textare name="txtEDatum" class="form-control marvin__input" id="txtEDatum" rows="1">Datum </textarea>
+
+
+                <div class="col-sm-3">
+                    <label for="EndDate" class="ce__label">End Date</label>
+                    <input type="date" name="EndDate" id="EndDate"
+                               class="form-control ce--input" required/>
                 </div>
 
-                <div class="col-sm-4">
+            </div>
+            <div class="row page__row">
+                <div class="col-sm-6">
                     <label class="form__label">Introduction</label>
                     <!-- form-control is een bootstrap input class -->
                     <!-- Met requirecd checkt je browser of het leef blijft -->
                     <!-- input type heeft wel 12 types ofzo. Je kan ze makkkelijk online vinden -->
                     <input type="text" class="form-control marvin__input" id="txtEmployees" name="txtIntroduction"
-                           value="piet@pietspettenfabriek.pan" required>
+                           value="Introduction text" required/>
+                </div>
+                <div class="col-sm-6">
+                    <label class="form__label">Reminder</label>
+                    <!-- form-control is een bootstrap input class -->
+                    <!-- Met requirecd checkt je browser of het leef blijft -->
+                    <!-- input type heeft wel 12 types ofzo. Je kan ze makkkelijk online vinden -->
+                    <input type="text" class="form-control marvin__input" id="txtEmployees" name="txtIntroduction"
+                           value="Reminder text" required/>
                 </div>
             </div>
-
-            <!-- Nieuwe boostrap row maken -->
-            <!-- Elke nieuwe row heeft 12 colummen -->
             <div class="row page__row">
-                <div class="col-sm-12">
+
+                <div class="col auto">
                     <!-- Bootstrap defeult button is btn -->
                     <!-- Bootstrap button class toevoegen voor een andere kleur. De kleuren kan je vinden in de bootstrap documentatie -->
                     <input type="submit" name="btnOpslaan" value="Save" id="btnOpslaan" class="btn btn-danger marvin__input">
                 </div>
             </div>
-        </form>
+
+            <div class="row page__row">
+                <div class="col auto">
+                    <select required id="selContactAdd" name="selContactAdd"
+                        class="form-control">
+                    <?php $Scan->fillScanAddContact(); ?>
+                    </select>
+                </div>
+            </div>
     </div>
+
 </div>
 
+
 <?php
-require ("../functions/controller/Scancontroller.php");
-$Scan = new ScanController();
+
 $Status = "Active";
 $ReminderText = "remindertext test gr marvin";
-$startDate = "2020-05-13";
-$endDate = "2020-08-28";
 if(isset($_POST['btnOpslaan'])) {
+    $selContactAdd = $_POST['selContactAdd'];
+    $startDate = date("Y-m-d", strtotime($_POST['StartDate']));
+    $endDate = date("Y-m-d", strtotime($_POST['EndDate']));
     $scanName= $_POST['txtName'];
     $scanComment= $_POST['txtComment'];
     $scanStatus= $Status;
