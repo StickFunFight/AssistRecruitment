@@ -109,8 +109,6 @@ class QA_QuestionFunctions
     }
 
     public function putinArrayAnswer($questionID, $answer, $answerScore){
-        // Creating a array
-        $arrayTempAnswer = array();
         $entQuestion = new EntQuestionAnswer($questionID, $answer, $answerScore);
         array_push($arrayTempAnswer, $entQuestion);
         return $arrayTempAnswer;

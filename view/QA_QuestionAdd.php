@@ -179,7 +179,8 @@ if(isset($_POST['btConfirm'])){
 
 //During the process of making a new question, the user adds an answer.
 //This answer does not have a questionID that it should connect to, yet.
-
+// Creating a array
+$arrayTempAnswer = array();
 if(isset($_POST['btnConfirmAnswerAdd'])){
     $answerAdd = $_POST['txAnswer'];
     $arrayScore = $_POST['txScore'];
