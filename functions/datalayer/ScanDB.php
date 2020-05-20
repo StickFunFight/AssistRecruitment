@@ -124,11 +124,7 @@
             $query = "UPDATE scan SET scanStatus = 'Archived' WHERE scanID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $scanID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
+            if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
         }
@@ -138,15 +134,42 @@
             $query = "UPDATE scan SET scanStatus = 'Deleted' WHERE scanID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $scanID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
+            if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
         }
 
+        // Function to get templates
+        function getScanQuestionAir() {
+            $listQuestionAirs = array();
+
+            // Create Query to get questionairs
+            $query = "SELECT * FROM questionair";
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                // Getting the results fromm the database
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                // Looping through the results
+                foreach($result as $questionair){
+                    // Putting it in the modal
+                    $entQuestionair = new EntQuestionair($questionair->questionairID, $questionair->questionairName, $questionair->questionairComment, $questionair->questionairStatus);
+                    array_push($listQuestionAirs, $entQuestionair);
+                }
+                // Returning the full list
+                return $listQuestionAirs;    
+            }
+            // Showing a error when the query didn't execute
+            else{
+                echo "Er is iets fout gegaan waardoor er geen functies opgehaald konden worden";
+            }
+        }
+
+        // Getting the id of the autocomplete questionair
+        function getQuestionairID($scanQuestionair) {
+            // Create Query to get questionairs
+            $query = "SELECT questionairID FROM questionair WHERE questionairName = ?";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $scanQuestionair);
         function getScan($scanID){
             // Creating a array
             $listScans = array();

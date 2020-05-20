@@ -13,8 +13,9 @@ class EntContact {
     private $UserDepartmentName;
     private $UserCustomerID;
     private $userDepartmentID;
+    private $userDepartmentComment;
 
-    public function __construct($UserID, $ContactID, $ContactName, $UserPhoneNumber, $UserEmail, $UserComment, $UserStatus, $ContactBirth, $UserCustomerName, $UserDepartmentName, $UserCustomerID, $userDepartmentID) {
+    public function __construct($UserID, $ContactID, $ContactName, $UserPhoneNumber, $UserEmail, $UserComment, $UserStatus, $ContactBirth, $UserCustomerName, $UserDepartmentName, $UserCustomerID, $userDepartmentID, $userDepartmentComment) {
         $this->UserID = $UserID;
         $this->ContactID = $ContactID;
         $this->ContactName = $ContactName;
@@ -27,6 +28,7 @@ class EntContact {
         $this->UserDepartmentName = $UserDepartmentName;
         $this->UserCustomerID = $UserCustomerID;
         $this->userDepartmentID = $userDepartmentID;
+        $this->userDepartmentComment = $userDepartmentComment;
     }
 
     public function getUserID() {
@@ -76,6 +78,11 @@ class EntContact {
     public function getuserDepartmentID() {
         return $this->userDepartmentID;
     }
+
+    public function getuserDepartmentComment() {
+        return $this->userDepartmentComment;
+    }
+
 } 
 
 ?>

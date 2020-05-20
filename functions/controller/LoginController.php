@@ -47,4 +47,16 @@ class LoginController {
         }
     }
 
+    // Function to logg of
+    function userLogOff() {
+        // Getting the session and destroying it
+        session_start();
+
+        session_unset();
+        session_destroy();
+
+        // Sending user to login page
+        header("Location: loginScreen");
+    }
+
 }

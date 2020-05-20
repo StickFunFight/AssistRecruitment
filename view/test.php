@@ -3,44 +3,7 @@
 ?>
 <html>
     <body>
-        <!-- Jouw container -->
-        <div class="container-jouw-pagina" style="100%">
-            <!-- Bootstrap container -->
-            <div class="container">
-            </div>
-        </div>
-    <!-- Styling tab hoor je niet te gebruiken en is alleen voor het voorbeeld -->
-    <style>
-        body {
-            font-size: 16px;
-        }
-
-        .page__container {
-           width: 100%;
-        }
-
-        /** 1rem is 16px. Hij haalt rem uit je body font-size */
-        .page__row {
-            padding: 1rem; 
-        }
-
-        .form__label {
-            color: #000;
-        }
-
-        /* inherit pakt de styling van het element erboven */
-        .marvin__input{
-            font-size: inherit;
-        }
-
-        .marvin__select {
-            height: auto;
-        }
-    </style>
-
-    <body style="font-size: 16px;">
-        <!-- Linken naar stylesheet -->
-        <link rel="stylesheet" href="../assests/styling/customer-edit.css">
+        <link rel="stylesheet" href="../assests/styling/scan-add.css">
         <!-- Pagina container -->
         <div class="page__container"> 
             <!--- Bootstrap container -->
