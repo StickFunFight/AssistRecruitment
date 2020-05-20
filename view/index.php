@@ -1,6 +1,6 @@
 <?php 
     // Starting the session
-    $_SESSION['user'] = 518;
+    $_SESSION['user'] = 568;
     //session_start();
 
     // Inlcude Database class
@@ -76,6 +76,9 @@
                     foreach ($listDepartments as $departmentUser) {
 
                         // Getting the scans for every department
+                        $listScansDepartment = $ScanCtrl->getScansDepartment($user->getuserDepartmentID());
+
+                        if (!empty($listScansDepartment)) {
                         ?>
                             <section class="dashboard__department">
                                 <div class="row">
@@ -83,8 +86,23 @@
                                         <h2 class="dashboard--subtitle"><?php echo $departmentUser->getUserDepartmentName(); ?></h2>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <?php
+                                        // Looping through the departmentscans
+                                        foreach ($listScansDepartment as $scanDP) {
+                                        ?>
+                                            <div class="col-sm-12">
+                                                
+                                            </div>
+                                        <?php
+                                        // ending department scan foreach
+                                        }
+                                    ?>
+                                </div>
                             </section>
                         <?php
+                        }
                     // ending department user foreach
                     }
                 ?>
