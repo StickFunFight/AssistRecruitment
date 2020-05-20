@@ -1,16 +1,19 @@
 <?php
     require_once '../functions/datalayer/ScanDB.php';
 
-    Class ScanController {
-        
-        private $scanDB;   
-    
-        public function __construct(){
+    Class ScanController
+    {
+
+        private $scanDB;
+
+        public function __construct()
+        {
             $this->ScanDB = new ScanDB();
         }
 
         // Getting all scans
-        function getScans($statusScan){
+        function getScans($statusScan)
+        {
             // Creating a array
             $listScans = array();
 
@@ -18,10 +21,11 @@
 
             // Returning the list given from the Database class
             return $listScans;
-        }  
+        }
 
         // Getting all scan from 1 customer
-        function getScansCustomer($customerID, $statusScan){
+        function getScansCustomer($customerID, $statusScan)
+        {
             // Creating a array
             $listScans = array();
 
@@ -30,7 +34,9 @@
             // Returning the list given from the Database class
             return $listScans;
         }
-        Function GetScan($scanID){
+
+        function GetScan($scanID)
+        {
             $listScans = array();
 
             $listScans = $this->ScanDB->getScan($scanID);
@@ -38,12 +44,14 @@
             return $listScans;
         }
 
-        function UpdateScan($scanID, $scanName,$scanComment, $scanStatus,$scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate){
-         $this->ScanDB->EditScan($scanID, $scanName,$scanComment, $scanStatus,$scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate);
+        function UpdateScan($scanID, $scanName, $scanComment, $scanStatus, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate)
+        {
+            $this->ScanDB->EditScan($scanID, $scanName, $scanComment, $scanStatus, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate);
         }
 
         // Getting all scans from 1 user
-        function getScansUser($userID) {
+        function getScansUser($userID)
+        {
             // Creating a array
             $listScans = array();
 
@@ -54,17 +62,20 @@
         }
 
         // Function to archive scan
-        function archiveScan($scanID) {
+        function archiveScan($scanID)
+        {
             $this->ScanDB->archiveScan($scanID);
         }
 
         // Function to delete scan
-        function deleteScan($scanID) {
+        function deleteScan($scanID)
+        {
             $this->ScanDB->deleteScan($scanID);
         }
 
         // Function to get templates
-        function getScanQuestionAir() {
+        function getScanQuestionAir()
+        {
             // Creating a array
             $listQuestionair = array();
 
@@ -75,28 +86,27 @@
         }
 
         // Getting the id of the autocomplete questionair
-        function getQuestionairID($scanQuestionair) {
+        function getQuestionairID($scanQuestionair)
+        {
             $QuestionairID = $this->ScanDB->getQuestionairID($scanQuestionair);
 
             return $QuestionairID;
         }
 
         // Function to add scan
-        function addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair, $customerID) {
+        function addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair, $customerID)
+        {
             $this->ScanDB->addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair, $customerID);
-         // Function to get scans for a department
-        function getScansDepartment($departmentID) {
-             // Creating a array
-            $listScans = array();
+            // Function to get scans for a department
+            function getScansDepartment($departmentID)
+            {
+                // Creating a array
+                $listScans = array();
 
-            $listScans = $this->ScanDB->getScansDepartment($departmentID);
+                $listScans = $this->ScanDB->getScansDepartment($departmentID);
 
-            // Returning the list given from the Database class
-            return $listScans;
+                // Returning the list given from the Database class
+                return $listScans;
+            }
         }
     }
-
-
-    
-
-?>
