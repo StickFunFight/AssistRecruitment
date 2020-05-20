@@ -1,33 +1,94 @@
 <?php
 
-class EntQuestionair {
-    private $QuestionairID;
-    private $QuestionairName;
-    private $QuestionairComment;
-    private $QuestionairStatus;
+class EntQuestionair{
 
-    public function __construct($QuestionairID, $QuestionairName, $QuestionairComment, $QuestionairStatus) {
-        $this->QuestionairID = $QuestionairID;
-        $this->QuestionairName = $QuestionairName;
-        $this->QuestionairComment = $QuestionairComment;
-        $this->QuestionairStatus = $QuestionairStatus;
+
+
+    private $questionairID;
+    private $questionairName;
+    private $questionairComment;
+    private $questionairStatus;
+
+    /**
+     * EntQuestionair constructor.
+     * @param $questionairID
+     * @param $questionairName
+     * @param $questionairComment
+     * @param $questionairStatus
+     */
+    public function __construct($questionairID, $questionairName, $questionairComment, $questionairStatus)
+    {
+        $this->questionairID = $questionairID;
+        $this->questionairName = $questionairName;
+        $this->questionairComment = $questionairComment;
+        $this->questionairStatus = $questionairStatus;
     }
 
-    public function getQuestionairID() {
-        return $this->QuestionairID;
+    /**
+     * @return mixed
+     */
+    public function getQuestionairID()
+    {
+        return $this->questionairID;
     }
 
-    public function getQuestionairName() {
-        return $this->QuestionairName;
-    }
- 
-    public function getQuestionairComment() {
-        return $this->DepartmentComment;
+    /**
+     * @param mixed $questionairID
+     */
+    public function setQuestionairID($questionairID)
+    {
+        $this->questionairID = $questionairID;
     }
 
-    public function getQuestionairStatus() {
-        return $this->QuestionairStatus;
+    /**
+     * @return mixed
+     */
+    public function getQuestionairName()
+    {
+        return $this->questionairName;
     }
-} 
 
-?>
+    /**
+     * @param mixed $questionairName
+     */
+    public function setQuestionairName($questionairName)
+    {
+        $this->questionairName = $questionairName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuestionairComment()
+    {
+        return $this->questionairComment;
+    }
+
+    /**
+     * @param mixed $questionairComment
+     */
+    public function setQuestionairComment($questionairComment)
+    {
+        $this->questionairComment = $questionairComment;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuestionairStatus()
+    {
+        return $this->questionairStatus;
+    }
+
+    /**
+     * @param mixed $questionairStatus
+     */
+    public function setQuestionairStatus($questionairStatus)
+    {
+        $this->questionairStatus = $questionairStatus;
+    }
+
+
+
+
+}
