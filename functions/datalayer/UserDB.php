@@ -202,5 +202,20 @@
                 echo "Er is iets fout gegaan";
             }
         }
+
+        Function CreateUserBulk($userEmail){
+            $userStatus= 'Active';
+            $selector = bin2hex(random_bytes(12));
+            $hashedToken = password_hash($selector, PASSWORD_DEFAULT);
+            $query = "INSERT INTO user (userName, userEmail,userPassword,userStatus ) VALUES (?,?,?,?)";
+            $stm = $this->conn->prepare($query);
+            $stm->bindParam(1, $userEmail);
+            $stm->bindParam(2, $userEmail);
+            $stm->bindParam(3, $hashedToken);
+            $stm->bindParam(4, $userStatus);
+            if ($stm->execute()) {
+                
+            }
+        }
     }
 ?>

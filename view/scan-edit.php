@@ -96,6 +96,50 @@ foreach ($lijstScan as $item) {
                     </div>
             </form>
         </div>
+        <form method="post" enctype="multipart/form-data">
+            <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="ce__title" id="pageTitle">Publish in bulk</h1>
+                </div>
+            </div>
+            <div class="row ce--form-row">
+                <div class="col-sm-6">
+                        <input type="file"  name="file" class="custom-file-input" id="file">
+                        <label id="Lblcsv" class="custom-file-label ce--input" for="file">Kies csv bestand..</label>
+                    <script>
+                        $('#file').change(function () {
+                            var value = $(this).val();
+                            var result = value.substring(value.lastIndexOf("\\") + 1);
+                            $('#Lblcsv').text(result);
+                        })
+                    </script>
+
+                </div>
+                <div class="col-sm-6">
+                    <input type="submit" name="BtnImport" value="Importeren" class="btn btn-secondary btn-lg" />
+                </div>
+            </div>
+            </div>
+            </form>
+        <?php
+        if (isset($_POST["BtnImport"])) {
+            if ($_FILES['file']['name']) {
+                $filename = explode(".", $_FILES['file']['name']);
+                if ($filename[1] == 'csv') {
+                    $handle = fopen($_FILES['file']['tmp_name'], "r");
+                    while ($data = fgetcsv($handle)) {
+                        $item1 = $data[0];
+                        $item2 = $data[1];
+
+                        echo $item1;
+                        echo $item2;
+                    }
+                    fclose($handle);
+                }
+            }
+        }
+?>
     </body>
     </html>
     <?php
@@ -110,5 +154,6 @@ if(isset($_POST['BtnOpslaan'])) {
         $scanEndDate= $_POST['DpEnd'];
         $Scan->UpdateScan($id, $scanName,$scanComment, $scanStatus,$scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate);
 }
+
 
 
