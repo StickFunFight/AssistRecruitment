@@ -171,7 +171,6 @@
             $stm->bindParam(1, $scanQuestionair);
         }
 
-
         function getScan($scanID)
         {
             // Creating a array

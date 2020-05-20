@@ -99,5 +99,10 @@
             $this->UserDB->addUser($UserID, $UserName, $UserEmail, $userType, $userPassword, $userType, $UserStatus);
 
         }
+        function createUserBulk($UserEmail, $ScanID){
+            //semding the data to the databqaseclass
+            $this->UserDB->CreateUserBulk($UserEmail, $ScanID);
+
+        }
     }
 ?>

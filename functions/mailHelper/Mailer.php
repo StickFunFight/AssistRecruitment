@@ -15,7 +15,7 @@ class Mailer {
         $mail = new PHPMailer(TRUE);
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = TRUE;
+        $mail->SMTPAuth = true;
         $mail->Username = 'noreplyQuestlog@gmail.com';
         $mail->Password = 'questlogadmin69';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -38,6 +38,24 @@ class Mailer {
             $mail->setFrom('Assist@gmail.com');
             $mail->addAddress($email);
             $mail->Subject = 'Wachtwoord vergeten';
+            $mail->msgHTML($emailBody);
+
+            $mail->send();
+        } catch (Exception $e) {
+            echo $e->errorMessage();
+        }
+    }
+
+    function ScanInBulk($email) {
+        $mail = $this->mailSetup();
+
+        $emailBody = 'U bent toegevoegd aan een Scan, Klik hier om deze te maken.';
+
+        //Set email information
+        try{
+            $mail->setFrom('Assist@gmail.com');
+            $mail->addAddress($email);
+            $mail->Subject = 'Toegevoegd aan scan';
             $mail->msgHTML($emailBody);
 
             $mail->send();

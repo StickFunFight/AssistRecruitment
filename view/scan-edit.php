@@ -5,7 +5,11 @@ require('menu.php');
 $id = $_GET['Id'];
 
 require("../functions/controller/ScanController.php");
+require("../functions/controller/UserController.php");
+require("../functions/mailHelper/Mailer.php");
 require '../functions/models/entScan.php';
+$Mailer = new Mailer();
+$user = new UserController();
 $Scan = new ScanController();
 $lijstScan = $Scan->GetScan($id);
 foreach ($lijstScan as $item) {
@@ -129,11 +133,9 @@ foreach ($lijstScan as $item) {
                 if ($filename[1] == 'csv') {
                     $handle = fopen($_FILES['file']['tmp_name'], "r");
                     while ($data = fgetcsv($handle)) {
-                        $item1 = $data[0];
-                        $item2 = $data[1];
-
-                        echo $item1;
-                        echo $item2;
+                        $Email = $data[1];
+                        $user->createUserBulk($Email, $id);
+                        $Mailer->ScanInBulk($Email);
                     }
                     fclose($handle);
                 }
