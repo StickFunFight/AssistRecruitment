@@ -222,6 +222,6 @@
     </body>
 </html>
 <?php
-    // Ending foreach loop
+    // Ending user foreach loop
     }
 ?>

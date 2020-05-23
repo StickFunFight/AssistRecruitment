@@ -269,7 +269,7 @@
             * Then the questions that are bonded to the question are gotton from scan_question where the scan_question scanID = scan_answer scanID
             * The completed percentage is than calculeted between the scanID in the scan_answer in comparison to the scanID in scan_answer
             */
-            $query = "SELECT sc.scanID, (Count(sc.scanID)* 100 / (SELECT Count(sq.questionID) FROM scan_question sq WHERE sq.scanID = sc.scanID)) AS scanProgress
+            $query = "SELECT sc.scanID, (Count(sc.scanID) * 100 / (SELECT Count(sq.questionID) FROM scan_question sq WHERE sq.scanID = sc.scanID)) AS scanProgress
                       FROM scan_answer sc
                       WHERE sc.userID = ? AND scanID = ?
                       GROUP BY sc.scanID";
