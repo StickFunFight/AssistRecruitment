@@ -7,6 +7,34 @@ function maintenceSubMenu(){
     submenu.classList.toggle("submenu--show");
 }
 
+// Filling the progress bar per scan on the index page
+function setProgressbarScan(scanCircle, progress) {
+    // Getting the circle
+    var circle = document.getElementById(scanCircle);
+    // Getting the radius of the circle
+    var radius = circle.r.baseVal.value;
+    // calculating the with
+    var circumference = radius * 2 * Math.PI;
+
+    circle.style.strokeDasharray = `${circumference} ${circumference}`;
+    circle.style.strokeDashoffset = `${circumference}`;
+
+    // Calculating the progress
+    function setProgress(percent) {
+        const offset = circumference - percent / 100 * circumference;
+        circle.style.strokeDashoffset = offset;
+    }
+
+    // Setting the progress
+    setProgress(progress);
+
+    // input.addEventListener('change', function(e) {
+    //     if (input.value < 101 && input.value > -1) {
+    //         setProgress(input.value);
+    //     }  
+    // })
+}
+
 // Test function to sort the tables
 function sortTable(sortTable, tableColumn, direction) {
     var table, column, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0, tableIconTop, tableIconBottom, restTableIconTop, restTableIconBottom;

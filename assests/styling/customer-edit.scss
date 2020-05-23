@@ -1,5 +1,4 @@
 @import "variables";
-@import "mixins";
 
 /* Container next to the sidebar */
 .page__container {
@@ -173,6 +172,7 @@ select.form-control{
     font-size: 1.6rem;
     background-color: $grey;
     border-color: $grey;
+    cursor: pointer;
 }
 
 .btn.btn-status:hover {
@@ -283,7 +283,114 @@ select.form-control{
     font-size: 16px;
 }
 
+/* Department name on the index page */
 .dashboard--subtitle {
     font-size: 2rem;
     padding-bottom: 1.5rem;
+}
+
+.scan--feedback {
+    font-size: 1.6rem;
+}
+
+/* Dtyling for the scans on the index page */
+.scan {
+    margin: 0 0 25px;
+    background-color: $white;
+    border: 1px solid $black;
+    box-shadow: 3px 2px rgb(209, 209, 209);
+}
+
+/* container in the card */
+.scan__inner {
+    padding: 10px;
+    font-size: 16px;
+    display: flex;
+    height: auto;
+}
+
+/* progress of the scan on the left */
+.scan__progress {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    max-width: 300px;
+    min-width: 100px;
+}
+
+/* scan info of the scan on the right */
+.scan__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 75%;
+}
+
+/* styling the progress ring */
+.scan__progress-ring {
+    position: relative;
+}
+
+/* the circle itself */
+.scan__progress-circle {
+    fill: transparent;
+    stroke: $green;
+
+    transition: 0.35s stroke-dashoffset;
+    // axis compensation
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+/* Container for progress text */
+.scan__prograss-container {
+    position: absolute;
+}
+
+/* Progress text */
+.scan__progress-procent {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+/* Top of scan infor for title and dates */
+.scan-info-top {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+
+/* Scan title container */
+.scan-info__title {
+    width: calc(75% - 15px);
+    margin-right: 15px;
+}
+
+/* Scan dates container */
+.scan-info__dates {
+    width: 25%;
+}
+
+/* Scan info title */
+.scan--title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Scan info dates */
+.scan-info--dates {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.75);
+    font-weight: 500;
+}
+
+/* Scan info middle with introduction text */
+.scan-middle {
+    padding: 10px 0;
+    min-height: 140px;
 }

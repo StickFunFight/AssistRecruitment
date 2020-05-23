@@ -53,19 +53,77 @@
                         <div class="col-sm-12">
                             <h2 class="dashboard--subtitle">Scans for you</h2>
                         </div>
+                        <?php
+                            // Getting the scans linked to the contact and user
+                            $listScansUser = $ScanCtrl->getScansUser($user->getUserID());
+
+                            if (array_filter($listScansUser) != []) {
+                                // Looping through the results
+                                foreach ($listScansUser as $scanUser) {
+                                    ?>
+                                        <div class="col-sm-12">
+                                            <div class="scan">
+                                                <div class="scan__inner">
+                                                    <div class="scan__progress">
+                                                        <!-- Drawing a process circle -->
+                                                        <svg
+                                                            class="scan__progress-ring"
+                                                            height="200"
+                                                            width="200"
+                                                            >
+                                                            <circle
+                                                                id="<?php echo "scan" . $user->getUserId() . $scanUser->getScanID(); ?>"
+                                                                class="scan__progress-circle"
+                                                                stroke-width="10"
+                                                                r="80"
+                                                                cx="100"
+                                                                cy="100"/>
+                                                        </svg>
+
+                                                        <script>
+                                                            // Setting the progress
+                                                            setProgressbarScan("<?php echo 'scan' . $user->getUserId() . $scanUser->getScanID(); ?>", <?php echo $ScanCtrl->getScanProgres($user->getUserID(), $scanUser->getScanID()); ?>);
+                                                        </script>
+                                                        
+                                                        <div class="scan__prograss-container">
+                                                            <label class="scan__progress-procent"><?php echo $ScanCtrl->getScanProgres($user->getUserID(), $scanUser->getScanID()); ?>&#37;</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="scan__info">
+                                                        <div class="scan-info-top">
+                                                            <div class="scan-info__title">
+                                                                <h3 class="scan--title"><?php echo $scanUser->getScanName(); ?></h3>
+                                                            </div>
+                                                            
+                                                            <div class="scan-info__dates">
+                                                                <label class="scan-info--dates"><?php echo $scanUser->getScanStartDate() . " - " . $scanUser->getScanEndDate(); ?></label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="scan-middle">
+                                                            <p class="scan-info--text">
+                                                                <?php echo $scanUser->getScanIntroductionText(); ?>
+                                                            </p>
+                                                        </div>
+
+                                                        <div class="scan-bottom">
+                                                            <a class="btn btn-status">continue scan</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                <?php
+                                // ending scan user foreach
+                                }
+                            } else {
+                                ?>
+                                    <span class="scan--feedback">There are no scan for you right now. </span>
+                                <?php
+                            }
+                        ?>
                     </div>
-                    <?php
-                        // Getting the scans linked to the contact and user
-                        $listScansUser = $ScanCtrl->getScansUser($user->getUserID());
-
-                        // Looping through the results
-                        foreach ($listScansUser as $scanUser) {
-                            ?>
-
-                            <?php
-                        // ending scan user foreach
-                        }
-                    ?>
                 </section>
                     <?php
 
@@ -76,9 +134,12 @@
                     foreach ($listDepartments as $departmentUser) {
 
                         // Getting the scans for every department
-                        $listScansDepartment = $ScanCtrl->getScansDepartment($user->getuserDepartmentID());
+                        $listScansDepartment = $ScanCtrl->getScansDepartment($departmentUser->getuserDepartmentID());
 
-                        if (!empty($listScansDepartment)) {
+                        //var_dump($listScansDepartment);
+
+                        // Only showing departments with active scans
+                        if (array_filter($listScansDepartment) != []) {
                         ?>
                             <section class="dashboard__department">
                                 <div class="row">
@@ -93,7 +154,57 @@
                                         foreach ($listScansDepartment as $scanDP) {
                                         ?>
                                             <div class="col-sm-12">
-                                                
+                                                <div class="scan">
+                                                    <div class="scan__inner">
+                                                        <div class="scan__progress">
+                                                            <!-- Drawing a process circle -->
+                                                            <svg
+                                                                class="scan__progress-ring"
+                                                                height="200"
+                                                                width="200"
+                                                                >
+                                                                <circle
+                                                                    id="<?php echo "scan" . $departmentUser->getUserDepartmentName() . $scanDP->getScanID(); ?>"
+                                                                    class="scan__progress-circle"
+                                                                    stroke-width="10"
+                                                                    r="80"
+                                                                    cx="100"
+                                                                    cy="100"/>
+                                                            </svg>
+
+                                                            <script>
+                                                                // Setting the progress
+                                                                setProgressbarScan("<?php echo 'scan' . $departmentUser->getUserDepartmentName() . $scanDP->getScanID(); ?>", <?php echo $ScanCtrl->getScanProgres($user->getUserID(), $scanDP->getScanID()); ?>);
+                                                            </script>
+                                                            
+                                                            <div class="scan__prograss-container">
+                                                                <label class="scan__progress-procent"><?php echo $ScanCtrl->getScanProgres($user->getUserID(), $scanDP->getScanID()); ?>&#37;</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="scan__info">
+                                                            <div class="scan-info-top">
+                                                                <div class="scan-info__title">
+                                                                    <h3 class="scan--title"><?php echo $scanDP->getScanName(); ?></h3>
+                                                                </div>
+                                                                
+                                                                <div class="scan-info__dates">
+                                                                    <label class="scan-info--dates"><?php echo $scanDP->getScanStartDate() . " - " . $scanDP->getScanEndDate(); ?></label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="scan-middle">
+                                                                <p class="scan-info--text">
+                                                                    <?php echo $scanDP->getScanIntroductionText(); ?>
+                                                                </p>
+                                                            </div>
+
+                                                            <div class="scan-bottom">
+                                                                <a class="btn btn-status">continue scan</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         <?php
                                         // ending department scan foreach

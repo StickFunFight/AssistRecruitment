@@ -84,6 +84,8 @@
         // Function to add scan
         function addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair, $customerID) {
             $this->ScanDB->addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair, $customerID);
+        }
+
          // Function to get scans for a department
         function getScansDepartment($departmentID) {
              // Creating a array
@@ -94,9 +96,12 @@
             // Returning the list given from the Database class
             return $listScans;
         }
+
+        // Function to get the percentage of completed questions of a scan
+        function getScanProgres($userID, $scanID) {
+            $scanProgress = $this->ScanDB->getScanProgres($userID, $scanID);
+
+            return $scanProgress;
+        }
     }
-
-
-    
-
 ?>
