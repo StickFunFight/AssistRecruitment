@@ -102,8 +102,12 @@
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // Looping through the results
                 foreach($result as $scan){
+                    // Converting the dates to format '15 March'
+                    $scanStartDate = date("d F", strtotime($scan->scanStartDate));
+                    $scanEndDate = date("d F", strtotime($scan->scanEndDate));
+
                     // Putting it in the modal
-                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, null, $scan->scanStartDate, $scan->scanEndDate, null, null, null, $scan->userID);
+                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, null, $scanStartDate, $scanEndDate, null, null, null, $scan->userID);
                     array_push($listScans, $entScan);
                 }
                 // Returning the full list

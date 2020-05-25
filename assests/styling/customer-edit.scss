@@ -373,6 +373,8 @@ select.form-control{
 /* Scan dates container */
 .scan-info__dates {
     width: 25%;
+    display: flex;
+    justify-content: flex-end;
 }
 
 /* Scan info title */
