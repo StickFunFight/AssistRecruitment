@@ -1,6 +1,5 @@
 <?php
 
-
 class QuestionairDatabase
 {
     private $conn;
@@ -10,29 +9,28 @@ class QuestionairDatabase
         require_once 'database.class.php';
         $database = new Database();
         $this->conn = $database->getConnection();
-
-    }
+        }
 
     public function AddQuestionair($QName, $QStatus)
     {
-        $query = "INSERT INTO questionair (questionairName, questionairStatus) VALUES (
-                  $QName , $QStatus
+        $query = "INSERT INTO questionair (questionairName, questionairComment, questionairStatus) VALUES (
+                  '$QName', 'Dit is een test', '$QStatus'
                   )";
         $stm = $this->conn->prepare($query);
         if ($stm->execute())
         {
-
+            return $this->conn->lastInsertId();
         }
     }
 
-    public function getQuestionairID($QName)
+    public function getQuestionairID($QID)
     {
-        $query = "SELECT questionairID FROM questionair WHERE questionairName = '$QName'";
+        $query = "SELECT questionairID FROM questionair WHERE questionairID = $QID";
         $stm = $this->conn->prepare($query);
         if ($stm->execute())
         {
             $result = $stm->fetch(PDO::FETCH_OBJ);
-            return $result->questionairID;
+            return $result;
         }
     }
 
@@ -42,7 +40,7 @@ class QuestionairDatabase
         $query = "SELECT * FROM question
                   JOIN questionair_question ON questionair_question.questionID = question.questionID
                   JOIN questionair ON questionair.questionairID = questionair_question.questionairID
-                  WHERE questionair.questionairID = 1";
+                  WHERE questionair.questionairID = $QID";
         $stm = $this->conn->prepare($query);
         if ($stm->execute()) {
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -56,6 +54,36 @@ class QuestionairDatabase
 
         } else {
            echo "oef foutje";
+        }
+    }
+
+
+    public function getQuestions(){
+        $lijst2 = array();
+        $query2 = "SELECT * FROM question";
+        $stm = $this->conn->prepare($query2);
+        if ($stm->execute()) {
+            $result = $stm->fetchAll(PDO::FETCH_OBJ);
+            foreach ($result as $question) {
+                // Hier stonden de entiteit class functies maar hij wilde de database kolom namen
+                $antQuestion = new EntQuestion($question->questionID, $question->categorieID, $question->axisID, $question->questionName, $question->questionExemple,
+                    $question->questionStatus, $question->questionType);
+                array_push($lijst2, $antQuestion);
+            }
+            return $lijst2;
+
+        } else {
+            echo "oef foutje";
+        }
+    }
+
+    public function add($QID, $QuestID){
+        $query = "INSERT INTO questionair_question (questionairID, questionID) VALUES(
+                  $QID, $QuestID
+                  )";
+        $stm = $this->conn->prepare($query);
+        if ($stm->execute()) {
+
         }
     }
 }

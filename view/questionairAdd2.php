@@ -2,6 +2,13 @@
 
 require_once 'head.php';
 require_once 'menu.php';
+require '../functions/controller/questionairController.php';
+
+if (isset($_GET['qID'])){
+    $ID = $_GET['qID'];
+    $QC = new questionairController();
+    $QC->setQuestionairID($ID);
+}
 
 ?>
 <html
@@ -24,9 +31,7 @@ require_once 'menu.php';
                 </thead>
                 <tbody>
                 <?php
-                require '../functions/controller/questionairController.php';
                 require '../functions/models/EntQuestion.php';
-                $QC = new questionairController();
                 $lijstQuestionair = $QC->getQuestionairList();
                 foreach ($lijstQuestionair as $item)
                 {
@@ -46,7 +51,7 @@ require_once 'menu.php';
     </div>
 </div>
 
-<!-- AxisAddModal -->
+<!-- QuestionairQuestionAddModal -->
 <div class="modal fade" id="questionairAddModal" tabindex="-1" role="dialog" aria-labelledby="questionairAddModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -56,35 +61,43 @@ require_once 'menu.php';
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST">
-                <div class="modal-body">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" data-target="#questionDropDown">
-                        Dropdown button
+            <form method="post">
+            <div class="modal-body">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            Dropdown button
                     </button>
-                    <div class="dropdown-menu" id="questionDropDown">
-                    <?php
-                    require '../functions/controller/questionairController.php';
-                    require '../functions/models/EntQuestion.php';
-                    $QC = new questionairController();
-                    $lijstQuestionair = $QC->getQuestionairList();
-                    foreach ($lijstQuestionair as $item)
-                    {
-                        echo '<option id="'.$item->getQuestionID().'">'.$item->getQuestionName().'</option>';
-
-                    }
-                    ?>
+                    <div class="dropdown-menu">
+                        <?php
+                        $lijstQuestion = $QC->getQuestions();
+                        foreach ($lijstQuestion as $question)
+                        {
+                            echo '<a class="dropdown-item" id="'.$question->getQuestionID().'" onclick="SendID(this.id)" >'.$question->getQuestionName().'</a>';
+                        }
+                        ?>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" name="btnAnnuleer" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
-                    <input type="button" name="btnOpslaan" id="AxisAddOpslaan" class="btn btn-primary" data-dismiss="modal" value="Axis Opslaan"/>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success ButtonLeft" id="VraagOpslaan">Toevoegen</button>
+                <button class="btn btn-danger" id="btnAnnuleer" data-toggle="modal" data-target="#questionairAddModal">Annuleer</button>
+            </div>
             </form>
         </div>
     </div>
 </div>
 
+<?php
 
+//$QD = new QuestionairDatabase();
+//if (isset($_POST['btnOpslaan'])){
+//    $QID = $_POST['questionList'];
+//    echo $QID. $ID;
+//    $QD->add($ID, $QID);
+//    Header("Location: questionairAdd2.php?qID=$ID&vraag=$QID");
+//
+//}
+?>
 
 </html>
 
@@ -95,4 +108,36 @@ require_once 'menu.php';
         alert(x);
     });
 
+    $(document).ready(function(){
+        $(".dropdown-toggle").dropdown();
+    });
+
+
+
+    $('#VraagOpslaan').click(function () {
+        $.ajax({
+            url: 'questionairAddHandler2.php',
+            type: 'post',
+            data: { "questionairID": <?php echo $ID ?> ,"questionID": QuestionID},
+            success: function(response) {
+
+                window.location.href = 'questionairAdd2.php?qID=<?php echo $ID?>';
+            }
+        });
+    });
+
+</script>
+
+<!-- Linking voor jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Linking to Bootstrap JavaScript -->
+<script src="../assests/bootstrap/js/bootstrap.min.js"></script>
+
+<script>
+    function SendID(clicked_id)
+    {
+        console.log(clicked_id);
+        window.QuestionID = clicked_id;
+    }
 </script>
