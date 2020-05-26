@@ -86,5 +86,20 @@
                 echo "Er is iets fout gegaan";
             }
         }
+
+        function getProfile($UserID){
+            //create Query to get profile data
+            $query = "SELECT u.userID, u.userName, u.userEmail, u.userStatus, c.contactPhoneNumber
+                        FROM user u
+                        INNER JOIN contact c ON c.userID = u.userID";
+            $stm = $this->db->prepare($query);
+            if($stm->execute()){
+                echo "het werkt";
+            }
+            else { 
+                echo "het werkt niet";
+            }
+
+        }
     }
 ?>

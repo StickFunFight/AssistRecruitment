@@ -27,5 +27,16 @@
             // Checking the result
 
         }
+        
+        function getProfile($userID){
+            //creating an array
+            $profile = array();
+
+            $profile = $this->UserDB->getDetailsUser($userID);
+            //returning the list 
+
+            return $profile;
+        
+        }
     }
 ?>
