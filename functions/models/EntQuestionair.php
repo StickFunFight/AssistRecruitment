@@ -1,10 +1,13 @@
 <?php
 
 
+
 class EntQuestionair
 {
+
     private $questionairID;
     private $questionairName;
+    private $questionairComment;
     private $questionairStatus;
 
     /**
@@ -13,10 +16,12 @@ class EntQuestionair
      * @param $questionairName
      * @param $questionairStatus
      */
-    public function __construct($questionairID, $questionairName, $questionairStatus)
+
+    public function __construct($questionairID, $questionairName, $questionairComment, $questionairStatus)
     {
         $this->questionairID = $questionairID;
         $this->questionairName = $questionairName;
+        $this->questionairComment = $questionairComment;
         $this->questionairStatus = $questionairStatus;
     }
 
@@ -55,6 +60,25 @@ class EntQuestionair
     /**
      * @return mixed
      */
+
+
+    public function getQuestionairComment()
+    {
+        return $this->questionairComment;
+    }
+
+    /**
+     * @param mixed $questionairComment
+     */
+    public function setQuestionairComment($questionairComment)
+    {
+        $this->questionairComment = $questionairComment;
+    }
+
+    /**
+     * @return mixed
+     */
+
     public function getQuestionairStatus()
     {
         return $this->questionairStatus;
@@ -72,3 +96,6 @@ class EntQuestionair
 
 
 }
+
+
+
