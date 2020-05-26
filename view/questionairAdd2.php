@@ -48,6 +48,7 @@ if (isset($_GET['qID'])){
                 </tbody>
             </table>
         </div>
+        <button class="btn btn-success ButtonLeft" id="btnKlaar">Volgende</button>
     </div>
 </div>
 
@@ -87,6 +88,8 @@ if (isset($_GET['qID'])){
     </div>
 </div>
 
+
+
 <?php
 
 //$QD = new QuestionairDatabase();
@@ -124,6 +127,10 @@ if (isset($_GET['qID'])){
                 window.location.href = 'questionairAdd2.php?qID=<?php echo $ID?>';
             }
         });
+    });
+
+    $('#btnKlaar').click(function (){
+       window.location.href =  
     });
 
 </script>
