@@ -13,6 +13,15 @@ class questionairController
         $this->db = new QuestionairDatabase();
     }
 
+    public function GetQuestionair(){
+        $Lijst = array();
+
+        $Lijst = $this->db->GetQuestionair();
+
+        // Returning the list given from the Database class
+        return $Lijst;
+    }
+
     public function setQuestionairID($QID)
     {
         $this->QuestionairID= $QID;
@@ -42,5 +51,20 @@ class questionairController
         $lijst2 = $this->db->getQuestions();
 
         return $lijst2;
+    }
+
+    public function getName(){
+        $Name = $this->db->getName($this->QuestionairID);
+        return $Name;
+    }
+
+    public function getStatus(){
+        $Status = $this->db->getStatus($this->QuestionairID);
+        return $Status;
+    }
+
+    public function getComment(){
+        $Comment = $this->db->getComment($this->QuestionairID);
+        return $Comment;
     }
 }

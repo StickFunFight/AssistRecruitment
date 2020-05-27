@@ -17,6 +17,9 @@ require_once 'menu.php';
             <br>
             <label for="txtStatus"><h3>Status:</h3></label>
             <input type="text" name="txtStatus" id="txtStatus">
+            <br>
+            <label for="txtComment"><h3>Comment:</h3></label>
+            <input type="text" name="txtComment" id="txtComment">
 
 
 
@@ -35,7 +38,7 @@ require_once 'menu.php';
         $.ajax({
             url: 'questionairAddHandler.php',
             type: 'post',
-            data: { "questionairName": $('#txtName').val(), "questionairStatus": $('#txtStatus').val()},
+            data: { "questionairName": $('#txtName').val(), "questionairComment": $('#txtComment').val() ,"questionairStatus": $('#txtStatus').val()},
             success: function(response) {
                 window.location.href = 'questionairAdd2.php?qID='+response;
             }
