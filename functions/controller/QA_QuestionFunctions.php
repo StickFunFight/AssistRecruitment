@@ -1,4 +1,5 @@
 <?php
+require_once '../functions/models/entAnswer.php';
 
 class QA_QuestionFunctions
 {
@@ -108,10 +109,15 @@ class QA_QuestionFunctions
         $stm->execute();
     }
 
-    public function putinArrayAnswer($questionID, $answer, $answerScore){
-        $entQuestion = new EntQuestionAnswer($questionID, $answer, $answerScore);
+    public function putinArrayAnswer($arrayTempAnswer, $answer, $answerScore){
+        $entQuestion = new entAnswer($answer, $answerScore);
         array_push($arrayTempAnswer, $entQuestion);
+        print_r($arrayTempAnswer);
         return $arrayTempAnswer;
+    }
+
+    public function readArrayAnswer($arrayTempAnswer){
+        echo $arrayTempAnswer;
     }
 
     public function getDataFromSelectedQuestionID($questionID){

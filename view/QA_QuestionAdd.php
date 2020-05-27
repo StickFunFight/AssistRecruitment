@@ -145,7 +145,7 @@ require_once '../functions/controller/QA_QuestionFunctions.php';
                     </div>
                     <div class="modal-footer">
                         <button type="button" name="btnCancel" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
-                        <input type="button" name="btnConfirmAnswerAdd" id="btnConfirmAnswerAdd" class="btn btn-primary" data-dismiss="modal" value="Antwoord Opslaan"/>
+                        <input type="submit" name="btnConfirmAnswerAdd" id="btnConfirmAnswerAdd" class="btn btn-primary"  value="Antwoord Opslaan"/>
                     </div>
                 </form>
             </div>
@@ -176,15 +176,16 @@ if(isset($_POST['btConfirm'])){
         $QF->setQuestion($selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
     }
 }
-
+session_start();
+$session[] = '';
 //During the process of making a new question, the user adds an answer.
 //This answer does not have a questionID that it should connect to, yet.
 // Creating a array
 $arrayTempAnswer = array();
 if(isset($_POST['btnConfirmAnswerAdd'])){
     $answerAdd = $_POST['txAnswer'];
-    $arrayScore = $_POST['txScore'];
-    $QF->putinArrayAnswer($arrayAnswer, $arrayScore);
+    $scoreAdd = $_POST['txScore'];
+    $QF->putinArrayAnswer($arrayTempAnswer, $answerAdd, $scoreAdd);
 }
 ?>
 </body>
