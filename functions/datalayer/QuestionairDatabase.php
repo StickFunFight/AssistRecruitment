@@ -7,7 +7,6 @@ class QuestionairDatabase
 {
     private $conn;
 
-
     public function __construct()
     {
         require_once 'database.class.php';
@@ -15,10 +14,10 @@ class QuestionairDatabase
         $this->conn = $database->getConnection();
         }
 
-    public function AddQuestionair($QName, $QStatus)
+    public function AddQuestionair($QName, $Qcomment, $QStatus)
     {
         $query = "INSERT INTO questionair (questionairName, questionairComment, questionairStatus) VALUES (
-                  '$QName', 'Dit is een test', '$QStatus'
+                  '$QName', '$Qcomment', '$QStatus'
                   )";
         $stm = $this->conn->prepare($query);
         if ($stm->execute())
@@ -94,6 +93,62 @@ class QuestionairDatabase
             } else {
                 echo "oef foutje";
             }
+
+        }
+    }
+
+    public function getName($ID)
+    {
+        $query = "SELECT questionairName FROM questionair WHERE questionairID = $ID";
+        $stm = $this->conn->prepare($query);
+        if($stm->execute())
+        {
+           $result = $stm->fetch(PDO::FETCH_ASSOC);
+           foreach ($result as $Name){
+               return $Name;
+           }
+
+        }
+    }
+
+    public function getStatus($ID){
+        $query = "SELECT questionairStatus FROM questionair WHERE questionairID = $ID";
+        $stm = $this->conn->prepare($query);
+        if($stm->execute())
+        {
+            $result = $stm->fetch(PDO::FETCH_ASSOC);
+            foreach ($result as $Status){
+                return $Status;
+            }
+        }
+    }
+
+    public function getComment($ID){
+        $query = "SELECT questionairComment FROM questionair WHERE questionairID = $ID";
+        $stm = $this->conn->prepare($query);
+        if($stm->execute())
+        {
+            $result = $stm->fetch(PDO::FETCH_ASSOC);
+            foreach ($result as $Comment){
+                return $Comment;
+            }
+        }
+    }
+
+    public function delete($qID, $QuestID)
+    {
+        $query = "DELETE FROM questionair_question WHERE questionairID = $qID AND questionID = $QuestID";
+        $stm = $this->conn->prepare($query);
+        if($stm->execute()) {
+
+        }
+    }
+
+    public function update($QID, $QName, $QComment, $QStatus)
+    {
+        $query = "UPDATE questionair SET questionairName = '$QName', questionairComment = '$QComment', questionairStatus ='$QStatus' WHERE questionairID = $QID";
+        $stm = $this->conn->prepare($query);
+        if($stm->execute()) {
 
         }
 

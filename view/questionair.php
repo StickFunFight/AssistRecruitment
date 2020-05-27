@@ -41,7 +41,7 @@ require_once 'menu.php';
                     echo  $item->getQuestionairStatus();
                     echo '</td>';
                     echo '<td>';
-                    echo '<a id="'.$item->getQuestionairID().'" onclick="SendID(this.id)"><i class="fas tab-table__icon editKnop">&#xf044;</i></a>';
+                    echo '<a id="'.$item->getQuestionairID().'" onclick="editScreen(this.id)"><i class="fas tab-table__icon editKnop">&#xf044;</i></a>';
                     echo  ' ';
                     echo '<a id="'.$item->getQuestionairID().'" onclick="SendID(this.id)" data-id="'.$item->getQuestionairID().'"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
                     echo '</td>';
@@ -78,8 +78,13 @@ require_once 'menu.php';
     </div>
 </div>
 </body>
-
+</html>
 <script>
+    function SendID(clicked_id)
+    {
+        window.QuestionairID = clicked_id;
+    }
+
     $(document).ready(function(){
         $("#Filter").on("keyup", function() {
             var value = $(this).val().toLowerCase();
@@ -122,6 +127,13 @@ require_once 'menu.php';
             }
         });
     });
+
+
+
+    function editScreen(ID){
+        window.QuestionairID = ID;
+        window.location.href = 'questionairEdit.php?qID='+QuestionairID;
+    }
 </script>
 </html>
 <?php
