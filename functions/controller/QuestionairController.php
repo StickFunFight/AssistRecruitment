@@ -34,9 +34,11 @@ class questionairController
         // Returning the list given from the Database class
         return $Lijst;
     }
+    
 
     public function getQuestions(){
         $lijst2 = array();
+
         $lijst2 = $this->db->getQuestions();
 
         return $lijst2;
