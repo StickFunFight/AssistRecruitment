@@ -1,12 +1,11 @@
 <?php
-require '../functions/datalayer/UserDB.php';
+require '../functions/datalayer/ScanDB.php';
 
-if (isset($_POST['scanID'], ['userID'])){
+if (isset($_POST['scanID'])){
 
     $ScanID = $_POST['scanID'];
-    $UserID = $_POST['userID'];
 
-    $CAF = new UserDB();
+    $CAF = new ScanDB();
     $CAF->archiveScan($ScanID);
     echo "Succes";
 
