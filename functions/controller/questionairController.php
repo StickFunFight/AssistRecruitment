@@ -2,6 +2,10 @@
 
 require '../functions/datalayer/QuestionairDatabase.php';
 
+
+
+
+
 class QuestionairController
 {
     private $db;
@@ -20,6 +24,7 @@ class QuestionairController
         // Returning the list given from the Database class
         return $Lijst;
     }
+
 
     /**
      * @return mixed
