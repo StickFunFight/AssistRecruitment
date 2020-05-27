@@ -14,7 +14,7 @@ require_once 'menu.php';
                 <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een questionair.">
             </div>
             <div class="col-sm-6">
-                <button type="button" class="btn add-container__btn ButtonRight"><i class="fas fa-plus-circle"></i> Questionair toevoegen</button>
+                <button type="button" class="btn add-container__btn ButtonRight" id="AddQuestionair"><i class="fas fa-plus-circle"></i> Questionair toevoegen</button>
             </div>
         </div>
         <div>
@@ -68,4 +68,8 @@ require_once 'menu.php';
             });
         });
     });
+
+    $('#AddQuestionair').click(function () {
+        window.location.href = 'questionairAdd.php';
+    })
 </script>

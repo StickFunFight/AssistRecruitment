@@ -1,7 +1,7 @@
 <?php
 require '../functions/models/EntCategory.php';
 require '../functions/models/EntQuestionair.php';
-require '../functions/models/EntQuestion.php';
+
 
 class QuestionairDatabase
 {
@@ -23,17 +23,6 @@ class QuestionairDatabase
         if ($stm->execute())
         {
             return $this->conn->lastInsertId();
-        }
-    }
-
-    public function getQuestionairID($QID)
-    {
-        $query = "SELECT questionairID FROM questionair WHERE questionairID = $QID";
-        $stm = $this->conn->prepare($query);
-        if ($stm->execute())
-        {
-            $result = $stm->fetch(PDO::FETCH_OBJ);
-            return $result;
         }
     }
 

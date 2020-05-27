@@ -130,7 +130,7 @@ if (isset($_GET['qID'])){
     });
 
     $('#btnKlaar').click(function (){
-       window.location.href =  
+       window.location.href = 'questionair.php';
     });
 
 </script>

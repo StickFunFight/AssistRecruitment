@@ -2,9 +2,8 @@
 
 require '../functions/datalayer/QuestionairDatabase.php';
 
-class questionairController
+class QuestionairController
 {
-
     private $db;
     private $QuestionairID;
 
@@ -13,9 +12,13 @@ class questionairController
         $this->db = new QuestionairDatabase();
     }
 
-    public function setQuestionairID($QID)
-    {
-        $this->QuestionairID= $QID;
+    public function GetQuestionair(){
+        $Lijst = array();
+
+        $Lijst = $this->db->GetQuestionair();
+
+        // Returning the list given from the Database class
+        return $Lijst;
     }
 
     /**
@@ -24,6 +27,14 @@ class questionairController
     public function getQuestionairID()
     {
         return $this->QuestionairID;
+    }
+
+    /**
+     * @param mixed $QuestionairID
+     */
+    public function setQuestionairID($QuestionairID)
+    {
+        $this->QuestionairID = $QuestionairID;
     }
 
     public function getQuestionairList(){
@@ -37,6 +48,7 @@ class questionairController
 
     public function getQuestions(){
         $lijst2 = array();
+
         $lijst2 = $this->db->getQuestions();
 
         return $lijst2;
