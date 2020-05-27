@@ -30,5 +30,20 @@
       font-size: 15px;
   }
 
-  
+  .btnSubmit {
+    color: black;
+    font-size: 1.6rem;
+    background-color: #d1d1d1;
+    border-color: #d1d1d1;
+}
+
+.btnSubmit:hover { 
+    color: white;
+    background-color: #73b99b;
+    border-color: #73b99b;
+}
+.btn__row{
+  padding-left: 305px;
+}
+
   

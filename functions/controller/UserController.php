@@ -9,7 +9,7 @@
             $this->UserDB = new UserDB();
         }
 
-        // Getting al the contact
+        // Getting all the contact
         function getDetailsUser($userID){
             // Creating a array
             $detailsUser = array();
@@ -28,15 +28,21 @@
 
         }
         
-        function getProfile($userID){
+        function getProfile($UserID){
             //creating an array
             $profile = array();
 
-            $profile = $this->UserDB->getDetailsUser($userID);
+            $profile = $this->UserDB->getProfile($UserID);
             //returning the list 
 
             return $profile;
         
+        }
+
+        function updatePassword($UserID, $hash){
+            //sending data to database
+
+            $this->UserDB->updatePassword($UserID, $hash);
         }
     }
 ?>

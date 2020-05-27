@@ -32,7 +32,7 @@
                 // Looping through the results
                 foreach($result as $user){
                     // Putting it in the modal
-                    $entUser = new entUser($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
+                    $entUser = new entContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
                     array_push($detailsUser, $entUser);
                 }
                 // Returning the full list
@@ -88,18 +88,46 @@
         }
 
         function getProfile($UserID){
+
+            $userDetails = array();
             //create Query to get profile data
-            $query = "SELECT u.userID, u.userName, u.userEmail, u.userStatus, c.contactPhoneNumber
+            $query = "SELECT u.userID, c.contactName, u.userEmail, u.userStatus, c.contactPhoneNumber
                         FROM user u
-                        INNER JOIN contact c ON c.userID = u.userID";
+                        INNER JOIN contact c ON c.userID = u.userID
+                        WHERE u.userID = ?";
             $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $UserID);
             if($stm->execute()){
-                echo "het werkt";
+                //resultaten ophalen
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                // loop aanmaken
+                foreach($result as $user){
+                //entiteit aanroepen
+                $entContact = new entContact($user->userID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->userStatus, null, null);
+                array_push($userDetails, $entContact);
+                }
+                return $userDetails;
             }
             else { 
                 echo "het werkt niet";
             }
 
+        }
+        
+        function updatePassword($userPassword, $UserID){
+            //password hashen
+            $hash = password_hash($userPassword, PASSWORD_DEFAULT);
+            //create query to update password
+            $query = "UPDATE user SET userPassword = ? WHERE userID = ?";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $hash);
+            $stm->bindParam(2, $UserID);
+            if($stm->execute()){
+                echo "het werkt";
+            }
+            else {
+                echo "het werkt niet";
+            }
         }
     }
 ?>
