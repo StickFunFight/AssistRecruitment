@@ -13,6 +13,29 @@
             $this->db = $database->getConnection();
         }
 
+        //functie van marfmans (thanx for deleting last time)
+        function setScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $questionairID)
+        {
+            $sql = "INSERT INTO scan (scanName, scanComment, scanStatus, scanIntroductionText, scanReminderText, scanStartDate, scanEndDate, questionairID) VALUES ('$name', '$comment', '$status', '$introductiontext', '$remindertext', '$startdate', '$enddate', '$questionairID')";
+            $stm = $this->db->prepare($sql);
+            if($stm->execute()){
+                echo 'Gelukt';
+            }
+            else{
+                echo "Niet gelukt";
+            }
+        }
+
+        //Functie van Marfmans
+        function fillScanAddSelect(){
+            require_once 'QuestionairController.php';
+            $QC = new QuestionairController();
+            $lijstQuestionairs = $QC->GetQuestionair();
+            foreach ($lijstQuestionairs as $item) {
+                echo "<option value=" . $item->questionairID . ">" . $item->questionairName . "</option>";
+            }
+        }
+
         function getScans($statusScan)
         {
             // Creating a array

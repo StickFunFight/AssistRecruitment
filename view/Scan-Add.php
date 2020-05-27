@@ -97,8 +97,22 @@ $Scan = new ScanController();
                            value="Reminder text" required/>
                 </div>
             </div>
-            <div class="row page__row">
 
+            <!-- Add one or more contact to a scan
+                    when a contact is selected,
+                    add another select in which the already selected contact is removed
+                    repeat after each selected contact
+              -->
+            <div class="row page__row">
+                <div class="col auto">
+                    <select  id="selContactAdd" name="selContactAdd"
+                            class="form-control">
+                            <?php   $Scan->fillScanAddContact(); ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row page__row">
                 <div class="col auto">
                     <!-- Bootstrap defeult button is btn -->
                     <!-- Bootstrap button class toevoegen voor een andere kleur. De kleuren kan je vinden in de bootstrap documentatie -->
@@ -106,14 +120,18 @@ $Scan = new ScanController();
                 </div>
             </div>
 
-            <div class="row page__row">
-                <div class="col auto">
-                    <select required id="selContactAdd" name="selContactAdd"
-                        class="form-control">
-                    <?php $Scan->fillScanAddContact(); ?>
-                    </select>
-                </div>
-            </div>
+            <!-- add Questionair, see func in scandb.php -->
+<!--            <div class="row page__row">-->
+<!--                <div class="col auto">-->
+<!--                    <select required id="selContactAdd" name="selContactAdd"-->
+<!--                            class="form-control">-->
+<!---->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </div>-->
+
+
+
     </div>
 
 </div>
@@ -124,7 +142,7 @@ $Scan = new ScanController();
 $Status = "Active";
 $ReminderText = "remindertext test gr marvin";
 if(isset($_POST['btnOpslaan'])) {
-    $selContactAdd = $_POST['selContactAdd'];
+//    $selContactAdd = $_POST['selContactAdd'];
     $startDate = date("Y-m-d", strtotime($_POST['StartDate']));
     $endDate = date("Y-m-d", strtotime($_POST['EndDate']));
     $scanName= $_POST['txtName'];
@@ -134,7 +152,7 @@ if(isset($_POST['btnOpslaan'])) {
     $scanReminderText= $ReminderText;
     $scanStartDate= $startDate;
     $scanEndDate= $endDate;
-    $Scan->addScan($scanName,$scanComment, $scanStatus,$scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, "");
+    $Scan->addScan($scanName,$scanComment, $scanStatus,$scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, 1);
 }
 
 

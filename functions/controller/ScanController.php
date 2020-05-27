@@ -9,6 +9,12 @@
             $this->ScanDB = new ScanDB();
         }
 
+        //dont delete - gemaakt door marfmans
+        function addScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $questionairID){
+            $listScanAdd = $this->ScanDB->setScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $questionairID);
+            return $listScanAdd;
+        }
+
         // Getting all scans
         function getScans($statusScan){
             // Creating a array
@@ -63,5 +69,7 @@
             // Returning the list given from the Database class
             return $listScans;
         }
+
+
     }
 ?>
