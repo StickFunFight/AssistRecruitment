@@ -1,8 +1,9 @@
 <?php
 
-class EntQuestionair{
 
 
+class EntQuestionair
+{
 
     private $questionairID;
     private $questionairName;
@@ -13,9 +14,9 @@ class EntQuestionair{
      * EntQuestionair constructor.
      * @param $questionairID
      * @param $questionairName
-     * @param $questionairComment
      * @param $questionairStatus
      */
+
     public function __construct($questionairID, $questionairName, $questionairComment, $questionairStatus)
     {
         $this->questionairID = $questionairID;
@@ -59,6 +60,8 @@ class EntQuestionair{
     /**
      * @return mixed
      */
+
+
     public function getQuestionairComment()
     {
         return $this->questionairComment;
@@ -75,6 +78,7 @@ class EntQuestionair{
     /**
      * @return mixed
      */
+
     public function getQuestionairStatus()
     {
         return $this->questionairStatus;
@@ -92,3 +96,6 @@ class EntQuestionair{
 
 
 }
+
+
+

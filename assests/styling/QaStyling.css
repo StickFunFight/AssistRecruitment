@@ -65,3 +65,8 @@ th{
 .RuimteVragen{
     margin-right:10px
 }
+.ButtonLeft{
+    font-size: 1.5rem;
+    float: left;
+    background-color: #73b99b;
+}

@@ -264,5 +264,33 @@
                 echo "Er is iets fout gegaan";
             }
         }
+
+        Function CreateUserBulk($userEmail, $ScanId){
+            $userStatus= 'Active';
+            $userRights= 'Employee';
+            $selector = bin2hex(random_bytes(12));
+            $hashedToken = password_hash($selector, PASSWORD_DEFAULT);
+            $query = "INSERT INTO user (userName, userEmail,userPassword,userRights, userStatus ) VALUES (?,?,?,?,?)";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $userEmail);
+            $stm->bindParam(2, $userEmail);
+            $stm->bindParam(3, $hashedToken);
+            $stm->bindParam(4, $userRights);
+            $stm->bindParam(5, $userStatus);
+            if ($stm->execute()) {
+                $id = $this->db->lastInsertId();
+                $this->KoppelUserScan($ScanId, $id);
+            }
+        }
+
+        Function KoppelUserScan($ScanId, $UserId){
+            $query = "INSERT INTO scan_user (scanID, UserID ) VALUES (?,?)";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $ScanId);
+            $stm->bindParam(2, $UserId);
+            if ($stm->execute()) {
+
+            }
+        }
     }
-?>
+

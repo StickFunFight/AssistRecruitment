@@ -1,8 +1,6 @@
 <?php
 
-class EntQuestionair{
-
-
+class EntQuestionair {
 
     private $questionairID;
     private $questionairName;
@@ -16,8 +14,7 @@ class EntQuestionair{
      * @param $questionairComment
      * @param $questionairStatus
      */
-    public function __construct($questionairID, $questionairName, $questionairComment, $questionairStatus)
-    {
+    public function __construct($questionairID, $questionairName, $questionairComment, $questionairStatus) {
         $this->questionairID = $questionairID;
         $this->questionairName = $questionairName;
         $this->questionairComment = $questionairComment;
@@ -27,68 +24,56 @@ class EntQuestionair{
     /**
      * @return mixed
      */
-    public function getQuestionairID()
-    {
+    public function getQuestionairID() {
         return $this->questionairID;
     }
 
     /**
      * @param mixed $questionairID
      */
-    public function setQuestionairID($questionairID)
-    {
+    public function setQuestionairID($questionairID) {
         $this->questionairID = $questionairID;
     }
 
     /**
      * @return mixed
      */
-    public function getQuestionairName()
-    {
+    public function getQuestionairName() {
         return $this->questionairName;
     }
 
     /**
      * @param mixed $questionairName
      */
-    public function setQuestionairName($questionairName)
-    {
+    public function setQuestionairName($questionairName) {
         $this->questionairName = $questionairName;
     }
 
     /**
      * @return mixed
      */
-    public function getQuestionairComment()
-    {
+    public function getQuestionairComment() {
         return $this->questionairComment;
     }
 
     /**
      * @param mixed $questionairComment
      */
-    public function setQuestionairComment($questionairComment)
-    {
+    public function setQuestionairComment($questionairComment) {
         $this->questionairComment = $questionairComment;
     }
 
     /**
      * @return mixed
      */
-    public function getQuestionairStatus()
-    {
+    public function getQuestionairStatus() {
         return $this->questionairStatus;
     }
 
     /**
      * @param mixed $questionairStatus
      */
-    public function setQuestionairStatus($questionairStatus)
-    {
+    public function setQuestionairStatus($questionairStatus) {
         $this->questionairStatus = $questionairStatus;
     }
-
-
-
-
 }
