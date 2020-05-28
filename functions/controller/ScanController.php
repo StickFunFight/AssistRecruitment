@@ -1,5 +1,7 @@
 <?php
     require_once '../functions/datalayer/ScanDB.php';
+    require_once 'QuestionairController.php';
+
 
     Class ScanController {
         
@@ -13,6 +15,16 @@
         function addScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $questionairID){
             $listScanAdd = $this->ScanDB->setScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $questionairID);
             return $listScanAdd;
+        }
+
+        //Functie van Marfmans
+        function fillScanAddSelect(){
+            $QC = new QuestionairController();
+            $lijstQuestionairs = array();
+            $lijstQuestionairs = $QC->GetQuestionair();
+            foreach ($lijstQuestionairs as $item) {
+                echo "<option value=".$item->questionairID.">".$item->questionairName."</option>";
+            }
         }
 
         // Getting all scans

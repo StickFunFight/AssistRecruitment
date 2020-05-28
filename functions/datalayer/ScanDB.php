@@ -26,15 +26,7 @@
             }
         }
 
-        //Functie van Marfmans
-        function fillScanAddSelect(){
-            require_once 'QuestionairController.php';
-            $QC = new QuestionairController();
-            $lijstQuestionairs = $QC->GetQuestionair();
-            foreach ($lijstQuestionairs as $item) {
-                echo "<option value=" . $item->questionairID . ">" . $item->questionairName . "</option>";
-            }
-        }
+
 
         function getScans($statusScan)
         {
