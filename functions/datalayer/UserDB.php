@@ -91,7 +91,7 @@
                       INNER JOIN department_contact dc ON dc.contactID = c.contactID
                       INNER JOIN department dp ON dc.departmentID = dp.departmentID
                       WHERE u.userID = ? AND c.contactStatus = ?
-                      ORDER BY c.contactName ASC";
+                      ORDER BY dp.departmentName ASC";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
             $stm->bindParam(2, $status);
@@ -175,7 +175,6 @@
                     foreach($result as $user){
                         echo $user->userID;
 
-                        //$queryInsertContact = "INSERT INTO contact(contactName, contactPhoneNumber, contactEmail, contactComment, contactStatus, customerID, userID, contactBirth) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
                         $queryInsertContact = "INSERT INTO contact(contactName, contactPhoneNumber, contactEmail, contactComment, contactStatus, customerID, userID, contactBirth) 
                         VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 

@@ -19,7 +19,6 @@
         <link rel="stylesheet" href="../assests/styling/main.css">
 
         <!-- Linking to own JavaScript -->
-        <script src="../assests/script/validation.js"></script>
         <script src="../assests/script/main.js"></script>
 
         <!-- Linking voor jQuery -->

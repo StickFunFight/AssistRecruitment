@@ -1,6 +1,7 @@
 <?php
-require_once 'head.php';
 require_once 'menu.php';
+
+
 ?>
 <html>
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
@@ -13,7 +14,7 @@ require_once 'menu.php';
                 <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een vraag of antwoord">
             </div>
             <div class="col-sm-6">
-                <button type="button" class="btn add-container__btn ButtonRight"><i class="fas fa-plus-circle"></i> Vraag toevoegen</button>
+                <button onclick="window.location.href='QA_QuestionAdd.php'" type="button" class="btn add-container__btn ButtonRight"><i class="fas fa-plus-circle"></i> Vraag toevoegen</button>
             </div>
         </div>
         <div id="wrapper">
@@ -21,31 +22,31 @@ require_once 'menu.php';
                 <table class="table">
                     <thead>
                     <tr>
-                    <th><i class="fas fa-folder-open"></i> (All Categories)</th>
+                        <th><i class="fas fa-folder-open"></i> (All Categories)</th>
                         <th><i id="CategoryAdd" class="fas fa-plus fa-lg" data-target="#modalCatAdd" data-toggle="modal"></i> </th>
                     </tr>
                     </thead>
                     <tbody>
-                            <?php
-                            require("../functions/datalayer/QaOverView.php");
-                            $QO = new QaOverView();
-                            $Qa = $QO->GetAllCategories();
-                            foreach ($Qa as $item)
-                            {
-                                echo '<tr class="category-tabel__row" onclick="filterSelection('.$item->GetID().')">';
-                                echo '<td value="'.$item->GetID().'">';
-                                echo '<i id="Icon" class="fas fa-folder"></i>';
-                                echo " ";
-                                echo  $item->GetNaam();
-                                echo '</td>';
-                                echo '<td>';
-                                echo '<i id="'.$item->GetID().'" onClick="SendID(this.id)" data-toggle="modal" data-target="#editCategory" class="fas fa-edit table--icon"></i>';
-                                echo " ";
-                                echo '<i  id="'.$item->GetID().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteCategoryModal" class="fas fa-trash-alt table--icon"></i>';
-                                echo '</td>';
-                                echo '</tr>';
-                            }
-                            ?>
+                    <?php
+                    require("../functions/datalayer/QaOverView.php");
+                    $QO = new QaOverView();
+                    $Qa = $QO->GetAllCategories();
+                    foreach ($Qa as $item)
+                    {
+                        echo '<tr class="category-tabel__row" onclick="filterSelection('.$item->GetID().')">';
+                        echo '<td value="'.$item->GetID().'">';
+                        echo '<i id="Icon" class="fas fa-folder"></i>';
+                        echo " ";
+                        echo  $item->GetNaam();
+                        echo '</td>';
+                        echo '<td>';
+                        echo '<i id="'.$item->GetID().'" onClick="SendID(this.id)" data-toggle="modal" data-target="#editCategory" class="fas fa-edit table--icon"></i>';
+                        echo " ";
+                        echo '<i  id="'.$item->GetID().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteCategoryModal" class="fas fa-trash-alt table--icon"></i>';
+                        echo '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
 
                     </tbody>
                 </table>
@@ -75,7 +76,7 @@ require_once 'menu.php';
                         }
                         echo '</td>';
                         echo '<td>';
-                        echo '<a id="'.$item->getQuestionID().'" onclick="SendID(this.id)"><i class="fas tab-table__icon editKnop">&#xf044;</i></a>';
+                        echo '<a href="QA_QuestionEdit.php?questionID='.$item->getQuestionID().'" class="editKnop" id="'.$item->getQuestionID().'" onclick="SendID(this.id)"><i class="fas tab-table__icon">&#xf044;</i></a>';
                         echo  ' ';
                         echo '<a id="'.$item->getQuestionID().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteQuestionModal" data-id="'.$item->getQuestionID().'"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
                         echo '</td>';
@@ -189,10 +190,19 @@ require_once 'menu.php';
         </div>
     </div>
 </div>
-
 </body>
 </html>
 <script>
+
+
+    $('#selQuestionType').change(function(){
+        if($(this).val() == "Question-answer") {
+            $('#divAnswerOptions').show();
+        }
+        else{
+            $('#divAnswerOptions').hide();
+        }
+    });
 
     $(document).ready(function(){
         $('#deleteQuestionModal').on('show.bs.modal', function (e) {
@@ -243,7 +253,7 @@ require_once 'menu.php';
             type: 'post',
             data: { "catName": $('#textField').val()},
             success: function(response) {
-            window.location.href='Qa.php';
+                window.location.href='Qa.php';
             }
         });
     });
