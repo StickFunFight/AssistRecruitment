@@ -2,28 +2,33 @@
     // Inlcude Database class
     require '../functions/datalayer/database.class.php';
     // Including controller
-    require '../functions/controller/contactController.php';
     require '../functions/controller/CustomerController.php';
-    //require '../functions/controller/userController.php';
+    require '../functions/controller/UserController.php';
     // Including entity classes
-    require '../functions/models/entCustomer.php';
+    require '../functions/models/entContact.php';
 
     // Including the head and menu
     require 'menu.php';
 
     // Creating connections with the classes
-    $CustomerCtrl = new CustomerController();
-    $ContactCtrl = new ContactController();
+    $UserCtrl = new UserController();
 
     // Creating a customer id to fil it later
-    $customerID;
+    $customerID = 0;
 
     // If there is a customer id, it will be of the customer, else it will be 0
     // This is to later check wich functions shouldn't be activeted
-    if(isset($_GET['customer']) && $_GET['customer'] != 0) {
+    if(isset($_POST['submitCreateUser'])){
+        $UserName = $_POST['userName'];
+        $UserEmail = $_POST['userEmail'];
+        $UserType = $_POST['userType'];
+        $userPassword = $_POST[''];
+
+        $UserCtrl->createUser($UserName, $UserEmail, $UserType, $userPassword);
+    }
+
+    if (isset($_GET['customer'])) {
         $customerID = $_GET['customer'];
-    }else {
-        $customerID = 0;
     }
 
     // Creating the list for the customer details
@@ -49,9 +54,9 @@
                     </div>
                 </div>
 
-                <form method="POST" autocomplete="off" action="?customer=<?php echo $customerID; ?>">
+                <!-- <form method="POST" autocomplete="off" action="?customer=<?php echo $customerID; ?>"> -->
                     <!-- Customer ID for refrence -->
-                    <input type="hidden" name="txtCustomerID" value="">
+                    <!-- <input type="hidden" name="txtCustomerID" value="">
 
                     <div class="row ce--form-row">
                         <div class="col-sm-12">
@@ -59,7 +64,83 @@
                             <input type="text" class="form-control au--input" name="txtSearchUser" id="searchUser" placeholder="type a name">
                         </div>
                     </div>
-                </from>
+                </from> -->
+                <form method="post" class="user-form">
+                    <div class="row ce--form-row">
+                        <div class="col-sm-6">
+                            <label class="ce__label">E-mail</label>
+                            <input name="userEmail" class="form-control user-add__input" type="text">
+                        </div>
+
+                        <div class="col-sm-6 ">
+                            <label class="ce__label">Username</label>
+                            <input name="userName" class="form-control user-add__input" type="text">
+                        </div>
+                    </div>
+                
+                    <div class="row page__row ce--form-row">
+                        <div class="col-sm-6">
+                            <label class="ce__label">Type</label>
+                            <input name="userType" class="form-control user-add__input" type="text">
+                        </div>
+                    </div>
+
+                    <div class="row page__row ce--form-row">
+                        <div class="col-sm-6">
+                            <label class="ce__label">Phone number</label>
+                            <input name="userPhonenumber" class="form-control user-add__input" type="text" required>
+                        </div>
+
+                        <div class="col-sm-6 ">
+                            <label class="ce__label">Date of birth</label>
+                            <input name="userBirthdate" class="form-control user-add__input" type="date" required>
+                        </div>
+                    </div>
+
+                    <div class="row page__row ce--form-row">
+                        <div class="col-sm-6">
+                            <label class="ce__label">Comment</label>
+                            <textarea name="userComment" class="form-control user-add__input" rows="5"></textarea>
+                        </div>
+
+                        <div class="col-sm-6 ">
+                            <label class="ce__label">Customer</label>
+                            <select class="form-control" name="cbxCustomer" id="customerSelect" onchange="changeSelectCustomer()">
+                                <?php 
+                                    // Checking for customer. If there is, lock it in that customer
+                                    // Creating an variable to fill it later
+                                    $listCustomers;
+
+                                    if (!empty($user->getUserCustomerID())) {
+                                        // Filling the list
+                                        $listCustomers =  $CustomerCtrl->getCustomerDetails($user->getUserCustomerID()); 
+                                        //Showing a select where you can't pick a customer
+                                        echo "<script> setCustomerSelectDisabeld(); </script>";
+                                    }  else {
+                                        $listCustomers = $CustomerCtrl->getCustomers('Active');
+                                    }
+                                    
+                                    foreach($listCustomers as $customer){
+                                        if($customer->getCustomerID() == $user->getUserCustomerID()) {
+                                            ?>
+                                                <option selected="selected" value="<?php echo $customer->getCustomerID(); ?>"><?php echo $customer->getCustomerName(); ?></option>
+                                            <?php
+                                        } else {
+                                            ?>
+                                                <option value="<?php echo $customer->getCustomerID(); ?>"><?php echo $customer->getCustomerName(); ?></option>
+                                            <?php
+                                        }
+                                    }
+                                ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row ce--form-row">
+                        <div class="col-sm-12">
+                            <input name="submitCreateUser" class="btn btn-add" type="submit" id="createUserButton" value="Add user">
+                        </div>
+                    </div>
             </div>
         </div> 
     </body>

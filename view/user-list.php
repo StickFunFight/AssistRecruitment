@@ -113,11 +113,11 @@
                                             // Checking for customer id to know where to add the new user to
                                             if ($customerID != 0) {
                                                 ?>
-                                                    <!-- <a href="user-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a> -->
+                                                    <a href="user-add?customer=<?php echo $customerID; ?>" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
                                                 <?php
                                             } else {
                                                 ?>
-                                                    <!-- <a href="user-add" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a> -->
+                                                    <a href="user-add" class="btn add-container__btn"><i class='fas add-container--icon'>&#xf055;</i> Add user</a>
                                                 <?php
                                             }       
                                         ?>
@@ -133,12 +133,11 @@
                                     <th class="tab-table__head">Name <div class="table__icon-top" onclick="sortTable('filterTable', 0, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 0, 'desc')"></div></th>
                                     <th class="tab-table__head">Phone number <div class="table__icon-top" onclick="sortTable('filterTable', 1, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 1, 'desc')"></div></th>
                                     <th class="tab-table__head">Email <div class="table__icon-top" onclick="sortTable('filterTable', 2, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 2, 'desc')"></div></th>
-                                    <th class="tab-table__head">Department <div class="table__icon-top" onclick="sortTable('filterTable', 3, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 3, 'desc')"></div></th>
                                     <?php 
                                         // Checking if there is a customer set
                                         if($customerID == 0) {
                                             ?>
-                                                <th class="tab-table__head">Customer <div class="table__icon-top" onclick="sortTable('filterTable', 4, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 4, 'desc')"></div></th>
+                                                <th class="tab-table__head">Customer <div class="table__icon-top" onclick="sortTable('filterTable', 3, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 3, 'desc')"></div></th>
                                             <?php
                                         }
                                     ?>
@@ -187,7 +186,6 @@
                                         <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getContactName(); ?></td>
                                         <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserPhoneNumber(); ?></td>
                                         <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserEmail(); ?></td>
-                                        <td class="tab-table__td" onclick="toDetails(<?php echo $customerID; ?>, <?php echo $user->getUserID(); ?>)"><?php echo $user->getUserDepartmentName(); ?></td>
                                         <?php 
                                             // Checking if there is a customer set
                                             if($customerID == 0) {
@@ -203,7 +201,7 @@
                                                 switch ($userStatus) {
                                                     case 'Archived':
                                                         ?>
-                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteModal" id='<?php echo $user->getUserID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
                                                         <?php
                                                         break;
                                                     case 'Deleted':
@@ -213,7 +211,7 @@
                                                         break;
                                                     default:
                                                         ?>
-                                                            <a class="deleteKnop" href="#"><i class="fas tab-table__icon">&#xf187;</i></a>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $user->getUserID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf187;</i></a>
                                                         <?php
                                                         break;
                                                 }

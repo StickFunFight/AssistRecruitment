@@ -17,12 +17,10 @@
             $listUsers = array();
 
             // Making a query to get the scans of the customer out the database
-            $query = "SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, c.contactBirth, cust.customerName, dp.departmentName, cust.customerID, dp.departmentID
+            $query = "SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, c.contactBirth, cust.customerName,  cust.customerID
                       FROM user u
                       INNER JOIN contact c ON c.userID = u.userID
                       INNER JOIN customer cust ON c.customerID = cust.customerID
-                      INNER JOIN department_contact dc ON dc.contactID = c.contactID
-                      INNER JOIN department dp ON dc.departmentID = dp.departmentID
                       WHERE c.contactStatus = ?
                       ORDER BY c.contactName ASC";
             $stm = $this->db->prepare($query);
@@ -33,7 +31,7 @@
                 // Looping through the results
                 foreach($result as $user){
                     // Putting it in the modal
-                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
+                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, null, $user->customerID, null, null);
                     array_push($listUsers, $entUser);
                 }
                 // Returning the full list
@@ -55,8 +53,8 @@
                       FROM user u 
                       INNER JOIN contact c ON c.userID = u.userID
                       INNER JOIN customer cust ON c.customerID = cust.customerID
-                      INNER JOIN department_contact dc ON dc.contactID = c.contactID
-                      INNER JOIN department dp ON dc.departmentID = dp.departmentID
+                      LEFT JOIN department_contact dc ON dc.contactID = c.contactID
+                      LEFT JOIN department dp ON dc.departmentID = dp.departmentID
                       WHERE cust.customerID = ? AND c.contactStatus = ?
                       ORDER BY c.contactName ASC";
             $stm = $this->db->prepare($query);
@@ -68,7 +66,7 @@
                 // Looping through the results
                 foreach($result as $user){
                     // Putting it in the modal
-                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
+                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID, null);
                     array_push($listUsers, $entUser);
                 }
                 // Returning the full list
@@ -86,7 +84,7 @@
             $listUsers = array();
 
             // Making a query to get the scans of the customer out the database
-            $query = "SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, c.contactBirth, cust.customerName, dp.departmentName, cust.customerID, dp.departmentID
+            $query = "SELECT u.userID, c.contactID, c.contactName, c.contactPhoneNumber, u.userEmail, c.contactComment, c.contactStatus, c.contactBirth, cust.customerName, dp.departmentName, cust.customerID, dp.departmentID, dp.departmentComment
                       FROM user u 
                       INNER JOIN contact c ON c.userID = u.userID
                       INNER JOIN customer cust ON c.customerID = cust.customerID
@@ -103,7 +101,7 @@
                 // Looping through the results
                 foreach($result as $user){
                     // Putting it in the modal
-                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
+                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID,$user->departmentComment);
                     array_push($listUsers, $entUser);
                 }
                 // Returning the full list
@@ -137,7 +135,7 @@
                 // Looping through the results
                 foreach($result as $user){
                     // Putting it in the modal
-                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID);
+                    $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID, null);
                     array_push($detailsUser, $entUser);
                 }
                 // Returning the full list
@@ -149,6 +147,63 @@
             }
         }
 
+        // Function to add user
+        function addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer) {
+            // Fake data for now
+            $userStatus = "Active";
+            $userPassword = password_hash(uniqid(), PASSWORD_DEFAULT);
+
+            $dbDate = date("Y-m-d", strtotime($contactBirthDay));
+            echo $dbDate . "<br>";
+
+            $queryInsertUser = "INSERT INTO user(userName, userEmail, userPassword, userRights, userStatus) VALUES(?, ?, ?, ?, ?)";
+            $stm = $this->db->prepare($queryInsertUser);
+            $stm->bindParam(1, $userEmail);
+            $stm->bindParam(2, $userEmail);
+            $stm->bindParam(3, $userPassword);
+            $stm->bindParam(4, $userType);
+            $stm->bindParam(5, $userStatus);
+            if ($stm->execute()) {
+                // Getting the user to create a contact
+                $queryGetUser = "SELECT * FROM user WHERE userEmail = ?";
+                $stmt = $this->db->prepare($queryGetUser);
+                $stmt->bindParam(1, $userEmail);
+                if ($stmt->execute()) {
+                    // Getting the results fromm the database
+                    $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+                    // Looping through the results
+                    foreach($result as $user){
+                        echo $user->userID;
+
+                        //$queryInsertContact = "INSERT INTO contact(contactName, contactPhoneNumber, contactEmail, contactComment, contactStatus, customerID, userID, contactBirth) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+                        $queryInsertContact = "INSERT INTO contact(contactName, contactPhoneNumber, contactEmail, contactComment, contactStatus, customerID, userID, contactBirth) 
+                        VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+
+                        $statement = $this->db->prepare($queryInsertContact);
+                        $statement->bindParam(1, $contactName);
+                        $statement->bindParam(2, $contactPhone);
+                        $statement->bindParam(3, $userEmail);
+                        $statement->bindParam(4, $contactComment);
+                        $statement->bindParam(5, $userStatus);
+                        $statement->bindParam(6, $contactCustomer);
+                        $statement->bindParam(7, $user->userID);
+                        $statement->bindParam(8, $dbDate);
+                        if ($statement->execute()) {
+                            return true;
+                        } else {
+                            return false;
+                        }                 
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                // Returning false because user isnt created
+                return false;
+            }
+        }
+
+        // Updateing the user
         function updateUser($userID, $contactID, $contactName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment) {
             $query = "START TRANSACTION;
                       UPDATE user SET userEmail = ? AND userStatus = ? WHERE userID = ?;
@@ -177,9 +232,13 @@
 
         function archiveUser($userID){
             // Create Query to update Customer Status
-            $query = "UPDATE user SET userStatus = 'Archived' WHERE userID = ?";
+            $query = "START TRANSACTION;
+                        UPDATE contact SET contactStatus = 'Archived' WHERE userID = ?;
+                        UPDATE user SET userStatus = 'Archived' WHERE userID = ?;
+                        COMMIT; ";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
+            $stm->bindParam(2, $userID);
             if($stm->execute()){
                 echo 'Het is gelukt';
             }
@@ -191,9 +250,13 @@
     
         function deleteUser($userID){
             // Create Query to update Customer Status
-            $query = "UPDATE user SET userStatus = 'Deleted' WHERE userID = ?";
+            $query = "START TRANSACTION;
+                        UPDATE contact SET contactStatus = 'Deleted' WHERE userID = ?;
+                        UPDATE user SET userStatus = 'Deleted' WHERE userID = ?;
+                        COMMIT; ";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
+            $stm->bindParam(2, $userID);
             if($stm->execute()){
                 echo 'Het is gelukt';
             }

@@ -83,10 +83,10 @@
             $query = "SELECT dp.departmentID, dp.departmentName, dp.departmentComment, dp.departmentStatus, dp.customerID, c.customerName
                       FROM department dp
                       INNER JOIN customer c ON dp.customerID = c.customerID
-                      WHERE c.customerID = ? AND dp.departmentStatus = ?
+                      WHERE dp.userID = ? AND dp.departmentStatus = ?
                       ORDER BY dp.departmentName ASC";
             $stm = $this->db->prepare($query);
-            $stm->bindParam(1, $customerID);
+            $stm->bindParam(1, $userID);
             $stm->bindParam(2, $departmentStatus);
             if($stm->execute()){
                 // Getting the results fromm the database
@@ -178,11 +178,7 @@
             $query = "UPDATE department SET departmentStatus = 'Deleted' WHERE departmentID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $departmentID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
+            if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
         }
@@ -192,11 +188,7 @@
             $query = "UPDATE department SET departmentStatus = 'Archived' WHERE departmentID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $departmentID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
+            if(!$stm->execute()){
                 echo "Er is iets fout gegaan";
             }
         }
