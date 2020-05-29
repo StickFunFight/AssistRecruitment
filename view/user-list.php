@@ -197,7 +197,7 @@
                                         <td class="tab-table__td">
                                             <a class="editKnop" href="user-edit?user=<?php echo $user->getUserID(); ?>"><i class="fas tab-table__icon">&#xf044;</i></a>
                                             <?php
-                                                // Checking for status and user an different icon for a different icon for that status
+                                                // Checking for status and user a different icon for a different icon for that status
                                                 switch ($userStatus) {
                                                     case 'Archived':
                                                         ?>

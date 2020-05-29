@@ -288,8 +288,51 @@
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $ScanId);
             $stm->bindParam(2, $UserId);
-            if ($stm->execute()) {
+            if (!$stm->execute()) {
+                echo "Oof";
+            }
+        }
 
+        function getProfile($UserID){
+
+            $userDetails = array();
+            //create Query to get profile data
+            $query = "SELECT u.userID, c.contactName, u.userEmail, u.userStatus, c.contactPhoneNumber
+                        FROM user u
+                        INNER JOIN contact c ON c.userID = u.userID
+                        WHERE u.userID = ?";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $UserID);
+            if($stm->execute()){
+                //resultaten ophalen
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                // loop aanmaken
+                foreach($result as $user){
+                //entiteit aanroepen
+                $entContact = new entContact($user->userID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->userStatus, null, null);
+                array_push($userDetails, $entContact);
+                }
+                return $userDetails;
+            }
+            else { 
+                echo "het werkt niet";
+            }
+
+        }
+        
+        function updatePassword($UserID, $userPassword){
+            //password hashen
+            $hash = password_hash($userPassword, PASSWORD_DEFAULT);
+            //create query to update password
+            $query = "UPDATE user SET userPassword = ? WHERE userID = ?";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $hash);
+            $stm->bindParam(2, $UserID);
+            if($stm->execute()){
+                return true;
+            }
+            else {
+                return false;
             }
         }
     }

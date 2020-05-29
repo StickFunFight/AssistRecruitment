@@ -42,7 +42,7 @@
                         <div class="navbar__bottom">
                             <ul class="navbar__list">
                                 <li class="navbar__item">
-                                    <i class="fa navbar--icon"><a href="#" class="navbar--link">&#xf007;</a></i>
+                                    <i class="fa navbar--icon"><a href="profile" class="navbar--link">&#xf007;</a></i>
                                 </li>
                                 <li class="navbar__item">
                                     <i class="fa navbar--icon"><a href="../functions/handler/logoutHandler" class="navbar--link">&#xf2f5;</a></i>
