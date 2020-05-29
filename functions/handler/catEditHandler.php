@@ -3,7 +3,7 @@ require '../datalayer/CategoryDatabase.php';
 
 $CAF = new CategoryDatabase();
 
-if (isset($_POST['catName']) && isset($_POST['catStatus']) && isset($_POST['CustomerID'])){
+if (isset($_POST['catName']) && isset($_POST['catStatus']) && isset($_POST['CustomerID'])) {
 
     $catName = $_POST['catName'];
     $catStatus = $_POST['catStatus'];
@@ -13,8 +13,6 @@ if (isset($_POST['catName']) && isset($_POST['catStatus']) && isset($_POST['Cust
 
     $CAF->catAanpassen($catName, $catStatus, $customerID);
     echo "Succes";
-
-
-}else echo "failed";
+} else echo "failed";
 
 ?>

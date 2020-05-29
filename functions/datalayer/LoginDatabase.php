@@ -17,12 +17,12 @@ class LoginDatabase {
 
          try {
             return $stmt->execute();
-         } catch (PDOException $exception){
+         } catch (PDOException $exception) {
             return false;
          }
     }
 
-    public function getUser($username){
+    public function getUser($username) {
         $connection = new Database();
         $getUser = null;
         $db = $connection->getConnection();
@@ -40,7 +40,7 @@ class LoginDatabase {
             }
 
             return $getUser;
-        } catch(PDOException $exception){
+        } catch(PDOException $exception) {
             return null;
         }
     }
@@ -68,7 +68,7 @@ class LoginDatabase {
         }
     }
 
-    public function createPasswordToken($token){
+    public function createPasswordToken($token) {
         $connection = new Database();
         $db = $connection->getConnection();
     }

@@ -1,13 +1,10 @@
 <?php
-// Class aanmaken
     class Database {
 
-        // Variabele aanmaken voor de connectie
+        // Variable for the connection
         public $conn;
 
-        // De gegevens om de connectie mee te maken
-
-
+        // Database login information
         private $host = 'assist.tk';
         private $db_name = 'assist';
         private $username = 'assist_remote';
@@ -17,7 +14,7 @@
         public function getConnection() {
             $this->conn = null;
 
-            // Kijken of de connectie gemaakt kan worden en anders een foutmelding geven
+            // Checking if connection can be made, else show error
             try {
                 $this->conn = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name . ';port=3306', $this->username, $this->password);
             } catch (\PDOException $exception) {

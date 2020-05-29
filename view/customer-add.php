@@ -14,12 +14,14 @@
 
 <!--This is where the HTML code comes in-->
 <html>
-<link rel="stylesheet" href="../assests/styling/customer-add.css">
-<link rel="stylesheet" href="../assests/styling/customer-edit.css">
     <head>
         <meta charset = "utf-8">
         <title>Add customer</title>
+        
+        <link rel="stylesheet" href="../assests/styling/customer-add.css">
+        <link rel="stylesheet" href="../assests/styling/customer-edit.css">
     </head>
+
     <body>
         <div class="page__content">
             <div class="container">

@@ -10,6 +10,5 @@ if (isset($_POST['CustomerID'])){
     $CAF->deleteCustomer($CustomerID);
     echo "Succes";
 
-}else echo "failed";
-
+} else echo "failed";
 ?>

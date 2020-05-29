@@ -5,7 +5,7 @@
         
         private $db;   
     
-        public function __construct(){
+        public function __construct() {
             // Creating a new connection
             $database = new Database();
             $this->db = $database->getConnection();
@@ -44,7 +44,7 @@
         }
 
         // Getting all contact for one customer
-        function getUsersCustomer($customerID, $status){
+        function getUsersCustomer($customerID, $status) {
             // Creating a array
             $listUsers = array();
 
@@ -79,7 +79,7 @@
         }
 
         // Getting all contact for one customer
-        function getDepartmentsUser($userID, $status){
+        function getDepartmentsUser($userID, $status) {
             // Creating a array
             $listUsers = array();
 
@@ -114,7 +114,7 @@
         }
 
         // Getting all details of a user
-        function getDetailsUser($userID){
+        function getDetailsUser($userID) {
             // Creating a array
             $detailsUser = array();
 
@@ -133,7 +133,7 @@
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // Looping through the results
-                foreach($result as $user){
+                foreach($result as $user) {
                     // Putting it in the modal
                     $entUser = new EntContact($user->userID, $user->contactID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->contactComment, $user->contactStatus, $user->contactBirth, $user->customerName, $user->departmentName, $user->customerID, $user->departmentID, null);
                     array_push($detailsUser, $entUser);
@@ -229,12 +229,12 @@
             }
         }
 
-        function archiveUser($userID){
+        function archiveUser($userID) {
             // Create Query to update Customer Status
             $query = "START TRANSACTION;
-                        UPDATE contact SET contactStatus = 'Archived' WHERE userID = ?;
-                        UPDATE user SET userStatus = 'Archived' WHERE userID = ?;
-                        COMMIT; ";
+                      UPDATE contact SET contactStatus = 'Archived' WHERE userID = ?;
+                      UPDATE user SET userStatus = 'Archived' WHERE userID = ?;
+                      COMMIT; ";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
             $stm->bindParam(2, $userID);
@@ -250,9 +250,9 @@
         function deleteUser($userID){
             // Create Query to update Customer Status
             $query = "START TRANSACTION;
-                        UPDATE contact SET contactStatus = 'Deleted' WHERE userID = ?;
-                        UPDATE user SET userStatus = 'Deleted' WHERE userID = ?;
-                        COMMIT; ";
+                      UPDATE contact SET contactStatus = 'Deleted' WHERE userID = ?;
+                      UPDATE user SET userStatus = 'Deleted' WHERE userID = ?;
+                      COMMIT; ";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
             $stm->bindParam(2, $userID);
@@ -265,7 +265,7 @@
             }
         }
 
-        Function CreateUserBulk($userEmail, $ScanId){
+        Function CreateUserBulk($userEmail, $ScanId) {
             $userStatus= 'Active';
             $userRights= 'Employee';
             $selector = bin2hex(random_bytes(12));
@@ -293,4 +293,3 @@
             }
         }
     }
-

@@ -1,30 +1,27 @@
 <?php
 
-class QA_QuestionFunctions
-{
+class QA_QuestionFunctions {
     private $conn;
 
-    public function __construct()
-    {
+    public function __construct() {
         require_once "../functions/datalayer/database.class.php";
         $database = new Database();
         $this->conn = $database->getConnection();
     }
 
-    public function setQuestion($categorieID, $questionName, $questionExemple, $questionStatus, $questionType)
-    {
+    public function setQuestion($categorieID, $questionName, $questionExemple, $questionStatus, $questionType) {
         $sql = "INSERT INTO question (categorieID, questionName, questionExemple, questionStatus, questionType) VALUES ($categorieID, '$questionName', '$questionExemple', '$questionStatus', '$questionType')";
         $stm = $this->conn->prepare($sql);
         $stm->execute();
     }
 
-    public function updateQuestion($questionID, $categorieID, $questionname, $questionExemple, $questionStatus, $questionType){
+    public function updateQuestion($questionID, $categorieID, $questionname, $questionExemple, $questionStatus, $questionType) {
         $sql = "UPDATE question SET categorieID = '$categorieID', questionName = '$questionname', questionExemple = '$questionExemple', questionStatus = '$questionStatus', questionType = '$questionType' WHERE questionID = '$questionID'";
         $stm = $this->conn->prepare($sql);
         $stm->execute();
     }
 
-    public function getCategories(){
+    public function getCategories() {
         $sql = "SELECT * FROM categorie";
         $stm = $this->conn->prepare($sql);
         if($stm->execute()){
@@ -35,7 +32,7 @@ class QA_QuestionFunctions
         }
     }
 
-    public function getCategoryName($categoryID){
+    public function getCategoryName($categoryID) {
         $sql = "SELECT * FROM categorie WHERE categorieID = ?";
         $stm = $this->conn->prepare($sql);
         $stm->bindParam(1, $categoryID);
@@ -49,7 +46,7 @@ class QA_QuestionFunctions
         }
     }
 
-    public function getQuestionID(){
+    public function getQuestionID() {
         $sql = "SELECT * FROM question";
         $stm = $this->conn->prepare($sql);
         if($stm->execute()){
@@ -60,7 +57,7 @@ class QA_QuestionFunctions
         }
     }
 
-    public function getQuestionData($questionID){
+    public function getQuestionData($questionID) {
         $sql = "SELECT q.questionID, q.questionName, q.questionExemple, q.questionStatus, q.questionType, c.categorieName, q.categorieID FROM question q JOIN categorie c ON c.categorieID = q.categorieID WHERE q.questionID = '$questionID'";
         $stm = $this->conn->prepare($sql);
         if($stm->execute()){
@@ -70,7 +67,7 @@ class QA_QuestionFunctions
         }
     }
 
-    public function getAllAxis(){
+    public function getAllAxis() {
         $sql = "SELECT * FROM axis";
         $stm = $this->conn->prepare($sql);
         if($stm->execute()) {
@@ -82,7 +79,7 @@ class QA_QuestionFunctions
 
     }
 
-    public function getQuestionAnswer($questionID){
+    public function getQuestionAnswer($questionID) {
         $sql = "SELECT * FROM answer WHERE questionID = ?";
         $stm = $this->conn->prepare($sql);
         $stm->bindParam(1, $questionID);
@@ -99,7 +96,7 @@ class QA_QuestionFunctions
         }
     }
 
-    public function setQuestionAnswer($answer, $questionID){
+    public function setQuestionAnswer($answer, $questionID) {
         //Score en Axis moeten nog toegevoegd worden
         $sql = "INSERT INTO answer (answer, questionID) VALUES (?, ?)";
         $stm = $this->conn->prepare($sql);
@@ -108,11 +105,11 @@ class QA_QuestionFunctions
         $stm->execute();
     }
 
-    public function getDataFromSelectedQuestionID($questionID){
+    public function getDataFromSelectedQuestionID($questionID) {
 
     }
 
-    public function fillCategorySelect(){
+    public function fillCategorySelect() {
 
     }
 }

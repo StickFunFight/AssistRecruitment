@@ -14,6 +14,3 @@ else if ($_POST['rowid']) {
     $id = $_POST['rowid'];
     $QD->showQ($id);;
 }
-
-
-

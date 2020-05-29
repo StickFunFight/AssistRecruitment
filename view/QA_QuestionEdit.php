@@ -1,11 +1,10 @@
 <?php
-require_once 'head.php';
-require_once '../functions/controller/QA_QuestionFunctions.php';
-require_once 'menu.php';
-$QF = new QA_QuestionFunctions();
-$questionID = $_GET['questionID'];
-$resultQuestionData = $QF->getQuestionData($questionID);
-
+    require_once 'head.php';
+    require_once '../functions/controller/QA_QuestionFunctions.php';
+    require_once 'menu.php';
+    $QF = new QA_QuestionFunctions();
+    $questionID = $_GET['questionID'];
+    $resultQuestionData = $QF->getQuestionData($questionID);
 ?>
     <link rel="stylesheet" href="../assests/styling/QaStyling.css">
     <link rel="stylesheet" type="text/css" href="../assests/styling/QA_QuestionStyle.css">

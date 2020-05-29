@@ -5,7 +5,7 @@
         
         private $UserDB;   
     
-        public function __construct(){
+        public function __construct() {
             $this->UserDB = new UserDB();
         }
 
@@ -19,7 +19,7 @@
             return $listUsers;
         }
 
-        function getUsersCustomer($customerID, $status){
+        function getUsersCustomer($customerID, $status) {
             // Creating a array
             $listUsers = array();
 
@@ -41,7 +41,7 @@
         }
 
         // Getting al the contact
-        function getDetailsUser($userID){
+        function getDetailsUser($userID) {
             // Creating a array
             $detailsUser = array();
 
@@ -69,7 +69,7 @@
         }
 
         function updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment) {
-            if($this->UserDB->updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment)){
+            if($this->UserDB->updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment)) {
                 // Getting the current url
                 $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                 $newURL = $currentURL . "?error=none";
@@ -85,21 +85,22 @@
         }
 
         // Function to archive user
-        function archiveUser($userID){
+        function archiveUser($userID) {
             $this->UserDB->archiveUser($userID);
         }
     
         // Function to delete user
-        function deleteUser($userID){
+        function deleteUser($userID) {
             $this->UserDB->deleteUser($userID);
         }
 
-        function createUser($UserID, $UserName, $UserEmail, $userType, $userPassword, $UserStatus){
-            //semding the data to the databqaseclass
+        function createUser($UserID, $UserName, $UserEmail, $userType, $userPassword, $UserStatus) {
+            //semding the data to the databaseclass
             $this->UserDB->addUser($UserID, $UserName, $UserEmail, $userType, $userPassword, $userType, $UserStatus);
 
         }
-        function createUserBulk($UserEmail, $ScanID){
+
+        function createUserBulk($UserEmail, $ScanID) {
             //semding the data to the databqaseclass
             $this->UserDB->CreateUserBulk($UserEmail, $ScanID);
 

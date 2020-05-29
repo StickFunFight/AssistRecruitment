@@ -1,9 +1,10 @@
 <?php
     require_once 'menu.php';
-require_once '../functions/controller/QA_QuestionFunctions.php';
+    require_once '../functions/controller/QA_QuestionFunctions.php';
     $QF = new QA_QuestionFunctions();
     $arrayAnswer = [];
 ?>
+
 <link rel="stylesheet" type="text/css" href="../assests/styling/QA_QuestionStyle.css">
 <body>
 
@@ -172,7 +173,7 @@ require_once '../functions/controller/QA_QuestionFunctions.php';
         });
 </script>
 <?php
-if(isset($_POST['btConfirm'])){
+if(isset($_POST['btConfirm'])) {
     //$selAxis = $_POST['selAxisEdit'];
     $selCategory = $_POST['selCategory'];
     $txQuestion = $_POST['txQuestion'];
@@ -180,7 +181,7 @@ if(isset($_POST['btConfirm'])){
     $selStatus = $_POST['selStatus'];
     $selQuestionType = $_POST['selQuestionType'];
 
-    if($selCategory == null || $txQuestion == null || $selStatus == null || $selQuestionType == null){
+    if($selCategory == null || $txQuestion == null || $selStatus == null || $selQuestionType == null) {
     }
     else {
         $QF->setQuestion($selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
@@ -194,6 +195,6 @@ if(isset($_POST['btnConfirmAnswerAdd'])){
     $answerAdd = $_POST['txAnswer'];
     array_push($arrayAnswer, $answerAdd);
     //$QF->setQuestionAnswer($answerAdd, $questionID);
-    }
+}
 ?>
 </body>

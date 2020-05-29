@@ -5,11 +5,11 @@
         
         private $departmentDB;   
     
-        public function __construct(){
+        public function __construct() {
             $this->departmentDB = new DepartmentDB();
         }
 
-        function getDepartments($statusDepartment){
+        function getDepartments($statusDepartment) {
             // Creating a array
             $listDepartments = array();
 
@@ -20,7 +20,7 @@
         }
 
         // Function to get all departments for 1 customer
-        function getDepartmentsCustomer($customerID, $departmentStatus){
+        function getDepartmentsCustomer($customerID, $departmentStatus) {
             // Creating a array
             $listDepartments = array();
 
@@ -31,7 +31,7 @@
         }
 
         // Function to get all departments for 1 customer
-        function getDepartmentUser($userID, $departmentStatus){
+        function getDepartmentUser($userID, $departmentStatus) {
             // Creating a array
             $listDepartments = array();
 
@@ -41,7 +41,7 @@
             return $listDepartments;
         }
 
-        public function createDepartment($departmentName, $departmentComment, $customerID) {
+        function createDepartment($departmentName, $departmentComment, $customerID) {
             
             if($this->departmentDB->createDepartment($departmentName, $departmentComment, $customerID)){
                 echo "Department succesfully added!";
@@ -64,7 +64,7 @@
         // Function to update the department
         function updateDepartment($departmentID, $departmentName, $departmentStatus, $departmentComment, $departmentCustomer) {
             // Sending the variables to the database and checking the result
-            if($this->departmentDB->updateDepartment($departmentID, $departmentName, $departmentStatus, $departmentComment, $departmentCustomer)){
+            if($this->departmentDB->updateDepartment($departmentID, $departmentName, $departmentStatus, $departmentComment, $departmentCustomer)) {
                 // Getting the current url
                 $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                 $newURL = $currentURL . "&error=none";
@@ -80,12 +80,12 @@
         }
 
         // Function to archive department
-        function archiveDepartment($departmentID){
+        function archiveDepartment($departmentID) {
             $this->departmentDB->archiveDepartment($departmentID);
         }
 
         // Function to delete department
-        function deleteDepartment($departmentID){
+        function deleteDepartment($departmentID) {
             $this->departmentDB->deleteDepartment($departmentID);
         }
 

@@ -1,8 +1,7 @@
 <?php
 
 
-class EntAxis
-{
+class EntAxis {
     public $AxisId;
     public $AxisName;
     public $AxisStatus;
@@ -13,8 +12,7 @@ class EntAxis
      * @param $AxisName
      * @param $AxisStatus
      */
-    public function __construct($AxisId, $AxisName, $AxisStatus)
-    {
+    public function __construct($AxisId, $AxisName, $AxisStatus) {
         $this->AxisId = $AxisId;
         $this->AxisName = $AxisName;
         $this->AxisStatus = $AxisStatus;
@@ -24,50 +22,42 @@ class EntAxis
     /**
      * @return mixed
      */
-    public function getAxisId()
-    {
+    public function getAxisId() {
         return $this->AxisId;
     }
 
     /**
      * @param mixed $AxisId
      */
-    public function setAxisId($AxisId)
-    {
+    public function setAxisId($AxisId) {
         $this->AxisId = $AxisId;
     }
 
     /**
      * @return mixed
      */
-    public function getAxisName()
-    {
+    public function getAxisName() {
         return $this->AxisName;
     }
 
     /**
      * @param mixed $AxisName
      */
-    public function setAxisName($AxisName)
-    {
+    public function setAxisName($AxisName) {
         $this->AxisName = $AxisName;
     }
 
     /**
      * @return mixed
      */
-    public function getAxisStatus()
-    {
+    public function getAxisStatus() {
         return $this->AxisStatus;
     }
 
     /**
      * @param mixed $AxisStatus
      */
-    public function setAxisStatus($AxisStatus)
-    {
+    public function setAxisStatus($AxisStatus) {
         $this->AxisStatus = $AxisStatus;
     }
-
-
 }

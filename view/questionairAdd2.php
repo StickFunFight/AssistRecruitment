@@ -11,7 +11,7 @@ if (isset($_GET['qID'])){
 }
 
 ?>
-<html
+<html>
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
 <link rel="stylesheet" href="../assests/styling/customer.scss">
 <div id="page-content">

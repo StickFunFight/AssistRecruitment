@@ -5,30 +5,30 @@
         
         private $db;   
     
-        public function __construct(){
+        public function __construct() {
             //maakt een nieuwe connectie 
             $database = new Database();
             $this->db = $database->getConnection();
         }
 
         // Function to get departments for all customers
-        function getDepartments($statusDepartment){
+        function getDepartments($statusDepartment) {
             // Creating a array
             $listDepartments = array();
 
             // Making a query to get the scans of the customer out the database
             $query = "SELECT dp.departmentID, dp.departmentName, dp.departmentComment, dp.departmentStatus, dp.customerID, c.customerName
-                        FROM department dp
-                        INNER JOIN customer c ON dp.customerID = c.customerID
-                        WHERE dp.departmentStatus = ?
-                        ORDER BY dp.departmentName ASC";
+                      FROM department dp
+                      INNER JOIN customer c ON dp.customerID = c.customerID
+                      WHERE dp.departmentStatus = ?
+                      ORDER BY dp.departmentName ASC";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $statusDepartment);
-            if($stm->execute()){
+            if($stm->execute()) {
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // Looping through the results
-                foreach($result as $department){
+                foreach($result as $department) {
                     // Putting it in the modal
                     $entDepartment = new entDepartment($department->departmentID, $department->departmentName, $department->departmentComment, $department->departmentStatus, $department->customerID, $department->customerName);
                     array_push($listDepartments, $entDepartment);
@@ -37,13 +37,13 @@
                 return $listDepartments;    
             }
             // Showing a error when the query didn't execute
-            else{
+            else {
                 echo "Er is iets fout gegaan waardoor er geen functies opgehaald konden worden";
             }
         }
 
         // Function to get departments for 1 customer
-        function getDepartmentsCustomer($customerID, $departmentStatus){
+        function getDepartmentsCustomer($customerID, $departmentStatus) {
             // Creating a array
             $listDepartments = array();
 
@@ -56,11 +56,11 @@
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $customerID);
             $stm->bindParam(2, $departmentStatus);
-            if($stm->execute()){
+            if($stm->execute()) {
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // Looping through the results
-                foreach($result as $department){
+                foreach($result as $department) {
                     // Putting it in the modal
                     $entDepartment = new EntDepartment($department->departmentID, $department->departmentName, $department->departmentComment, $department->departmentStatus, $department->customerID, $department->customerName);
                     array_push($listDepartments, $entDepartment);
@@ -75,7 +75,7 @@
         }
 
         // Function to get departments for 1 user
-        function getDepartmentsUser($userID, $departmentStatus){
+        function getDepartmentsUser($userID, $departmentStatus) {
             // Creating a array
             $listDepartments = array();
 
@@ -88,11 +88,11 @@
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
             $stm->bindParam(2, $departmentStatus);
-            if($stm->execute()){
+            if($stm->execute()) {
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // Looping through the results
-                foreach($result as $department){
+                foreach($result as $department) {
                     // Putting it in the modal
                     $entDepartment = new EntDepartment($department->departmentID, $department->departmentName, $department->departmentComment, $department->departmentStatus, $department->customerID, $department->customerName);
                     array_push($listDepartments, $entDepartment);
@@ -101,7 +101,7 @@
                 return $listDepartments;    
             }
             // Showing a error when the query didn't execute
-            else{
+            else {
                 echo "Er is iets fout gegaan waardoor er geen functies opgehaald konden worden";
             }
         }
@@ -126,7 +126,7 @@
         }
 
         // Function to get department details
-        function getDetailsDepartment($departmentID){
+        function getDetailsDepartment($departmentID) {
             // Creating a array
             $detailsDepartment = array();
 
@@ -137,11 +137,11 @@
                       WHERE dp.departmentID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $departmentID);
-            if($stm->execute()){
+            if($stm->execute()) {
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // Looping through the results
-                foreach($result as $department){
+                foreach($result as $department) {
                     // Putting it in the modal
                     $entDepartment = new entDepartment($department->departmentID, $department->departmentName, $department->departmentComment, $department->departmentStatus, $department->customerID, $department->customerName);
                     array_push($detailsDepartment, $entDepartment);
@@ -150,7 +150,7 @@
                 return $detailsDepartment;    
             }
             // Showing a error when the query didn't execute
-            else{
+            else {
                 echo "Er is iets fout gegaan waardoor er geen functies opgehaald konden worden";
             }
         }
@@ -164,31 +164,31 @@
             $stm->bindParam(3, $departmentStatus);
             $stm->bindParam(4, $departmentCustomer);
             $stm->bindParam(5, $departmentID);
-            if($stm->execute()){
+            if($stm->execute()) {
                 // Sending true back for succes message
                 return true;
-            } else{
+            } else {
                 // Sending false back for an error
                 return false;
             }
         }
 
-        function deleteDepartment($departmentID){
+        function deleteDepartment($departmentID) {
             // Create Query to update Customer Status
             $query = "UPDATE department SET departmentStatus = 'Deleted' WHERE departmentID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $departmentID);
-            if(!$stm->execute()){
+            if(!$stm->execute()) {
                 echo "Er is iets fout gegaan";
             }
         }
 
-        function archiveDepartment($departmentID){
+        function archiveDepartment($departmentID) {
             // Create Query to update Customer Status
             $query = "UPDATE department SET departmentStatus = 'Archived' WHERE departmentID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $departmentID);
-            if(!$stm->execute()){
+            if(!$stm->execute()) {
                 echo "Er is iets fout gegaan";
             }
         }

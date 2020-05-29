@@ -20,11 +20,13 @@
 
 <!--This is where the HTML code comes in-->
 <html>
-<link rel="stylesheet" href="../assests/styling/customer-add.css">
-<link rel="stylesheet" href="../assests/styling/customer-edit.css">
     <head>
         <title>Department add</title>
+
+        <link rel="stylesheet" href="../assests/styling/customer-add.css">
+        <link rel="stylesheet" href="../assests/styling/customer-edit.css">
     </head>
+
     <body>
         <div class="page__content">
             <div class="container">
@@ -36,7 +38,8 @@
 
                 <!--Creating an HTML form-->
                 <form method="POST" class="department-form">
-                <input type="hidden" name="txtCustomerID" id="custID" value="<?php echo $customerID; ?>">
+                    <input type="hidden" name="txtCustomerID" id="custID" value="<?php echo $customerID; ?>">
+                    
                     <div class="row ce--form-row">
                         <div class="col-sm-6">
                             <label class="ce__label">Department name</label>

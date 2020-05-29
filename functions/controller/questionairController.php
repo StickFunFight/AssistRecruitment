@@ -2,17 +2,15 @@
 
 require '../functions/datalayer/QuestionairDatabase.php';
 
-class questionairController
-{
+class questionairController {
     private $db;
     private $QuestionairID;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->db = new QuestionairDatabase();
     }
 
-    public function GetQuestionair(){
+    public function GetQuestionair() {
         $Lijst = array();
 
         $Lijst = $this->db->GetQuestionair();
@@ -21,16 +19,14 @@ class questionairController
         return $Lijst;
     }
 
-    public function setQuestionairID($QID)
-    {
+    public function setQuestionairID($QID) {
         $this->QuestionairID= $QID;
     }
 
     /**
      * @return mixed
      */
-    public function getQuestionairID()
-    {
+    public function getQuestionairID() {
         return $this->QuestionairID;
     }
 
@@ -44,7 +40,7 @@ class questionairController
     }
 
 
-    public function getQuestions(){
+    public function getQuestions() {
         $lijst2 = array();
 
         $lijst2 = $this->db->getQuestions();
@@ -52,17 +48,17 @@ class questionairController
         return $lijst2;
     }
 
-    public function getName(){
+    public function getName() {
         $Name = $this->db->getName($this->QuestionairID);
         return $Name;
     }
 
-    public function getStatus(){
+    public function getStatus() {
         $Status = $this->db->getStatus($this->QuestionairID);
         return $Status;
     }
 
-    public function getComment(){
+    public function getComment() {
         $Comment = $this->db->getComment($this->QuestionairID);
         return $Comment;
     }

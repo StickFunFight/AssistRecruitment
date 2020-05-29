@@ -5,12 +5,12 @@
         
         private $customerDB;   
     
-        public function __construct(){
+        public function __construct() {
             //maakt een nieuwe connectie 
             $this->customerDB = new CustomerDB();
         }
 
-        function getCustomers($status){
+        function getCustomers($status) {
             // Array aanmaken voor de functies
             $listCustomers = $this->customerDB->getCustomers($status);
 
@@ -18,13 +18,13 @@
             return $listCustomers;
         }
 
-        function deleteCustomers($customerID){
+        function deleteCustomers($customerID) {
             $this->customerDB->deleteCustomers($customerID);
         }
         
         //This function creates a new customer using the values obtained from the customerDatabase (createCustomer) function.
         //Also gives an echo as feedback to assure the user that the statement has succesfully been executed or not.
-        public function createCustomer($customerName, $customerComment, $customerReference) {
+        function createCustomer($customerName, $customerComment, $customerReference) {
             if($this->customerDB->createCustomer($customerName, $customerComment, $customerReference)){
                 // Getting the current url
                 $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -53,7 +53,7 @@
         // Function to update the customer
         function updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus, $exitWindow) {
             // Sending the variables to the database and checking the result
-            if($this->customerDB->updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus)){
+            if($this->customerDB->updateCustomer($customerID, $customerName, $customerReference, $customerComment, $customerStatus)) {
                  // Checking if user want to leave customer edit
                  if ($exitWindow == 1) {
                     // Sending user to customer listed
