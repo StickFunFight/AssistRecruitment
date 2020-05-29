@@ -97,7 +97,6 @@
             // Returning the list given from the Database class
             return $listScore;
         }
-    }
 
         // Function to get scans for a department
         function getScansDepartment($departmentID) {

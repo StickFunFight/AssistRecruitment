@@ -19,7 +19,7 @@
             <div class="border-right" id="sidebar-wrapper">
                 <div class="menu list-group list-group-flush">
                     <div class="menu__picture">
-                        <img src="../assests/images/AssistLogoWit.png" class="menu--logo" alt="Logo Assist">
+                        <a href="../view"><img src="../assests/images/AssistLogoWit.png" class="menu--logo" alt="Logo Assist"></a>
                     </div>
 
                     <nav class="navbar">
@@ -54,12 +54,12 @@
 
                 <div class="submenu" id="maintanceSubmenu">
                     <ul class="submenu__list">
-                        <li class="submenu__item"> <a href="customer_list" class="submenu--link">Customer</a> </li>
-                        <li class="submenu__item"> <a href="department-list" class="submenu--link">Department</a> </li>
-                        <li class="submenu__item"> <a href="user-list" class="submenu--link">User</a> </li>
-                        <li class="submenu__item"> <a href="scan-list" class="submenu--link">Scan</a> </li>
-                        <li class="submenu__item"> <a href="qa" class="submenu--link">QA</a> </li>
-                        <li class="submenu__item"> <a href="Axis" class="submenu--link">Axis</a> </li>
+                        <li class="submenu__item"><a href="customer_list" class="submenu--link">Customer</a></li>
+                        <li class="submenu__item"><a href="department-list" class="submenu--link">Department</a></li>
+                        <li class="submenu__item"><a href="user-list" class="submenu--link">User</a></li>
+                        <li class="submenu__item"><a href="scan-list" class="submenu--link">Scan</a></li>
+                        <li class="submenu__item"><a href="qa" class="submenu--link">QA</a></li>
+                        <li class="submenu__item"><a href="Axis" class="submenu--link">Axis</a></li>
                     </ul>
 
                     <div class="submenu__resize">
