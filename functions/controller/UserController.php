@@ -39,10 +39,17 @@
         
         }
 
-        function updatePassword($UserID, $hash){
-            //sending data to database
-
-            $this->UserDB->updatePassword($UserID, $hash);
+        function updatePassword($userID, $userPassword){
+            if ($this->UserDB->updatePassword($userID, $userPassword)) {
+                                // Reloading page with succes message
+                echo '<script>location.replace("?error=none");</script>';
+            } else {
+                // Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "?error=1";
+                // Reloading page with succes message
+                echo '<script>location.replace("error=1");</script>';
+            }
         }
     }
 ?>

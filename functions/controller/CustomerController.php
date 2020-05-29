@@ -19,7 +19,7 @@
         }
 
         function deleteCustomers($customerID){
-            $this->customerDB->deleteCustomers($customerID);
+            $this->customerDB->deleteCustomer($customerID);
         }
         
         //This function creates a new customer using the values obtained from the customerDatabase (createCustomer) function.

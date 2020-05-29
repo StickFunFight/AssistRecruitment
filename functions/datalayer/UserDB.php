@@ -114,7 +114,7 @@
 
         }
         
-        function updatePassword($userPassword, $UserID){
+        function updatePassword($UserID, $userPassword){
             //password hashen
             $hash = password_hash($userPassword, PASSWORD_DEFAULT);
             //create query to update password
@@ -123,10 +123,10 @@
             $stm->bindParam(1, $hash);
             $stm->bindParam(2, $UserID);
             if($stm->execute()){
-                echo "het werkt";
+                return true;
             }
             else {
-                echo "het werkt niet";
+                return false;
             }
         }
     }
