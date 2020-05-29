@@ -294,13 +294,12 @@
         }
 
         function getProfile($UserID){
-
             $userDetails = array();
             //create Query to get profile data
             $query = "SELECT u.userID, c.contactName, u.userEmail, u.userStatus, c.contactPhoneNumber
-                        FROM user u
-                        INNER JOIN contact c ON c.userID = u.userID
-                        WHERE u.userID = ?";
+                      FROM user u
+                      INNER JOIN contact c ON c.userID = u.userID
+                      WHERE u.userID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $UserID);
             if($stm->execute()){
@@ -308,16 +307,15 @@
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // loop aanmaken
                 foreach($result as $user){
-                //entiteit aanroepen
-                $entContact = new entContact($user->userID, $user->contactName, $user->contactPhoneNumber, $user->userEmail, $user->userStatus, null, null);
-                array_push($userDetails, $entContact);
+                    //entiteit aanroepen
+                    $entContact = new entContact($user->userID, null, $user->contactName, $user->contactPhoneNumber, $user->userEmail, null, $user->userStatus, null, null, null, null, null, null);
+                    array_push($userDetails, $entContact);
                 }
                 return $userDetails;
             }
             else { 
                 echo "het werkt niet";
             }
-
         }
         
         function updatePassword($UserID, $userPassword){

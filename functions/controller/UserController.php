@@ -111,10 +111,9 @@
             $profile = array();
 
             $profile = $this->UserDB->getProfile($UserID);
+            
             //returning the list 
-
             return $profile;
-        
         }
 
         function updatePassword($userID, $userPassword){
