@@ -3,7 +3,7 @@ require '../functions/datalayer/UserDB.php';
 
 echo '<script>alert("Ik ben een check");</script>';
 
-if (isset($_POST['scanID']) && isset($_POST['userID'])){
+if (isset($_POST['scanID']) && isset($_POST['userID'])) {
 
     $scanID = $_POST['scanID'];
     $userID = $_POST['userID'];
@@ -14,6 +14,6 @@ if (isset($_POST['scanID']) && isset($_POST['userID'])){
     $CAF->deleteUserScan($userID, $scanID);
     echo "Succes";
 
-}else echo "failed";
+} else echo "failed";
 
 ?>

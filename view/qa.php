@@ -11,10 +11,13 @@ require_once 'menu.php';
     <div class="container-fluid">
         <div class="row QaTopMargin">
             <div class="col-sm-6">
-                <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een vraag of antwoord">
+                <input class="form-control form-control-lg" id="Filter" type="text"
+                       placeholder="Zoek naar een vraag of antwoord">
             </div>
             <div class="col-sm-6">
-                <button onclick="window.location.href='QA_QuestionAdd.php'" type="button" class="btn add-container__btn ButtonRight"><i class="fas fa-plus-circle"></i> Vraag toevoegen</button>
+                <button onclick="window.location.href='QA_QuestionAdd.php'" type="button"
+                        class="btn add-container__btn ButtonRight"><i class="fas fa-plus-circle"></i> Vraag toevoegen
+                </button>
             </div>
         </div>
         <div id="wrapper">
@@ -23,7 +26,8 @@ require_once 'menu.php';
                     <thead>
                     <tr>
                         <th><i class="fas fa-folder-open"></i> (All Categories)</th>
-                        <th><i id="CategoryAdd" class="fas fa-plus fa-lg" data-target="#modalCatAdd" data-toggle="modal"></i> </th>
+                        <th><i id="CategoryAdd" class="fas fa-plus fa-lg" data-target="#modalCatAdd"
+                               data-toggle="modal"></i></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -31,18 +35,17 @@ require_once 'menu.php';
                     require("../functions/datalayer/QaOverView.php");
                     $QO = new QaOverView();
                     $Qa = $QO->GetAllCategories();
-                    foreach ($Qa as $item)
-                    {
-                        echo '<tr class="category-tabel__row" onclick="filterSelection('.$item->GetID().')">';
-                        echo '<td value="'.$item->GetID().'">';
+                    foreach ($Qa as $item) {
+                        echo '<tr class="category-tabel__row" onclick="filterSelection(' . $item->GetID() . ')">';
+                        echo '<td value="' . $item->GetID() . '">';
                         echo '<i id="Icon" class="fas fa-folder"></i>';
                         echo " ";
-                        echo  $item->GetNaam();
+                        echo $item->GetNaam();
                         echo '</td>';
                         echo '<td>';
-                        echo '<i id="'.$item->GetID().'" onClick="SendID(this.id)" data-toggle="modal" data-target="#editCategory" class="fas fa-edit table--icon"></i>';
+                        echo '<i id="' . $item->GetID() . '" onClick="SendID(this.id)" data-toggle="modal" data-target="#editCategory" class="fas fa-edit table--icon"></i>';
                         echo " ";
-                        echo '<i  id="'.$item->GetID().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteCategoryModal" class="fas fa-trash-alt table--icon"></i>';
+                        echo '<i  id="' . $item->GetID() . '" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteCategoryModal" class="fas fa-trash-alt table--icon"></i>';
                         echo '</td>';
                         echo '</tr>';
                     }
@@ -64,11 +67,10 @@ require_once 'menu.php';
                     <?php
                     $QO = new QaOverView();
                     $Qa = $QO->GetQuestionAnswers();
-                    foreach ($Qa as $item)
-                    {
-                        echo'<tr id="RowFilter">';
-                        echo '<td id="'.$item->getCategorieID().'">';
-                        echo  $item->getQuestionName();
+                    foreach ($Qa as $item) {
+                        echo '<tr id="RowFilter">';
+                        echo '<td id="' . $item->getCategorieID() . '">';
+                        echo $item->getQuestionName();
                         echo '</td>';
                         echo '<td>';
                         foreach ($item->getAnswers() as $test) {
@@ -76,9 +78,9 @@ require_once 'menu.php';
                         }
                         echo '</td>';
                         echo '<td>';
-                        echo '<a href="QA_QuestionEdit.php?questionID='.$item->getQuestionID().'" class="editKnop" id="'.$item->getQuestionID().'" onclick="SendID(this.id)"><i class="fas tab-table__icon">&#xf044;</i></a>';
-                        echo  ' ';
-                        echo '<a id="'.$item->getQuestionID().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteQuestionModal" data-id="'.$item->getQuestionID().'"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
+                        echo '<a href="QA_QuestionEdit.php?questionID=' . $item->getQuestionID() . '" class="editKnop" id="' . $item->getQuestionID() . '" onclick="SendID(this.id)"><i class="fas tab-table__icon">&#xf044;</i></a>';
+                        echo ' ';
+                        echo '<a id="' . $item->getQuestionID() . '" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteQuestionModal" data-id="' . $item->getQuestionID() . '"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
                         echo '</td>';
                         echo '</tr>';
                     }
@@ -106,8 +108,10 @@ require_once 'menu.php';
                     <input type="text" name="textField" id="textField"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" name="btnCatAnnuleer" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
-                    <input type="button" name="btnOpslaan" id="btnCatOpslaan" class="btn btn-primary" data-dismiss="modal" value="Categorie Opslaan"/>
+                    <button type="button" name="btnCatAnnuleer" class="btn btn-danger" data-dismiss="modal">Annuleren
+                    </button>
+                    <input type="button" name="btnOpslaan" id="btnCatOpslaan" class="btn btn-primary"
+                           data-dismiss="modal" value="Categorie Opslaan"/>
                 </div>
             </form>
         </div>
@@ -115,7 +119,8 @@ require_once 'menu.php';
 </div>
 
 <!-- Modal Edit Category-->
-<div class="modal fade" id="editCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -133,8 +138,11 @@ require_once 'menu.php';
                     <input type="text" name="textFieldStatus" id="txtStatus" value="Active"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" name="btnCatEditAnnuleer" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
-                    <input type="button" name="btnOpslaan" id="btnCatEditOpslaan" class="btn btn-primary" data-dismiss="modal" value="Categorie Opslaan"/>
+                    <button type="button" name="btnCatEditAnnuleer" class="btn btn-danger" data-dismiss="modal">
+                        Annuleren
+                    </button>
+                    <input type="button" name="btnOpslaan" id="btnCatEditOpslaan" class="btn btn-primary"
+                           data-dismiss="modal" value="Categorie Opslaan"/>
                 </div>
             </form>
         </div>
@@ -142,7 +150,8 @@ require_once 'menu.php';
 </div>
 
 <!-- Modal Archive Category-->
-<div class="modal fade" id="deleteCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteCategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -154,7 +163,8 @@ require_once 'menu.php';
             <div class="modal-body">
 
                 <div class="form-group">
-                    <label for="message-text" class="col-form-label">weet je zeker dat je de category wilt verwijderen?</label>
+                    <label for="message-text" class="col-form-label">weet je zeker dat je de category wilt
+                        verwijderen?</label>
 
                 </div>
             </div>
@@ -167,7 +177,8 @@ require_once 'menu.php';
 </div>
 
 <!-- Modal Archive Question-->
-<div class="modal fade" id="deleteQuestionModal" tabindex="-1" role="dialog" aria-labelledby="deleteQuestionModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteQuestionModal" tabindex="-1" role="dialog" aria-labelledby="deleteQuestionModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -182,7 +193,9 @@ require_once 'menu.php';
                         <label for="message-text" class="col-form-label fetched-data"></label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" name="btnDelete" id="btnQuestionDelete" class="btn btn-danger" value="Ja">Ja</button>
+                        <button type="submit" name="btnDelete" id="btnQuestionDelete" class="btn btn-danger" value="Ja">
+                            Ja
+                        </button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">nee</button>
                     </div>
                 </form>
@@ -195,33 +208,32 @@ require_once 'menu.php';
 <script>
 
 
-    $('#selQuestionType').change(function(){
-        if($(this).val() == "Question-answer") {
+    $('#selQuestionType').change(function () {
+        if ($(this).val() == "Question-answer") {
             $('#divAnswerOptions').show();
-        }
-        else{
+        } else {
             $('#divAnswerOptions').hide();
         }
     });
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#deleteQuestionModal').on('show.bs.modal', function (e) {
             var rowid = $(e.relatedTarget).data('id');
             $.ajax({
-                type : 'post',
-                url : '../functions/handler/QaDeleteHandler.php', //Here you will fetch records
-                data :  'rowid='+ rowid, //Pass $id
-                success : function(data){
+                type: 'post',
+                url: '../functions/handler/QaDeleteHandler.php', //Here you will fetch records
+                data: 'rowid=' + rowid, //Pass $id
+                success: function (data) {
                     $('.fetched-data').html("Weet je zeker dat je de vraag: " + data + " wilt archiveren?");//Show fetched data from database
                 }
             });
         });
     });
 
-    $(document).ready(function(){
-        $("#Filter").on("keyup", function() {
+    $(document).ready(function () {
+        $("#Filter").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            $("#QaTable #RowFilter").filter(function() {
+            $("#QaTable #RowFilter").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
@@ -243,6 +255,7 @@ require_once 'menu.php';
             }
         }
     }
+
     $('#modalCatAdd').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
     })
@@ -251,9 +264,9 @@ require_once 'menu.php';
         $.ajax({
             url: '../functions/handler/catHandler.php',
             type: 'post',
-            data: { "catName": $('#textField').val()},
-            success: function(response) {
-                window.location.href='Qa.php';
+            data: {"catName": $('#textField').val()},
+            success: function (response) {
+                window.location.href = 'Qa.php';
             }
         });
     });
@@ -262,8 +275,7 @@ require_once 'menu.php';
         var button = $(event.relatedTarget) // Button that triggered the modal
     })
 
-    function SendID(clicked_id)
-    {
+    function SendID(clicked_id) {
         window.categoryID = clicked_id;
     }
 
@@ -271,9 +283,11 @@ require_once 'menu.php';
         $.ajax({
             url: '../functions/handler/catEditHandler.php',
             type: 'post',
-            data: { "catName": $('#txtNaam').val(), "catStatus" : $('#txtStatus').val(), "CustomerID": categoryID},
+            data: {"catName": $('#txtNaam').val(), "catStatus": $('#txtStatus').val(), "CustomerID": categoryID},
 
-            success: function(response) { window.location.href = 'Qa.php'; },
+            success: function (response) {
+                window.location.href = 'Qa.php';
+            },
         });
     });
 
@@ -289,8 +303,10 @@ require_once 'menu.php';
         $.ajax({
             url: '../functions/handler/QaDeleteHandler.php',
             type: 'post',
-            data: { "QuestionId": categoryID},
-            success: function(response) { window.location.href = 'Qa.php'; }
+            data: {"QuestionId": categoryID},
+            success: function (response) {
+                window.location.href = 'Qa.php';
+            }
         });
     });
 
@@ -302,8 +318,10 @@ require_once 'menu.php';
         $.ajax({
             url: '../functions/handler/catDeleteHandler.php',
             type: 'post',
-            data: { "catID": categoryID},
-            success: function(response) { window.location.href = 'Qa.php'; }
+            data: {"catID": categoryID},
+            success: function (response) {
+                window.location.href = 'Qa.php';
+            }
         });
     });
 

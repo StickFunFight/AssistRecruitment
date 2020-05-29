@@ -1,6 +1,7 @@
 <?php
 
-class EntQuestionAnswer {
+class EntQuestionAnswer
+{
     private $questionID;
     private $categorieID;
     private $questionStatus;
@@ -19,7 +20,8 @@ class EntQuestionAnswer {
      * @param $answerID
      * @param $answer
      */
-    public function __construct($questionID,$categorieID, $questionStatus, $questionName, $questionType, $answerID) {
+    public function __construct($questionID, $categorieID, $questionStatus, $questionName, $questionType, $answerID)
+    {
         $this->questionID = $questionID;
         $this->categorieID = $categorieID;
         $this->questionStatus = $questionStatus;
@@ -31,51 +33,105 @@ class EntQuestionAnswer {
     /**
      * @return mixed
      */
-    public function getQuestionID() {
+    public function getQuestionID()
+    {
         return $this->questionID;
     }
 
     /**
-     * @return mixed
+     * @param mixed $questionID
      */
-    public function getCategorieID() {
-        return $this->categorieID;
+    public function setQuestionID($questionID)
+    {
+        $this->questionID = $questionID;
     }
-
 
     /**
      * @return mixed
      */
-    public function getQuestionStatus() {
+    public function getCategorieID()
+    {
+        return $this->categorieID;
+    }
+
+    /**
+     * @param mixed $categorieID
+     */
+    public function setCategorieID($categorieID)
+    {
+        $this->categorieID = $categorieID;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuestionStatus()
+    {
         return $this->questionStatus;
     }
 
     /**
+     * @param mixed $questionStatus
+     */
+    public function setQuestionStatus($questionStatus)
+    {
+        $this->questionStatus = $questionStatus;
+    }
+
+    /**
      * @return mixed
      */
-    public function getQuestionName() {
+    public function getQuestionName()
+    {
         return $this->questionName;
     }
 
     /**
+     * @param mixed $questionName
+     */
+    public function setQuestionName($questionName)
+    {
+        $this->questionName = $questionName;
+    }
+
+    /**
      * @return mixed
      */
-    public function getQuestionType() {
+    public function getQuestionType()
+    {
         return $this->questionType;
     }
 
     /**
-     * @return mixed
+     * @param mixed $questionType
      */
-    public function getAnswerID() {
-        return $this->answerID;
+    public function setQuestionType($questionType)
+    {
+        $this->questionType = $questionType;
     }
 
     /**
      * @return mixed
      */
-    public function getAnswers() {
-        if($this->answer == null){
+    public function getAnswerID()
+    {
+        return $this->answerID;
+    }
+
+    /**
+     * @param mixed $answerID
+     */
+    public function setAnswerID($answerID)
+    {
+        $this->answerID = $answerID;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAnswers()
+    {
+        if ($this->answer == null) {
             return array();
         }
         return $this->answer;
@@ -84,49 +140,8 @@ class EntQuestionAnswer {
     /**
      * @param mixed $answer
      */
-    public function setAnswers($answer) {
+    public function setAnswers($answer)
+    {
         $this->answer = $answer;
-    }
-
-    /**
-     * @param mixed $questionID
-     */
-    public function setQuestionID($questionID) {
-        $this->questionID = $questionID;
-    }
-
-    /**
-     * @param mixed $categorieID
-     */
-    public function setCategorieID($categorieID) {
-        $this->categorieID = $categorieID;
-    }
-
-    /**
-     * @param mixed $questionStatus
-     */
-    public function setQuestionStatus($questionStatus) {
-        $this->questionStatus = $questionStatus;
-    }
-
-    /**
-     * @param mixed $questionName
-     */
-    public function setQuestionName($questionName) {
-        $this->questionName = $questionName;
-    }
-
-    /**
-     * @param mixed $questionType
-     */
-    public function setQuestionType($questionType) {
-        $this->questionType = $questionType;
-    }
-
-    /**
-     * @param mixed $answerID
-     */
-    public function setAnswerID($answerID) {
-        $this->answerID = $answerID;
     }
 }

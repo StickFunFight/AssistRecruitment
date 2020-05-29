@@ -1,5 +1,5 @@
 // Function to show and hide the maintence sub menu
-function maintenceSubMenu(){
+function maintenceSubMenu() {
     // Ophalen van element
     var submenu = document.getElementById("maintanceSubmenu");
 
@@ -37,14 +37,15 @@ function setProgressbarScan(scanCircle, progress) {
 
 // Test function to sort the tables
 function sortTable(sortTable, tableColumn, direction) {
-    var table, column, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0, tableIconTop, tableIconBottom, restTableIconTop, restTableIconBottom;
+    var table, column, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0, tableIconTop, tableIconBottom,
+        restTableIconTop, restTableIconBottom;
     // Getting the table and the column
     table = document.getElementById(sortTable);
     column = document.getElementById(tableColumn);
 
     // Getting the sorting icons
     tableIconTop = document.getElementById(sortTable).getElementsByClassName("table__icon-top")[tableColumn];
-    tableIconBottom = document.getElementById(sortTable).getElementsByClassName("table__icon-bottom")[tableColumn];  
+    tableIconBottom = document.getElementById(sortTable).getElementsByClassName("table__icon-bottom")[tableColumn];
 
     // Getting the other sorting icons
     restTableIconTop = document.querySelector("#" + CSS.escape(sortTable) + " .table__icon-top").classList.remove("table__icon-active");
@@ -87,9 +88,9 @@ function sortTable(sortTable, tableColumn, direction) {
                     // If so, mark as a switch and break the loop:
                     shouldSwitch = true;
 
-                   // Styling the column icons
-                   tableIconTop.classList.remove("table__icon-active");
-                   tableIconBottom.classList.add("table__icon-active");
+                    // Styling the column icons
+                    tableIconTop.classList.remove("table__icon-active");
+                    tableIconBottom.classList.add("table__icon-active");
 
                     break;
                 }
@@ -102,7 +103,7 @@ function sortTable(sortTable, tableColumn, direction) {
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
             // Each time a switch is done, increase this count by 1:
-            switchcount ++;
+            switchcount++;
         } else {
             /* If no switching has been done AND the direction is "asc",
             set the direction to "desc" and run the while loop again. */
@@ -116,7 +117,7 @@ function sortTable(sortTable, tableColumn, direction) {
 
 // function to get url of customer edit and change a overview status
 // Checking the table status
-function updateTableStatus(overviewTable, overviewStatus) { 
+function updateTableStatus(overviewTable, overviewStatus) {
     // Checking wich table has been clicked
     var status = document.getElementById(overviewStatus).value;
     // Getting the url of
@@ -139,7 +140,7 @@ function updateTableStatus(overviewTable, overviewStatus) {
                 location.replace(url + "&department-status=" + status);
             }
             break;
-    
+
         case "Scans":
             // Checking if scan status has been changed
             if (url.includes("scan-status", 0)) {
@@ -171,7 +172,7 @@ function updateTableStatus(overviewTable, overviewStatus) {
 }
 
 // Function to go to the details page onclick of table cell
-function toDetails(overviewTable, overviewID, customerID){
+function toDetails(overviewTable, overviewID, customerID) {
     // Checking wich table has been clicked
     switch (overviewTable) {
         case "Departments":
@@ -193,11 +194,13 @@ function autocomplete(inp, arr) {
     the text field element and an array of possible autocompleted values:*/
     var currentFocus;
     /*execute a function when someone writes in the text field:*/
-    inp.addEventListener("input", function(e) {
+    inp.addEventListener("input", function (e) {
         var a, b, i, val = this.value;
         /*close any already open lists of autocompleted values*/
         closeAllLists();
-        if (!val) { return false;}
+        if (!val) {
+            return false;
+        }
         currentFocus = -1;
         /*create a DIV element that will contain the items (values):*/
         a = document.createElement("DIV");
@@ -207,29 +210,29 @@ function autocomplete(inp, arr) {
         this.parentNode.appendChild(a);
         /*for each item in the array...*/
         for (i = 0; i < arr.length; i++) {
-          /*check if the item starts with the same letters as the text field value:*/
-          if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-            /*create a DIV element for each matching element:*/
-            b = document.createElement("DIV");
-            /*make the matching letters bold:*/
-            b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-            b.innerHTML += arr[i].substr(val.length);
-            /*insert a input field that will hold the current array item's value:*/
-            b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-            /*execute a function when someone clicks on the item value (DIV element):*/
-            b.addEventListener("click", function(e) {
-                /*insert the value for the autocomplete text field:*/
-                inp.value = this.getElementsByTagName("input")[0].value;
-                /*close the list of autocompleted values,
-                (or any other open lists of autocompleted values:*/
-                closeAllLists();
-            });
-            a.appendChild(b);
-          }
+            /*check if the item starts with the same letters as the text field value:*/
+            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                /*create a DIV element for each matching element:*/
+                b = document.createElement("DIV");
+                /*make the matching letters bold:*/
+                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML += arr[i].substr(val.length);
+                /*insert a input field that will hold the current array item's value:*/
+                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                /*execute a function when someone clicks on the item value (DIV element):*/
+                b.addEventListener("click", function (e) {
+                    /*insert the value for the autocomplete text field:*/
+                    inp.value = this.getElementsByTagName("input")[0].value;
+                    /*close the list of autocompleted values,
+                    (or any other open lists of autocompleted values:*/
+                    closeAllLists();
+                });
+                a.appendChild(b);
+            }
         }
     });
     /*execute a function presses a key on the keyboard:*/
-    inp.addEventListener("keydown", function(e) {
+    inp.addEventListener("keydown", function (e) {
         var x = document.getElementById(this.id + "autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
 
@@ -256,34 +259,34 @@ function autocomplete(inp, arr) {
     });
 
     function addActive(x) {
-      /*a function to classify an item as "active":*/
-      if (!x) return false;
-      /*start by removing the "active" class on all items:*/
-      removeActive(x);
-      if (currentFocus >= x.length) currentFocus = 0;
-      if (currentFocus < 0) currentFocus = (x.length - 1);
-      /*add class "autocomplete-active":*/
-      x[currentFocus].classList.add("autocomplete-active");
+        /*a function to classify an item as "active":*/
+        if (!x) return false;
+        /*start by removing the "active" class on all items:*/
+        removeActive(x);
+        if (currentFocus >= x.length) currentFocus = 0;
+        if (currentFocus < 0) currentFocus = (x.length - 1);
+        /*add class "autocomplete-active":*/
+        x[currentFocus].classList.add("autocomplete-active");
     }
 
     function removeActive(x) {
-      /*a function to remove the "active" class from all autocomplete items:*/
-      for (var i = 0; i < x.length; i++) {
-        x[i].classList.remove("autocomplete-active");
-      }
+        /*a function to remove the "active" class from all autocomplete items:*/
+        for (var i = 0; i < x.length; i++) {
+            x[i].classList.remove("autocomplete-active");
+        }
     }
 
     function closeAllLists(elmnt) {
-      /*close all autocomplete lists in the document,
-      except the one passed as an argument:*/
-      var x = document.getElementsByClassName("autocomplete-items");
-      for (var i = 0; i < x.length; i++) {
-        if (elmnt != x[i] && elmnt != inp) {
-          x[i].parentNode.removeChild(x[i]);
+        /*close all autocomplete lists in the document,
+        except the one passed as an argument:*/
+        var x = document.getElementsByClassName("autocomplete-items");
+        for (var i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+                x[i].parentNode.removeChild(x[i]);
+            }
         }
-      }
     }
-    
+
     /*execute a function when someone clicks in the document:*/
     document.addEventListener("click", function (e) {
         closeAllLists(e.target);
@@ -305,6 +308,7 @@ function setScanIDModal(scanID) {
     // Setting the value of the scan id in the modal
     document.getElementById("scanIDDisconnect").value = scanID;
 }
+
 // Function to get department and use it in the modal
 function setContactIDModalCustomerEdit(contactID) {
     document.getElementById("ContactIDArchive").value = contactID;

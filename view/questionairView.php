@@ -6,9 +6,8 @@ require_once '../functions/datalayer/database.class.php';
 $QairID = "1";
 
 ?>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >archiveer questionair</button>
-
-
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">archiveer questionair
+</button>
 
 
 <script>

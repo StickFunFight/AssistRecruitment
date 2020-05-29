@@ -34,27 +34,30 @@ $resultQuestionData = $QF->getAnswer($answerID);
 
                 <div class="form-group row">
                     <div class="col-sm-10">
-                    <button type="submit" name="btnCancel" class="mb-2 btn btn-danger" >Annuleren
-                    </button>
-                    <input type="submit" name="btnConfirmEditAnswer" id="btnConfirmEditAnswer" class="mb-2 btn btn-primary"
-                           value="Antwoord Opslaan"></div>
+                        <button type="submit" name="btnCancel" class="mb-2 btn btn-danger">Annuleren
+                        </button>
+                        <input type="submit" name="btnConfirmEditAnswer" id="btnConfirmEditAnswer"
+                               class="mb-2 btn btn-primary"
+                               value="Antwoord Opslaan"></div>
                 </div>
 
             </form>
             <?php
             $questionID = $_GET['qID'];
-            if(isset($_POST['btnConfirmEditAnswer'])){
+            if (isset($_POST['btnConfirmEditAnswer'])) {
                 $Answer = $_POST['txAnswer'];
                 $AnswerScore = $_POST['txScore'];
 
                 $QF->updateQuestionAnswer($answerID, $Answer, $AnswerScore);
-                $url = "http://localhost/AssistRecruitment/view/QA_QuestionEdit.php?questionID=".$questionID;
-                ?><script>window.location ='<?php echo $url ?>';</script><?php
+                $url = "http://localhost/AssistRecruitment/view/QA_QuestionEdit.php?questionID=" . $questionID;
+                ?>
+                <script>window.location = '<?php echo $url ?>';</script><?php
             }
 
-            if(isset($_POST['btnCancel'])){
-                $url = "http://localhost/AssistRecruitment/view/QA_QuestionEdit.php?questionID=".$questionID;
-                ?><script>window.location ='<?php echo $url ?>';</script><?php
+            if (isset($_POST['btnCancel'])) {
+                $url = "http://localhost/AssistRecruitment/view/QA_QuestionEdit.php?questionID=" . $questionID;
+                ?>
+                <script>window.location = '<?php echo $url ?>';</script><?php
             }
             ?>
         </div>

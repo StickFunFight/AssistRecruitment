@@ -1,7 +1,7 @@
 <?php
 require '../functions/datalayer/UserDB.php';
 
-if (isset($_POST['userID'])){
+if (isset($_POST['userID'])) {
 
     $UserID = $_POST['userID'];
 
@@ -9,6 +9,6 @@ if (isset($_POST['userID'])){
     $CAF->deleteUser($UserID);
     echo "Succes";
 
-}else echo "failed";
+} else echo "failed";
 
 ?>

@@ -11,52 +11,55 @@ require_once 'menu.php';
     <div class="container-fluid">
         <div class="row QaTopMargin">
             <div class="col-sm-6">
-                <input class="form-control form-control-lg" id="Filter" type="text" placeholder="Zoek naar een Axis doormiddel van de naam of status">
+                <input class="form-control form-control-lg" id="Filter" type="text"
+                       placeholder="Zoek naar een Axis doormiddel van de naam of status">
             </div>
             <div class="col-sm-6">
-                <button type="button" class="btn add-container__btn ButtonRight" data-toggle="modal" data-target="#AxisAddModal"><i class="fas fa-plus-circle"></i>Axis toevoegen</button>
+                <button type="button" class="btn add-container__btn ButtonRight" data-toggle="modal"
+                        data-target="#AxisAddModal"><i class="fas fa-plus-circle"></i>Axis toevoegen
+                </button>
             </div>
         </div>
-            <div>
-                <table id="QaTable" class="table">
-                    <thead>
-                    <tr>
-                        <th>Axis</th>
-                        <th>Axis Status</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    require("../functions/controller/AxisController.php");
-                    require '../functions/models/EntAxis.php';
-                    $Axis = new AxisController();
-                    $lijstAxis = $Axis->getAxis();
-                    foreach ($lijstAxis as $item)
-                    {
-                        echo'<tr id="RowFilter">';
-                        echo '<td id="'.$item->getAxisName().'">';
-                        echo $item->getAxisName();
-                        echo '</td>';
-                        echo '<td>';
-                        echo  $item->getAxisStatus(); 
-                        echo '</td>';
-                        echo '<td>';
-                        echo '<a id="'.$item->getAxisId().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisEditModal"><i class="fas tab-table__icon editKnop">&#xf044;</i></a>';
-                        echo  ' ';
-                        echo '<a id="'.$item->getAxisId().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisArchiveModal" data-id="'.$item->getAxisId().'"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
-                        echo '</td>';
-                        echo '</tr>';
-                    }
-                    ?>
-                    </tbody>
-                </table>
-            </div>
+        <div>
+            <table id="QaTable" class="table">
+                <thead>
+                <tr>
+                    <th>Axis</th>
+                    <th>Axis Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                require("../functions/controller/AxisController.php");
+                require '../functions/models/EntAxis.php';
+                $Axis = new AxisController();
+                $lijstAxis = $Axis->getAxis();
+                foreach ($lijstAxis as $item) {
+                    echo '<tr id="RowFilter">';
+                    echo '<td id="' . $item->getAxisName() . '">';
+                    echo $item->getAxisName();
+                    echo '</td>';
+                    echo '<td>';
+                    echo $item->getAxisStatus();
+                    echo '</td>';
+                    echo '<td>';
+                    echo '<a id="' . $item->getAxisId() . '" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisEditModal"><i class="fas tab-table__icon editKnop">&#xf044;</i></a>';
+                    echo ' ';
+                    echo '<a id="' . $item->getAxisId() . '" onclick="SendID(this.id)" data-toggle="modal" data-target="#AxisArchiveModal" data-id="' . $item->getAxisId() . '"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 
 <!-- AxisAddModal -->
-<div class="modal fade" id="AxisAddModal" tabindex="-1" role="dialog" aria-labelledby="AxisAddModalLabel" aria-hidden="true">
+<div class="modal fade" id="AxisAddModal" tabindex="-1" role="dialog" aria-labelledby="AxisAddModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -71,8 +74,10 @@ require_once 'menu.php';
                     <input type="text" name="AxisAddtxt" id="AxisAddtxt"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" name="btnAnnuleer" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
-                    <input type="button" name="btnOpslaan" id="AxisAddOpslaan" class="btn btn-primary" data-dismiss="modal" value="Axis Opslaan"/>
+                    <button type="button" name="btnAnnuleer" class="btn btn-danger" data-dismiss="modal">Annuleren
+                    </button>
+                    <input type="button" name="btnOpslaan" id="AxisAddOpslaan" class="btn btn-primary"
+                           data-dismiss="modal" value="Axis Opslaan"/>
                 </div>
             </form>
         </div>
@@ -80,7 +85,8 @@ require_once 'menu.php';
 </div>
 
 <!--Editing Modal-->
-<div class="modal fade" id="AxisEditModal" tabindex="-1" role="dialog" aria-labelledby="AxisEditModalLabel" aria-hidden="true">
+<div class="modal fade" id="AxisEditModal" tabindex="-1" role="dialog" aria-labelledby="AxisEditModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -98,8 +104,11 @@ require_once 'menu.php';
                     <input type="text" name="txtAxisStatus" id="txtAxisStatus" value="Active"/>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" name="btnCatEditAnnuleer" class="btn btn-danger" data-dismiss="modal">Annuleren</button>
-                    <input type="button" name="btnOpslaan" id="AxisEditOpslaan" class="btn btn-primary" data-dismiss="modal" value="Axis Opslaan"/>
+                    <button type="button" name="btnCatEditAnnuleer" class="btn btn-danger" data-dismiss="modal">
+                        Annuleren
+                    </button>
+                    <input type="button" name="btnOpslaan" id="AxisEditOpslaan" class="btn btn-primary"
+                           data-dismiss="modal" value="Axis Opslaan"/>
                 </div>
             </form>
         </div>
@@ -107,7 +116,8 @@ require_once 'menu.php';
 </div>
 
 <!--Archiving Modal-->
-<div class="modal fade" id="AxisArchiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="AxisArchiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -122,7 +132,9 @@ require_once 'menu.php';
                         <label for="message-text" class="col-form-label fetched-data"></label>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" name="btnArchiveer" id="btnArchiveer" class="btn btn-danger" value="Ja">Ja</button>
+                        <button type="submit" name="btnArchiveer" id="btnArchiveer" class="btn btn-danger" value="Ja">
+                            Ja
+                        </button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">nee</button>
                     </div>
                 </form>
@@ -133,23 +145,23 @@ require_once 'menu.php';
 </body>
 </html>
 <script>
-    $(document).ready(function(){
-        $("#Filter").on("keyup", function() {
+    $(document).ready(function () {
+        $("#Filter").on("keyup", function () {
             var value = $(this).val().toLowerCase();
-            $("#QaTable #RowFilter").filter(function() {
+            $("#QaTable #RowFilter").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
     });
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#AxisArchiveModal').on('show.bs.modal', function (e) {
             var rowid = $(e.relatedTarget).data('id');
             $.ajax({
-                type : 'post',
-                url : '../functions/handler/QA-Axis-Archive.php', //Here you will fetch records
-                data :  'rowid='+ rowid, //Pass $id
-                success : function(data){
+                type: 'post',
+                url: '../functions/handler/QA-Axis-Archive.php', //Here you will fetch records
+                data: 'rowid=' + rowid, //Pass $id
+                success: function (data) {
                     $('.fetched-data').html("Weet je zeker dat je de axis: " + data + " wilt archiveren?");//Show fetched data from database
                 }
             });
@@ -166,8 +178,7 @@ require_once 'menu.php';
         modal.find('.modal-body input').val(recipient)
     })
 
-    function SendID(clicked_id)
-    {
+    function SendID(clicked_id) {
         window.AxisID = clicked_id;
     }
 
@@ -175,8 +186,10 @@ require_once 'menu.php';
         $.ajax({
             url: '../functions/handler/QA-Axis-Archive.php',
             type: 'post',
-            data: { "AxisID": AxisID},
-            success: function(response) { window.location.href = 'Axis.php'; }
+            data: {"AxisID": AxisID},
+            success: function (response) {
+                window.location.href = 'Axis.php';
+            }
         });
     });
 
@@ -184,8 +197,10 @@ require_once 'menu.php';
         $.ajax({
             url: '../functions/handler/AxisAddHandler.php',
             type: 'post',
-            data: { "AxisName": $('#AxisAddtxt').val()},
-            success: function(response) { window.location.href = 'Axis.php'; }
+            data: {"AxisName": $('#AxisAddtxt').val()},
+            success: function (response) {
+                window.location.href = 'Axis.php';
+            }
         });
     });
 
@@ -193,9 +208,11 @@ require_once 'menu.php';
         $.ajax({
             url: '../functions/handler/AxisEditHandler.php',
             type: 'post',
-            data: { "AxisName": $('#txtAxisNaam').val(), "AxisStatus" : $('#txtAxisStatus').val(), "AxisID": AxisID},
+            data: {"AxisName": $('#txtAxisNaam').val(), "AxisStatus": $('#txtAxisStatus').val(), "AxisID": AxisID},
 
-            success: function(response) { window.location.href = 'Axis.php'; },
+            success: function (response) {
+                window.location.href = 'Axis.php';
+            },
         });
     });
 

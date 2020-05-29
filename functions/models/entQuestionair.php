@@ -1,7 +1,6 @@
 <?php
 
 
-
 class EntQuestionair
 {
 
@@ -91,8 +90,6 @@ class EntQuestionair
     {
         $this->questionairStatus = $questionairStatus;
     }
-
-
 
 
 }

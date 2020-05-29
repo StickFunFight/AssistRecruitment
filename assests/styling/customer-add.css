@@ -1,4 +1,4 @@
-body{
+body {
     font-size: 16px;
 }
 
@@ -9,7 +9,7 @@ body{
 
 /** 1rem is 16px. Hij haalt rem uit je body font-size */
 .page__row {
-    padding: 1rem 0; 
+    padding: 1rem 0;
 }
 
 .form__label {
@@ -20,7 +20,7 @@ body{
     font-size: 16px;
 }
 
-/* customer edit update button */  
+/* customer edit update button */
 .btn.btn-add {
     color: black;
     font-size: 1.6rem;

@@ -18,4 +18,3 @@ if (isset($_POST['answerID'])){
 //        $QF->DeleteAnswer($answerID);
     }
 }
-

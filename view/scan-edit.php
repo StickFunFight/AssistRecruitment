@@ -102,30 +102,30 @@ foreach ($lijstScan as $item) {
         </div>
         <form method="post" enctype="multipart/form-data">
             <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h1 class="ce__title" id="pageTitle">Publish in bulk</h1>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h1 class="ce__title" id="pageTitle">Publish in bulk</h1>
+                    </div>
                 </div>
-            </div>
-            <div class="row ce--form-row">
-                <div class="col-sm-6">
-                        <input type="file"  name="file" class="custom-file-input" id="file">
+                <div class="row ce--form-row">
+                    <div class="col-sm-6">
+                        <input type="file" name="file" class="custom-file-input" id="file">
                         <label id="Lblcsv" class="custom-file-label ce--input" for="file">Kies csv bestand..</label>
-                    <script>
-                        $('#file').change(function () {
-                            var value = $(this).val();
-                            var result = value.substring(value.lastIndexOf("\\") + 1);
-                            $('#Lblcsv').text(result);
-                        })
-                    </script>
+                        <script>
+                            $('#file').change(function () {
+                                var value = $(this).val();
+                                var result = value.substring(value.lastIndexOf("\\") + 1);
+                                $('#Lblcsv').text(result);
+                            })
+                        </script>
 
-                </div>
-                <div class="col-sm-6">
-                    <input type="submit" name="BtnImport" value="Importeren" class="btn btn-secondary btn-lg" />
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="submit" name="BtnImport" value="Importeren" class="btn btn-secondary btn-lg"/>
+                    </div>
                 </div>
             </div>
-            </div>
-            </form>
+        </form>
         <?php
         if (isset($_POST["BtnImport"])) {
             if ($_FILES['file']['name']) {
@@ -141,20 +141,20 @@ foreach ($lijstScan as $item) {
                 }
             }
         }
-?>
+        ?>
     </body>
     </html>
     <?php
 }
-if(isset($_POST['BtnOpslaan'])) {
-        $scanName= $_POST['txtName'];
-        $scanComment= $_POST['TxtComment'];
-        $scanStatus= $_POST['cbxStatus'];
-        $scanIntroductionText= $_POST['Txtintro'];
-        $scanReminderText= $_POST['TxtReminder'];
-        $scanStartDate= $_POST['DpStart'];
-        $scanEndDate= $_POST['DpEnd'];
-        $Scan->UpdateScan($id, $scanName,$scanComment, $scanStatus,$scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate);
+if (isset($_POST['BtnOpslaan'])) {
+    $scanName = $_POST['txtName'];
+    $scanComment = $_POST['TxtComment'];
+    $scanStatus = $_POST['cbxStatus'];
+    $scanIntroductionText = $_POST['Txtintro'];
+    $scanReminderText = $_POST['TxtReminder'];
+    $scanStartDate = $_POST['DpStart'];
+    $scanEndDate = $_POST['DpEnd'];
+    $Scan->UpdateScan($id, $scanName, $scanComment, $scanStatus, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate);
 }
 
 

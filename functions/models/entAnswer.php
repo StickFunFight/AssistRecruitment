@@ -7,7 +7,6 @@ class entAnswer
     public $tempID;
 
 
-
     public function __construct($tempID, $answer, $answerScore)
     {
         $this->tempID = $tempID;
@@ -48,37 +47,32 @@ class entAnswer
     }
 
     /**
-     * @return mixed
-
-    public function getQuestionID()
-    {
-        return $this->questionID;
-    }
-
-
      * @param mixed $questionID
-
-    public function setQuestionID($questionID)
-    {
-        $this->questionID = $questionID;
-    }
-
-
-     * @return mixed
-
-    public function getAnswerID()
-    {
-        return $this->answerID;
-    }
-
+     *
+     * public function setQuestionID($questionID)
+     * {
+     * $this->questionID = $questionID;
+     * }
      * @param mixed $answerID
-
-    public function setAnswerID($answerID)
-    {
-        $this->answerID = $answerID;
-    }
-
-    /**
+     *
+     * public function setAnswerID($answerID)
+     * {
+     * $this->answerID = $answerID;
+     * }
+     *
+     * /**
+     * @return mixed
+     *
+     * public function getAnswerID()
+     * {
+     * return $this->answerID;
+     * }
+     * @return mixed
+     *
+     * public function getQuestionID()
+     * {
+     * return $this->questionID;
+     * }
      * @return mixed
      */
     public function getAnswer()

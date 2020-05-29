@@ -1,6 +1,7 @@
 <?php
 
-class EntContact {
+class EntContact
+{
     private $UserID;
     private $ContactID;
     private $ContactName;
@@ -15,7 +16,8 @@ class EntContact {
     private $userDepartmentID;
     private $userDepartmentComment;
 
-    public function __construct($UserID, $ContactID, $ContactName, $UserPhoneNumber, $UserEmail, $UserComment, $UserStatus, $ContactBirth, $UserCustomerName, $UserDepartmentName, $UserCustomerID, $userDepartmentID, $userDepartmentComment) {
+    public function __construct($UserID, $ContactID, $ContactName, $UserPhoneNumber, $UserEmail, $UserComment, $UserStatus, $ContactBirth, $UserCustomerName, $UserDepartmentName, $UserCustomerID, $userDepartmentID, $userDepartmentComment)
+    {
         $this->UserID = $UserID;
         $this->ContactID = $ContactID;
         $this->ContactName = $ContactName;
@@ -24,65 +26,78 @@ class EntContact {
         $this->UserComment = $UserComment;
         $this->UserStatus = $UserStatus;
         $this->ContactBirth = $ContactBirth;
-        $this->UserCustomerName = $UserCustomerName; 
+        $this->UserCustomerName = $UserCustomerName;
         $this->UserDepartmentName = $UserDepartmentName;
         $this->UserCustomerID = $UserCustomerID;
         $this->userDepartmentID = $userDepartmentID;
         $this->userDepartmentComment = $userDepartmentComment;
     }
 
-    public function getUserID() {
+    public function getUserID()
+    {
         return $this->UserID;
     }
 
-    public function getContactID() {
+    public function getContactID()
+    {
         return $this->ContactID;
     }
 
-    public function getContactName() {
+    public function getContactName()
+    {
         return $this->ContactName;
     }
 
-    public function getUserPhoneNumber() {
+    public function getUserPhoneNumber()
+    {
         return $this->UserPhoneNumber;
     }
 
-    public function getUserEmail() {
+    public function getUserEmail()
+    {
         return $this->UserEmail;
     }
 
-    public function getUserComment() {
+    public function getUserComment()
+    {
         return $this->UserComment;
     }
 
-    public function getUserStatus() {
+    public function getUserStatus()
+    {
         return $this->UserStatus;
     }
 
-    public function getContactBirth() {
+    public function getContactBirth()
+    {
         return $this->ContactBirth;
     }
 
-    public function getUserCustomerName() {
+    public function getUserCustomerName()
+    {
         return $this->UserCustomerName;
     }
 
-    public function getUserDepartmentName() {
+    public function getUserDepartmentName()
+    {
         return $this->UserDepartmentName;
     }
 
-    public function getUserCustomerID() {
+    public function getUserCustomerID()
+    {
         return $this->UserCustomerID;
     }
 
-    public function getuserDepartmentID() {
+    public function getuserDepartmentID()
+    {
         return $this->userDepartmentID;
     }
 
-    public function getuserDepartmentComment() {
+    public function getuserDepartmentComment()
+    {
         return $this->userDepartmentComment;
     }
 
-} 
+}
 
 ?>

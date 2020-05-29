@@ -2,17 +2,20 @@
 
 require_once 'database.class.php';
 
-class CategoryDatabase {
+class CategoryDatabase
+{
 
     private $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         $database = new Database();
         $this->conn = $database->getConnection();
 
     }
 
-    public function catOpslaan($categorieNaam) {
+    public function catOpslaan($categorieNaam)
+    {
         $catStatus = 'Active';
         $query = "INSERT INTO categorie (categorieName, categorieStatus) VALUES (? ,?)";
         $stm = $this->conn->prepare($query);
@@ -23,7 +26,8 @@ class CategoryDatabase {
 
     }
 
-    public function catAanpassen($categorieNaam, $categorieStatus, $customerID) {
+    public function catAanpassen($categorieNaam, $categorieStatus, $customerID)
+    {
         $query = "UPDATE categorie SET categorieName = ?,
                                        categorieStatus= ?
                                        WHERE categorieID = ?";
@@ -36,7 +40,28 @@ class CategoryDatabase {
         }
     }
 
-    function checkScan($cID) {
+    function DeleteQaCategory($cID)
+    {
+        $catStatus = 'Archive';
+        if ($this->checkScan($cID) == false) {
+            if ($this->checkQuestion($cID) == false) {
+                $query = "UPDATE categorie SET categorieStatus = ? WHERE categorieID = ?";
+                $stm = $this->conn->prepare($query);
+                $stm->bindParam(1, $catStatus);
+                $stm->bindParam(2, $cID);
+                if ($stm->execute()) {
+                    echo "Categorie op 'deleted' gezet";
+                }
+            } else {
+                echo "Er zijn vragen met de status 'Active' die bij deze categorie horen!";
+            }
+        } else {
+            echo "Er zijn scans met de status 'Active' die gebruik maken van deze categorie!";
+        }
+    }
+
+    function checkScan($cID)
+    {
         $query = "SELECT scanStatus FROM scan 
                   JOIN scan_question ON scan_question.scanID = scan.scanID
                   JOIN question ON question.questionID = scan_question.questionID
@@ -57,8 +82,9 @@ class CategoryDatabase {
         }
     }
 
-    function checkQuestion($cID) {
-        $query ="SELECT questionStatus from question WHERE categorieID = ?";
+    function checkQuestion($cID)
+    {
+        $query = "SELECT questionStatus from question WHERE categorieID = ?";
         $stm = $this->conn->prepare($query);
         $stm->bindParam(1, $cID);
         if ($stm->execute()) {
@@ -72,25 +98,6 @@ class CategoryDatabase {
             } else {
                 return true;
             }
-        }
-    }
-
-    function DeleteQaCategory($cID) {
-        $catStatus = 'Archive';
-        if ($this->checkScan($cID) == false) {
-            if ($this->checkQuestion($cID)==false) {
-                $query = "UPDATE categorie SET categorieStatus = ? WHERE categorieID = ?";
-                $stm = $this->conn->prepare($query);
-                $stm->bindParam(1, $catStatus);
-                $stm->bindParam(2, $cID);
-                if ($stm->execute()) {
-                    echo "Categorie op 'deleted' gezet";
-                }
-            } else {
-                echo "Er zijn vragen met de status 'Active' die bij deze categorie horen!";
-            }
-        } else {
-            echo "Er zijn scans met de status 'Active' die gebruik maken van deze categorie!";
         }
     }
 }

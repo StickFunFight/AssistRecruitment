@@ -1,8 +1,8 @@
-body{
+body {
     background-color: #F5F5F5;
 }
 
-a{
+a {
     color: black;
 }
 
@@ -18,7 +18,7 @@ a{
     min-width: 350px;
 }
 
-.logo{
+.logo {
     position: absolute;
     width: 20%;
     top: 2%;
@@ -27,6 +27,6 @@ a{
     min-width: 350px
 }
 
-.formButton{
+.formButton {
     width: 30%;
 }

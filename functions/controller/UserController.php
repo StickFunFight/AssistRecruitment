@@ -1,109 +1,122 @@
 <?php
-    require_once '../functions/datalayer/UserDB.php';
+require_once '../functions/datalayer/UserDB.php';
 
-    Class UserController {
-        
-        private $UserDB;   
-    
-        public function __construct() {
-            $this->UserDB = new UserDB();
-        }
+class UserController
+{
 
-        function getUsers($status) {
-            // Creating a array
-            $listUsers = array();
+    private $UserDB;
 
-            $listUsers = $this->UserDB->getUsers($status);
+    public function __construct()
+    {
+        $this->UserDB = new UserDB();
+    }
 
-            // Returning the list given from the Database class
-            return $listUsers;
-        }
+    function getUsers($status)
+    {
+        // Creating a array
+        $listUsers = array();
 
-        function getUsersCustomer($customerID, $status) {
-            // Creating a array
-            $listUsers = array();
+        $listUsers = $this->UserDB->getUsers($status);
 
-            $listUsers = $this->UserDB->getUsersCustomer($customerID, $status);
+        // Returning the list given from the Database class
+        return $listUsers;
+    }
 
-            // Returning the list given from the Database class
-            return $listUsers;
-        }
+    function getUsersCustomer($customerID, $status)
+    {
+        // Creating a array
+        $listUsers = array();
 
-        // Getting all the departments of the user
-        function getDepartmentsUser($userID, $status) {
-            // Creating a array
-            $listDepartmentsUser = array();
+        $listUsers = $this->UserDB->getUsersCustomer($customerID, $status);
 
-            $listDepartmentsUser = $this->UserDB->getDepartmentsUser($userID, $status);
+        // Returning the list given from the Database class
+        return $listUsers;
+    }
 
-            // Returning the list given from the Database class
-            return $listDepartmentsUser;
-        }
+    // Getting all the departments of the user
+    function getDepartmentsUser($userID, $status)
+    {
+        // Creating a array
+        $listDepartmentsUser = array();
 
-        // Getting al the contact
-        function getDetailsUser($userID) {
-            // Creating a array
-            $detailsUser = array();
+        $listDepartmentsUser = $this->UserDB->getDepartmentsUser($userID, $status);
 
-            $detailsUser = $this->UserDB->getDetailsUser($userID);
+        // Returning the list given from the Database class
+        return $listDepartmentsUser;
+    }
 
-            // Returning the list given from the Database class
-            return $detailsUser;
-        }
+    // Getting al the contact
+    function getDetailsUser($userID)
+    {
+        // Creating a array
+        $detailsUser = array();
 
-        function addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer) {
-            // Creating the user
-            if($this->UserDB->addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer)) {
-               // Getting the current url
-               $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-               $newURL = $currentURL . "?user-error=none";
-               // Reloading page with succes message
-               //echo '<script>location.replace("'.$newURL.'");</script>';
-            } else {
-                //Getting the current url
-                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-                $newURL = $currentURL . "?user-error=none";
-                // Reloading page with succes message
-                //echo '<script>location.replace("'.$newURL.'");</script>';
-            }
-        }
+        $detailsUser = $this->UserDB->getDetailsUser($userID);
 
-        function updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment) {
-            if($this->UserDB->updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment)) {
-                // Getting the current url
-                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-                $newURL = $currentURL . "?error=none";
-                // Reloading page with succes message
-                echo '<script>location.replace("'.$newURL.'");</script>';
-            } else {
-                // Getting the current url
-                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-                $newURL = $currentURL . "?error=1";
-                // Reloading page with succes message
-                echo '<script>location.replace("'.$newURL.'");</script>';
-            }
-        }
+        // Returning the list given from the Database class
+        return $detailsUser;
+    }
 
-        // Function to archive user
-        function archiveUser($userID) {
-            $this->UserDB->archiveUser($userID);
-        }
-    
-        // Function to delete user
-        function deleteUser($userID) {
-            $this->UserDB->deleteUser($userID);
-        }
-
-        function createUser($UserID, $UserName, $UserEmail, $userType, $userPassword, $UserStatus) {
-            //semding the data to the databaseclass
-            $this->UserDB->addUser($UserID, $UserName, $UserEmail, $userType, $userPassword, $userType, $UserStatus);
-
-        }
-
-        function createUserBulk($UserEmail, $ScanID) {
-            //semding the data to the databqaseclass
-            $this->UserDB->CreateUserBulk($UserEmail, $ScanID);
-
+    function addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer)
+    {
+        // Creating the user
+        if ($this->UserDB->addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer)) {
+            // Getting the current url
+            $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $newURL = $currentURL . "?user-error=none";
+            // Reloading page with succes message
+            //echo '<script>location.replace("'.$newURL.'");</script>';
+        } else {
+            //Getting the current url
+            $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $newURL = $currentURL . "?user-error=none";
+            // Reloading page with succes message
+            //echo '<script>location.replace("'.$newURL.'");</script>';
         }
     }
+
+    function updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment)
+    {
+        if ($this->UserDB->updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment)) {
+            // Getting the current url
+            $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $newURL = $currentURL . "?error=none";
+            // Reloading page with succes message
+            echo '<script>location.replace("' . $newURL . '");</script>';
+        } else {
+            // Getting the current url
+            $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $newURL = $currentURL . "?error=1";
+            // Reloading page with succes message
+            echo '<script>location.replace("' . $newURL . '");</script>';
+        }
+    }
+
+    // Function to archive user
+    function archiveUser($userID)
+    {
+        $this->UserDB->archiveUser($userID);
+    }
+
+    // Function to delete user
+    function deleteUser($userID)
+    {
+        $this->UserDB->deleteUser($userID);
+    }
+
+    function createUser($UserID, $UserName, $UserEmail, $userType, $userPassword, $UserStatus)
+    {
+        //semding the data to the databaseclass
+        $this->UserDB->addUser($UserID, $UserName, $UserEmail, $userType, $userPassword, $userType, $UserStatus);
+
+    }
+
+    function createUserBulk($UserEmail, $ScanID)
+    {
+        //semding the data to the databqaseclass
+        $this->UserDB->CreateUserBulk($UserEmail, $ScanID);
+
+    }
+}
+
 ?>

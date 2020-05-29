@@ -1,6 +1,7 @@
 <?php
 
-class EntQuestionn{
+class EntQuestionn
+{
 
     private $questionID;
     private $categorieID;
@@ -10,7 +11,8 @@ class EntQuestionn{
     private $questionStatus;
     private $questionType;
 
-    public function __construct(string $questionID, string $categorieID, string $axisID, string $questionName, string $questionExemple, string $questionStatus, string $questionType){
+    public function __construct(string $questionID, string $categorieID, string $axisID, string $questionName, string $questionExemple, string $questionStatus, string $questionType)
+    {
         $this->questionID = $questionID;
         $this->categorieID = $categorieID;
         $this->axisID = $axisID;

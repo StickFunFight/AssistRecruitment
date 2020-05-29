@@ -1,9 +1,7 @@
 <?php
 require_once 'menu.php';
-
 require '../functions/models/entAnswer.php';
 require_once '../functions/controller/QA_QuestionFunctions.php';
-
 
 
 $QF = new QA_QuestionFunctions();
@@ -55,7 +53,7 @@ $resultQuestionData = $QF->getQuestionData($questionID);
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="selAxis" class="col-sm-2 col-form-label">Axis</label>
+                        <label for="selAxisEdit" class="col-sm-2 col-form-label">Axis</label>
                         <div class="col-sm-10">
                             <select required id="selAxisEdit" name="selAxisEdit"
                                     class="form-control">
@@ -66,7 +64,8 @@ $resultQuestionData = $QF->getQuestionData($questionID);
                     <div class="form-group row">
                         <label for="selQuestionTypeQuestionEdit" class="col-sm-2 col-form-label">Vraag type</label>
                         <div class="col-sm-10">
-                            <select id="selQuestionTypeQuestionEdit" name="selQuestionTypeQuestionEdit" class="form-control">
+                            <select id="selQuestionTypeQuestionEdit" name="selQuestionTypeQuestionEdit"
+                                    class="form-control">
                                 <option value="OCAI">OCAI</option>
                                 <option value="Question-answer">Vraag-antwoord</option>
                             </select>
@@ -76,7 +75,8 @@ $resultQuestionData = $QF->getQuestionData($questionID);
                     <div name="divAnswerOptions" id="divAnswerOptions" class="form-group row">
                         <label for="answerOptions" class="col-sm-2 col-form-label">Antwoord opties</label>
                         <div class="col-sm-10">
-                            <a href="QA_QuestionAnswerAdd.php?qID=<?php echo $questionID; ?>"><i class="fas fa-plus"></i></a>
+                            <a href="QA_QuestionAnswerAdd.php?qID=<?php echo $questionID; ?>"><i
+                                        class="fas fa-plus"></i></a>
                             <br>
                             <br>
                             <table class="table table-bordered">
@@ -94,11 +94,11 @@ $resultQuestionData = $QF->getQuestionData($questionID);
                                 $listQuestionAnswerEdit = $QF->getQuestionAnswer($arrayQA, $questionID);
                                 foreach ($listQuestionAnswerEdit as $QAE) {
                                     echo '<tr>
-                                        <td value="'.$QAE->answer.'">'.$QAE->answer.'</td>
-                                        <td value="'.$QAE->answerScore.'">'.$QAE->answerScore.'</td>
+                                        <td value="' . $QAE->answer . '">' . $QAE->answer . '</td>
+                                        <td value="' . $QAE->answerScore . '">' . $QAE->answerScore . '</td>
                                         <td>
-                                        <a href="QA_QuestionAnswerEdit.php?answerID='.$QAE->tempID.'&qID='.$questionID.'"><i class="fas fa-pencil-alt" id="'.$QAE->tempID.'" value="'.$QAE->tempID.'"></i></a> 
-                                        <i data-toggle="modal" data-target="#archiveSelectedQuestionAnswer" id="'.$QAE->tempID.'" onClick="reply_click(this.id)" value="'.$QAE->tempID.'" class="fas fa-trash-alt"></i>
+                                        <a href="QA_QuestionAnswerEdit.php?answerID=' . $QAE->tempID . '&qID=' . $questionID . '"><i class="fas fa-pencil-alt" id="' . $QAE->tempID . '" value="' . $QAE->tempID . '"></i></a> 
+                                        <i data-toggle="modal" data-target="#archiveSelectedQuestionAnswer" id="' . $QAE->tempID . '" onClick="reply_click(this.id)" value="' . $QAE->tempID . '" class="fas fa-trash-alt"></i>
                                         </td>
                                         </tr>';
                                 }
@@ -118,7 +118,8 @@ $resultQuestionData = $QF->getQuestionData($questionID);
     </div>
 </div>
 
-<div class="modal fade" id="archiveSelectedQuestionAnswer" tabindex="-1" role="dialog" aria-labelledby="archiveSelectedQuestionAnswer"
+<div class="modal fade" id="archiveSelectedQuestionAnswer" tabindex="-1" role="dialog"
+     aria-labelledby="archiveSelectedQuestionAnswer"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -144,14 +145,12 @@ $resultQuestionData = $QF->getQuestionData($questionID);
 
                         $('#btnArchive').click(function () {
                             $.ajax({
-                                url: '../functions/handler/questionAnswerArchiveHandler.php',
+                                url: 'questionAnswerArchiveHandler.php',
                                 type: 'post',
                                 data: {"answerID": yourGlobalVariable},
                                 success: function (response) {
-
                                 }
                             });
-
                         });
 
                     </script>
@@ -163,21 +162,21 @@ $resultQuestionData = $QF->getQuestionData($questionID);
     </div>
 </div>
 
-
 <?php
+if (isset($_POST['btnQuestionEditSubmit'])) {
+    $selAxis = $_POST['selAxisEdit'];
+    $selCategory = $_POST['selCategoryQuestionEdit'];
+    $txQuestion = $_POST['txQuestionEdit'];
+    $taExemple = $_POST['taExampleEdit'];
+    $selStatus = $_POST['selStatusQuestEdit'];
+    $selQuestionType = $_POST['selQuestionTypeQuestionEdit'];
 
-    if(isset($_POST['btnQuestionEditSubmit'])){
-        $selAxis = $_POST['selAxisEdit'];
-        $selCategory = $_POST['selCategoryQuestionEdit'];
-        $txQuestion = $_POST['txQuestionEdit'];
-        $taExemple = $_POST['taExampleEdit'];
-        $selStatus = $_POST['selStatusQuestEdit'];
-        $selQuestionType = $_POST['selQuestionTypeQuestionEdit'];
+    $QF->updateQuestion($questionID, $selCategory, $selAxis, $txQuestion, $taExemple, $selStatus, $selQuestionType);
+    $url = "http://localhost/AssistRecruitment/view/QA_QuestionEdit.php?questionID=" . $questionID;
 
-        $QF->updateQuestion($questionID, $selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
-        $url = "http://localhost/AssistRecruitment/view/QA_QuestionEdit.php?questionID=".$questionID;
-        ?><script>window.location ='<?php echo $url ?>';</script><?php
-    }
+    ?>
+    <script>window.location = '<?php echo $url ?>';</script><?php
+}
 
 ?>
 <script>
@@ -186,18 +185,11 @@ $resultQuestionData = $QF->getQuestionData($questionID);
         window.yourGlobalVariable = clicked_id;
     }
 
-
-
-
-
     $('#selCategoryQuestionEdit').val(<?php echo $resultQuestionData['categorieID']; ?>);
     $('#selQuestionType').val("<?php echo $resultQuestionData['questionType'] ?>");
     $('#selStatusQuestEdit').val("<?php echo $resultQuestionData['questionStatus'] ?>");
 
-
-    $(document).ready(function(){
-
-        if('')
+    $(document).ready(function () {
         $('#selQuestionType').change(function () {
             if ($(this).val() == "Question-answer") {
                 $('#divAnswerOptions').show();

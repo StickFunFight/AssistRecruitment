@@ -2,27 +2,30 @@
 include 'database.class.php';
 include '../functions/models/User.php';
 
-class LoginDatabase {
+class LoginDatabase
+{
 
-    public function createUser($username, $passwordHash, $email) {
-         $connection = new Database();
-         $db = $connection->getConnection();
-         $userRight = 0;
+    public function createUser($username, $passwordHash, $email)
+    {
+        $connection = new Database();
+        $db = $connection->getConnection();
+        $userRight = 0;
 
-         $stmt = $db->prepare("INSERT INTO user (userName, userEmail, userPassword, userRights) VALUES (?, ?, ?, ?)");
-         $stmt->bindParam(1, $username);
-         $stmt->bindParam(2, $email);
-         $stmt->bindParam(3, $passwordHash);
-         $stmt->bindParam(4, $userRight);
+        $stmt = $db->prepare("INSERT INTO user (userName, userEmail, userPassword, userRights) VALUES (?, ?, ?, ?)");
+        $stmt->bindParam(1, $username);
+        $stmt->bindParam(2, $email);
+        $stmt->bindParam(3, $passwordHash);
+        $stmt->bindParam(4, $userRight);
 
-         try {
+        try {
             return $stmt->execute();
-         } catch (PDOException $exception) {
+        } catch (PDOException $exception) {
             return false;
-         }
+        }
     }
 
-    public function getUser($username) {
+    public function getUser($username)
+    {
         $connection = new Database();
         $getUser = null;
         $db = $connection->getConnection();
@@ -40,12 +43,13 @@ class LoginDatabase {
             }
 
             return $getUser;
-        } catch(PDOException $exception) {
+        } catch (PDOException $exception) {
             return null;
         }
     }
 
-    public function getUserByEmail($email) {
+    public function getUserByEmail($email)
+    {
         $connection = new Database();
         $getUser = null;
         $db = $connection->getConnection();
@@ -57,18 +61,19 @@ class LoginDatabase {
             $stmt->execute();
             $resultSet = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-            foreach($resultSet as $user) {
+            foreach ($resultSet as $user) {
                 $setUser = new User($user->userID, $user->userName, $user->userEmail, $user->userPassword, $user->userRights, $user->userStatus);
                 $getUser = $setUser;
             }
 
             return $getUser;
-        } catch(PDOException $exception){
+        } catch (PDOException $exception) {
             return null;
         }
     }
 
-    public function createPasswordToken($token) {
+    public function createPasswordToken($token)
+    {
         $connection = new Database();
         $db = $connection->getConnection();
     }

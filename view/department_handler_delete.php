@@ -1,8 +1,7 @@
-
 <?php
 require '../functions/datalayer/DepartmentDB.php';
 
-if (isset($_POST['departmentID'])){
+if (isset($_POST['departmentID'])) {
 
     $DepartmentID = $_POST['departmentID'];
 

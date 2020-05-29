@@ -193,61 +193,63 @@ if (isset($_GET['status'])) {
                         foreach ($listScans as $scan) {
                             ?>
                             <tr class="tab-table__row filter__row">
-                                <td class="tab-table__td"><?php echo $scan->getScanName(); ?></td>
-                                <td class="tab-table__td"><?php echo $scan->getScanStartDate(); ?></td>
-                                <td class="tab-table__td"><?php echo $scan->getScanEndDate(); ?></td>
-                                <?php
-                                // Checking if there is a customer set
-                                if ($customerID == 0) {
-                                    ?>
-                                    <td class="tab-table__td"><?php echo $scan->getScanCustomerName(); ?></td>
-                                    <?php
-                                }
+                            <td class="tab-table__td"><?php echo $scan->getScanName(); ?></td>
+                            <td class="tab-table__td"><?php echo $scan->getScanStartDate(); ?></td>
+                            <td class="tab-table__td"><?php echo $scan->getScanEndDate(); ?></td>
+                            <?php
+                            // Checking if there is a customer set
+                            if ($customerID == 0) {
                                 ?>
-                                <td class="tab-table__td">
-                                    <a class="editKnop" href="scan-edit.php?Id=<?php echo $scan->getScanID(); ?>"><i class="fas tab-table__icon">&#xf044;</i></a>
+                                <td class="tab-table__td"><?php echo $scan->getScanCustomerName(); ?></td>
+                                <?php
+                            }
+                            ?>
+                            <td class="tab-table__td">
+                            <a class="editKnop" href="scan-edit.php?Id=<?php echo $scan->getScanID(); ?>"><i
+                                        class="fas tab-table__icon">&#xf044;</i></a>
+                            <?php
+                            // Checking for status and user an different icon for a different icon for that status
+                            switch ($scanStatus) {
+                                case 'Archived':
+                                    ?>
+                                    <a class="deleteKnop" href="#" data-toggle="modal"
+                                       data-target="#deleteModal" id='<?php echo $scan->getScanID(); ?>'
+                                       onClick="reply_click(this.id)"><i
+                                                class="fas tab-table__icon">&#xf2ed;</i></a>
                                     <?php
-                                    // Checking for status and user an different icon for a different icon for that status
-                                    switch ($scanStatus) {
-                                        case 'Archived':
-                                            ?>
-                                            <a class="deleteKnop" href="#" data-toggle="modal"
-                                               data-target="#deleteModal" id='<?php echo $scan->getScanID(); ?>'
-                                               onClick="reply_click(this.id)"><i
-                                                        class="fas tab-table__icon">&#xf2ed;</i></a>
-                                            <?php
-                                            break;
-                                        case 'Deleted':
-                                            ?>
-                                        
-                                    <tr class="tab-table__row filter__row">
-                                        <td class="tab-table__td"><?php echo $scan->getScanName(); ?></td>
-                                        <td class="tab-table__td"><?php echo $scan->getScanStartDate(); ?></td>
-                                        <td class="tab-table__td"><?php echo $scan->getScanEndDate(); ?></td>
-                                        <?php 
-                                            // Checking if there is a customer set
-                                            if($customerID == 0) {
-                                                ?>
-                                                    <td class="tab-table__td"><?php echo $scan->getScanCustomerName(); ?></td>
-                                                <?php
-                                            }
-                                        ?>
-                                        <td class="tab-table__td">
-                                            <a class="editKnop" href="scan-edit.php?Id=<?php echo $scan->getScanID();?>"><i class="fas tab-table__icon">&#xf044;</i></a>
-                                            <?php
-                                            break;
-                                        default:
-                                            ?>
-                                            <a class="deleteKnop" href="#" data-toggle="modal"
-                                               data-target="#archiveModal" id='<?php echo $scan->getScanID(); ?>'
-                                               onClick="reply_click(this.id)"><i
-                                                        class="fas tab-table__icon">&#xf187;</i></a>
-                                            <?php
-                                            break;
-                                    }
+                                    break;
+                                case 'Deleted':
                                     ?>
 
-                                </td>
+                                    <tr class="tab-table__row filter__row">
+                                    <td class="tab-table__td"><?php echo $scan->getScanName(); ?></td>
+                                    <td class="tab-table__td"><?php echo $scan->getScanStartDate(); ?></td>
+                                    <td class="tab-table__td"><?php echo $scan->getScanEndDate(); ?></td>
+                                    <?php
+                                    // Checking if there is a customer set
+                                    if ($customerID == 0) {
+                                        ?>
+                                        <td class="tab-table__td"><?php echo $scan->getScanCustomerName(); ?></td>
+                                        <?php
+                                    }
+                                    ?>
+                                    <td class="tab-table__td">
+                                    <a class="editKnop" href="scan-edit.php?Id=<?php echo $scan->getScanID(); ?>"><i
+                                                class="fas tab-table__icon">&#xf044;</i></a>
+                                    <?php
+                                    break;
+                                default:
+                                    ?>
+                                    <a class="deleteKnop" href="#" data-toggle="modal"
+                                       data-target="#archiveModal" id='<?php echo $scan->getScanID(); ?>'
+                                       onClick="reply_click(this.id)"><i
+                                                class="fas tab-table__icon">&#xf187;</i></a>
+                                    <?php
+                                    break;
+                            }
+                            ?>
+
+                            </td>
                             </tr>
                             <?php
                         }
@@ -258,7 +260,6 @@ if (isset($_GET['status'])) {
             </div>
         </div>
     </div>
-
 
 
     </body>

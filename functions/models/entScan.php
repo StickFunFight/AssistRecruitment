@@ -1,6 +1,7 @@
 <?php
 
-class EntScan {
+class EntScan
+{
     private $ScanID;
     private $ScanName;
     private $ScanComment;
@@ -14,7 +15,8 @@ class EntScan {
     private $DepartmentID;
     private $UserID;
 
-    public function __construct($ScanID, $ScanName, $ScanComment, $ScanStatus, $ScanIntroductionText, $ScanReminderText, $ScanStartDate, $ScanEndDate, $CustomerName, $CustomerID, $DepartmentID, $UserID) {
+    public function __construct($ScanID, $ScanName, $ScanComment, $ScanStatus, $ScanIntroductionText, $ScanReminderText, $ScanStartDate, $ScanEndDate, $CustomerName, $CustomerID, $DepartmentID, $UserID)
+    {
         $this->ScanID = $ScanID;
         $this->ScanName = $ScanName;
         $this->ScanComment = $ScanComment;
@@ -29,53 +31,65 @@ class EntScan {
         $this->UserID = $UserID;
     }
 
-    public function getScanID() {
+    public function getScanID()
+    {
         return $this->ScanID;
     }
 
-    public function getScanName() {
+    public function getScanName()
+    {
         return $this->ScanName;
     }
 
-    public function getScanComment() {
+    public function getScanComment()
+    {
         return $this->ScanComment;
     }
- 
-    public function getScanStatus() {
+
+    public function getScanStatus()
+    {
         return $this->ScanStatus;
     }
 
-    public function getScanIntroductionText() {
+    public function getScanIntroductionText()
+    {
         return $this->ScanIntroductionText;
     }
 
-    public function getScanReminderText() {
+    public function getScanReminderText()
+    {
         return $this->ScanReminderText;
     }
 
-    public function getScanStartDate() {
+    public function getScanStartDate()
+    {
         return $this->ScanStartDate;
     }
 
-    public function getScanEndDate() {
+    public function getScanEndDate()
+    {
         return $this->ScanEndDate;
     }
 
-    public function getScanCustomerName() {
+    public function getScanCustomerName()
+    {
         return $this->CustomerName;
     }
 
-    public function getCustomerID() {
-        return $this->CustomerName;
-    }
-    
-    public function getDepartmentID() {
+    public function getCustomerID()
+    {
         return $this->CustomerName;
     }
 
-    public function getUserID() {
+    public function getDepartmentID()
+    {
         return $this->CustomerName;
     }
-} 
+
+    public function getUserID()
+    {
+        return $this->CustomerName;
+    }
+}
 
 ?>

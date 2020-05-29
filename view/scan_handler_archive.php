@@ -1,7 +1,7 @@
 <?php
 require '../functions/datalayer/ScanDB.php';
 
-if (isset($_POST['scanID'])){
+if (isset($_POST['scanID'])) {
 
     $ScanID = $_POST['scanID'];
 
@@ -9,6 +9,6 @@ if (isset($_POST['scanID'])){
     $CAF->archiveScan($ScanID);
     echo "Succes";
 
-}else echo "failed";
+} else echo "failed";
 
 ?>

@@ -13,14 +13,13 @@ require_once 'menu.php';
         <h1>Questionare Add</h1>
         <form method="POST">
             <label for="txtName"><h3>Name: </h3></label>
-            <input type="text" name="txtName" id="txtName" />
+            <input type="text" name="txtName" id="txtName"/>
             <br>
             <label for="txtStatus"><h3>Status:</h3></label>
             <input type="text" name="txtStatus" id="txtStatus">
             <br>
             <label for="txtComment"><h3>Comment:</h3></label>
             <input type="text" name="txtComment" id="txtComment">
-
 
 
             <div class="row QaTopMargin">
@@ -38,9 +37,13 @@ require_once 'menu.php';
         $.ajax({
             url: 'questionairAddHandler.php',
             type: 'post',
-            data: { "questionairName": $('#txtName').val(), "questionairComment": $('#txtComment').val() ,"questionairStatus": $('#txtStatus').val()},
-            success: function(response) {
-                window.location.href = 'questionairAdd2.php?qID='+response;
+            data: {
+                "questionairName": $('#txtName').val(),
+                "questionairComment": $('#txtComment').val(),
+                "questionairStatus": $('#txtStatus').val()
+            },
+            success: function (response) {
+                window.location.href = 'questionairAdd2.php?qID=' + response;
             }
         });
     });

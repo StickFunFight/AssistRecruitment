@@ -2,16 +2,19 @@
 require '../functions/models/EntCategory.php';
 require '../functions/models/EntQuestionAnswer.php';
 
-class QaOverView {
+class QaOverView
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         require_once 'database.class.php';
         $database = new Database();
         $this->db = $database->getConnection();
     }
 
-    function GetAllCategories() {
+    function GetAllCategories()
+    {
         $lijst = array();
         $query = "SELECT * FROM categorie where categorieStatus = 'Active'";
         $stm = $this->db->prepare($query);
@@ -28,15 +31,16 @@ class QaOverView {
         }
     }
 
-    function GetQuestionAnswers() {
+    function GetQuestionAnswers()
+    {
         $lijst = array();
         $query = "SELECT * FROM QuestionAnswer";
         $stm = $this->db->prepare($query);
         if ($stm->execute()) {
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
             foreach ($result as $item) {
-                $entQuestionAnswer = new EntQuestionAnswer($item->questionID,$item->categorieID, $item->questionStatus, $item->questionName, $item->questionType, $item->answerID);
-                if(!empty($lijst[$item->questionID])){
+                $entQuestionAnswer = new EntQuestionAnswer($item->questionID, $item->categorieID, $item->questionStatus, $item->questionName, $item->questionType, $item->answerID);
+                if (!empty($lijst[$item->questionID])) {
                     $entQuestionAnswer = $lijst[$item->questionID];
                 }
                 $Answers = $entQuestionAnswer->getAnswers();

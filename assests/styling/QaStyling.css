@@ -1,4 +1,4 @@
-body{
+body {
     font-size: 1.5rem;
 }
 
@@ -7,30 +7,35 @@ body{
     padding-right: 5rem;
 }
 
-#wrapper{
+#wrapper {
     display: flex;
     flex-direction: row;
     /* border: 1px solid black; */
     height: 50%;
 }
-#FirstQaDiv{
+
+#FirstQaDiv {
     width: 20%;
 }
-#SecondQaDiv{
-    width:80%;
+
+#SecondQaDiv {
+    width: 80%;
 }
+
 #Icon {
-color: dimgray;
+    color: dimgray;
 }
 
 
 tr:hover {
     background-color: #73b99b;
 }
-#CategoryAdd{
-    float:right;
+
+#CategoryAdd {
+    float: right;
 }
-th{
+
+th {
     background-color: #73b99b;
     color: white;
 }
@@ -43,29 +48,34 @@ th{
 }
 
 /* table hover maken */
-.category-tabel__row:hover{
+.category-tabel__row:hover {
     background-color: rgb(115, 185, 155);
 }
 
 /* show icon on hover */
-.category-tabel__row:hover .table--icon{
+.category-tabel__row:hover .table--icon {
     display: inline-block;
 }
-.table--icon:hover, .table--icon:visited{
+
+.table--icon:hover, .table--icon:visited {
     color: #005cbf;
 }
-.ButtonRight{
+
+.ButtonRight {
     font-size: 1.5rem;
     float: right;
     background-color: #73b99b;
 }
-.QaTopMargin{
+
+.QaTopMargin {
     margin-top: 10%
 }
-.RuimteVragen{
-    margin-right:10px
+
+.RuimteVragen {
+    margin-right: 10px
 }
-.ButtonLeft{
+
+.ButtonLeft {
     font-size: 1.5rem;
     float: left;
     background-color: #73b99b;

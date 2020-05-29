@@ -1,17 +1,20 @@
 <?php
 
-class AxisDatabase {
+class AxisDatabase
+{
 
     private $conn;
 
-    public function __construct() {
+    public function __construct()
+    {
         require_once 'database.class.php';
         $database = new Database();
         $this->conn = $database->getConnection();
 
     }
 
-    public function GetAllAxis() { 
+    public function GetAllAxis()
+    {
         {
             $lijst = array();
             $query = "SELECT * FROM axis";
@@ -30,17 +33,19 @@ class AxisDatabase {
         }
     }
 
-     function archiveerAxis($Aid) {
+    function archiveerAxis($Aid)
+    {
         //variabele (n) uit de url halen
         $query = "UPDATE axis SET AxisStatus = 'Archived' WHERE AxisId = ?";
         $stm = $this->conn->prepare($query);
-         $stm->bindParam(1, $Aid);
+        $stm->bindParam(1, $Aid);
         if ($stm->execute()) {
 
         } else echo "oeps";
     }
 
-    function showA($Aid) {
+    function showA($Aid)
+    {
         $query = "SELECT * FROM axis WHERE AxisId = ?";
         $stm = $this->conn->prepare($query);
         $stm->bindParam(1, $Aid);
@@ -50,21 +55,22 @@ class AxisDatabase {
         } else echo "oeps";
     }
 
-    public function AxisAanpassen($AxisName, $AxisStatus, $AxisID) {
+    public function AxisAanpassen($AxisName, $AxisStatus, $AxisID)
+    {
         $query = "UPDATE axis SET AxisName = ? , AxisStatus = ?
                   WHERE AxisID = ?";
         $stm = $this->conn->prepare($query);
         $stm->bindParam(1, $AxisName);
         $stm->bindParam(2, $AxisStatus);
         $stm->bindParam(3, $AxisID);
-        if ($stm->execute()){
+        if ($stm->execute()) {
 
         }
     }
 
     public function AxisOpslaan($AxisName)
     {
-        $AxisStatus= 'Active';
+        $AxisStatus = 'Active';
         $query = "INSERT INTO axis (AxisName, AxisStatus) VALUES (?, ?)";
         $stm = $this->conn->prepare($query);
         $stm->bindParam(1, $AxisName);

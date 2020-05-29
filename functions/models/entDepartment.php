@@ -1,6 +1,7 @@
 <?php
 
-class EntDepartment {
+class EntDepartment
+{
     private $DepartmentID;
     private $DepartmentName;
     private $DepartmentComment;
@@ -8,7 +9,8 @@ class EntDepartment {
     private $CustomerID;
     private $CustomerName;
 
-    public function __construct($DepartmentID, $DepartmentName, $DepartmentComment, $DepartmentStatus, $CustomerID, $CustomerName) {
+    public function __construct($DepartmentID, $DepartmentName, $DepartmentComment, $DepartmentStatus, $CustomerID, $CustomerName)
+    {
         $this->DepartmentID = $DepartmentID;
         $this->DepartmentName = $DepartmentName;
         $this->DepartmentComment = $DepartmentComment;
@@ -17,29 +19,35 @@ class EntDepartment {
         $this->CustomerName = $CustomerName;
     }
 
-    public function getDepartmentID() {
+    public function getDepartmentID()
+    {
         return $this->DepartmentID;
     }
 
-    public function getDepartmentName() {
+    public function getDepartmentName()
+    {
         return $this->DepartmentName;
     }
- 
-    public function getdepartmentComment() {
+
+    public function getdepartmentComment()
+    {
         return $this->DepartmentComment;
     }
 
-    public function getDepartmentStatus() {
+    public function getDepartmentStatus()
+    {
         return $this->DepartmentStatus;
     }
 
-    public function getCustomerID() {
+    public function getCustomerID()
+    {
         return $this->CustomerID;
     }
 
-    public function getCustomerName() {
+    public function getCustomerName()
+    {
         return $this->CustomerName;
     }
-} 
+}
 
 ?>

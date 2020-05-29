@@ -4,7 +4,7 @@ require_once 'head.php';
 require_once 'menu.php';
 require '../functions/controller/questionairController.php';
 
-if (isset($_GET['qID'])){
+if (isset($_GET['qID'])) {
     $ID = $_GET['qID'];
     $QC = new questionairController();
     $QC->setQuestionairID($ID);
@@ -18,7 +18,9 @@ if (isset($_GET['qID'])){
     <div class="container-fluid">
         <div class="row QaTopMargin">
             <div class="col-sm-6">
-                <button type="button" class="btn btn-success ButtonRight" data-toggle="modal" data-target="#questionairAddModal"><i class="fas fa-plus-circle"></i>Vraag Toevoegen</button>
+                <button type="button" class="btn btn-success ButtonRight" data-toggle="modal"
+                        data-target="#questionairAddModal"><i class="fas fa-plus-circle"></i>Vraag Toevoegen
+                </button>
             </div>
         </div>
         <div>
@@ -33,14 +35,13 @@ if (isset($_GET['qID'])){
                 <?php
                 require '../functions/models/EntQuestion.php';
                 $lijstQuestionair = $QC->getQuestionairList();
-                foreach ($lijstQuestionair as $item)
-                {
-                    echo'<tr id="RowFilter">';
-                    echo '<td id="'.$item->getQuestionID().'">';
+                foreach ($lijstQuestionair as $item) {
+                    echo '<tr id="RowFilter">';
+                    echo '<td id="' . $item->getQuestionID() . '">';
                     echo $item->getQuestionName();
                     echo '</td>';
                     echo '<td>';
-                    echo  $item->getQuestionType();
+                    echo $item->getQuestionType();
                     echo '</td>';
                     echo '</tr>';
                 }
@@ -53,7 +54,8 @@ if (isset($_GET['qID'])){
 </div>
 
 <!-- QuestionairQuestionAddModal -->
-<div class="modal fade" id="questionairAddModal" tabindex="-1" role="dialog" aria-labelledby="questionairAddModal" aria-hidden="true">
+<div class="modal fade" id="questionairAddModal" tabindex="-1" role="dialog" aria-labelledby="questionairAddModal"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -63,31 +65,31 @@ if (isset($_GET['qID'])){
                 </button>
             </div>
             <form method="post">
-            <div class="modal-body">
-                <div class="dropdown">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <div class="modal-body">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                             Dropdown button
-                    </button>
-                    <div class="dropdown-menu">
-                        <?php
-                        $lijstQuestion = $QC->getQuestions();
-                        foreach ($lijstQuestion as $question)
-                        {
-                            echo '<a class="dropdown-item" id="'.$question->getQuestionID().'" onclick="SendID(this.id)" >'.$question->getQuestionName().'</a>';
-                        }
-                        ?>
+                        </button>
+                        <div class="dropdown-menu">
+                            <?php
+                            $lijstQuestion = $QC->getQuestions();
+                            foreach ($lijstQuestion as $question) {
+                                echo '<a class="dropdown-item" id="' . $question->getQuestionID() . '" onclick="SendID(this.id)" >' . $question->getQuestionName() . '</a>';
+                            }
+                            ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-success ButtonLeft" id="VraagOpslaan">Toevoegen</button>
-                <button class="btn btn-danger" id="btnAnnuleer" data-toggle="modal" data-target="#questionairAddModal">Annuleer</button>
-            </div>
+                <div class="modal-footer">
+                    <button class="btn btn-success ButtonLeft" id="VraagOpslaan">Toevoegen</button>
+                    <button class="btn btn-danger" id="btnAnnuleer" data-toggle="modal"
+                            data-target="#questionairAddModal">Annuleer
+                    </button>
+                </div>
             </form>
         </div>
     </div>
 </div>
-
 
 
 <?php
@@ -106,31 +108,30 @@ if (isset($_GET['qID'])){
 
 <script>
 
-    $(".dropdown").on("show.bs.dropdown", function(event){
+    $(".dropdown").on("show.bs.dropdown", function (event) {
         var x = $(event.relatedTarget).text(); // Get the text of the element
         alert(x);
     });
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $(".dropdown-toggle").dropdown();
     });
-
 
 
     $('#VraagOpslaan').click(function () {
         $.ajax({
             url: 'questionairAddHandler2.php',
             type: 'post',
-            data: { "questionairID": <?php echo $ID ?> ,"questionID": QuestionID},
-            success: function(response) {
+            data: {"questionairID": <?php echo $ID ?> , "questionID": QuestionID},
+            success: function (response) {
 
                 window.location.href = 'questionairAdd2.php?qID=<?php echo $ID?>';
             }
         });
     });
 
-    $('#btnKlaar').click(function (){
-       window.location.href = 'questionair.php';
+    $('#btnKlaar').click(function () {
+        window.location.href = 'questionair.php';
     });
 
 </script>
@@ -142,8 +143,7 @@ if (isset($_GET['qID'])){
 <script src="../assests/bootstrap/js/bootstrap.min.js"></script>
 
 <script>
-    function SendID(clicked_id)
-    {
+    function SendID(clicked_id) {
         console.log(clicked_id);
         window.QuestionID = clicked_id;
     }

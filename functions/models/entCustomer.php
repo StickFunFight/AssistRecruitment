@@ -1,13 +1,15 @@
 <?php
 
-class EntCustomer {
+class EntCustomer
+{
     private $CustomerID;
     private $CustomerName;
     private $CustomerComment;
     private $CustomerRefrence;
     private $CustomerStatus;
 
-    public function __construct($CustomerID, $CustomerName, $CustomerComment, $CustomerRefrence, $CustomerStatus) {
+    public function __construct($CustomerID, $CustomerName, $CustomerComment, $CustomerRefrence, $CustomerStatus)
+    {
         $this->CustomerID = $CustomerID;
         $this->CustomerName = $CustomerName;
         $this->CustomerComment = $CustomerComment;
@@ -15,25 +17,30 @@ class EntCustomer {
         $this->CustomerStatus = $CustomerStatus;
     }
 
-    public function getCustomerID() {
+    public function getCustomerID()
+    {
         return $this->CustomerID;
     }
 
-    public function getCustomerName() {
+    public function getCustomerName()
+    {
         return $this->CustomerName;
     }
- 
-    public function getCustomerComment() {
+
+    public function getCustomerComment()
+    {
         return $this->CustomerComment;
     }
 
-    public function getCustomerReference() {
+    public function getCustomerReference()
+    {
         return $this->CustomerRefrence;
     }
 
-    public function getCustomerStatus() {
+    public function getCustomerStatus()
+    {
         return $this->CustomerStatus;
     }
-} 
+}
 
 ?>
