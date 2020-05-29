@@ -112,7 +112,7 @@
                                                         </div>
 
                                                         <div class="scan-bottom">
-                                                            <a class="btn btn-status">continue scan</a>
+                                                            <a class="btn btn-status">Continue scan</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -209,7 +209,7 @@
                                                                 </div>
 
                                                                 <div class="scan-bottom">
-                                                                    <a class="btn btn-status">continue scan</a>
+                                                                    <a class="btn btn-status">Continue scan</a>
                                                                 </div>
                                                             </div>
                                                         </div>
