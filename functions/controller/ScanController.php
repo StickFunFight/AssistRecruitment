@@ -111,7 +111,7 @@
 
         // Function to get scans for a department
         function getScansDepartment($departmentID) {
-             // Creating a array
+            // Creating a array
             $listScans = array();
 
             $listScans = $this->ScanDB->getScansDepartment($departmentID);
@@ -125,6 +125,17 @@
             $scanProgress = $this->ScanDB->getScanProgres($userID, $scanID);
 
             return $scanProgress;
+        }
+
+        // Function to get all question answers
+        function getQuestionAnswers($questionID) {
+            // Creating a array
+            $listAnswers = array();
+
+            $listAnswers = $this->ScanDB->getQuestionAnswers($questionID);
+
+            // Returning the list given from the Database class
+            return $listAnswers;
         }
     }
 ?>

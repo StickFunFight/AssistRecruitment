@@ -342,5 +342,23 @@
                 echo "Er is iets fout gegaan";
             } 
         }
+
+        function getQuestionAnswers($questionID) {
+            $QuestionAnswers = array();
+            $query = "SELECT sa.questionID, sa.answerID, a.answer, a.answerScore
+                      FROM scan_answer sa
+                      INNER JOIN answer a ON sa.answerID = a.answerID
+                      WHERE sa.questionID = ?";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $questionID);
+            if ($stm->execute()) {
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                foreach ($result as $item) {
+                    $entAnswerScore = new entQuestionAnswered($item->questionID, $item->answerID, $item->answer, $item->answerScore);
+                    array_push($QuestionAnswers, $entAnswerScore);
+                }
+                return $QuestionAnswers;
+            }
+        }
     }
 ?>

@@ -6,6 +6,7 @@
 
     // Including entity classes
     require '../functions/models/entAnswerScore.php';
+    require '../functions/models/entQuestionsAnswered.php';
 
     // Creating connections with the classes
     $ScoreCtrl = new ScanController();
@@ -20,6 +21,7 @@
         ?>
         <!-- Linking to own styleheet -->
         <link rel="stylesheet" href="../assests/styling/qa.css">
+        <link rel="stylesheet" href="../assests/styling/customer-edit.css">
     </head>
 
     <body>
@@ -55,28 +57,45 @@
 
                             <tbody class="tab-table__body">
                                 <?php
-                                    // Creating a list to fill it later 
-                                    $listQA;
-
                                     //Getting QA Data
                                     $listQA = $ScoreCtrl->GetAnswerScore();
-                                    
-
 
                                     // Looping through the results
                                     foreach ($listQA as $QA) {                                  
-                                ?>
-                                    <tr class="tab-table__row filter__row">
-                                        <td class="tab-table__td" ><?php echo $QA->getQuestionName(); ?> </td>
-                                        <td class="tab-table__td" ><?php echo (round($QA->getAnswerScore())) ; ?> </td>
-                                        <td class="tab-table__td">
-                                            <a class="editKnop" href= '#' ><i class="fas tab-table__icon">&#xf044;</i></a>
-                                            <?php
-
-                                            ?>
-                                        </td>
-                                    </tr>
-                                <?php
+                                        ?>
+                                            <tr class="tab-table__row filter__row" id="asQuestion<?php echo $QA->getQuestionID(); ?>" onclick="openQuestionAnswers('asQuestion<?php echo $QA->getQuestionID(); ?>', 'questionAnswers<?php echo $QA->getQuestionID(); ?>', 'expendIcon<?php echo $QA->getQuestionID(); ?>')">
+                                                <td class="tab-table__td" ><?php echo $QA->getQuestionName(); ?> </td>
+                                                <td class="tab-table__td" ><?php echo (round($QA->getAnswerScore())) ; ?> </td>
+                                                <td class="tab-table__td" onclick="openQuestionAnswers('asQuestion<?php echo $QA->getQuestionID(); ?>', 'questionAnswers<?php echo $QA->getQuestionID(); ?>', 'expendIcon<?php echo $QA->getQuestionID(); ?>')">
+                                                    <i class="fas tab-table__icon" id="expendIcon<?php echo $QA->getQuestionID(); ?>">&#xf107;</i>
+                                                </td>
+                                            </tr>
+                                            <tr class="tab-table__row filter__row row--hidden av__row" id="questionAnswers<?php echo $QA->getQuestionID(); ?>">
+                                                <td class="tab-table__td tab-td__table" colspan="3">
+                                                    <table class="tab-table table table-hover answer-table" id="filterTable">
+                                                        <thead>
+                                                            <th class="tab-table__th">Answer</th>
+                                                            <th class="tab-table__th">Score</th>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
+                                                                //Getting QA Data
+                                                                $listAnswers = $ScoreCtrl->getQuestionAnswers($QA->getQuestionID());
+                                                                // Looping through the results
+                                                                foreach ($listAnswers as $answer) { 
+                                                                    ?>
+                                                                        <tr class="tab-table__row filter__row">
+                                                                            <td class="tab-table__td" ><?php echo $answer->getAnswerName(); ?> </td>
+                                                                            <td class="tab-table__td av-row--score" ><?php echo $answer->getAnswerScore(); ?> </td>
+                                                                        </tr>
+                                                                    <?php
+                                                                }
+                                                            ?>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        <?php
                                     }
                                 ?>
                             </tbody>
@@ -97,6 +116,5 @@
                 });
             });
         });
-
     </script>
 </html>
