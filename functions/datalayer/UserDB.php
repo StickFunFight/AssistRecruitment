@@ -154,7 +154,7 @@
             $userPassword = password_hash(uniqid(), PASSWORD_DEFAULT);
 
             $dbDate = date("Y-m-d", strtotime($contactBirthDay));
-            echo $dbDate . "<br>";
+            //echo $dbDate . "<br>";
 
             $queryInsertUser = "INSERT INTO user(userName, userEmail, userPassword, userRights, userStatus) VALUES(?, ?, ?, ?, ?)";
             $stm = $this->db->prepare($queryInsertUser);
@@ -173,7 +173,7 @@
                     $result = $stmt->fetchAll(PDO::FETCH_OBJ);
                     // Looping through the results
                     foreach($result as $user){
-                        echo $user->userID;
+                        //echo $user->userID;
 
                         $queryInsertContact = "INSERT INTO contact(contactName, contactPhoneNumber, contactEmail, contactComment, contactStatus, customerID, userID, contactBirth) 
                         VALUES(?, ?, ?, ?, ?, ?, ?, ?)";

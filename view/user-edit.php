@@ -202,10 +202,11 @@
                             <textarea name="txtUserComment" id="userComment" class="form-control ce--input" rows="5"><?php echo $user->getUserComment(); ?>
                             </textarea>
                         </div>
+                    </div>
 
                         <div class="row ce--form-row">
                             <div class="col-sm-12">
-                            <input type="submit" name="btnUpdate" class="btn ce__update-button" value="Update user">
+                                <input type="submit" name="btnUpdate" class="btn ce__update-button" value="Update user">
                             </div>
                         </div>
                     </div>
