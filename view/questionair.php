@@ -43,7 +43,7 @@ require_once 'menu.php';
                     echo '<td>';
                     echo '<a id="'.$item->getQuestionairID().'" onclick="editScreen(this.id)"><i class="fas tab-table__icon editKnop">&#xf044;</i></a>';
                     echo  ' ';
-                    echo '<a id="'.$item->getQuestionairID().'" onclick="SendID(this.id)" data-id="'.$item->getQuestionairID().'"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
+                    echo '<a id="'.$item->getQuestionairID().'" onclick="SendID(this.id)" data-id="'.$item->getQuestionairID().'" data-toggle="modal" data-target="#questionairArchiveModal"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
                     echo '</td>';
                     echo '</tr>';
                 }
