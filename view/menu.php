@@ -61,7 +61,7 @@
                         <li class="submenu__item"><a href="qa" class="submenu--link">QA</a></li>
                         <li class="submenu__item"><a href="questionair" class="submenu--link">Questonair</a></li>
                         <li class="submenu__item"><a href="Axis" class="submenu--link">Axis</a></li>
-                        <li class="submenu__item"><a href="qaTable" class="submenu--link">Average score</a></li>
+                        <li class="submenu__item"><a href="qaTable" class="submenu--link">Average Score</a></li>
                     </ul>
 
                     <div class="submenu__resize">
