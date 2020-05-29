@@ -388,14 +388,6 @@
                                     <th class="tab-table__head" onclick="sortTable(0)">Name <div class="table__icon-top" onclick="sortTable('filterTable', 0, 'desc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 0, 'asc')"></div></th>
                                     <th class="tab-table__head" onclick="sortTable(1)">Start date<div class="table__icon-top" onclick="sortTable('filterTable', 1, 'desc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 1, 'asc')"></div></th>
                                     <th class="tab-table__head" onclick="sortTable(2)">End date <div class="table__icon-top" onclick="sortTable('filterTable', 2, 'desc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 2, 'asc')"></div></th>
-                                    <?php 
-                                        // Checking if there is a customer set
-                                        if($customerID == 0) {
-                                            ?>
-                                                <th class="tab-table__head" onclick="sortTable(3)">Customer</td>
-                                            <?php
-                                        }
-                                    ?>
                                     <th class="tab-table__head">Actions</th>
                                 </tr>
                             </thead>
@@ -425,14 +417,6 @@
                                         <td class="tab-table__td"><?php echo $scan->getScanName(); ?></td>
                                         <td class="tab-table__td"><?php echo $scan->getScanStartDate(); ?></td>
                                         <td class="tab-table__td"><?php echo $scan->getScanEndDate(); ?></td>
-                                        <?php 
-                                            // Checking if there is a customer set
-                                            if($customerID == 0) {
-                                                ?>
-                                                    <td class="tab-table__td"><?php echo $scan->getScanCustomerName(); ?></td>
-                                                <?php
-                                            }
-                                        ?>
                                         <td class="tab-table__td">
                                             <a class="editKnop" href="#"><i class="fas tab-table__icon">&#xf044;</i></a>
                                             <?php
