@@ -296,8 +296,7 @@
             }
         }
 
-        function GetAnswerScore()
-        {
+        function GetAnswerScore() {
             $lijst = array();
             $query = "SELECT q.questionID , q.questionName, AVG(a.answerScore) AS answerScore
             FROM scan_answer sa
@@ -318,6 +317,31 @@
             } else {
                 echo "oef foutje";
             }
+        }
+
+        // Function to add scan
+        function addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair, $customerID) { 
+            $scanStatus = 'Active';
+
+            // Changing date for the database
+            $dbStartDate = date("Y-m-d", strtotime($scanStartDate));
+            $dbEndDate = date("Y-m-d", strtotime($scanEndDate));
+
+            // Create Query to insert scan
+            $query = "INSERT INTO scan(scanName, scanComment, scanStatus, scanIntroductionText, scanReminderText, scanStartDate, scanEndDate, questionairID) 
+                    VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $scanName);
+            $stm->bindParam(2, $scanComment);
+            $stm->bindParam(3, $scanStatus);
+            $stm->bindParam(4, $scanIntroductionText);
+            $stm->bindParam(5, $scanReminderText);
+            $stm->bindParam(6, $dbStartDate);
+            $stm->bindParam(7, $dbEndDate);
+            $stm->bindParam(8, $scanQuestionair);
+            if(!$stm->execute()){
+                echo "Er is iets fout gegaan";
+            } 
         }
     }
 ?>
