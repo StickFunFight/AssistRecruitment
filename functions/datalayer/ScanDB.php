@@ -19,7 +19,8 @@
             $sql = "INSERT INTO scan (scanName, scanComment, scanStatus, scanIntroductionText, scanReminderText, scanStartDate, scanEndDate, questionairID) VALUES ('$name', '$comment', '$status', '$introductiontext', '$remindertext', '$startdate', '$enddate', '$questionairID')";
             $stm = $this->db->prepare($sql);
             if($stm->execute()){
-                echo 'Gelukt';
+                $newURL = "scan-list.php";
+                echo '<script>location.replace("' . $newURL . '");</script>';
             }
             else{
                 echo "Niet gelukt";
