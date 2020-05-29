@@ -67,7 +67,7 @@
                                                 <td class="tab-table__td" ><?php echo $QA->getQuestionName(); ?> </td>
                                                 <td class="tab-table__td" ><?php echo (round($QA->getAnswerScore())) ; ?> </td>
                                                 <td class="tab-table__td" onclick="openQuestionAnswers('asQuestion<?php echo $QA->getQuestionID(); ?>', 'questionAnswers<?php echo $QA->getQuestionID(); ?>', 'expendIcon<?php echo $QA->getQuestionID(); ?>')">
-                                                    <i class="fas tab-table__icon" id="expendIcon<?php echo $QA->getQuestionID(); ?>">&#xf107;</i>
+                                                    <i class="fas tab-table__icon" id="expendIcon<?php echo $QA->getQuestionID(); ?>" onclick="openQuestionAnswers('asQuestion<?php echo $QA->getQuestionID(); ?>', 'questionAnswers<?php echo $QA->getQuestionID(); ?>', 'expendIcon<?php echo $QA->getQuestionID(); ?>')">&#xf107;</i>
                                                 </td>
                                             </tr>
                                             <tr class="tab-table__row filter__row row--hidden av__row" id="questionAnswers<?php echo $QA->getQuestionID(); ?>">
