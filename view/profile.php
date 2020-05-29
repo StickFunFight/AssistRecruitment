@@ -3,13 +3,11 @@
 require '../functions/datalayer/database.class.php';
 // Include Controller class
 require '../functions/controller/UserController.php';
-require '../functions/controller/contactController.php';
 // Include Entiteit class
 require '../functions/models/entContact.php';
 
 // Creating connections with the classes
 $UserCtrl = new UserController();
-$ContactCtrl = new ContactController();
 $userID = 568;
 
 $detailsUser = $UserCtrl->getProfile($userID);
@@ -61,22 +59,22 @@ if (isset($_POST['btnChangePassword'])) {
                 <div class="row ce--form-row">
                     <div class="col-sm-6">
                         <label class="lbl_textfield" name="lblUserName">Username:</label>
-                        <input class="form-control txt_field" name="txtUserName" type="text" value="<?php echo $user->getContactName(); ?>" readonly> </input>
+                        <input class="form-control txt_field" name="txtUserName" type="text" value="<?php echo $user->getContactName(); ?>" readonly>
                     </div>
                     <div class="col-sm-6">
                         <label class="lbl_textfield" name="lblPassword">E-mail:</label>
-                        <input class="form-control txt_field" name="txtPassword" type="text" value="<?php echo $user->getContactEmail(); ?>" readonly></input>
+                        <input class="form-control txt_field" name="txtPassword" type="text" value="<?php echo $user->getUserEmail(); ?>" readonly>
                     </div>
                 </div>
 
                 <div class="row page__row ce--form-row">
                     <div class="col-sm-6">
                         <label class="lbl_textfield" name="lblUserName">Phonenumber:</label>
-                        <input class="form-control txt_field" name="txtUserName" type="text" value="<?php echo $user->getContactPhoneNumber(); ?>" readonly></input>
+                        <input class="form-control txt_field" name="txtUserName" type="text" value="<?php echo $user->getUserPhoneNumber(); ?>" readonly>
                     </div>
                     <div class="col-sm-6">
                         <label class="lbl_textfield" name="lblPassword">Status:</label>
-                        <input class="form-control txt_field" name="txtPassword" type="text" value="<?php echo $user->getContactStatus(); ?>" readonly></input>
+                        <input class="form-control txt_field" name="txtPassword" type="text" value="<?php echo $user->getUserStatus(); ?>" readonly>
                     </div>
                 </div>
             </form>
@@ -105,7 +103,7 @@ if (isset($_POST['btnChangePassword'])) {
                 </div>
                 <div class="row page__row ce--form-row">
                     <div class="col-sm-12">
-                        <input type="submit" name="btnChangePassword" class="btnSubmit" value="Change password">
+                        <input type="submit" name="btnChangePassword" class="btn btnSubmit" value="Change password">
                     </div>
                 </div>
 
