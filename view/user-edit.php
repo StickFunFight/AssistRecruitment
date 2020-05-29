@@ -317,6 +317,7 @@
                         </div> -->
 
     <section class="ce-overview">
+        <div class="container">
         <div class="ce-overview__table">
             <div class="row">
                 <div class="col-sm-12">
@@ -592,6 +593,13 @@
                                 <?php
                                     }
                                 ?>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <script>
             // Function to add a contact to department
