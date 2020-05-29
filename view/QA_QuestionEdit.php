@@ -51,7 +51,6 @@ $resultQuestionData = $QF->getQuestionData($questionID);
                             <select id="selStatusQuestEdit" name="selStatusQuestEdit" class="form-control" required>
                                 <option value="Active">Actief</option>
                                 <option value="Archived">Gearchiveerd</option>
-                                <option value="Deleted">Verwijderd</option>
                             </select>
                         </div>
                     </div>

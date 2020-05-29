@@ -25,9 +25,9 @@ $arrayTempAnswer = array();
                             <div class="col-sm-10">
                                 <select id="selCategory" name="selCategory" class="form-control">
                                     <?php $QF->getCategories(); ?>
-                            </select>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
                     <div class="form-group row">
                         <label for="txQuestion" class="col-sm-2 col-form-label" >Vraag</label>
@@ -165,7 +165,7 @@ $arrayTempAnswer = array();
 </script>
 <?php
 
-if(isset($_POST['btConfirm'])){
+if(isset($_POST['btConfirm'])) {
     $selAxis = $_POST['selAxisAdd'];
     $selCategory = $_POST['selCategory'];
     $txQuestion = $_POST['txQuestion'];
@@ -178,10 +178,11 @@ if(isset($_POST['btConfirm'])){
 //During the process of making a new question, the user adds an answer.
 //This answer does not have a questionID that it should connect to, yet.
 
-if(isset($_POST['btnConfirmAnswerAdd'])){
-    $answerAdd = $_POST['txAnswer'];
-    $scoreAdd = $_POST['txScore'];
-    $QF->putinArrayAnswer($arrayTempAnswer, $answerAdd, $scoreAdd);
+    if (isset($_POST['btnConfirmAnswerAdd'])) {
+        $answerAdd = $_POST['txAnswer'];
+        $scoreAdd = $_POST['txScore'];
+        $QF->putinArrayAnswer($arrayTempAnswer, $answerAdd, $scoreAdd);
+    }
 }
 ?>
 </body>
