@@ -54,6 +54,40 @@ require_once 'menu.php';
                 </table>
             </div>
         </div>
+        <div>
+            <table id="QaTable" class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                require("../functions/controller/QuestionairController.php");
+                $questionair = new QuestionairController();
+                $lijstQuestionair = $questionair->GetQuestionair();
+                foreach ($lijstQuestionair as $item)
+                {
+                    echo'<tr id="RowFilter">';
+                    echo '<td>';
+                    echo $item->getQuestionairName();
+                    echo '</td>';
+                    echo '<td>';
+                    echo  $item->getQuestionairStatus();
+                    echo '</td>';
+                    echo '<td>';
+                    echo '<a id="'.$item->getQuestionairID().'" onclick="editScreen(this.id)"><i class="fas tab-table__icon editKnop">&#xf044;</i></a>';
+                    echo  ' ';
+                    echo '<a id="'.$item->getQuestionairID().'" onclick="SendID(this.id)" data-id="'.$item->getQuestionairID().'" data-toggle="modal" data-target="#questionairArchiveModal"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
+                    echo '</td>';
+                    echo '</tr>';
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="modal fade" id="questionairArchiveModal" tabindex="-1" role="dialog"

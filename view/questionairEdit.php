@@ -18,26 +18,56 @@ if (isset($_GET['qID'])) {
     <div class="container-fluid">
         <h1>Questionare Edit</h1>
 
-        <label for="txtName"><h3>Name:</h3></label>
-        <input type="text" name="txtOldName" id="txtOldName" value=" <?php echo $QC->getName(); ?>">
-        <input type="text" name="txtName" id="txtName">
-        <br>
-        <label for="txtStatus"><h3>Status:</h3></label>
-        <input type="text" name="txtOldStatus" id="txtOldStatus" value="<?php echo $QC->getStatus(); ?>">
-        <input type="text" name="txtStatus" id="txtStatus">
-        <br>
-        <label for="txtComment"><h3>Comment:</h3></label>
-        <input type="text" name="txtOldComment" id="txtOldComment" value="<?php echo $QC->getComment(); ?>">
-        <input type="text" name="txtComment" id="txtComment">
-        <br>
-        <button type="button" id="Update" class="btn btn-success ButtonLeft">Update</button>
+            <label for="txtName"><h3>Name:</h3></label>
+            <input type="text" name="txtOldName" id="txtOldName" value=" <?php echo $QC->getName();?>" contenteditable="false">
+            <input type="text" name="txtName" id="txtName">
+            <br>
+            <label for="txtStatus"><h3>Status:</h3></label>
+            <input type="text" name="txtOldStatus" id="txtOldStatus" value="<?php echo $QC->getStatus();?>" contenteditable="false">
+            <input type="text" name="txtStatus" id="txtStatus">
+            <br>
+            <label for="txtComment"><h3>Comment:</h3></label>
+            <input type="text" name="txtOldComment" id="txtOldComment" value="<?php echo $QC->getComment();?>" contenteditable="false">
+            <input type="text" name="txtComment" id="txtComment">
+            <br>
+            <button type="button" id="Update" class="btn btn-success ButtonLeft">Update</button>
 
 
-        <div class="row QaTopMargin">
-            <div class="col-sm-6">
-                <button type="button" class="btn btn-success ButtonRight" data-toggle="modal"
-                        data-target="#questionairAddModal"><i class="fas fa-plus-circle"></i>Vraag Toevoegen
-                </button>
+            <div class="row QaTopMargin">
+                <div class="col-sm-6">
+                    <button type="button" class="btn btn-success ButtonRight" data-toggle="modal" data-target="#questionairAddModal"><i class="fas fa-plus-circle"></i>Vraag Toevoegen</button>
+                </div>
+            </div>
+            <div>
+                <table id="QaTable" class="table">
+                    <thead>
+                    <tr>
+                        <th>Vraag</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    require '../functions/models/EntQuestion.php';
+                    $lijstQuestionair = $QC->getQuestionairList();
+                    foreach ($lijstQuestionair as $item)
+                    {
+                        echo'<tr id="RowFilter">';
+                        echo '<td id="'.$item->getQuestionID().'">';
+                        echo $item->getQuestionName();
+                        echo '</td>';
+                        echo '<td>';
+                        echo  $item->getQuestionType();
+                        echo '</td>';
+                        echo '<td>';
+                        echo '<a id="'.$item->getQuestionID().'" onclick="SendID(this.id)" data-toggle="modal" data-target="#deleteQuestionModal"><i class="fas tab-table__icon deleteKnop">&#xf187;</i></a>';
+                        echo '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div>
