@@ -118,13 +118,13 @@ if (isset($_GET['status'])) {
                                     // Checking for customer id to know where to add the new user to
                                     if ($customerID != 0) {
                                         ?>
-                                        <a href="user-add?customer=<?php echo $customerID; ?>"
+                                        <a href="Scan-Add.php"
                                            class="btn add-container__btn"><i
                                                     class='fas add-container--icon'>&#xf055;</i> Add scan</a>
                                         <?php
                                     } else {
                                         ?>
-                                        <a href="user-add" class="btn add-container__btn"><i
+                                        <a href="Scan-Add.php" class="btn add-container__btn"><i
                                                     class='fas add-container--icon'>&#xf055;</i> Add scan</a>
                                         <?php
                                     }

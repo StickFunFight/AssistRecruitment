@@ -1,14 +1,29 @@
 <?php
     require_once 'database.class.php';
 
-    Class ScanDB {
+    Class ScanDB
+    {
 
         private $db;
 
-        public function __construct() {
+        public function __construct()
+        {
             //maakt een nieuwe connectie 
             $database = new Database();
             $this->db = $database->getConnection();
+        }
+
+        //functie van marfmans (thanx for deleting last time)
+        function setScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $questionairID)
+        {
+            $sql = "INSERT INTO scan (scanName, scanComment, scanStatus, scanIntroductionText, scanReminderText, scanStartDate, scanEndDate, questionairID) VALUES ('$name', '$comment', '$status', '$introductiontext', '$remindertext', '$startdate', '$enddate', '$questionairID')";
+            $stm = $this->db->prepare($sql);
+            if($stm->execute()){
+                echo 'Gelukt';
+            }
+            else{
+                echo "Niet gelukt";
+            }
         }
 
         function getScans($statusScan) {
@@ -154,7 +169,7 @@
                 return $listQuestionAirs;
             } // Showing a error when the query didn't execute
             else {
-                echo "Er is iets fout gegaan waardoor er geen functies opgehaald konden worden";
+                echo "Er is iets fout gegaan";
             }
         }
 
@@ -166,7 +181,7 @@
             $stm->bindParam(1, $scanQuestionair);
         }
 
-        function getScan($scanID) {
+        function getScan($scanID){
             // Creating a array
             $listScans = array();
 
@@ -254,7 +269,7 @@
         // Function to get the percentage of completed questions of a scan
         function getScanProgres($userID, $scanID) {
             /**
-            * This query selects the scanID. The scanID is then the 100%. 
+            * This query selects the scanID. The scanID is then the 100%.
             * Then the questions that are bonded to the question are gotton from scan_question where the scan_question scanID = scan_answer scanID
             * The completed percentage is than calculeted between the scanID in the scan_answer in comparison to the scanID in scan_answer
             */
@@ -268,7 +283,7 @@
             if($stm->execute()){
                 // Getting the results from the database
                 $result = $stm->fetch(PDO::FETCH_OBJ);
-                
+
                 // Checking if there are results. If none send 0 back
                 if (empty($result->scanProgress) || $result->scanProgress == null) {
                     return 0;
@@ -297,7 +312,7 @@
                     array_push($lijst, $entAnswerScore);
                 }
                 return $lijst;
-    
+
             } else {
                 echo "oef foutje";
             }
