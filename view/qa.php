@@ -179,7 +179,7 @@ require_once 'menu.php';
             <div class="modal-body">
                 <form method="POST">
                     <div class="form-group">
-                        <label for="message-text" class="col-form-label fetched-data"></label
+                        <label for="message-text" class="col-form-label fetched-data"></label>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" name="btnDelete" id="btnQuestionDelete" class="btn btn-danger" value="Ja">Ja</button>

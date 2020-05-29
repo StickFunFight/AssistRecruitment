@@ -1,19 +1,17 @@
 <?php
 
-
-class AxisDatabase
-{
+class AxisDatabase {
 
     private $conn;
 
-    public function __construct()
-    {
+    public function __construct() {
         require_once 'database.class.php';
         $database = new Database();
         $this->conn = $database->getConnection();
 
     }
-    public function GetAllAxis(){ 
+
+    public function GetAllAxis() { 
         {
             $lijst = array();
             $query = "SELECT * FROM axis";
@@ -26,14 +24,13 @@ class AxisDatabase
                     array_push($lijst, $entAxis);
                 }
                 return $lijst;
-
             } else {
                 echo "oef foutje";
             }
         }
     }
 
-     function archiveerAxis($Aid){
+     function archiveerAxis($Aid) {
         //variabele (n) uit de url halen
         $query = "UPDATE axis SET AxisStatus = 'Archived' WHERE AxisId = ?";
         $stm = $this->conn->prepare($query);
@@ -43,7 +40,7 @@ class AxisDatabase
         } else echo "oeps";
     }
 
-    function showA($Aid){
+    function showA($Aid) {
         $query = "SELECT * FROM axis WHERE AxisId = ?";
         $stm = $this->conn->prepare($query);
         $stm->bindParam(1, $Aid);
@@ -53,10 +50,9 @@ class AxisDatabase
         } else echo "oeps";
     }
 
-    public function AxisAanpassen($AxisName, $AxisStatus, $AxisID){
-        $query = "UPDATE axis SET AxisName =? ,
-                                       AxisStatus= ?
-                                       WHERE AxisID = ?";
+    public function AxisAanpassen($AxisName, $AxisStatus, $AxisID) {
+        $query = "UPDATE axis SET AxisName = ? , AxisStatus = ?
+                  WHERE AxisID = ?";
         $stm = $this->conn->prepare($query);
         $stm->bindParam(1, $AxisName);
         $stm->bindParam(2, $AxisStatus);

@@ -7,6 +7,34 @@ function maintenceSubMenu(){
     submenu.classList.toggle("submenu--show");
 }
 
+// Filling the progress bar per scan on the index page
+function setProgressbarScan(scanCircle, progress) {
+    // Getting the circle
+    var circle = document.getElementById(scanCircle);
+    // Getting the radius of the circle
+    var radius = circle.r.baseVal.value;
+    // calculating the with
+    var circumference = radius * 2 * Math.PI;
+
+    circle.style.strokeDasharray = `${circumference} ${circumference}`;
+    circle.style.strokeDashoffset = `${circumference}`;
+
+    // Calculating the progress
+    function setProgress(percent) {
+        const offset = circumference - percent / 100 * circumference;
+        circle.style.strokeDashoffset = offset;
+    }
+
+    // Setting the progress
+    setProgress(progress);
+
+    // input.addEventListener('change', function(e) {
+    //     if (input.value < 101 && input.value > -1) {
+    //         setProgress(input.value);
+    //     }  
+    // })
+}
+
 // Test function to sort the tables
 function sortTable(sortTable, tableColumn, direction) {
     var table, column, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0, tableIconTop, tableIconBottom, restTableIconTop, restTableIconBottom;
@@ -116,7 +144,7 @@ function updateTableStatus(overviewTable, overviewStatus) {
             // Checking if scan status has been changed
             if (url.includes("scan-status", 0)) {
                 // Looking in the url for the parameter and value to replace with the new status
-                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'scan-status=' + status);
+                var newUrl = url.replace(/\bscan-status=[a-zA-Z]{1,50}\b/, 'scan-status=' + status);
 
                 // Refreshing the page with the new url
                 location.replace(newUrl);
@@ -130,7 +158,7 @@ function updateTableStatus(overviewTable, overviewStatus) {
             // Checking if scan status has been changed
             if (url.includes("user-status", 0)) {
                 // Looking in the url for the parameter and value to replace with the new status
-                var newUrl = url.replace(/\bdepartment-status=[a-zA-Z]{1,50}\b/, 'user-status=' + status);
+                var newUrl = url.replace(/\buser-status=[a-zA-Z]{1,50}\b/, 'user-status=' + status);
 
                 // Refreshing the page with the new url
                 location.replace(newUrl);
@@ -270,4 +298,27 @@ function setCustomerSelectDisabeld() {
 // Function to udate the customer ID
 function changeSelectCustomer() {
     document.getElementById("custID").value = document.getElementById("customerSelect").value;
+}
+
+// Function to set scanID from the overview and use it in the modal
+function setScanIDModal(scanID) {
+    // Setting the value of the scan id in the modal
+    document.getElementById("scanIDDisconnect").value = scanID;
+}
+// Function to get department and use it in the modal
+function setContactIDModalCustomerEdit(contactID) {
+    document.getElementById("ContactIDArchive").value = contactID;
+    document.getElementById("ContactIDDelete").value = contactID;
+}
+
+// Function to get department and use it in the modal
+function setDepartmentIDModalCustomerEdit(departmentID) {
+    document.getElementById("departmentIDArchive").value = departmentID;
+    document.getElementById("departmentIDDelete").value = departmentID;
+}
+
+// Function to get scan and use it in the modal
+function setScanIDModalCustomerEdit(scanID) {
+    document.getElementById("ScanIDArchive").value = scanID;
+    document.getElementById("ScanIDDelete").value = scanID;
 }

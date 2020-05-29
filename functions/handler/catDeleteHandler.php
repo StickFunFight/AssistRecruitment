@@ -7,7 +7,6 @@ if (isset($_POST['catID'])){
 
     $catID = $_POST['catID'];
 
-
     $CAF->DeleteQaCategory($catID);
     echo "Succes";
 

@@ -10,6 +10,6 @@ if (isset($_POST['departmentID'])){
     $CAF->deleteDepartment($DepartmentID);
     echo "Succes";
 
-}else echo "failed";
+} else echo "failed";
 
 ?>

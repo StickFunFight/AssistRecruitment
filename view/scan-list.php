@@ -219,10 +219,7 @@ if (isset($_GET['status'])) {
                                             break;
                                         case 'Deleted':
                                             ?>
-
-                                    // Looping through the results
-                                    foreach ($listScans as $scan) {                                  
-                                ?>
+                                        
                                     <tr class="tab-table__row filter__row">
                                         <td class="tab-table__td"><?php echo $scan->getScanName(); ?></td>
                                         <td class="tab-table__td"><?php echo $scan->getScanStartDate(); ?></td>

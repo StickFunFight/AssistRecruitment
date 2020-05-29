@@ -5,7 +5,7 @@
         
         private $UserDB;   
     
-        public function __construct(){
+        public function __construct() {
             $this->UserDB = new UserDB();
         }
 
@@ -19,7 +19,7 @@
             return $listUsers;
         }
 
-        function getUsersCustomer($customerID, $status){
+        function getUsersCustomer($customerID, $status) {
             // Creating a array
             $listUsers = array();
 
@@ -31,17 +31,17 @@
 
         // Getting all the departments of the user
         function getDepartmentsUser($userID, $status) {
-             // Creating a array
-             $listDepartmentsUser = array();
+            // Creating a array
+            $listDepartmentsUser = array();
 
-             $listDepartmentsUser = $this->UserDB->getDepartmentsUser($userID, $status);
- 
-             // Returning the list given from the Database class
-             return $listDepartmentsUser;
+            $listDepartmentsUser = $this->UserDB->getDepartmentsUser($userID, $status);
+
+            // Returning the list given from the Database class
+            return $listDepartmentsUser;
         }
 
         // Getting al the contact
-        function getDetailsUser($userID){
+        function getDetailsUser($userID) {
             // Creating a array
             $detailsUser = array();
 
@@ -51,8 +51,25 @@
             return $detailsUser;
         }
 
+        function addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer) {
+            // Creating the user
+            if($this->UserDB->addUser($contactName, $userEmail, $userType, $contactPhone, $contactBirthDay, $contactComment, $contactCustomer)) {
+               // Getting the current url
+               $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+               $newURL = $currentURL . "?user-error=none";
+               // Reloading page with succes message
+               //echo '<script>location.replace("'.$newURL.'");</script>';
+            } else {
+                //Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "?user-error=none";
+                // Reloading page with succes message
+                //echo '<script>location.replace("'.$newURL.'");</script>';
+            }
+        }
+
         function updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment) {
-            if($this->UserDB->updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment)){
+            if($this->UserDB->updateUser($userID, $contactID, $userName, $contactPhone, $userEmail, $userStatus, $contactCustomer, $contactComment)) {
                 // Getting the current url
                 $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                 $newURL = $currentURL . "?error=none";
@@ -65,6 +82,28 @@
                 // Reloading page with succes message
                 echo '<script>location.replace("'.$newURL.'");</script>';
             }
+        }
+
+        // Function to archive user
+        function archiveUser($userID) {
+            $this->UserDB->archiveUser($userID);
+        }
+    
+        // Function to delete user
+        function deleteUser($userID) {
+            $this->UserDB->deleteUser($userID);
+        }
+
+        function createUser($UserID, $UserName, $UserEmail, $userType, $userPassword, $UserStatus) {
+            //semding the data to the databaseclass
+            $this->UserDB->addUser($UserID, $UserName, $UserEmail, $userType, $userPassword, $userType, $UserStatus);
+
+        }
+
+        function createUserBulk($UserEmail, $ScanID) {
+            //semding the data to the databqaseclass
+            $this->UserDB->CreateUserBulk($UserEmail, $ScanID);
+
         }
     }
 ?>

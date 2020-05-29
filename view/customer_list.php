@@ -206,91 +206,84 @@
     <div class="modal fade" id="archiveModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="archiveModalLabel">Archive Customer</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to archive this costumer?
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="archiveModalLabel">Archive Customer</h5>
 
-            <form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
-                <button type="submit" name="btnDelete" class="btn btn-primary" id="btnArchive">Archive   </button>          
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-                <script type="text/javascript">
-                function reply_click(clicked_id)
-                {
-                    window.yourGlobalVariable = clicked_id;
-                }
+                <div class="modal-body">
+                    Are you sure you want to archive this costumer?
+                </div>
 
-                $('#btnArchive').click(function () {
+                <form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                        <button type="submit" name="btnDelete" class="btn btn-primary" id="btnArchive">Archive   </button>          
 
-                $.ajax({
-                    url: 'customer_handler_archive',
-                    type: 'post',
-                    data: { "CustomerID": yourGlobalVariable},
-                    success: function(response) { window.location.href='customer_list?status=<?php echo $userStatus;?>' }
-                });
+                        <script type="text/javascript">
+                            function reply_click(clicked_id) {
+                                window.yourGlobalVariable = clicked_id;
+                            }
 
-                });
+                            $('#btnArchive').click(function () {
+                                $.ajax({
+                                    url: 'customer_handler_archive',
+                                    type: 'post',
+                                    data: { "CustomerID": yourGlobalVariable},
+                                    success: function(response) { window.location.href='customer_list?status=<?php echo $userStatus;?>' }
+                                });
+                            });
 
-                </script>
-               
-            </div>
-            </form>
-
+                        </script>
+                    </div>
+                </form>
             </div>
         </div>
-        </div>
+    </div>
             
     <!--Delete Modal--->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteModal">Delete Customer</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this costumer?
-            </div>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModal">Delete Customer</h5>
+                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
-            <form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
-                <button type="submit" name="btnDelete" class="btn btn-primary" id="btnDelete">Delete   </button>          
+                <div class="modal-body">
+                    Are you sure you want to delete this costumer?
+                </div>
 
-                <script type="text/javascript">
-                function reply_click(clicked_id)
-                {
-                    window.yourGlobalVariable = clicked_id;
-                }
+                <form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                        <button type="submit" name="btnDelete" class="btn btn-primary" id="btnDelete">Delete   </button>          
 
-                $('#btnDelete').click(function () {
+                        <script type="text/javascript">
+                            function reply_click(clicked_id) {
+                                window.yourGlobalVariable = clicked_id;
+                            }
 
-                $.ajax({
-                    url: 'customer_handler_delete',
-                    type: 'post',
-                    data: { "CustomerID": yourGlobalVariable},
-                    success: function(response) { window.location.href='customer_list?status=<?php echo $userStatus;?>' }
-                });
-
-                });
-
-                </script>
-               
-            </div>
-            </form>
-
+                            $('#btnDelete').click(function () {
+                                $.ajax({
+                                    url: 'customer_handler_delete',
+                                    type: 'post',
+                                    data: { "CustomerID": yourGlobalVariable},
+                                    success: function(response) { window.location.href='customer_list?status=<?php echo $userStatus;?>' }
+                                });
+                            });
+                        </script>   
+                    </div>
+                </form>
             </div>
         </div>
-        </div>
+    </div>
 
     <script>
         // Filteren op de table
@@ -312,9 +305,8 @@
             location.replace("?status=" + status);
         }
 
-        function toDetails(customerID){
+        function toDetails(customerID) {
             location.assign("customer-edit?customer=" + customerID);
         }
-
     </script>
 </html>

@@ -2,17 +2,15 @@
 
 require '../functions/datalayer/AxisDatabase.php';
 
-class AxisController
-{
+class AxisController {
     private $db;
     private $AxisId;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->db = new AxisDatabase();
     }
 
-    public function GetAxis(){
+    public function GetAxis() {
         $Lijst = array();
 
         $Lijst = $this->db->GetAllAxis();
@@ -21,7 +19,7 @@ class AxisController
         return $Lijst;
     }
 
-    public function showAxisName($Aid){
+    public function showAxisName($Aid) {
         $this->AxisId = $Aid;
         $AxisName = $this->db->showA($this->AxisId);
         return $AxisName;
@@ -30,8 +28,7 @@ class AxisController
     /**
      * @param mixed $AxisId
      */
-    public function setAxisId($AxisId)
-    {
+    public function setAxisId($AxisId) {
         $this->AxisId = $AxisId;
     }
 

@@ -2,7 +2,7 @@
 <?php
 require '../functions/datalayer/CustomerDB.php';
 
-if (isset($_POST['CustomerID'])){
+if (isset($_POST['CustomerID'])) {
 
     $CustomerID = $_POST['CustomerID'];
 
@@ -10,6 +10,5 @@ if (isset($_POST['CustomerID'])){
     $CAF->archiveCustomer($CustomerID);
     echo "Succes";
 
-}else echo "failed";
-
+} else echo "failed";
 ?>

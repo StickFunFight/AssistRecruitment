@@ -1,20 +1,17 @@
 <?php
     require_once 'database.class.php';
 
-    Class ScanDB
-    {
+    Class ScanDB {
 
         private $db;
 
-        public function __construct()
-        {
+        public function __construct() {
             //maakt een nieuwe connectie 
             $database = new Database();
             $this->db = $database->getConnection();
         }
 
-        function getScans($statusScan)
-        {
+        function getScans($statusScan) {
             // Creating a array
             $listScans = array();
 
@@ -28,7 +25,7 @@
                       ORDER BY s.scanName ASC";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $statusScan);
-            if($stm->execute()){
+            if ($stm->execute()) {
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // Looping through the results
@@ -46,8 +43,7 @@
         }
 
         // Getting all scans of 1 customer
-        function getScansCustomer($customerID, $statusScan)
-        {
+        function getScansCustomer($customerID, $statusScan) {
             // Creating a array
             $listScans = array();
 
@@ -62,7 +58,7 @@
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $customerID);
             $stm->bindParam(2, $statusScan);
-            if($stm->execute()){
+            if ($stm->execute()) {
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // Looping through the results
@@ -72,16 +68,15 @@
                     array_push($listScans, $entScan);
                 }
                 // Returning the full list
-                return $listScans;    
-            }
-            // Showing a error when the query didn't execute
-            else{
+                return $listScans;
+            } // Showing a error when the query didn't execute
+            else {
                 echo "Er is iets fout gegaan waardoor er geen functies opgehaald konden worden";
             }
         }
 
         // Getting all scans of 1 user
-        function getScansUser($userID){
+        function getScansUser($userID) {
             // Creating a array
             $listScans = array();
 
@@ -97,82 +92,105 @@
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $userID);
             $stm->bindParam(2, $date);
-            if($stm->execute()){
+            if ($stm->execute()) {
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // Looping through the results
-                foreach($result as $scan){
+                foreach($result as $scan) {
+                    // Converting the dates to format '15 March'
+                    $scanStartDate = date("d F", strtotime($scan->scanStartDate));
+                    $scanEndDate = date("d F", strtotime($scan->scanEndDate));
+
                     // Putting it in the modal
-                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, null, $scan->scanStartDate, $scan->scanEndDate, null, null, null, $scan->userID);
+                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, null, $scanStartDate, $scanEndDate, null, null, null, $scan->userID);
                     array_push($listScans, $entScan);
                 }
                 // Returning the full list
-                return $listScans;    
-            }
-            // Showing a error when the query didn't execute
-            else{
+                return $listScans;
+            } // Showing a error when the query didn't execute
+            else {
                 echo "Er is iets fout gegaan waardoor er geen functies opgehaald konden worden";
             }
         }
 
 
-
-        
-
-        function archiveScan($scanID){
+        function archiveScan($scanID) {
             // Create Query to update Customer Status
             $query = "UPDATE scan SET scanStatus = 'Archived' WHERE scanID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $scanID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
-                echo "Er is iets fout gegaan";
-            }
-        }
-    
-        function deleteScan($scanID){
-            // Create Query to update Customer Status
-            $query = "UPDATE scan SET scanStatus = 'Deleted' WHERE scanID = ?";
-            $stm = $this->db->prepare($query);
-            $stm->bindParam(1, $scanID);
-            if($stm->execute()){
-                echo 'Het is gelukt';
-            }
-            // Error Text
-            else {
+            if (!$stm->execute()) {
                 echo "Er is iets fout gegaan";
             }
         }
 
-        function getScan($scanID){
+        function deleteScan($scanID) {
+            // Create Query to update Customer Status
+            $query = "UPDATE scan SET scanStatus = 'Deleted' WHERE scanID = ?";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $scanID);
+            if (!$stm->execute()) {
+                echo "Er is iets fout gegaan";
+            }
+        }
+
+        // Function to get templates
+        function getScanQuestionAir() {
+            $listQuestionAirs = array();
+
+            // Create Query to get questionairs
+            $query = "SELECT * FROM questionair";
+            $stm = $this->db->prepare($query);
+            if ($stm->execute()) {
+                // Getting the results fromm the database
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                // Looping through the results
+                foreach ($result as $questionair) {
+                    // Putting it in the modal
+                    $entQuestionair = new EntQuestionair($questionair->questionairID, $questionair->questionairName, $questionair->questionairComment, $questionair->questionairStatus);
+                    array_push($listQuestionAirs, $entQuestionair);
+                }
+                // Returning the full list
+                return $listQuestionAirs;
+            } // Showing a error when the query didn't execute
+            else {
+                echo "Er is iets fout gegaan waardoor er geen functies opgehaald konden worden";
+            }
+        }
+
+        // Getting the id of the autocomplete questionair
+        function getQuestionairID($scanQuestionair) {
+            // Create Query to get questionairs
+            $query = "SELECT questionairID FROM questionair WHERE questionairName = ?";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $scanQuestionair);
+        }
+
+        function getScan($scanID) {
             // Creating a array
             $listScans = array();
 
             // Making a query to get the scans of the customer out the database
             $query = sprintf("Select * from scan where scanID = $scanID");
             $stm = $this->db->prepare($query);
-            if($stm->execute()){
+            if ($stm->execute()) {
                 // Getting the results fromm the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // Looping through the results
-                foreach($result as $scan){
+                foreach ($result as $scan) {
                     // Putting it in the modal
-                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, $scan->scanReminderText, $scan->scanStartDate, $scan->scanEndDate, '','','','');
+                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, $scan->scanReminderText, $scan->scanStartDate, $scan->scanEndDate, '', '', '', '');
                     array_push($listScans, $entScan);
                 }
                 // Returning the full list
                 return $listScans;
-            }
-            // Showing a error when the query didn't execute
-            else{
+            } // Showing a error when the query didn't execute
+            else {
                 echo "Er is iets fout gegaan waardoor er geen functies opgehaald konden worden";
             }
         }
 
-        function EditScan($scanID, $scanName, $scanComment, $scanStatus,$scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate){
+        function EditScan($scanID, $scanName, $scanComment, $scanStatus, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate) {
             $query = "update scan set scanName = ?, scanComment=?, scanStatus = ? ,scanIntroductionText = ?, scanReminderText =? , scanStartDate = ?, scanEndDate = ? where scanID = ?";
             $stm = $this->db->prepare($query);
             $stm->bindParam(1, $scanName);
@@ -183,12 +201,11 @@
             $stm->bindParam(6, $scanStartDate);
             $stm->bindParam(7, $scanEndDate);
             $stm->bindParam(8, $scanID);
-            if($stm->execute()){
+            if ($stm->execute()) {
                 $newURL = "scan-list.php";
-                echo '<script>location.replace("'.$newURL.'");</script>';
-            }
-            // Showing a error when the query didn't execute
-            else{
+                echo '<script>location.replace("' . $newURL . '");</script>';
+            } // Showing a error when the query didn't execute
+            else {
                 echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
             }
         }
@@ -198,30 +215,92 @@
             // Creating a array
             $listScans = array();
 
+            // Getting the date of today to only select scan that are still active
+            $today = date("Y-m-d");
+
             $query = "SELECT s.scanID, s.scanName, s.scanComment, s.scanStatus, s.scanIntroductionText, s.scanReminderText, s.scanStartDate, s.scanEndDate, dp.departmentID, c.customerID, c.customerName
                       FROM scan s
                       INNER JOIN scan_department sd ON s.scanID = sd.scanID
                       INNER JOIN department dp ON sd.departmentID = dp.departmentID 
                       INNER JOIN customer c ON dp.customerID = c.customerID
-                      WHERE s.scanStatus = 'Active' AND dp.departmentID = 5
-                      AND s.scanStartDate <= '2020-05-18' AND s.scanEndDate >= '2020-05-18'
+                      WHERE s.scanStatus = 'Active' AND dp.departmentID = ?
+                      AND s.scanStartDate <= ? AND s.scanEndDate >= ?
                       ORDER BY s.scanEndDate ASC";
             $stm = $this->db->prepare($query);
-            if($stm->execute()){
-                // Getting the results fromm the database
+            $stm->bindParam(1, $departmentID);
+            $stm->bindParam(2, $today);
+            $stm->bindParam(3, $today);
+            if($stm->execute()) {
+                // Getting the results from the database
                 $result = $stm->fetchAll(PDO::FETCH_OBJ);
                 // Looping through the results
-                foreach($result as $scan){
+                foreach($result as $scan) {
+                    // Converting the dates to format '15 March'
+                    $scanStartDate = date("d F", strtotime($scan->scanStartDate));
+                    $scanEndDate = date("d F", strtotime($scan->scanEndDate));
+
                     // Putting it in the modal
-                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, $scan->scanReminderText, $scan->scanStartDate, $scan->scanEndDate, $scan->customerName, $scan->customerID, $scan->departmentID, null);
+                    $entScan = new entScan($scan->scanID, $scan->scanName, $scan->scanComment, $scan->scanStatus, $scan->scanIntroductionText, $scan->scanReminderText, $scanStartDate, $scanEndDate, $scan->customerName, $scan->customerID, $scan->departmentID, null);
                     array_push($listScans, $entScan);
                 }
                 // Returning the full list
                 return $listScans;
-            }
-            // Showing a error when the query didn't execute
-            else{
+            } // Showing a error when the query didn't execute
+            else {
                 echo "Er is iets fout gegaan wardoor er geen functies opgehaald konden worden";
+            }
+        }
+
+        // Function to get the percentage of completed questions of a scan
+        function getScanProgres($userID, $scanID) {
+            /**
+            * This query selects the scanID. The scanID is then the 100%. 
+            * Then the questions that are bonded to the question are gotton from scan_question where the scan_question scanID = scan_answer scanID
+            * The completed percentage is than calculeted between the scanID in the scan_answer in comparison to the scanID in scan_answer
+            */
+            $query = "SELECT sc.scanID, (Count(sc.scanID) * 100 / (SELECT Count(sq.questionID) FROM scan_question sq WHERE sq.scanID = sc.scanID)) AS scanProgress
+                      FROM scan_answer sc
+                      WHERE sc.userID = ? AND scanID = ?
+                      GROUP BY sc.scanID";
+            $stm = $this->db->prepare($query);
+            $stm->bindParam(1, $userID);
+            $stm->bindParam(2, $scanID);
+            if($stm->execute()){
+                // Getting the results from the database
+                $result = $stm->fetch(PDO::FETCH_OBJ);
+                
+                // Checking if there are results. If none send 0 back
+                if (empty($result->scanProgress) || $result->scanProgress == null) {
+                    return 0;
+                } else {
+                    // Getting the progress, rounding it and returning it
+                    $scanProgressProcent = round($result->scanProgress);
+                    return $scanProgressProcent;
+                }
+            }
+        }
+
+        function GetAnswerScore()
+        {
+            $lijst = array();
+            $query = "SELECT q.questionID , q.questionName, AVG(a.answerScore) AS answerScore
+            FROM scan_answer sa
+            INNER JOIN question q ON q.questionID = sa.questionID
+            INNER JOIN answer a ON a.answerID = sa.answerID
+            GROUP BY q.questionID
+            ORDER BY q.questionName ASC";
+
+            $stm = $this->db->prepare($query);
+            if ($stm->execute()) {
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                foreach ($result as $item) {
+                    $entAnswerScore = new entAnswerScore(null, $item->answerScore, $item->questionID, $item->questionName);
+                    array_push($lijst, $entAnswerScore);
+                }
+                return $lijst;
+    
+            } else {
+                echo "oef foutje";
             }
         }
     }

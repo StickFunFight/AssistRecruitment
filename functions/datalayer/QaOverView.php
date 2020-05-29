@@ -1,19 +1,17 @@
 <?php
 require '../functions/models/EntCategory.php';
 require '../functions/models/EntQuestionAnswer.php';
-class QaOverView
-{
+
+class QaOverView {
     private $db;
 
-    public function __construct()
-    {
+    public function __construct() {
         require_once 'database.class.php';
         $database = new Database();
         $this->db = $database->getConnection();
     }
 
-    function GetAllCategories()
-    {
+    function GetAllCategories() {
         $lijst = array();
         $query = "SELECT * FROM categorie where categorieStatus = 'Active'";
         $stm = $this->db->prepare($query);
@@ -30,8 +28,7 @@ class QaOverView
         }
     }
 
-    function GetQuestionAnswers()
-    {
+    function GetQuestionAnswers() {
         $lijst = array();
         $query = "SELECT * FROM QuestionAnswer";
         $stm = $this->db->prepare($query);

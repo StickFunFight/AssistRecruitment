@@ -7,6 +7,7 @@
 // Creating a array
 $arrayTempAnswer = array();
 ?>
+
 <link rel="stylesheet" type="text/css" href="../assests/styling/QA_QuestionStyle.css">
 <body>
 
@@ -174,7 +175,8 @@ if(isset($_POST['btConfirm'])){
 
     $QF->setQuestion($selCategory, $selAxis, $txQuestion, $taExemple, $selStatus, $selQuestionType);
 
-}
+//During the process of making a new question, the user adds an answer.
+//This answer does not have a questionID that it should connect to, yet.
 
 if(isset($_POST['btnConfirmAnswerAdd'])){
     $answerAdd = $_POST['txAnswer'];

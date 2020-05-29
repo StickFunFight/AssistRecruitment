@@ -6,16 +6,16 @@ Class CustomerDB {
     
     private $db;
         
-    public function __construct(){
+    public function __construct() {
         //Create a connection with the Database 
         $database = new Database();
         $this->db = $database->getConnection();
 
     }
 
-    function getCustomers($status){
-    // Create an Array for the function
-      $listCustomers = array();
+    function getCustomers($status) {
+        // Create an Array for the function
+        $listCustomers = array();
 
         // Query to select data from customer table
         $query = "SELECT * FROM customer WHERE customerStatus = ? ORDER BY customerName ASC";
@@ -26,10 +26,10 @@ Class CustomerDB {
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
             // Create a loop to get all customers from the customer table
             foreach ($result as $customer) {
-                // Call Entity Class to get values for each customer
-                $entCustomer = new entCustomer($customer->customerID, $customer->customerName, $customer->customerComment, $customer->customerReference, $customer->customerStatus);
-                array_push($listCustomers, $entCustomer);
-                    }       
+                    // Call Entity Class to get values for each customer
+                    $entCustomer = new entCustomer($customer->customerID, $customer->customerName, $customer->customerComment, $customer->customerReference, $customer->customerStatus);
+                    array_push($listCustomers, $entCustomer);
+                }       
                 // Return full list
                 return $listCustomers;       
             }
@@ -41,10 +41,9 @@ Class CustomerDB {
          
     //Function to bind the values required to execute the createCustomer function in the customerAdd class.
     public function createCustomer($customerName, $customerComment, $customerReference) {
-
         $customerStatus = 'Active';
 
-        //A query is create here and values are being bound to the parameters inside the query.
+        // A query is create here and values are being bound to the parameters inside the query.
         $stmt = $this->db->prepare("INSERT INTO customer (customerID, customerName, customerComment, customerReference, customerStatus) VALUES (?, ?, ?, ?, ?)");
         $stmt->bindParam(1, $customerID);
         $stmt->bindParam(2, $customerName);
@@ -60,7 +59,7 @@ Class CustomerDB {
         }
     }
 
-    function archiveCustomer($customerID){
+    function archiveCustomer($customerID) {
         // Create Query to update Customer Status
         $query = "UPDATE customer SET customerStatus = 'Archived' WHERE customerID = ?";
         $stm = $this->db->prepare($query);
@@ -74,7 +73,7 @@ Class CustomerDB {
         }
     }
 
-    function deleteCustomer($customerID){
+    function deleteCustomer($customerID) {
         // Create Query to update Customer Status
         $query = "UPDATE customer SET customerStatus = 'Deleted' WHERE customerID = ?";
         $stm = $this->db->prepare($query);
@@ -125,7 +124,7 @@ Class CustomerDB {
         $stm->bindParam(3, $customerComment);
         $stm->bindParam(4, $customerStatus);
         $stm->bindParam(5, $customerID);
-        if($stm->execute()){
+        if($stm->execute()) {
             // Sending true back for succes message
             return true;
         } else {
@@ -133,7 +132,5 @@ Class CustomerDB {
             return false;
         }
     }
-
 }
-
 ?>
