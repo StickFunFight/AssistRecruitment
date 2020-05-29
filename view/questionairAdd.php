@@ -8,6 +8,7 @@ require_once 'menu.php';
 <html>
 <link rel="stylesheet" href="../assests/styling/QaStyling.css">
 <link rel="stylesheet" href="../assests/styling/customer.scss">
+<link rel="stylesheet" href="../assests/styling/customer-edit.css">
 <div id="page-content">
     <div class="container-fluid">
         <h1>Questionare Add</h1>
