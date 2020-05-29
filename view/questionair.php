@@ -17,7 +17,7 @@ require_once 'menu.php';
                 <button type="button" class="btn add-container__btn ButtonRight" id="AddQuestionair"><i class="fas fa-plus-circle"></i> Questionair toevoegen</button>
             </div>
         </div>
-        <div>
+        <div class="row">
             <table id="QaTable" class="table">
                 <thead>
                 <tr>

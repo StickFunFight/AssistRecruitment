@@ -439,7 +439,7 @@ tr.av__row-active {
 
 /* setting the score under the avagere score */
 .tab-table__td.av-row--score {
-  width: 30%;
+  width: 25%;
 }
 
 /* changeing the th background color */

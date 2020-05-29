@@ -9,7 +9,7 @@
 <body>
 
     <div id="page-content">
-        <div class="container-fluid">
+        <div class="container-fluid container-margin">
 
             <div class="header">
                 <h1 class="title">Vraag toevoegen</h1>

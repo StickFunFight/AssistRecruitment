@@ -68,7 +68,9 @@ foreach ($lijstScan as $item) {
                         <input type="date" name="DpEnd" id="EndDate" value="<?php echo $item->getScanEndDate(); ?>"
                                class="form-control ce--input" required/>
                     </div>
+                </div>
 
+                <div class="row ce--form-row">
                     <div class="col-sm-6">
                         <label for="status" class="ce__label">Status</label>
                         <select class="form-control" name="cbxStatus">
@@ -93,11 +95,13 @@ foreach ($lijstScan as $item) {
                         </select>
                     </div>
                 </div>
+
                 <div class="row ce--form-row">
                     <div class="col-sm-6">
-                        <input type="submit" class="btn btn-secondary btn-lg" value="Opslaan" name="BtnOpslaan"
+                        <input type="submit" class="btn btn-status" value="Opslaan" name="BtnOpslaan"
                                id="BtnOpslaan"/>
                     </div>
+                </div>
             </form>
         </div>
         <form method="post" enctype="multipart/form-data">
@@ -107,7 +111,7 @@ foreach ($lijstScan as $item) {
                     <h1 class="ce__title" id="pageTitle">Publish in bulk</h1>
                 </div>
             </div>
-            <div class="row ce--form-row">
+            <div class="row">
                 <div class="col-sm-6">
                         <input type="file"  name="file" class="custom-file-input" id="file">
                         <label id="Lblcsv" class="custom-file-label ce--input" for="file">Kies csv bestand..</label>
@@ -121,7 +125,7 @@ foreach ($lijstScan as $item) {
 
                 </div>
                 <div class="col-sm-6">
-                    <input type="submit" name="BtnImport" value="Importeren" class="btn btn-secondary btn-lg" />
+                    <input type="submit" name="BtnImport" value="Importeren" class="btn btn-status" />
                 </div>
             </div>
             </div>
