@@ -158,7 +158,7 @@ class QuestionairDatabase
         //variabele (n) uit de url halen
         $query = "UPDATE questionair SET questionairStatus = 'Archived' WHERE questionairID = $QairID";
 
-        $stm = $this->db->prepare($query);
+        $stm = $this->conn->prepare($query);
         if ($stm->execute()) {
             return "wowiepowie";
         } else return "oeps";
@@ -167,7 +167,7 @@ class QuestionairDatabase
     function showQuestionair($QairID)
     {
         $query = "SELECT * FROM questionair WHERE questionairID = '$QairID'";
-        $stm = $this->db->prepare($query);
+        $stm = $this->conn->prepare($query);
         if ($stm->execute()) {
             $result = $stm->fetch(PDO::FETCH_OBJ);
             echo $result->questionairName;
