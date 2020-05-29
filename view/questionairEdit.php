@@ -19,15 +19,15 @@ if (isset($_GET['qID'])){
         <h1>Questionare Edit</h1>
 
             <label for="txtName"><h3>Name:</h3></label>
-            <input type="text" name="txtOldName" id="txtOldName" value=" <?php echo $QC->getName();?>">
+            <input type="text" name="txtOldName" id="txtOldName" value=" <?php echo $QC->getName();?>" contenteditable="false">
             <input type="text" name="txtName" id="txtName">
             <br>
             <label for="txtStatus"><h3>Status:</h3></label>
-            <input type="text" name="txtOldStatus" id="txtOldStatus" value="<?php echo $QC->getStatus();?>">
+            <input type="text" name="txtOldStatus" id="txtOldStatus" value="<?php echo $QC->getStatus();?>" contenteditable="false">
             <input type="text" name="txtStatus" id="txtStatus">
             <br>
             <label for="txtComment"><h3>Comment:</h3></label>
-            <input type="text" name="txtOldComment" id="txtOldComment" value="<?php echo $QC->getComment();?>">
+            <input type="text" name="txtOldComment" id="txtOldComment" value="<?php echo $QC->getComment();?>" contenteditable="false">
             <input type="text" name="txtComment" id="txtComment">
             <br>
             <button type="button" id="Update" class="btn btn-success ButtonLeft">Update</button>
