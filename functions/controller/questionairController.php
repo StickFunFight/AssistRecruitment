@@ -15,9 +15,7 @@ class questionairController
     public function GetQuestionair()
     {
         $Lijst = array();
-
         $Lijst = $this->db->GetQuestionair();
-
         // Returning the list given from the Database class
         return $Lijst;
     }

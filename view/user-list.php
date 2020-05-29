@@ -234,8 +234,24 @@ if (isset($_GET['status'])) {
                                             ?>
 
                                             <?php
-                                            break;
-                                        default:
+                                                // Checking for status and user a different icon for a different icon for that status
+                                                switch ($userStatus) {
+                                                    case 'Archived':
+                                                        ?>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#deleteModal" id='<?php echo $user->getUserID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf2ed;</i></a>
+                                                        <?php
+                                                        break;
+                                                    case 'Deleted':
+                                                        ?>
+                                                        
+                                                        <?php
+                                                        break;
+                                                    default:
+                                                        ?>
+                                                            <a class="deleteKnop" href="#" data-toggle="modal" data-target="#archiveModal" id='<?php echo $user->getUserID();?>' onClick="reply_click(this.id)"><i class="fas tab-table__icon">&#xf187;</i></a>
+                                                        <?php
+                                                        break;
+                                                }
                                             ?>
                                             <a class="deleteKnop" href="#" data-toggle="modal"
                                                data-target="#archiveModal" id='<?php echo $user->getUserID(); ?>'

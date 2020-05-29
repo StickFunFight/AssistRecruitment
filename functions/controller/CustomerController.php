@@ -12,10 +12,27 @@ class CustomerController
         $this->customerDB = new CustomerDB();
     }
 
-    function getCustomers($status)
-    {
-        // Array aanmaken voor de functies
-        $listCustomers = $this->customerDB->getCustomers($status);
+        function deleteCustomers($customerID){
+            $this->customerDB->deleteCustomer($customerID);
+        }
+        
+        //This function creates a new customer using the values obtained from the customerDatabase (createCustomer) function.
+        //Also gives an echo as feedback to assure the user that the statement has succesfully been executed or not.
+        function createCustomer($customerName, $customerComment, $customerReference) {
+            if($this->customerDB->createCustomer($customerName, $customerComment, $customerReference)){
+                // Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "?error=none";
+                // Reloading page with succes message
+                echo '<script>location.replace("'.$newURL.'");</script>';
+            } else {
+               // Getting the current url
+               $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+               $newURL = $currentURL . "?error=1";
+               // Reloading page with succes message
+               echo '<script>location.replace("'.$newURL.'");</script>';
+           }
+        }
 
         // Returning the list given from the Database class
         return $listCustomers;

@@ -293,6 +293,14 @@ function autocomplete(inp, arr) {
     });
 }
 
+// Opening a new table with all results on qaTable
+function openQuestionAnswers(tableRowAV, tableRowQA, expendIcon) {
+    // Getting the tablee row and giving or removing class row--hidden
+    document.getElementById(tableRowAV).classList.toggle("av__row-active");
+    document.getElementById(tableRowQA).classList.toggle("row--hidden");
+    document.getElementById(expendIcon).classList.toggle("expend-icon");
+}
+
 // Setting the customer select on user-edit on disabeld when the user is connected to a customer
 function setCustomerSelectDisabeld() {
     document.getElementById("customerSelect").disabled = true;

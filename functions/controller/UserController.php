@@ -116,6 +116,30 @@ class UserController
         //semding the data to the databqaseclass
         $this->UserDB->CreateUserBulk($UserEmail, $ScanID);
 
+        }
+        
+        function getProfile($UserID){
+            //creating an array
+            $profile = array();
+
+            $profile = $this->UserDB->getProfile($UserID);
+            
+            //returning the list 
+            return $profile;
+        }
+
+        function updatePassword($userID, $userPassword){
+            if ($this->UserDB->updatePassword($userID, $userPassword)) {
+                                // Reloading page with succes message
+                echo '<script>location.replace("?error=none");</script>';
+            } else {
+                // Getting the current url
+                $currentURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                $newURL = $currentURL . "?error=1";
+                // Reloading page with succes message
+                echo '<script>location.replace("error=1");</script>';
+            }
+        }
     }
 }
 
