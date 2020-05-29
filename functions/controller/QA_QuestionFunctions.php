@@ -1,6 +1,6 @@
 <?php
 //require '../models/
-require '../functions/datalayer/database.class.php';
+require_once '../functions/datalayer/database.class.php';
 
 class QA_QuestionFunctions
 {
