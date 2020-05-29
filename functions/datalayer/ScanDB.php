@@ -279,5 +279,29 @@
                 }
             }
         }
+
+        function GetAnswerScore()
+        {
+            $lijst = array();
+            $query = "SELECT q.questionID , q.questionName, AVG(a.answerScore) AS answerScore
+            FROM scan_answer sa
+            INNER JOIN question q ON q.questionID = sa.questionID
+            INNER JOIN answer a ON a.answerID = sa.answerID
+            GROUP BY q.questionID
+            ORDER BY q.questionName ASC";
+
+            $stm = $this->db->prepare($query);
+            if ($stm->execute()) {
+                $result = $stm->fetchAll(PDO::FETCH_OBJ);
+                foreach ($result as $item) {
+                    $entAnswerScore = new entAnswerScore(null, $item->answerScore, $item->questionID, $item->questionName);
+                    array_push($lijst, $entAnswerScore);
+                }
+                return $lijst;
+    
+            } else {
+                echo "oef foutje";
+            }
+        }
     }
 ?>

@@ -88,6 +88,17 @@
             $this->ScanDB->addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair, $customerID);
         }
 
+        function GetAnswerScore() {
+            // Creating a array
+            $listScore = array();
+
+            $listScore = $this->ScanDB->GetAnswerScore();
+
+            // Returning the list given from the Database class
+            return $listScore;
+        }
+    }
+
         // Function to get scans for a department
         function getScansDepartment($departmentID) {
             // Creating a array
