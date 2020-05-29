@@ -2,7 +2,10 @@
     require_once 'menu.php';
 require_once '../functions/controller/QA_QuestionFunctions.php';
     $QF = new QA_QuestionFunctions();
-    $arrayAnswer = [];
+//During the process of making a new question, the user adds an answer.
+//This answer does not have a questionID that it should connect to, yet.
+// Creating a array
+$arrayTempAnswer = array();
 ?>
 <link rel="stylesheet" type="text/css" href="../assests/styling/QA_QuestionStyle.css">
 <body>
@@ -43,9 +46,8 @@ require_once '../functions/controller/QA_QuestionFunctions.php';
                         <label for="selStatus" class="col-sm-2 col-form-label" >Status</label>
                         <div class="col-sm-10">
                             <select id="selStatus" name="selStatus" class="form-control">
-                                <option value="active">Actief</option>
-                                <option value="archived">Gearchiveerd</option>
-                                <option value="deleted">Verwijderd</option>
+                                <option value="Active">Actief</option>
+                                <option value="Archived">Gearchiveerd</option>
                             </select>
                         </div>
                     </div>
@@ -86,18 +88,17 @@ require_once '../functions/controller/QA_QuestionFunctions.php';
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <?php //$QF->getQuestionAnswer($questionID);
-                                        if(isset($_POST['btnConfirmAnswerAdd'])){
-                                            foreach($arrayAnswer as $item){
-                                                "<tr>
-                                                    <td>".$item."</td>
-                                                    <td>Nog niet bestaande score</td>
-                                                    <td>Nog niet bestaande axis</td>
-                                                    </tr>";
-                                                //$questionID = $_POST['']
-                                                //$QF->setQuestionAnswer($answerAdd, $questionID);
-                                            }
-                                        }
+                                        <?php $tempAnswers = $QF->readArrayAnswer($arrayTempAnswer);
+                                                foreach($tempAnswers as $tempItem){
+                                                    echo '<tr>
+                                                            <td value="'.$tempItem->answer.'">'.$tempItem->answer.'</td>
+                                                            <td value="'.$tempItem->answerScore.'">'.$tempItem->answerScore.'</td>
+                                                            <td>
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                            <i class="fas fa-trash-alt"></i>
+                                                            </td>
+                                                            </tr>';
+                                                }
                                         ?>
                                     </tr>
                                     </tbody>
@@ -107,7 +108,7 @@ require_once '../functions/controller/QA_QuestionFunctions.php';
                         </div>
 
                         <div class="modal-footer">
-                            <input type="submit" class="btn btn-primary" id="btConfirm" name="btConfirm"
+                            <input type="submit" class="btn btn-primary" id="btnConfirmAnswerAdd" name="btnConfirmAnswerAdd"
                                    value="Verzenden"/>
                         </div>
                     </div>
@@ -162,26 +163,19 @@ require_once '../functions/controller/QA_QuestionFunctions.php';
         });
 </script>
 <?php
+
 if(isset($_POST['btConfirm'])){
-    //$selAxis = $_POST['selAxisEdit'];
+    $selAxis = $_POST['selAxisAdd'];
     $selCategory = $_POST['selCategory'];
     $txQuestion = $_POST['txQuestion'];
     $taExemple = $_POST['taExample'];
     $selStatus = $_POST['selStatus'];
     $selQuestionType = $_POST['selQuestionType'];
 
-    if($selCategory == null || $txQuestion == null || $selStatus == null || $selQuestionType == null){
-    }
-    else {
-        $QF->setQuestion($selCategory, $txQuestion, $taExemple, $selStatus, $selQuestionType);
-    }
+    $QF->setQuestion($selCategory, $selAxis, $txQuestion, $taExemple, $selStatus, $selQuestionType);
+
 }
-session_start();
-$session[] = '';
-//During the process of making a new question, the user adds an answer.
-//This answer does not have a questionID that it should connect to, yet.
-// Creating a array
-$arrayTempAnswer = array();
+
 if(isset($_POST['btnConfirmAnswerAdd'])){
     $answerAdd = $_POST['txAnswer'];
     $scoreAdd = $_POST['txScore'];

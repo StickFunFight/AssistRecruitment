@@ -2,13 +2,33 @@
 
 class entAnswer
 {
-    private $answerScore;
-    private $answer;
+    public $answerScore;
+    public $answer;
+    public $tempID;
 
-    public function __construct($answer, $answerScore)
+
+
+    public function __construct($tempID, $answer, $answerScore)
     {
+        $this->tempID = $tempID;
         $this->answer = $answer;
         $this->answerScore = $answerScore;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTempID()
+    {
+        return $this->tempID;
+    }
+
+    /**
+     * @param mixed $tempID
+     */
+    public function setTempID($tempID)
+    {
+        $this->tempID = $tempID;
     }
 
     /**

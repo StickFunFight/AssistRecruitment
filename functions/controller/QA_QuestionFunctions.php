@@ -12,9 +12,45 @@ class QA_QuestionFunctions
         $this->conn = $database->getConnection();
     }
 
-    public function setQuestion($categorieID, $questionName, $questionExemple, $questionStatus, $questionType)
+    public function getAnswer($answerID){
+        $sql = "SELECT * FROM answer WHERE answerID = ?";
+        $stm = $this->conn->prepare($sql);
+        $stm->bindParam(1, $answerID);
+        if($stm->execute()){
+            while($row = $stm->fetch(PDO::FETCH_ASSOC)){
+                return $row;
+            }
+        }
+        else{
+            echo "OEPS";
+        }
+    }
+
+    public function updateQuestionAnswer($answerID, $answerName, $answerScore){
+        // Create Query to update answer status Status
+        $query = "UPDATE answer SET answerScore = ?, answer = ? WHERE answerID = ?";
+        $stm = $this->conn->prepare($query);
+        $stm->bindParam(1, $answerScore);
+        $stm->bindParam(2, $answerName);
+        $stm->bindParam(3, $answerID);
+        if($stm->execute()){
+
+        }
+    }
+
+    public function deleteAnswer($answerID){
+        // Create Query to update answer status Status
+        $query = "UPDATE answer SET status = 'Archived' WHERE answerID = ?";
+        $stm = $this->conn->prepare($query);
+        $stm->bindParam(1, $answerID);
+        if($stm->execute()){
+
+        }
+    }
+
+    public function setQuestion($categorieID, $axisID, $questionName, $questionExemple, $questionStatus, $questionType)
     {
-        $sql = "INSERT INTO question (categorieID, questionName, questionExemple, questionStatus, questionType) VALUES ($categorieID, '$questionName', '$questionExemple', '$questionStatus', '$questionType')";
+        $sql = "INSERT INTO question (categorieID, axisID, questionName, questionExemple, questionStatus, questionType) VALUES ($categorieID, $axisID, '$questionName', '$questionExemple', '$questionStatus', '$questionType')";
         $stm = $this->conn->prepare($sql);
         $stm->execute();
     }
@@ -83,41 +119,49 @@ class QA_QuestionFunctions
 
     }
 
-    public function getQuestionAnswer($questionID){
+    public function getQuestionAnswer($arrayQA, $questionID){
+
         $sql = "SELECT * FROM answer WHERE questionID = ?";
         $stm = $this->conn->prepare($sql);
         $stm->bindParam(1, $questionID);
         if($stm->execute()){
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
             foreach($result as $answer){
-                echo "<tr>
-                        <td value=".$answer->answerID.">".$answer->answer."</td>
-                        <td>Nog niet bestaande score</td>
-                        <td>Nog niet bestaande axis</td>
-                        <td><i class='fas fa-pencil-alt'></i> <i class='fas fa-trash-alt'></i></td>
-                        </tr>";
+                $realID = $answer->answerID;
+                $answerName = $answer->answer;
+                $answerScore = $answer->answerScore;
+
+                $entQuestion = new entAnswer($realID, $answerName, $answerScore);
+                array_push($arrayQA, $entQuestion);
+
             }
+            return $arrayQA;
         }
     }
 
-    public function setQuestionAnswer($answer, $questionID){
-        //Score en Axis moeten nog toegevoegd worden
-        $sql = "INSERT INTO answer (answer, questionID) VALUES (?, ?)";
+    public function setQuestionAnswer($answer, $answerScore, $questionID){
+        $sql = "INSERT INTO answer (answer, answerScore, questionID) VALUES (?, ?, ?)";
         $stm = $this->conn->prepare($sql);
         $stm->bindParam(1, $answer);
-        $stm->bindParam(2, $questionID);
-        $stm->execute();
+        $stm->bindParam(2, $answerScore);
+        $stm->bindParam(3, $questionID);
+        if($stm->execute()){
+            echo "Antwoord: ".$answer;
+            echo "Score: ".$answerScore;
+            echo "QuestionID".$questionID;
+        }
+
     }
 
     public function putinArrayAnswer($arrayTempAnswer, $answer, $answerScore){
-        $entQuestion = new entAnswer($answer, $answerScore);
+        $entQuestion = new entAnswer("1", $answer, $answerScore);
         array_push($arrayTempAnswer, $entQuestion);
-        print_r($arrayTempAnswer);
+
         return $arrayTempAnswer;
     }
 
     public function readArrayAnswer($arrayTempAnswer){
-        echo $arrayTempAnswer;
+        return $arrayTempAnswer;
     }
 
     public function getDataFromSelectedQuestionID($questionID){
