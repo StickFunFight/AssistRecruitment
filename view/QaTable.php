@@ -49,7 +49,8 @@
                                 <tr class="tab-table__row">
                                     <!-- Voor de onlcick gebruik maken van int zodat JavaScript de column kan vinden -->
                                     <th class="qa__th_name">Question <div class="table__icon-top" onclick="sortTable('filterTable', 0, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 0, 'desc')"></div></th>
-                                    <th class="qa__th_comment">Average Score <div class="table__icon-top" onclick="sortTable('filterTable', 1, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 1, 'desc')"></div></th>    
+                                    <th class="qa__th_comment">Average Score <div class="table__icon-top" onclick="sortTable('filterTable', 1, 'asc')"></div> <div class="table__icon-bottom" onclick="sortTable('filterTable', 1, 'desc')"></div></th>   
+                                    <th class=""></th> 
                             </tr>
 
                             </thead>
