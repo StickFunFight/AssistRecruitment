@@ -1,35 +1,22 @@
 <?php
 require_once 'database.class.php';
 
-    Class ScanDB
-    {
+class ScanDB
+{
 
     private $db;
 
-        public function __construct()
-        {
-            //maakt een nieuwe connectie 
-            $database = new Database();
-            $this->db = $database->getConnection();
-        }
+    public function __construct()
+    {
+        //maakt een nieuwe connectie
+        $database = new Database();
+        $this->db = $database->getConnection();
+    }
 
-        //functie van marfmans (thanx for deleting last time)
-        function setScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $questionairID)
-        {
-            $sql = "INSERT INTO scan (scanName, scanComment, scanStatus, scanIntroductionText, scanReminderText, scanStartDate, scanEndDate, questionairID) VALUES ('$name', '$comment', '$status', '$introductiontext', '$remindertext', '$startdate', '$enddate', '$questionairID')";
-            $stm = $this->db->prepare($sql);
-            if($stm->execute()){
-                $newURL = "scan-list.php";
-                echo '<script>location.replace("' . $newURL . '");</script>';
-            }
-            else{
-                echo "Niet gelukt";
-            }
-        }
-
-        function getScans($statusScan) {
-            // Creating a array
-            $listScans = array();
+    function getScans($statusScan)
+    {
+        // Creating a array
+        $listScans = array();
 
         // Making a query to get the scans of the customer out the database
         $query = "SELECT s.scanID, s.scanName, s.scanComment, s.scanStatus, s.scanIntroductionText, s.scanReminderText, s.scanStartDate, s.scanEndDate, c.customerName 
@@ -159,23 +146,17 @@ require_once 'database.class.php';
     {
         $listQuestionAirs = array();
 
-            // Create Query to get questionairs
-            $query = "SELECT * FROM questionair";
-            $stm = $this->db->prepare($query);
-            if ($stm->execute()) {
-                // Getting the results fromm the database
-                $result = $stm->fetchAll(PDO::FETCH_OBJ);
-                // Looping through the results
-                foreach ($result as $questionair) {
-                    // Putting it in the modal
-                    $entQuestionair = new EntQuestionair($questionair->questionairID, $questionair->questionairName, $questionair->questionairComment, $questionair->questionairStatus);
-                    array_push($listQuestionAirs, $entQuestionair);
-                }
-                // Returning the full list
-                return $listQuestionAirs;
-            } // Showing a error when the query didn't execute
-            else {
-                echo "Er is iets fout gegaan";
+        // Create Query to get questionairs
+        $query = "SELECT * FROM questionair";
+        $stm = $this->db->prepare($query);
+        if ($stm->execute()) {
+            // Getting the results fromm the database
+            $result = $stm->fetchAll(PDO::FETCH_OBJ);
+            // Looping through the results
+            foreach ($result as $questionair) {
+                // Putting it in the modal
+                $entQuestionair = new EntQuestionair($questionair->questionairID, $questionair->questionairName, $questionair->questionairComment, $questionair->questionairStatus);
+                array_push($listQuestionAirs, $entQuestionair);
             }
             // Returning the full list
             return $listQuestionAirs;
@@ -194,9 +175,10 @@ require_once 'database.class.php';
         $stm->bindParam(1, $scanQuestionair);
     }
 
-        function getScan($scanID){
-            // Creating a array
-            $listScans = array();
+    function getScan($scanID)
+    {
+        // Creating a array
+        $listScans = array();
 
         // Making a query to get the scans of the customer out the database
         $query = sprintf("Select * from scan where scanID = $scanID");
@@ -281,104 +263,57 @@ require_once 'database.class.php';
         }
     }
 
-        // Function to get the percentage of completed questions of a scan
-        function getScanProgres($userID, $scanID) {
-            /**
-            * This query selects the scanID. The scanID is then the 100%.
-            * Then the questions that are bonded to the question are gotton from scan_question where the scan_question scanID = scan_answer scanID
-            * The completed percentage is than calculeted between the scanID in the scan_answer in comparison to the scanID in scan_answer
-            */
-            $query = "SELECT sc.scanID, (Count(sc.scanID) * 100 / (SELECT Count(sq.questionID) FROM scan_question sq WHERE sq.scanID = sc.scanID)) AS scanProgress
+    // Function to get the percentage of completed questions of a scan
+    function getScanProgres($userID, $scanID)
+    {
+        /**
+         * This query selects the scanID. The scanID is then the 100%.
+         * Then the questions that are bonded to the question are gotton from scan_question where the scan_question scanID = scan_answer scanID
+         * The completed percentage is than calculeted between the scanID in the scan_answer in comparison to the scanID in scan_answer
+         */
+        $query = "SELECT sc.scanID, (Count(sc.scanID) * 100 / (SELECT Count(sq.questionID) FROM scan_question sq WHERE sq.scanID = sc.scanID)) AS scanProgress
                       FROM scan_answer sc
                       WHERE sc.userID = ? AND scanID = ?
                       GROUP BY sc.scanID";
-            $stm = $this->db->prepare($query);
-            $stm->bindParam(1, $userID);
-            $stm->bindParam(2, $scanID);
-            if($stm->execute()){
-                // Getting the results from the database
-                $result = $stm->fetch(PDO::FETCH_OBJ);
+        $stm = $this->db->prepare($query);
+        $stm->bindParam(1, $userID);
+        $stm->bindParam(2, $scanID);
+        if ($stm->execute()) {
+            // Getting the results from the database
+            $result = $stm->fetch(PDO::FETCH_OBJ);
 
-                // Checking if there are results. If none send 0 back
-                if (empty($result->scanProgress) || $result->scanProgress == null) {
-                    return 0;
-                } else {
-                    // Getting the progress, rounding it and returning it
-                    $scanProgressProcent = round($result->scanProgress);
-                    return $scanProgressProcent;
-                }
+            // Checking if there are results. If none send 0 back
+            if (empty($result->scanProgress) || $result->scanProgress == null) {
+                return 0;
+            } else {
+                // Getting the progress, rounding it and returning it
+                $scanProgressProcent = round($result->scanProgress);
+                return $scanProgressProcent;
             }
         }
     }
 
-        function GetAnswerScore() {
-            $lijst = array();
-            $query = "SELECT q.questionID , q.questionName, AVG(a.answerScore) AS answerScore
+    function GetAnswerScore()
+    {
+        $lijst = array();
+        $query = "SELECT q.questionID , q.questionName, AVG(a.answerScore) AS answerScore
             FROM scan_answer sa
             INNER JOIN question q ON q.questionID = sa.questionID
             INNER JOIN answer a ON a.answerID = sa.answerID
             GROUP BY q.questionID
             ORDER BY q.questionName ASC";
 
-            $stm = $this->db->prepare($query);
-            if ($stm->execute()) {
-                $result = $stm->fetchAll(PDO::FETCH_OBJ);
-                foreach ($result as $item) {
-                    $entAnswerScore = new entAnswerScore(null, $item->answerScore, $item->questionID, $item->questionName);
-                    array_push($lijst, $entAnswerScore);
-                }
-                return $lijst;
-
-            } else {
-                echo "oef foutje";
+        $stm = $this->db->prepare($query);
+        if ($stm->execute()) {
+            $result = $stm->fetchAll(PDO::FETCH_OBJ);
+            foreach ($result as $item) {
+                $entAnswerScore = new entAnswerScore(null, $item->answerScore, $item->questionID, $item->questionName);
+                array_push($lijst, $entAnswerScore);
             }
             return $lijst;
 
         } else {
             echo "oef foutje";
-        }
-
-        // Function to add scan
-        function addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair, $customerID) { 
-            $scanStatus = 'Active';
-
-            // Changing date for the database
-            $dbStartDate = date("Y-m-d", strtotime($scanStartDate));
-            $dbEndDate = date("Y-m-d", strtotime($scanEndDate));
-
-            // Create Query to insert scan
-            $query = "INSERT INTO scan(scanName, scanComment, scanStatus, scanIntroductionText, scanReminderText, scanStartDate, scanEndDate, questionairID) 
-                    VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-            $stm = $this->db->prepare($query);
-            $stm->bindParam(1, $scanName);
-            $stm->bindParam(2, $scanComment);
-            $stm->bindParam(3, $scanStatus);
-            $stm->bindParam(4, $scanIntroductionText);
-            $stm->bindParam(5, $scanReminderText);
-            $stm->bindParam(6, $dbStartDate);
-            $stm->bindParam(7, $dbEndDate);
-            $stm->bindParam(8, $scanQuestionair);
-            if(!$stm->execute()){
-                echo "Er is iets fout gegaan";
-            } 
-        }
-
-        function getQuestionAnswers($questionID) {
-            $QuestionAnswers = array();
-            $query = "SELECT sa.questionID, sa.answerID, a.answer, a.answerScore
-                      FROM scan_answer sa
-                      INNER JOIN answer a ON sa.answerID = a.answerID
-                      WHERE sa.questionID = ?";
-            $stm = $this->db->prepare($query);
-            $stm->bindParam(1, $questionID);
-            if ($stm->execute()) {
-                $result = $stm->fetchAll(PDO::FETCH_OBJ);
-                foreach ($result as $item) {
-                    $entAnswerScore = new entQuestionAnswered($item->questionID, $item->answerID, $item->answer, $item->answerScore);
-                    array_push($QuestionAnswers, $entAnswerScore);
-                }
-                return $QuestionAnswers;
-            }
         }
     }
 }

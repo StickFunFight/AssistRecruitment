@@ -4,8 +4,8 @@
 class EntQuestionair
 {
 
-    public $questionairID;
-    public $questionairName;
+    private $questionairID;
+    private $questionairName;
     private $questionairComment;
     private $questionairStatus;
 

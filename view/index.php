@@ -204,9 +204,14 @@ foreach ($detailsUser as $user) {
                                                         </div>
                                                     </div>
 
-                                                        <div class="scan-bottom">
-                                                            <a class="btn btn-status">Continue scan</a>
-                                                        </div>
+                                                    <div class="scan-middle">
+                                                        <p class="scan-info--text">
+                                                            <?php echo $scanDP->getScanIntroductionText(); ?>
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="scan-bottom">
+                                                        <a class="btn btn-status">continue scan</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -220,104 +225,12 @@ foreach ($detailsUser as $user) {
                         </div>
                     </section>
                     <?php
-
-                    // Getting the deparments of the user
-                    $listDepartments = $UserCtrl->getDepartmentsUser($user->getUserID(), 'Active');
-                    
-                    // Looping through the results
-                    foreach ($listDepartments as $departmentUser) {
-
-                        // Getting the scans for every department
-                        $listScansDepartment = $ScanCtrl->getScansDepartment($departmentUser->getuserDepartmentID());
-
-                        //var_dump($listScansDepartment);
-
-                        // Only showing departments with active scans
-                        if (array_filter($listScansDepartment) != []) {
-                        ?>
-                            <section class="dashboard__department">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <h2 class="dashboard--subtitle"><?php echo $departmentUser->getUserDepartmentName(); ?></h2>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <?php
-                                        // Looping through the departmentscans
-                                        foreach ($listScansDepartment as $scanDP) {
-                                            $scanProgress = $ScanCtrl->getScanProgres($user->getUserID(), $scanUser->getScanID());
-
-                                            // Checking if scan is completed
-                                            if($scanProgress != 100){
-                                            ?>
-                                                <div class="col-sm-12">
-                                                    <div class="scan">
-                                                        <div class="scan__inner">
-                                                            <div class="scan__progress">
-                                                                <!-- Drawing a process circle -->
-                                                                <svg
-                                                                    class="scan__progress-ring"
-                                                                    height="200"
-                                                                    width="200"
-                                                                    >
-                                                                    <circle
-                                                                        id="<?php echo "scan" . $departmentUser->getUserDepartmentName() . $scanDP->getScanID(); ?>"
-                                                                        class="scan__progress-circle"
-                                                                        stroke-width="10"
-                                                                        r="80"
-                                                                        cx="100"
-                                                                        cy="100"/>
-                                                                </svg>
-
-                                                                <script>
-                                                                    // Setting the progress
-                                                                    setProgressbarScan("<?php echo 'scan' . $departmentUser->getUserDepartmentName() . $scanDP->getScanID(); ?>", <?php echo $ScanCtrl->getScanProgres($user->getUserID(), $scanDP->getScanID()); ?>);
-                                                                </script>
-                                                                
-                                                                <div class="scan__prograss-container">
-                                                                    <label class="scan__progress-procent"><?php echo $ScanCtrl->getScanProgres($user->getUserID(), $scanDP->getScanID()); ?>&#37;</label>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="scan__info">
-                                                                <div class="scan-info-top">
-                                                                    <div class="scan-info__title">
-                                                                        <h3 class="scan--title"><?php echo $scanDP->getScanName(); ?></h3>
-                                                                    </div>
-                                                                    
-                                                                    <div class="scan-info__dates">
-                                                                        <label class="scan-info--dates"><?php echo $scanDP->getScanStartDate() . " - " . $scanDP->getScanEndDate(); ?></label>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="scan-middle">
-                                                                    <p class="scan-info--text">
-                                                                        <?php echo $scanDP->getScanIntroductionText(); ?>
-                                                                    </p>
-                                                                </div>
-
-                                                                <div class="scan-bottom">
-                                                                    <a class="btn btn-status">Continue scan</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            <?php
-                                            }
-                                        // ending department scan foreach
-                                        }
-                                    ?>
-                                </div>
-                            </section>
-                        <?php
-                        }
-                    // ending department user foreach
-                    }
-                ?>
-            </div>
-        </div> 
+                }
+                // ending department user foreach
+            }
+            ?>
+        </div>
+    </div>
     </body>
     </html>
     <?php
