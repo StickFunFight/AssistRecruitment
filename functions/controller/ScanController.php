@@ -1,17 +1,34 @@
 <?php
     require_once '../functions/datalayer/ScanDB.php';
+    require_once 'QuestionairController.php';
 
-    Class ScanController
-    {
 
-        private $scanDB;
-
-        public function __construct() {
+    Class ScanController {
+        
+        private $scanDB;   
+    
+        public function __construct(){
             $this->ScanDB = new ScanDB();
         }
 
+        //dont delete - gemaakt door marfmans
+        function addScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $questionairID){
+            $listScanAdd = $this->ScanDB->setScan($name, $comment, $status, $introductiontext, $remindertext, $startdate, $enddate, $questionairID);
+            return $listScanAdd;
+        }
+
+        //Functie van Marfmans
+        function fillScanAddSelect(){
+            $QC = new QuestionairController();
+            $lijstQuestionairs = array();
+            $lijstQuestionairs = $QC->GetQuestionair();
+            foreach ($lijstQuestionairs as $item) {
+                echo "<option value=".$item->questionairID.">".$item->questionairName."</option>";
+            }
+        }
+
         // Getting all scans
-        function getScans($statusScan) {
+        function getScans($statusScan){
             // Creating a array
             $listScans = array();
 
@@ -19,10 +36,10 @@
 
             // Returning the list given from the Database class
             return $listScans;
-        }
+        }  
 
         // Getting all scan from 1 customer
-        function getScansCustomer($customerID, $statusScan) {
+        function getScansCustomer($customerID, $statusScan){
             // Creating a array
             $listScans = array();
 
@@ -31,8 +48,7 @@
             // Returning the list given from the Database class
             return $listScans;
         }
-
-        function GetScan($scanID) {
+        Function GetScan($scanID){
             $listScans = array();
 
             $listScans = $this->ScanDB->getScan($scanID);
@@ -83,11 +99,6 @@
             return $QuestionairID;
         }
 
-        // Function to add scan
-        function addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair, $customerID) {
-            $this->ScanDB->addScan($scanName, $scanComment, $scanIntroductionText, $scanReminderText, $scanStartDate, $scanEndDate, $scanQuestionair, $customerID);
-        }
-
         function GetAnswerScore() {
             // Creating a array
             $listScore = array();
@@ -100,7 +111,7 @@
 
         // Function to get scans for a department
         function getScansDepartment($departmentID) {
-            // Creating a array
+             // Creating a array
             $listScans = array();
 
             $listScans = $this->ScanDB->getScansDepartment($departmentID);
