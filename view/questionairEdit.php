@@ -88,7 +88,7 @@ if (isset($_GET['qID'])){
                 <div class="modal-body">
                     <div class="dropdown">
                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                            Dropdown button
+                            Vraag toevoegen
                         </button>
                         <div class="dropdown-menu">
                             <?php
