@@ -1,5 +1,6 @@
 <?php
-require_once '../functions/models/entAnswer.php';
+//require '../models/
+require '../functions/datalayer/database.class.php';
 
 class QA_QuestionFunctions
 {
@@ -7,7 +8,6 @@ class QA_QuestionFunctions
 
     public function __construct()
     {
-        require_once "../functions/datalayer/database.class.php";
         $database = new Database();
         $this->conn = $database->getConnection();
     }
@@ -45,6 +45,25 @@ class QA_QuestionFunctions
         $stm->bindParam(1, $answerID);
         if($stm->execute()){
 
+        }
+    }
+
+    public function checkifActiveAnswer($answerID){
+        $query = "SELECT a.answerID, a.questionID, q.questionID, s.scanStatus, s.scanID, sq.scanID
+                    FROM answer a, question q, scan s, scan_question sq
+                    WHERE a.questionID = q.questionID
+                    AND s.scanStatus = 'Active'
+                    AND q.questionID = sq.questionID
+                    AND sq.scanID = s.scanID
+                    AND a.answerID = ?";
+        $stm = $this->conn->prepare($query);
+        $stm->bindParam(1, $answerID);
+        if($stm->execute()){
+            if ($stm->rowCount() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 

@@ -1,6 +1,6 @@
 <?php
     require_once 'menu.php';
-require_once '../functions/controller/QA_QuestionFunctions.php';
+    require_once '../functions/controller/QA_QuestionFunctions.php';
     $QF = new QA_QuestionFunctions();
 //During the process of making a new question, the user adds an answer.
 //This answer does not have a questionID that it should connect to, yet.

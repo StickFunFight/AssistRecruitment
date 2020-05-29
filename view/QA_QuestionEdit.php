@@ -1,6 +1,10 @@
 <?php
 require_once 'menu.php';
+
+require '../functions/models/entAnswer.php';
 require_once '../functions/controller/QA_QuestionFunctions.php';
+
+
 
 $QF = new QA_QuestionFunctions();
 $questionID = $_GET['questionID'];
@@ -95,7 +99,7 @@ $resultQuestionData = $QF->getQuestionData($questionID);
                                         <td value="'.$QAE->answerScore.'">'.$QAE->answerScore.'</td>
                                         <td>
                                         <a href="QA_QuestionAnswerEdit.php?answerID='.$QAE->tempID.'&qID='.$questionID.'"><i class="fas fa-pencil-alt" id="'.$QAE->tempID.'" value="'.$QAE->tempID.'"></i></a> 
-                                        <i data-toggle="modal" data-target="#deleteSelectedQuestionAnswer" id="'.$QAE->tempID.'" onClick="reply_click(this.id)" value="'.$QAE->tempID.'" class="fas fa-trash-alt"></i>
+                                        <i data-toggle="modal" data-target="#archiveSelectedQuestionAnswer" id="'.$QAE->tempID.'" onClick="reply_click(this.id)" value="'.$QAE->tempID.'" class="fas fa-trash-alt"></i>
                                         </td>
                                         </tr>';
                                 }
@@ -132,7 +136,7 @@ $resultQuestionData = $QF->getQuestionData($questionID);
             <form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>
-                    <button type="submit" name="btnArchive" class="btn btn-primary" id="btnArchive">Bevestig</button>
+                    <button type="button" name="btnArchive" class="btn btn-primary" id="btnArchive">Bevestig</button>
 
                     <script type="text/javascript">
                         function reply_click(clicked_id) {
